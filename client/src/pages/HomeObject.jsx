@@ -3,18 +3,21 @@ import Container from "react-bootstrap/Container";
 import { Row, Card, Button } from "react-bootstrap";
 import CardObjects from "../components/CardObjects";
 import AddObject from "../modals/AddObject";
+import { useSelector } from 'react-redux';
 
 const HomeObject = () => {
 
-    const [itemsObject, setItemsObject] = useState([
-        {id: 1, name: "Новые сады"},
-        {id: 2, name: "Новые сады"},
-        {id: 3, name: "Новые сады"},
-        {id: 4, name: "Новые сады"},
-        {id: 5, name: "Новые сады"}
-    ])
+    // const [itemsObject, setItemsObject] = useState([
+    //     {id: 1, name: "Новые сады"},
+    //     {id: 2, name: "Новые сады"},
+    //     {id: 3, name: "Новые сады"},
+    //     {id: 4, name: "Новые сады"},
+    //     {id: 5, name: "Новые сады"}
+    // ])
 
     const [newObj, setNewObj] = useState(false)
+
+    const objects = useSelector((state) => state.objectBuilds.objectsBuild)
 
     return (
         <Container>
@@ -29,7 +32,7 @@ const HomeObject = () => {
                 <AddObject show={newObj} onHide={ () => setNewObj(false)}/>
 
 
-                {itemsObject.map((item) => (
+                {objects.map((item) => (
                     <CardObjects key={item.id} {...item}/>
                 ))}
             </Row>
