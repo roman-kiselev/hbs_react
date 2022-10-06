@@ -22,7 +22,7 @@ const AddObject = ({show, onHide}) => {
         }
 
         dispatch(addObject(arrObject))
-        console.log(arrObject)
+        
         setAddressObject('')
         setNameObject('')
     }

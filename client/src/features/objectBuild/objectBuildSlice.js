@@ -10,11 +10,15 @@ export const objectSlice = createSlice({
     reducers: {
         addObject: (state, action) => {
             state.objectsBuild.push(action.payload)
+        },
+
+        removeObject: (state, action) => {
+            state.objectsBuild = state.objectsBuild.filter((obj) => obj.id !== action.payload)
         }
     }
 })
 
 
-export const { addObject } = objectSlice.actions;
+export const { addObject, removeObject } = objectSlice.actions;
 export default objectSlice.reducer;
 
