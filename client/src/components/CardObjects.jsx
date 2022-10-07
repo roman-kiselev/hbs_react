@@ -4,7 +4,7 @@ import { BsFillXCircleFill } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { removeObject } from '../features/objectBuild/objectBuildSlice';
 import { useNavigate } from "react-router-dom"
-import { OBJECT_BUILD_ROUTE } from '../utils/consts';
+import { OBJECT_BUILD_ROUTE, ONE_OBJECT } from '../utils/consts';
 
 const CardObjects = ({id, name, address}) => {
 
@@ -31,7 +31,7 @@ const CardObjects = ({id, name, address}) => {
                 <Card.Text>
                     {address}
                 </Card.Text>
-                <Button variant="primary" onClick={() => navigate(`${OBJECT_BUILD_ROUTE}/${id}`)}>Вперёд</Button>
+                <Button variant="primary" onClick={() => navigate(OBJECT_BUILD_ROUTE + "/" + id)}>Вперёд</Button>
                 < BsFillXCircleFill 
                     onClick={() => question(id)}
                 color={"red"} 

@@ -11,7 +11,7 @@ export const publickRoutes = [
         Component: HomeObject
     },
     {
-        path: OBJECT_BUILD_ROUTE + '/id',
+        path: OBJECT_BUILD_ROUTE + '/:id',
         Component: OneObject
     },
     {
