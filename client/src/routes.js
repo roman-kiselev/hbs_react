@@ -1,7 +1,8 @@
+import AddHotMeter from "./pages/AddHotMeter";
 import HomeObject from "./pages/HomeObject";
 import HomePage from "./pages/HomePage";
 import OneObject from "./pages/OneObject";
-import { HOME_PAGE_ROUTE, OBJECT_BUILD_ROUTE } from "./utils/consts";
+import { ADD_HOT_METER, HOME_PAGE_ROUTE, OBJECT_BUILD_ROUTE } from "./utils/consts";
 
 
 
@@ -17,5 +18,9 @@ export const publickRoutes = [
     {
         path: HOME_PAGE_ROUTE,
         Component: HomePage
+    },
+    {
+        path: ADD_HOT_METER,
+        Component: AddHotMeter
     }
 ]
