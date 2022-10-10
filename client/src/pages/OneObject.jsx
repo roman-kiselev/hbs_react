@@ -1,53 +1,56 @@
 import React from 'react'
-import { Container, Card, Button } from 'react-bootstrap';
+import { Container, Card, Button, Row } from 'react-bootstrap';
 
 const OneObject = () => {
   return (
     <Container>
-      <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src="holder.js/100px180" />
+      <Row style={{display: "flex", justifyContent: "center"}}>
+      <Card style={{ width: '18rem', margin: "10px" }}>
         <Card.Body>
-          <Card.Title>Card Title</Card.Title>
+          <Card.Title>Счётчики горячей воды</Card.Title>
           <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            Добавление только счётчиков горячей воды
           </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
+          <Button variant="primary">Вперёд</Button>
         </Card.Body>
       </Card>
-      <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src="holder.js/100px180" />
+      <Card style={{ width: '18rem', margin: "10px" }}>
         <Card.Body>
-          <Card.Title>Card Title</Card.Title>
+          <Card.Title>Счётчики холодной воды</Card.Title>
           <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            Добавление только счётчиков холодной воды
           </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
+          <Button variant="primary">Вперёд</Button>
         </Card.Body>
       </Card>
-      <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src="holder.js/100px180" />
+      <Card style={{ width: '18rem', margin: "10px" }}>
         <Card.Body>
-          <Card.Title>Card Title</Card.Title>
+          <Card.Title>Счётчики холодной и горячей воды</Card.Title>
           <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            Добавление только счётчиков холодной и горячей воды
           </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
+          <Button variant="primary">Вперёд</Button>
         </Card.Body>
       </Card>
-      <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src="holder.js/100px180" />
+      <Card style={{ width: '18rem', margin: "10px" }}>
         <Card.Body>
-          <Card.Title>Card Title</Card.Title>
+          <Card.Title>Счётчики тепла</Card.Title>
           <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            Добавление только счётчиков тепла
           </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
+          <Button variant="primary">Вперёд</Button>
         </Card.Body>
       </Card>
+      <Card style={{ width: '18rem', margin: "10px" }}>
+        <Card.Body>
+          <Card.Title>Счётчики электроэнергии</Card.Title>
+          <Card.Text>
+            Добавление только счётчиков электроэнергии
+          </Card.Text>
+          <Button variant="primary">Вперёд</Button>
+        </Card.Body>
+      </Card>
+      </Row>
     </Container>
 
   )
