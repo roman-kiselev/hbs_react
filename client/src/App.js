@@ -2,6 +2,7 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./components/AppRouter";
+import TreeRouter from "./components/TreeRouter";
 
 
 function App() {
@@ -9,8 +10,8 @@ function App() {
    
     <BrowserRouter>
        <AppRouter />
+       
     </BrowserRouter>
-
   );
 }
 
