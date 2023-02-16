@@ -42,12 +42,16 @@ const AddObject = ({show, onHide}) => {
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>Введите наименование</Form.Label>
                         <Form.Control
-                            type="email"
+                            type="text"
                             placeholder="Новые сады"
                             value={nameObject}
                             autoFocus
                             onChange={(e) => setNameObject(e.target.value)}
                         />
+                    </Form.Group>
+                    <Form.Group controlId="formFile" className="mb-3">
+                        <Form.Label>Выбор изображения</Form.Label>
+                        <Form.Control type="file" />
                     </Form.Group>
                     <Form.Group
                         className="mb-3"

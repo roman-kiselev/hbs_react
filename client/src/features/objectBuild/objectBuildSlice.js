@@ -1,7 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    objectsBuild: []
+    objectsBuild: [
+        {
+            id: 1,
+            img: "file",
+            name: "Новые сады",
+            address: "г. Пенза ул. Советская д.9"
+        }
+    ]
 }
 
 export const objectSlice = createSlice({

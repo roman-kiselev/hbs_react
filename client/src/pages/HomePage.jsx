@@ -1,33 +1,38 @@
-import React from 'react'
-import { Container, Row, Button, Col } from "react-bootstrap"
-import {useNavigate} from "react-router-dom"
-import { OBJECT_BUILD_ROUTE } from '../utils/consts'
+import React, {useState} from 'react'
+import {  Row, Button, Col, Card } from "react-bootstrap"
+import AddObject from "../modals/AddObject";
+import {useSelector} from "react-redux";
+import OneObject from "../components/objects/OneObject";
+import ListObjects from "../components/objects/ListObjects";
+
+
+
 
 const HomePage = () => {
+    const [show, setShow] = useState(false);
 
-  const navigate = useNavigate()
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+
+
 
   return (
-    <Container style={{display: "flex"}}>
-      <Row className="mx-auto" style={{display: "flex", justifyContent: "center", marginTop: "25%"}}>
-        <Col style={{display: "flex"}}>
-          <Button variant="primary" onClick={() => navigate(OBJECT_BUILD_ROUTE)}>Объекты</Button>
-        </Col>
-        <Col>
-          <Button variant="secondary">Администрирование</Button>
-        </Col>
-        <Col>
-          <Button variant="success">Что то</Button>
-        </Col>
-        <Col>
-          <Button variant="warning">Что то</Button>
-        </Col>
-        <Col>
-          <Button variant="danger">Что то</Button>
-        </Col>
-        
-      </Row>
-    </Container>
+    <Row className="m-5">
+        <Row className="mt-3 justify-content-center">
+            <Col className="col-4 text-center">
+                <Button className="btn" onClick={() => handleShow()} variant="primary">Добавить объект</Button>
+            </Col>
+        </Row>
+
+        <Row>
+            <AddObject  show={show} onHide={() => handleClose()}/>
+        </Row>
+
+        <ListObjects />
+
+    </Row>
+
   )
 }
 
