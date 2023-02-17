@@ -8,6 +8,8 @@ import AddCoolMetersBolid from "./addMeters/bolid/AddCoolMetersBolid";
 import AddHotMeterBolid from "./addMeters/bolid/AddHotMeterBolid";
 import AddMeterCoolHotBolid from "./addMeters/bolid/AddMeterCoolHotBolid";
 import AddCoolMeterPulsar from "./addMeters/pulsar/AddCoolMeterPulsar";
+import AddHotMeterPulsar from "./addMeters/pulsar/AddHotMeterPulsar";
+import AddCoolHotMeterPulsar from "./addMeters/pulsar/AddCoolHotMeterPulsar";
 
 
 const AppRouter = () => {
@@ -21,6 +23,8 @@ const AppRouter = () => {
                 <Route path="addHotMeterBolid" element={< AddHotMeterBolid />}/>
                 <Route path="addMeterCoolHotBolid" element={< AddMeterCoolHotBolid />}/>
                 <Route path="addCoolMeterPulsar" element={< AddCoolMeterPulsar />}/>
+                <Route path="addHotMeterPulsar" element={< AddHotMeterPulsar />}/>
+                <Route path="addCoolHotMeterPulsar" element={< AddCoolHotMeterPulsar />}/>
 
 
             </Route>
