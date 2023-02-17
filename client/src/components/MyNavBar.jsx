@@ -16,10 +16,10 @@ const MyNavBar = () => {
                     >
                         {/*<NavLink style={{textDecoration: "none"}} to="/"><Nav.Link href="/">Домашняя</Nav.Link></NavLink>*/}
                         <NavLink style={{textDecoration: "none", margin: 7, color: "grey"}} to="/">Домашняя</NavLink>
-                        <NavLink style={{textDecoration: "none", margin: 7, color: "grey"}} to="/">link</NavLink>
+                        <NavLink style={{textDecoration: "none", margin: 7, color: "grey"}} to="/">Пусто</NavLink>
                        {/* <NavLink style={{textDecoration: "none"}} to="/"><Nav.Link href="#action2">Link</Nav.Link></NavLink>*/}
 
-                        <NavDropdown title="Link" id="navbarScrollingDropdown">
+                        <NavDropdown title="Пусто" id="navbarScrollingDropdown">
                             <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action4">
                                 Another action
@@ -30,7 +30,7 @@ const MyNavBar = () => {
                             </NavDropdown.Item>
                         </NavDropdown>
                         <Nav.Link href="#" disabled>
-                            Link
+                            Пусто
                         </Nav.Link>
                     </Nav>
                     <Form className="d-flex">

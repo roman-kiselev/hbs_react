@@ -52,7 +52,7 @@ const MenuOneObject = ({id, show, handleClose}) => {
                                 </ListGroup.Item>
                             </Link>
 
-                            <Link style={{textDecoration: "none"}} to="addMeterCoolHotPulsar">
+                            <Link style={{textDecoration: "none"}} to="addMeterPulsar">
                                 <ListGroup.Item action variant="light">
                                     Добавить ХГВС - Пульсар
                                 </ListGroup.Item>
