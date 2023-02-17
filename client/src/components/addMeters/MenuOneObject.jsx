@@ -52,9 +52,20 @@ const MenuOneObject = ({id, show, handleClose}) => {
                                 </ListGroup.Item>
                             </Link>
 
-                            <Link style={{textDecoration: "none"}} to="addMeterPulsar">
+                            <Link style={{textDecoration: "none"}} to="addMeterCoolHotPulsar">
                                 <ListGroup.Item action variant="light">
                                     Добавить ХГВС - Пульсар
+                                </ListGroup.Item>
+                            </Link>
+
+                            <Link style={{textDecoration: "none"}} to="addHeat">
+                                <ListGroup.Item action variant="light">
+                                    Добавить счётчики тепла
+                                </ListGroup.Item>
+                            </Link>
+                            <Link style={{textDecoration: "none"}} to="addHeat">
+                                <ListGroup.Item action variant="light">
+                                    Добавить счётчики электроэнергии
                                 </ListGroup.Item>
                             </Link>
 
