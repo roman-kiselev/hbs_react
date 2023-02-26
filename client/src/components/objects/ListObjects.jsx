@@ -1,12 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import OneObject from "./OneObject";
 import {Row} from "react-bootstrap";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {getAllObjects} from "../../features/objectBuild/objectBuildSlice";
 
 const ListObjects = () => {
 
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getAllObjects())
+    },[])
     const objects = useSelector((state) => state.objectBuilds.objectsBuild)
 
+    console.log(objects)
 
     return (
         <Row className="mt-3 justify-content-center">

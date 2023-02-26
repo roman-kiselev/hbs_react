@@ -22,6 +22,12 @@ const MenuOneObject = ({id, show, handleClose}) => {
                                 </ListGroup.Item>
                             </Link>
 
+                            <Link style={{textDecoration: "none"}} to="settings">
+                                <ListGroup.Item action variant="light">
+                                    Настройка
+                                </ListGroup.Item>
+                            </Link>
+
                             <Link style={{textDecoration: "none"}} to="addCoolMeterBolid">
                                 <ListGroup.Item action variant="light">
                                     Добавить ХВС - Болид

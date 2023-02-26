@@ -41,15 +41,15 @@ const CardMeter = ({id, section, floors, flat, kdl, asr, numberMeter, sum}) => {
                         </Modal.Footer>
                     </Modal>
                 </Row>
-                <Card>
-                    <Card.Header>Квартира № {flat}</Card.Header>
+                <Card className="text-center">
+                    <Card.Header className="text-center">Квартира № {flat}</Card.Header>
                     <Card.Body>
-                        <Card.Title>Секция №{section} - Этаж №{floors}</Card.Title>
-                        <Card.Text>
-                            <p>КДЛ № {kdl}</p>
-                            <p>АСР № {asr}</p>
-                            <p>Счётчик № {numberMeter}</p>
-                            <p>Показания {sum}</p>
+                        <Card.Title className="text-center">Секция №{section} - Этаж №{floors}</Card.Title>
+                        <Card.Text className="text-center">
+                            <li className="list-unstyled">КДЛ № {kdl}</li>
+                            <li className="list-unstyled">АСР № {asr}</li>
+                            <li className="list-unstyled">Счётчик № {numberMeter}</li>
+                            <li className="list-unstyled">Показания {sum}</li>
                         </Card.Text>
                         <Button variant="primary" onClick={handleShow}>Редактировать</Button>
                     </Card.Body>

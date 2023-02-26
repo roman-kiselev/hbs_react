@@ -1,15 +1,36 @@
 import React from 'react';
 import {Button, Col, Form, Row} from "react-bootstrap";
+import CitiesInput from "./CitiesInput";
+import MyCitiesInput from "./MyCitiesInput";
 
 const FormCoolMeterBolid = () => {
+
+    const cities = ['Пенза', 'Спасск']
+
+
+
+
     return (
         <Row>
+            <Row>
+                <Col>
+                    <CitiesInput cities={cities}/>
+                </Col>
+                <Col>
+                    <MyCitiesInput />
+                </Col>
+            </Row>
             <Form>
                 <Row>
                     <Col>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Секция</Form.Label>
-                            <Form.Control type="number"/>
+                            <Form.Select aria-label="Default select example">
+                                <option>Выбор</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </Form.Select>
                         </Form.Group>
                     </Col>
                     <Col>
@@ -54,6 +75,7 @@ const FormCoolMeterBolid = () => {
                     Добавить
                 </Button>
             </Form>
+
         </Row>
     );
 };
