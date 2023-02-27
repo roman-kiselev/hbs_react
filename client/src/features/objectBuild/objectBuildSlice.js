@@ -10,13 +10,12 @@ const initialState = {
 
 export const createObjects = createAsyncThunk('api/object', async ({formData}, {rejectedWithValue, dispatch}) => {
     const {data} = await $authHost.post('api/object', formData)
-    console.log(data)
     dispatch(addObject(data))
 })
 
 export const getAllObjects = createAsyncThunk('api/object', async (_, {rejectedWithValue, dispatch}) => {
     const {data} = await $authHost.get('api/object')
-
+    console.log(data)
     dispatch(setObject(data))
 })
 

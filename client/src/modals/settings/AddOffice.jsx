@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
 
-const AddFlat = ({show, onHide}) => {
+const AddOffice = ({show, onHide}) => {
 
     return (
         <Modal show={show} onHide={onHide}>
@@ -39,4 +39,4 @@ const AddFlat = ({show, onHide}) => {
     );
 };
 
-export default AddFlat;
+export default AddOffice;

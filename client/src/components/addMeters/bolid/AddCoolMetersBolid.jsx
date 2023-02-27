@@ -45,7 +45,9 @@ const AddCoolMetersBolid = () => {
                     className="mb-3"
                 >
                     <Tab eventKey="addMeter" title="Добавление">
-                        <FormCoolMeterBolid />
+                        <Row>
+                            <FormCoolMeterBolid />
+                        </Row>
                     </Tab>
                     <Tab eventKey="list" title="Список">
                         Сортировка // Квартиры // Этажи // Секции // КДЛ // АСР // Поиск номера

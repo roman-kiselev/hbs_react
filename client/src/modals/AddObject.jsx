@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import {Modal, Form, Button} from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import {addObject, createObjects} from "../features/objectBuild/objectBuildSlice";
+import {addObject, createObjects, getAllObjects} from "../features/objectBuild/objectBuildSlice";
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -23,7 +23,11 @@ const AddObject = ({show, onHide}) => {
         formData.append("img", img)
         formData.append("description", addressObject)
 
-        dispatch(createObjects({formData})).then((data) => onHide())
+        dispatch(createObjects({formData})).then((data) => {
+            dispatch(getAllObjects())
+            onHide()
+        })
+
     }
 
     const selectFile = (e) => {

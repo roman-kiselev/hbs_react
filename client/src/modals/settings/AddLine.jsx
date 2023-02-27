@@ -1,12 +1,12 @@
 import React from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
 
-const AddSections = ({show, onHide}) => {
+const AddLine = ({show, onHide}) => {
 
     return (
         <Modal show={show} onHide={onHide}>
             <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title>Добавить линию</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
@@ -39,4 +39,4 @@ const AddSections = ({show, onHide}) => {
     );
 };
 
-export default AddSections;
+export default AddLine;

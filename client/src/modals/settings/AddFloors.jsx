@@ -1,12 +1,12 @@
 import React from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
 
-const AddFlat = ({show, onHide}) => {
+const AddFloors = ({show, onHide}) => {
 
     return (
         <Modal show={show} onHide={onHide}>
             <Modal.Header closeButton>
-                <Modal.Title>Добавить квартиры</Modal.Title>
+                <Modal.Title>Добавить этажи</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
@@ -39,4 +39,4 @@ const AddFlat = ({show, onHide}) => {
     );
 };
 
-export default AddFlat;
+export default AddFloors;

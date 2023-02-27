@@ -53,7 +53,7 @@ function CityInput() {
         const value = e.target.value;
         let suggestions = [];
         if (value.length > 0) {
-            const regex =  (`^${value}`, 'i');
+            const regex =  new RegExp(`^${value}`, 'i');
             suggestions = cities.sort().filter(v => regex.test(v));
         }
         setInputText(value);

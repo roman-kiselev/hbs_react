@@ -12,14 +12,6 @@ const FormCoolMeterBolid = () => {
 
     return (
         <Row>
-            <Row>
-                <Col>
-                    <CitiesInput cities={cities}/>
-                </Col>
-                <Col>
-                    <MyCitiesInput />
-                </Col>
-            </Row>
             <Form>
                 <Row>
                     <Col>

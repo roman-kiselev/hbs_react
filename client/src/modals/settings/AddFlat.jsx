@@ -1,12 +1,12 @@
 import React from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
 
-const AddLine = ({show, onHide}) => {
+const AddFlat = ({show, onHide}) => {
 
     return (
         <Modal show={show} onHide={onHide}>
             <Modal.Header closeButton>
-                <Modal.Title>Добавить линию</Modal.Title>
+                <Modal.Title>Добавить квартиры</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
@@ -25,6 +25,7 @@ const AddLine = ({show, onHide}) => {
                         <Form.Label>Example textarea</Form.Label>
                         <Form.Control as="textarea" rows={3} />
                     </Form.Group>
+
                 </Form>
             </Modal.Body>
             <Modal.Footer>
@@ -39,4 +40,4 @@ const AddLine = ({show, onHide}) => {
     );
 };
 
-export default AddLine;
+export default AddFlat;

@@ -9,13 +9,9 @@ const ListObjects = () => {
     const {objects} = useSelector((state) => state.objectBuilds.objectsBuild)
 
 
-    /*useEffect(() => {
+    useEffect(() => {
         dispatch(getAllObjects())
-    },[])
-    */
-
-
-
+    },[dispatch])
 
 
     return (
