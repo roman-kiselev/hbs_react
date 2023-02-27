@@ -1,6 +1,7 @@
+import axios from "axios"
 import jwt_decode from "jwt-decode";
-import {createAsyncThunk, createSlice, isRejectedWithValue} from "@reduxjs/toolkit";
-import {$authHost, $host} from "../../http";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {$authHost, $host} from "../../http/index.js";
 
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
 // Функция логин
 export const loginIn = createAsyncThunk('api/user/login', async ({login, password},{rejectedWithValue, dispath}) => {
     const {data} = await $host.post('api/user/login', {login, password})
+    console.log(data.token)
     localStorage.setItem('token', data.token)
     return jwt_decode(data.token)
 })
@@ -30,11 +32,17 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action) => {
-            let {login, password, role} = action.payload
-            state.user = {login, password, role}
+            let {login, role, id} = action.payload
+            state.user = {
+                id: id,
+                login: login,
+                role: role
+            }
         },
         getUser: (state, action) => {
-
+            return {
+                login: state.user.login
+            }
         },
         setIsAuth: (state, action) => {
             state.isAuth = action.payload

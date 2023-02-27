@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Card, Container, Form, Row, Button} from "react-bootstrap";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setUser, setIsAuth, loginIn} from "../features/user/userSlice";
 import {useNavigate} from "react-router-dom";
 
@@ -10,6 +10,9 @@ const Auth = () => {
     const navigate = useNavigate()
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
+
+    const users = useSelector((state) => state.users)
+
 
     const checkAndRedirect = async () => {
         try {

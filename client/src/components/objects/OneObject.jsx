@@ -6,12 +6,12 @@ const OneObject = ({description}) => {
 
     return (
         <Card style={{ width: '18rem' , margin: 10}}>
-            <Card.Img className="mt-2" variant="top" src="https://www.novostroy.su/regions//u/editor_2/wm_5e0ddbbd8fb05.jpg" />
+            <Card.Img className="mt-2" variant="top" src={`${process.env.REACT_APP_URL_API}/${description.img}`} />
             <Card.Body>
 
                 <Card.Title>{description.name}</Card.Title>
                 <Card.Text>
-                    {description.address}
+                    {description.description}
                 </Card.Text>
 
                 <Link to={`/object/${description.id}`}><Button variant="primary">Перейти</Button></Link>

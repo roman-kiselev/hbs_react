@@ -8,10 +8,11 @@ import routes from "./routes/index.js";
 const PORT = process.env.PORT;
 import * as path from "path";
 import Models from './models/models.js'
+import ErrorHandlingMIddleware from "./middleware/ErrorHandlingMIddleware.js";
 const app = express();
 app.use(cors());
-app.use(express.static(path.resolve('static')));
-app.use(fileUpload())
+app.use(express.static(path.resolve('static/objects/img')));
+app.use(fileUpload({}))
 app.use(express.json());
 
 
@@ -22,14 +23,12 @@ app.use('/api',  routes);
 
 
 
-
-
+app.use(ErrorHandlingMIddleware);
 // Слушаем порт сервера
 (async () => {
     await sequelize.sync({force: false}).then( () => [
         app.listen(PORT, function () {
             console.log(`Сервер ожидает подключения...${PORT}`);
-            //console.log(path.resolve('static'))
         })
     ]);
 })();

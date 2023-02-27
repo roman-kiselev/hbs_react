@@ -16,8 +16,6 @@ import {useSelector} from "react-redux";
 const AppRouter = () => {
 
     const isAuth = useSelector((state) => state.users.isAuth)
-    console.log(isAuth)
-    const role = 'admin'
 
   return (
     <Routes>
@@ -40,8 +38,6 @@ const AppRouter = () => {
                     <Route path="/" element={< Auth /> }/>
                 </Route>
         }
-
-
 
     </Routes>
   )

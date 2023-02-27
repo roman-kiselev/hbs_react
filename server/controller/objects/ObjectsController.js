@@ -8,6 +8,7 @@ class ObjectsController {
         try {
             const {name, description} = req.body
             console.log(name, description)
+            console.log(req.files)
             const {img} = req.files
 
             let fileName = uuid() + ".jpg"

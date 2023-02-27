@@ -14,9 +14,6 @@ const HomePage = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-
-
-
   return (
     <Row className="m-5">
         <Row className="mt-3 justify-content-center">

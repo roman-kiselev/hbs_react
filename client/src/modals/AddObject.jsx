@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import {Modal, Form, Button} from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { addObject } from "../features/objectBuild/objectBuildSlice";
+import {addObject, createObjects} from "../features/objectBuild/objectBuildSlice";
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -13,24 +13,23 @@ const AddObject = ({show, onHide}) => {
 
     const [nameObject, setNameObject] = useState('');
     const [addressObject, setAddressObject] = useState('');
+    const [img, setImg] = useState(null)
 
-    const addObjectHandler = () => {
-        const arrObject = {
-            id: uuidv4(),
-            name: nameObject,
-            address: addressObject
-        }
 
-        dispatch(addObject(arrObject))
-        
-        setAddressObject('')
-        setNameObject('')
+    const addHome = (e) => {
+        e.preventDefault()
+        const formData = new FormData();
+        formData.append("name", nameObject)
+        formData.append("img", img)
+        formData.append("description", addressObject)
+
+        dispatch(createObjects({formData})).then((data) => onHide())
     }
 
-    const addNewObjectBuild = () => {
-        addObjectHandler()
-        onHide()
+    const selectFile = (e) => {
+        setImg(e.target.files[0])
     }
+
 
     return (
         <Modal show={show} onHide={onHide}>
@@ -51,7 +50,10 @@ const AddObject = ({show, onHide}) => {
                     </Form.Group>
                     <Form.Group controlId="formFile" className="mb-3">
                         <Form.Label>Выбор изображения</Form.Label>
-                        <Form.Control type="file" />
+                        <Form.Control
+                            type="file"
+                            onChange={(e) => selectFile(e)}
+                        />
                     </Form.Group>
                     <Form.Group
                         className="mb-3"
@@ -69,7 +71,7 @@ const AddObject = ({show, onHide}) => {
                 <Button variant="secondary" onClick={onHide}>
                     Закрыть
                 </Button>
-                <Button variant="primary" onClick={() => addNewObjectBuild()}>
+                <Button variant="primary" onClick={(e) => addHome(e)}>
                     Добавить
                 </Button>
             </Modal.Footer>
