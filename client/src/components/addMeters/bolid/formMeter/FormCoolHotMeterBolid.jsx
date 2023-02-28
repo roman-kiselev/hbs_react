@@ -42,7 +42,8 @@ const FormCoolHotMeterBolid = () => {
                     </Col>
 
                     <Row className="m-2">
-                        <Col>
+                        <Col className="col-sm-6 text-center" style={{border: "1px solid grey", borderRadius: 10}}>
+                            <h5>ХВС</h5>
                             <Col>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <Form.Label>Номер Канала</Form.Label>
@@ -58,7 +59,9 @@ const FormCoolHotMeterBolid = () => {
                                 <Form.Control type="number" step="0.01"/>
                             </Form.Group>
                         </Col>
-                        <Col>
+
+                        <Col className="col-12 col-sm-6 text-center" style={{border: "1px solid grey", borderRadius: 10}}>
+                            <h5>ГВС</h5>
                             <Col>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <Form.Label>Номер Канала</Form.Label>

@@ -593,6 +593,24 @@ Office.belongsToMany(PriborNumberChanel, {through: PriborNumberChanelOffice})
 /*// Связь приборов каналов
 class PriborChanel extends Sequelize.Model {}*/
 
+class Line extends Sequelize.Model {}
+Line.init({
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false
+    },
+    number: {
+        type: Sequelize.INTEGER,
+        allowNull: true
+    }
+},{
+    sequelize, modelName: 'line'
+})
+
+
+
 
 export default {User, ObjectBuilds, TypeMeter, Role, UsersRoles, DescriptionObject, Section, Floors, Flats, Office, Brands, Meter, Pribors, NameProperty, ValueProperty, MeterNumber, PriborNumber, Chanel, PriborNumberChanel, PriborNumberChanelNumberMeters, PriborNumberChanelFlat, PriborNumberChanelOffice}
 

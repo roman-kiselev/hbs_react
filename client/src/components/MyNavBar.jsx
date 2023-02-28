@@ -16,7 +16,7 @@ const MyNavBar = () => {
                     >
                         {/*<NavLink style={{textDecoration: "none"}} to="/"><Nav.Link href="/">Домашняя</Nav.Link></NavLink>*/}
                         <NavLink style={{textDecoration: "none", margin: 7, color: "grey"}} to="/">Домашняя</NavLink>
-                        <NavLink style={{textDecoration: "none", margin: 7, color: "grey"}} to="/">Пусто</NavLink>
+                        <NavLink style={{textDecoration: "none", margin: 7, color: "grey"}} to="/admin">Админ панель</NavLink>
                        {/* <NavLink style={{textDecoration: "none"}} to="/"><Nav.Link href="#action2">Link</Nav.Link></NavLink>*/}
 
                         <NavDropdown title="Пусто" id="navbarScrollingDropdown">

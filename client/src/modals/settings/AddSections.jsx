@@ -1,7 +1,27 @@
-import React from 'react';
-import {Button, Form, Modal} from "react-bootstrap";
+import React, {useEffect} from 'react';
+import {Button, Form, Modal, Table, Row, Pagination, Col} from "react-bootstrap";
+import {useDispatch, useSelector} from "react-redux";
+import {getAllSections} from "../../features/objectBuild/sectionsSlice";
+import RowTable from "./sections/RowTable";
+import Pages from "../../components/pagination/Pages"
 
 const AddSections = ({show, onHide}) => {
+
+    const dispatch = useDispatch()
+    const limit = 4
+    const offset = 3
+
+    const sections = useSelector((state) => state.sections.sections)
+    const count = useSelector((state) => state.sections.count)
+    console.log(count)
+
+    useEffect(() => {
+        dispatch(getAllSections({limit: 4, offset: 4}))
+    }, [])
+
+    let pageCount = Math.ceil(count / limit)
+    let pages = [];
+
 
     return (
         <Modal show={show} onHide={onHide}>
@@ -11,21 +31,48 @@ const AddSections = ({show, onHide}) => {
             <Modal.Body>
                 <Form>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Email address</Form.Label>
+                        <Form.Label>Номер секции</Form.Label>
                         <Form.Control
-                            type="email"
-                            placeholder="name@example.com"
+                            type="number"
                             autoFocus
                         />
                     </Form.Group>
-                    <Form.Group
-                        className="mb-3"
-                        controlId="exampleForm.ControlTextarea1"
-                    >
-                        <Form.Label>Example textarea</Form.Label>
-                        <Form.Control as="textarea" rows={3} />
-                    </Form.Group>
+                    <Button variant="success">
+                        Добавить
+                    </Button>
                 </Form>
+                <Row className="mt-2">
+                    <Table striped bordered hover>
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Номер</th>
+                            <th>Функция</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {
+                            sections.length > 0 ?
+                                sections.map((section) => (
+
+                                <RowTable key={section.id} section={section}/>
+
+                                )) :
+                                <tr>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                </tr>
+
+                        }
+
+                        </tbody>
+                    </Table>
+
+                </Row>
+                <Row className="justify-content-center">
+                    <Pages />
+                </Row>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={onHide}>

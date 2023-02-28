@@ -11,11 +11,16 @@ import AddCoolMeterPulsar from "./addMeters/pulsar/AddCoolMeterPulsar";
 import SettingsBolid from "./settings/SettingsBolid";
 import Auth from "../pages/Auth";
 import {useSelector} from "react-redux";
+import AdminLayout from "../pages/admin/AdminLayout";
+import AdminHomePage from "../pages/admin/AdminHomePage";
 
 
 const AppRouter = () => {
 
     const isAuth = useSelector((state) => state.users.isAuth)
+
+
+
 
   return (
     <Routes>
@@ -30,6 +35,8 @@ const AppRouter = () => {
                         <Route path="addHotMeterBolid" element={< AddHotMeterBolid />}/>
                         <Route path="addMeterCoolHotBolid" element={< AddMeterCoolHotBolid />}/>
                         <Route path="addCoolMeterPulsar" element={< AddCoolMeterPulsar />}/>
+                    </Route>
+                    <Route path="/admin" element={< AdminHomePage />}>
 
                     </Route>
                 </Route>
