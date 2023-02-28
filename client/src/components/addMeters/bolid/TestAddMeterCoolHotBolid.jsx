@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {Button, Col, Modal, Row, Tab, Tabs} from "react-bootstrap";
-import FormCoolMeterBolid from "./formMeter/FormCoolMeterBolid";
 import ListMeters from "./listMeter/ListMeters";
-import FormCoolHotMeterBolid from "./formMeter/FormCoolHotMeterBolid";
+import TestFormCoolHotMeterBolid from "./formMeter/TestFormCoolHotMeterBolid";
 
-const AddMeterCoolHotBolid = () => {
+
+const TestAddMeterCoolHotBolid = () => {
 
     const [show, setShow] = useState(false);
 
@@ -48,7 +48,7 @@ const AddMeterCoolHotBolid = () => {
                 >
                     <Tab eventKey="addMeter" title="Добавление">
                         <Row>
-                            <FormCoolHotMeterBolid />
+                            <TestFormCoolHotMeterBolid />
                         </Row>
                     </Tab>
                     <Tab eventKey="list" title="Список">
@@ -65,4 +65,4 @@ const AddMeterCoolHotBolid = () => {
     );
 };
 
-export default AddMeterCoolHotBolid;
+export default TestAddMeterCoolHotBolid;

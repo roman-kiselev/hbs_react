@@ -609,9 +609,68 @@ Line.init({
     sequelize, modelName: 'line'
 })
 
+class MainAddMeter extends Sequelize.Model {}
+MainAddMeter.init({
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false
+    },
+    section: {
+        type: Sequelize.BIGINT,
+        allowNull: true
+    },
+    floor: {
+        type: Sequelize.BIGINT,
+        allowNull: true
+    },
+    flat: {
+        type: Sequelize.BIGINT,
+        allowNull: true
+    },
+    line: {
+        type: Sequelize.BIGINT,
+        allowNull: true
+    },
+    typeMeter: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+    numberMeter: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+    sumMeter: {
+        type: Sequelize.FLOAT(11),
+        allowNull: true
+    },
+    numberKdl: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        defaultValue: '0'
+    },
+    numberAsr: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        defaultValue: '0'
+    },
+    comment: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
 
 
+},{
+    sequelize, modelName: "main_meter"
+})
 
-export default {User, ObjectBuilds, TypeMeter, Role, UsersRoles, DescriptionObject, Section, Floors, Flats, Office, Brands, Meter, Pribors, NameProperty, ValueProperty, MeterNumber, PriborNumber, Chanel, PriborNumberChanel, PriborNumberChanelNumberMeters, PriborNumberChanelFlat, PriborNumberChanelOffice}
+ObjectBuilds.hasMany(MainAddMeter);
+MainAddMeter.belongsTo(ObjectBuilds);
+User.hasMany(MainAddMeter);
+MainAddMeter.belongsTo(User);
+
+
+export default {User, ObjectBuilds, TypeMeter, Role, UsersRoles, DescriptionObject, Section, Floors, Flats, Office, Brands, Meter, Pribors, NameProperty, ValueProperty, MeterNumber, PriborNumber, Chanel, PriborNumberChanel, PriborNumberChanelNumberMeters, PriborNumberChanelFlat, PriborNumberChanelOffice, MainAddMeter}
 
 

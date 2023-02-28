@@ -74,6 +74,11 @@ const MenuOneObject = ({id, show, handleClose}) => {
                                     Добавить счётчики электроэнергии
                                 </ListGroup.Item>
                             </Link>
+                            <Link style={{textDecoration: "none"}} to={`temporaryPage/?id=${id}`}>
+                                <ListGroup.Item action variant="light">
+                                    Добавить воду (Test)
+                                </ListGroup.Item>
+                            </Link>
 
 
 
