@@ -29,7 +29,7 @@ const DescriptionObject = () => {
             <Col  className="col-12 col-xl-9 justify-content-center mt-3">
                 <Row>
                     
-                    <Outlet />
+                    <Outlet/>
                 </Row>
             </Col>
 

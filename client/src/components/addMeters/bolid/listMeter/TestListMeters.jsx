@@ -1,11 +1,23 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Row} from "react-bootstrap";
-import CardMeter from "./CardMeter";
-import {useSelector} from "react-redux";
+import TestCardMeter from "./TestCardMeter";
+import {useDispatch, useSelector} from "react-redux";
+import {getAllMetersByUserAndObject} from "../../../../features/testMeters/testWaterMeterSlice";
 
-const ListMeters = () => {
+const TestListMeters = ({id: objectId}) => {
+    const dispatch = useDispatch()
+    const {id: userId} = useSelector((state) => state.users.user)
+    const cardMeter = useSelector((state) => state.mainTable.mainTable)
 
-    const cardMeter = useSelector((state) => state.coolBolid.coolBolidList)
+    const formQuery = {
+        userId,
+        objectId
+    }
+
+    useEffect(() => {
+        dispatch(getAllMetersByUserAndObject({formQuery}))
+    },[])
+
 
 
     return (
@@ -14,7 +26,7 @@ const ListMeters = () => {
             <Row>
                 {
                     cardMeter.map((card) => (
-                        <CardMeter key={card.id} {...card}/>
+                        <TestCardMeter key={card.id} {...card}/>
                     ))
                 }
             </Row>
@@ -23,4 +35,4 @@ const ListMeters = () => {
     );
 };
 
-export default ListMeters;
+export default TestListMeters;

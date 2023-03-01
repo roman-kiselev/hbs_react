@@ -1,23 +1,64 @@
 import React, {useState} from 'react';
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
+import {createTestMeter, getAllMetersByUserAndObject} from "../../../../features/testMeters/testWaterMeterSlice";
 
-const TestFormCoolHotMeterBolid = () => {
+const TestFormCoolHotMeterBolid = ({id}) => {
 
-    const [section, setSection] = useState(0)
-    const [floors, setFloors] = useState(0)
-    const [flat, setFlat] = useState(0)
-    const [kdl, setKdl] = useState(0)
-    const [channelCool, setChannelCool] = useState(0)
-    const [channelHot, setChannelHot] = useState()
-    const [numberMeterCool, setNumberMeterCool] = useState(0)
-    const [numberMeterHot, setNumberMeterHot] = useState(0)
-    const [sumMeterCool, setSumMeterCool] = useState(0.0)
-    const [sumMeterHot, setSumMeterHot] = useState(0.0)
+    const [section, setSection] = useState("")
+    const [floors, setFloors] = useState("")
+    const [flat, setFlat] = useState("")
+    const [kdl, setKdl] = useState("")
+    const [channelCool, setChannelCool] = useState("")
+    const [channelHot, setChannelHot] = useState("")
+    const [numberMeterCool, setNumberMeterCool] = useState("")
+    const [numberMeterHot, setNumberMeterHot] = useState("")
+    const [sumMeterCool, setSumMeterCool] = useState("")
+    const [sumMeterHot, setSumMeterHot] = useState("")
 
 
     const dispatch = useDispatch();
     const {id: userId} = useSelector((state) => state.users.user)
+
+    const addMeter = (e) => {
+        e.preventDefault()
+        const dataWith = {
+            section: section,
+            floors: floors,
+            flat: flat,
+            kdl: kdl,
+            channelCool: channelCool,
+            channelHot: channelHot,
+            numberMeterCool: numberMeterCool,
+            numberMeterHot: numberMeterHot,
+            sumMeterCool: sumMeterCool,
+            sumMeterHot: sumMeterHot,
+            userId: userId,
+            objectId: id
+        }
+        const formQuery = {userId, objectId: id}
+
+
+        dispatch(createTestMeter({dataWith})).then((d) => {
+            dispatch(getAllMetersByUserAndObject({formQuery}))
+        })
+
+    }
+    // Нечётный канал для воды
+    const oddChannel = (e) => {
+        const num = Number(e.target.value)
+        if (num % 2 === 0) {
+            setChannelCool(num + 1)
+        }
+        setChannelCool(num)
+    }
+
+    // Прибавляем канал
+    const addChannelHot = (e) => {
+        setChannelCool(e.target.value)
+        setChannelHot(Number(e.target.value) + 1)
+    }
+
 
 
 
@@ -79,7 +120,7 @@ const TestFormCoolHotMeterBolid = () => {
                                     <Form.Control
                                         type="number"
                                         value={channelCool}
-                                        onChange={(e) => setChannelCool(e.target.value)}
+                                        onChange={(e) => addChannelHot(e)}
                                     />
                                 </Form.Group>
                             </Col>
@@ -110,6 +151,7 @@ const TestFormCoolHotMeterBolid = () => {
                                         type="number"
                                         value={channelHot}
                                         onChange={(e) => setChannelHot(e.target.value)}
+                                        disabled={true}
                                     />
                                 </Form.Group>
                             </Col>
@@ -138,7 +180,11 @@ const TestFormCoolHotMeterBolid = () => {
                 </Row>
 
 
-                <Button variant="primary" type="submit">
+                <Button
+                    variant="primary"
+                    type="submit"
+                    onClick={(e) => addMeter(e)}
+                >
                     Добавить
                 </Button>
             </Form>

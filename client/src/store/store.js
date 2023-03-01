@@ -3,6 +3,7 @@ import objectSlice from "../features/objectBuild/objectBuildSlice";
 import coolWaterBildSlice from "../features/bolid/coolBolidSlice";
 import userSlice from "../features/user/userSlice";
 import sectionsSlice from "../features/objectBuild/sectionsSlice";
+import testWaterMeterSlice from "../features/testMeters/testWaterMeterSlice";
 
 
 export const store = configureStore({
@@ -10,6 +11,7 @@ export const store = configureStore({
         users: userSlice,
         objectBuilds: objectSlice,
         coolBolid: coolWaterBildSlice,
-        sections: sectionsSlice
+        sections: sectionsSlice,
+        mainTable: testWaterMeterSlice
     }
 })

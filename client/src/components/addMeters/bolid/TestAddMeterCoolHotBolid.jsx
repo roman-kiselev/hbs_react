@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {Button, Col, Modal, Row, Tab, Tabs} from "react-bootstrap";
-import ListMeters from "./listMeter/ListMeters";
+import TestListMeters from "./listMeter/TestListMeters";
 import TestFormCoolHotMeterBolid from "./formMeter/TestFormCoolHotMeterBolid";
+import {useParams} from "react-router-dom";
 
 
 const TestAddMeterCoolHotBolid = () => {
@@ -11,6 +12,9 @@ const TestAddMeterCoolHotBolid = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const {id} = useParams()
+
+    const [key, setKey] = useState('list');
 
     return (
         <Row>
@@ -42,18 +46,19 @@ const TestAddMeterCoolHotBolid = () => {
 
             <Row className="mt-3">
                 <Tabs
-                    defaultActiveKey="profile"
-                    id="uncontrolled-tab-example"
+                    id="controlled-tab-example"
+                    activeKey={key}
+                    onSelect={(k) => setKey(k)}
                     className="mb-3"
                 >
                     <Tab eventKey="addMeter" title="Добавление">
                         <Row>
-                            <TestFormCoolHotMeterBolid />
+                            <TestFormCoolHotMeterBolid id={id}/>
                         </Row>
                     </Tab>
                     <Tab eventKey="list" title="Список">
                         Сортировка // Квартиры // Этажи // Секции // КДЛ // АСР // Поиск номера
-                        <ListMeters />
+                        <TestListMeters id={id}/>
                     </Tab>
                     <Tab eventKey="op" title="Операции">
                         Тут разные

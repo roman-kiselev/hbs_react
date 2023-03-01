@@ -17,9 +17,11 @@ class TestWaterMeterController {
                 numberMeterHot,
                 sumMeterCool,
                 sumMeterHot,
-                objectId,
-                userId
+                userId,
+                objectId
             } = req.body
+
+
 
             const coolMeter = {
                 section: section,
@@ -60,8 +62,23 @@ class TestWaterMeterController {
         }
     }
 
-    async getAllByIdUser (req, res) {
+    async getAllByIdUserAndObject (req, res) {
         try {
+
+            const {userId, objectId} = req.query
+            console.log(userId, objectId)
+            const listMeters = await Models.MainAddMeter.findAll({
+                where: {
+                    objectBuildId: objectId,
+                    userId
+                },
+                limit: 20,
+                order: [
+                    ['id', 'DESC']
+                ]
+            })
+
+            return res.json({listMeters})
 
         } catch (e) {
             console.log(e)

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Card, Col, Form, Modal, Row, Tab, Tabs} from "react-bootstrap";
 import FormCoolMeterBolid from "./formMeter/FormCoolMeterBolid";
-import ListMeters from "./listMeter/ListMeters";
+import TestListMeters from "./listMeter/TestListMeters";
 
 const AddCoolMetersBolid = () => {
     const [show, setShow] = useState(false);
@@ -51,7 +51,7 @@ const AddCoolMetersBolid = () => {
                     </Tab>
                     <Tab eventKey="list" title="Список">
                         Сортировка // Квартиры // Этажи // Секции // КДЛ // АСР // Поиск номера
-                        <ListMeters />
+                        <TestListMeters />
                     </Tab>
                     <Tab eventKey="op" title="Операции">
                         Тут разные

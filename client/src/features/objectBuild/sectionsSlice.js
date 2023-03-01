@@ -17,6 +17,7 @@ export const createSections = createAsyncThunk('api/sections', async ({formData}
 })
 
 export const getAllSections = createAsyncThunk('api/sections', async ({dataForFilter}, {rejectedWithValue, dispatch}) => {
+    console.log(data)
     const {data} = await $authHost.get('api/sections', {params: {
         dataForFilter
         }})

@@ -4,6 +4,7 @@ const router = express.Router();
 
 
 router.post('/', TestWaterMeterController.addNewMeter)
+router.get('/', TestWaterMeterController.getAllByIdUserAndObject)
 
 
 

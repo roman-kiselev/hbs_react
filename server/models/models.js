@@ -629,6 +629,10 @@ MainAddMeter.init({
         type: Sequelize.BIGINT,
         allowNull: true
     },
+    office: {
+      type: Sequelize.INTEGER  ,
+        allowNull: true
+    },
     line: {
         type: Sequelize.BIGINT,
         allowNull: true

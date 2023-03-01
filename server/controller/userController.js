@@ -62,6 +62,7 @@ class UserController {
 
 
 
+
         let comparePassword = bcrypt.compareSync(password, user.password)
         if (!comparePassword) {
             return next(ApiError.internal('Указан неверный пароль'))
