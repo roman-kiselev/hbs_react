@@ -22,6 +22,7 @@ app.use(express.json());
 app.use('/api',  routes);
 
 
+// Вытянул
 
 
 app.use(ErrorHandlingMIddleware);
