@@ -22,7 +22,7 @@ app.use(express.json());
 app.use('/api',  routes);
 
 
-// Вытянул
+// Вытянул, ещё раз
 
 
 app.use(ErrorHandlingMIddleware);
