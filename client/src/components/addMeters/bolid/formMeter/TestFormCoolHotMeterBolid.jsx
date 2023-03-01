@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, Col, Form, Row} from "react-bootstrap";
+import {Alert, Button, Col, Form, Row} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {createTestMeter, getAllMetersByUserAndObject} from "../../../../features/testMeters/testWaterMeterSlice";
 
@@ -179,14 +179,24 @@ const TestFormCoolHotMeterBolid = ({id}) => {
 
                 </Row>
 
+                <Row>
+                    <Col>
+                        <Button
+                            variant="primary"
+                            type="submit"
+                            onClick={(e) => addMeter(e)}
+                        >
+                            Добавить
+                        </Button>
+                    </Col>
+                    <Col>
+                        <Alert show="false" className="" variant="info">
+                            <p>Были успешно добавлены</p>
+                            <p>Квартира №65</p>
+                        </Alert>
+                    </Col>
+                </Row>
 
-                <Button
-                    variant="primary"
-                    type="submit"
-                    onClick={(e) => addMeter(e)}
-                >
-                    Добавить
-                </Button>
             </Form>
 
         </Row>

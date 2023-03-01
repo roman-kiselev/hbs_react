@@ -43,7 +43,8 @@ export const sectionsSlice = createSlice({
 
         removeSections: (state, action) => {
 
-        }
+        },
+
     }
 })
 
