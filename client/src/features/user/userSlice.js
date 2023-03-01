@@ -12,7 +12,6 @@ const initialState = {
 // Функция логин
 export const loginIn = createAsyncThunk('api/user/login', async ({login, password},{rejectedWithValue, dispath}) => {
     const {data} = await $host.post('api/user/login', {login, password})
-    console.log(data.token)
     localStorage.setItem('token', data.token)
     return jwt_decode(data.token)
 })

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Row} from "react-bootstrap";
 import TestCardMeter from "./TestCardMeter";
 import {useDispatch, useSelector} from "react-redux";
@@ -9,6 +9,12 @@ const TestListMeters = ({id: objectId}) => {
     const {id: userId} = useSelector((state) => state.users.user)
     const cardMeter = useSelector((state) => state.mainTable.mainTable)
 
+    const {currentPage} = useSelector((state) => state.mainTable)
+    const {perPage} = useSelector((state) => state.mainTable)
+    const {totalCount} = useSelector((state) => state.mainTable)
+
+
+
     const formQuery = {
         userId,
         objectId
@@ -16,7 +22,7 @@ const TestListMeters = ({id: objectId}) => {
 
     useEffect(() => {
         dispatch(getAllMetersByUserAndObject({formQuery}))
-    },[])
+    },[dispatch])
 
 
 
@@ -25,9 +31,11 @@ const TestListMeters = ({id: objectId}) => {
 
             <Row>
                 {
-                    cardMeter.map((card) => (
-                        <TestCardMeter key={card.id} {...card}/>
-                    ))
+                    cardMeter.length !== 0 ?
+                        cardMeter.map((card) => (
+                            <TestCardMeter key={card.id} {...card}/>
+                        )) :
+                        <p>Пока ничего нет</p>
                 }
             </Row>
 

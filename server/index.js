@@ -17,7 +17,6 @@ app.use(express.json());
 
 
 
-
 // Здесь подключаем общий роутер
 app.use('/api',  routes);
 

@@ -15,7 +15,6 @@ export const createObjects = createAsyncThunk('api/object', async ({formData}, {
 
 export const getAllObjects = createAsyncThunk('api/object', async (_, {rejectedWithValue, dispatch}) => {
     const {data} = await $authHost.get('api/object')
-    console.log(data)
     dispatch(setObject(data))
 })
 

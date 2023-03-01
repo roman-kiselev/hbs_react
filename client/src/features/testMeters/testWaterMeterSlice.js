@@ -1,8 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {$authHost, $host} from "../../http/index.js";
+import {$authHost} from "../../http/index.js";
 
 const initialState = {
-    mainTable: []
+    mainTable: [],
+    currentPage: 1,
+    perPage: 10,
+    totalCount: 0
 }
 
 
@@ -18,7 +21,6 @@ export const createTestMeter = createAsyncThunk('api/testAddWater', async ({data
 
 export const getAllMetersByUserAndObject = createAsyncThunk('api/testAddWater',async ({formQuery}, {rejectedWithValue, dispatch}) => {
     const {userId, objectId} = formQuery
-    console.log(userId)
     const {data} = await $authHost.get(`api/testAddWater?userId=${userId}&objectId=${objectId}`, )
 
     dispatch(setMeters({data}))

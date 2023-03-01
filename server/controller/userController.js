@@ -16,9 +16,10 @@ const generateJwt = (id, login, role) => {
             role: role
         },
         process.env.SECRET_KEY,
-        {expiresIn: '24h'}
+        {expiresIn: '8h'}
     )
 }
+
 
 class UserController {
 
