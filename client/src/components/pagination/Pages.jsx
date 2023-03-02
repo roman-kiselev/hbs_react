@@ -1,9 +1,14 @@
 import React from 'react';
 import {Pagination} from "react-bootstrap";
+import {useDispatch, useSelector} from "react-redux";
+import {setCurrentPage} from "../../features/testMeters/testWaterMeterSlice";
 
-const Pages = ({count, limit, page: arrPage}) => {
-
-    const pageCount = Math.ceil(count / limit)
+const Pages = () => {
+    const dispatch = useDispatch()
+    const {totalCount} = useSelector((state) => state.mainTable)
+    const {limit} = useSelector((state) => state.mainTable)
+    const {currentPage} = useSelector((state) => state.mainTable)
+    const pageCount = Math.ceil(totalCount / limit)
     const pages = []
 
     for (let i = 0; i < pageCount; i++) {
@@ -14,7 +19,11 @@ const Pages = ({count, limit, page: arrPage}) => {
         <Pagination>
             {
                 pages.map((page) => (
-                    <Pagination.Item active={arrPage === page} key={page}>
+                    <Pagination.Item
+                        active={currentPage === page}
+                        key={page}
+                        onClick={() => dispatch(setCurrentPage(page))}
+                    >
                         {page}
                     </Pagination.Item>
                 ))

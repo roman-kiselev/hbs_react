@@ -66,14 +66,19 @@ class TestWaterMeterController {
 
         try {
 
-            const {userId, objectId} = req.query
-            console.log(userId, objectId)
+            let {userId, objectId, limit, page, } = req.query
+
+            page = page || 1
+            limit = limit || 6
+            let offset = page * limit - limit
+
             const listMeters = await Models.MainAddMeter.findAndCountAll({
                 where: {
                     objectBuildId: objectId,
                     userId
                 },
-                limit: 20,
+                limit,
+                offset,
                 order: [
                     ['id', 'DESC']
                 ]

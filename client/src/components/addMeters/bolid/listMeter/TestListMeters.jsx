@@ -3,6 +3,7 @@ import {Row} from "react-bootstrap";
 import TestCardMeter from "./TestCardMeter";
 import {useDispatch, useSelector} from "react-redux";
 import {getAllMetersByUserAndObject} from "../../../../features/testMeters/testWaterMeterSlice";
+import Pages from "../../../pagination/Pages";
 
 const TestListMeters = ({id: objectId}) => {
     const dispatch = useDispatch()
@@ -12,7 +13,6 @@ const TestListMeters = ({id: objectId}) => {
     const {currentPage} = useSelector((state) => state.mainTable)
     const {perPage} = useSelector((state) => state.mainTable)
     const {totalCount} = useSelector((state) => state.mainTable)
-
 
 
     const formQuery = {
@@ -37,6 +37,10 @@ const TestListMeters = ({id: objectId}) => {
                         )) :
                         <p>Пока ничего нет</p>
                 }
+            </Row>
+            <Row>
+
+                <Pages page={[1,2,3]}/>
             </Row>
 
         </Row>
