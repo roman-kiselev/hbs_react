@@ -56,7 +56,7 @@ const TestFormCoolHotMeterBolid = ({id}) => {
             setNumberMeterHot("")
             setSumMeterCool("")
             setSumMeterHot("")
-            setTimeout(setNewAlert, 10000)
+            setTimeout(setNewAlert, 5000)
         })
 
 

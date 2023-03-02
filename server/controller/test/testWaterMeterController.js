@@ -63,11 +63,12 @@ class TestWaterMeterController {
     }
 
     async getAllByIdUserAndObject (req, res) {
+
         try {
 
             const {userId, objectId} = req.query
             console.log(userId, objectId)
-            const listMeters = await Models.MainAddMeter.findAll({
+            const listMeters = await Models.MainAddMeter.findAndCountAll({
                 where: {
                     objectBuildId: objectId,
                     userId
