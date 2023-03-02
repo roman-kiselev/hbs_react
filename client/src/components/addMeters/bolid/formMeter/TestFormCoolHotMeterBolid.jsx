@@ -46,7 +46,11 @@ const TestFormCoolHotMeterBolid = ({id}) => {
         dispatch(createTestMeter({dataWith})).then((d) => {
             dispatch(getAllMetersByUserAndObject({formQuery}))
             setAlertAdd(true)
-            setTimeout(setNewAlert, 5000)
+            setNumberMeterCool("")
+            setNumberMeterHot("")
+            setSumMeterCool("")
+            setSumMeterHot("")
+            setTimeout(setNewAlert, 10000)
         })
 
 
