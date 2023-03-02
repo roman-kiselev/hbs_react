@@ -2,9 +2,12 @@ import React, {useState} from 'react';
 import {Alert, Button, Col, Form, Row} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {createTestMeter, getAllMetersByUserAndObject} from "../../../../features/testMeters/testWaterMeterSlice";
+import TestAlertAddMeters from "../alerts/TestAlertAddMeters";
 
 const TestFormCoolHotMeterBolid = ({id}) => {
 
+    const dispatch = useDispatch();
+    // Состояние форм
     const [section, setSection] = useState("")
     const [floors, setFloors] = useState("")
     const [flat, setFlat] = useState("")
@@ -15,12 +18,15 @@ const TestFormCoolHotMeterBolid = ({id}) => {
     const [numberMeterHot, setNumberMeterHot] = useState("")
     const [sumMeterCool, setSumMeterCool] = useState("")
     const [sumMeterHot, setSumMeterHot] = useState("")
-
+    // Состояние уведомлений
     const [alertAdd, setAlertAdd] = useState(false)
 
-    const dispatch = useDispatch();
+    // Достаём id пользователя
     const {id: userId} = useSelector((state) => state.users.user)
+    // Достаём добавленные счётчики
+    const {lastMeters} = useSelector((state) => state.mainTable)
 
+    // Данные для добавления
     const addMeter = (e) => {
         e.preventDefault()
         const dataWith = {
@@ -42,7 +48,7 @@ const TestFormCoolHotMeterBolid = ({id}) => {
         const setNewAlert = () => {
             setAlertAdd(false)
         }
-
+   
         dispatch(createTestMeter({dataWith})).then((d) => {
             dispatch(getAllMetersByUserAndObject({formQuery}))
             setAlertAdd(true)
@@ -63,7 +69,6 @@ const TestFormCoolHotMeterBolid = ({id}) => {
         }
         setChannelCool(num)
     }
-
     // Прибавляем канал
     const addChannelHot = (e) => {
         setChannelCool(e.target.value)
@@ -202,13 +207,21 @@ const TestFormCoolHotMeterBolid = ({id}) => {
                     </Col>
                     <Row className="fixed-top justify-content-end mt-3">
                         <Col className="col-sm-3">
-                            <Alert show={alertAdd} variant="info">
-                                <p>Были успешно добавлены</p>
-                                <p>Этаж №{floors || 0} Квартира {flat || 0} </p>
-                                <p>Кдл №{kdl || 0} Канал №{channelCool || 0} и №{channelHot || 0}</p>
-                            </Alert>
+
+                            <Row>
+                                {
+                                    alertAdd ?
+                                        lastMeters.map((meter) => (
+                                            <TestAlertAddMeters key={meter.id} alertAdd={alertAdd} {...meter} />
+                                        )) :
+                                        <></>
+                                }
+
+                            </Row>
+                            
                         </Col>
                     </Row>
+                    
 
                 </Row>
 

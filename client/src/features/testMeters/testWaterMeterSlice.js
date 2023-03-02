@@ -5,7 +5,8 @@ const initialState = {
     mainTable: [],
     currentPage: 1,
     perPage: 10,
-    totalCount: 0
+    totalCount: 0,
+    lastMeters: []
 }
 
 
@@ -15,7 +16,7 @@ export const createTestMeter = createAsyncThunk('api/testAddWater', async ({data
 
     const {data} = await $authHost.post('api/testAddWater', dataWith)
 
-    dispatch(addMeters(data))
+    dispatch(setLastMeters(data))
 
 })
 
@@ -48,11 +49,15 @@ export const testWaterMeterSlice = createSlice({
         setMeters: (state, action) => {
             state.mainTable = action.payload.data.listMeters
 
+        },
+
+        setLastMeters: (state, action) => {
+            state.lastMeters = action.payload
         }
 
     }
 })
 
 
-export const {addMeters, setMeters} = testWaterMeterSlice.actions;
+export const {addMeters, setMeters, setLastMeters} = testWaterMeterSlice.actions;
 export default testWaterMeterSlice.reducer;
