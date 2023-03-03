@@ -7,7 +7,7 @@ const initialState = {
     perPage: 10,
     totalCount: 0,
     lastMeters: [],
-    limit: 2
+    limit: 4
 }
 
 
@@ -23,8 +23,10 @@ export const createTestMeter = createAsyncThunk('api/testAddWater', async ({data
 
 export const getAllMetersByUserAndObject = createAsyncThunk('api/testAddWater',async ({formQuery}, {rejectedWithValue, dispatch}) => {
     const {userId, objectId} = formQuery
-    console.log(limit, currentPage)
+    const {limit, currentPage, perPage} = initialState
+    
     const {data} = await $authHost.get(`api/testAddWater?userId=${userId}&objectId=${objectId}&limit=${limit}&page=${currentPage}`)
+    
     const {rows, count} = data.listMeters
     dispatch(setTotalCount(count))
     dispatch(setMeters({rows}))

@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import Models from "../../models/models.js";
 
 class TestWaterMeterController {
@@ -66,11 +67,17 @@ class TestWaterMeterController {
 
         try {
 
-            let {userId, objectId, limit, page, } = req.query
+            let {userId, objectId, limit, page} = req.query
 
             page = page || 1
             limit = limit || 6
             let offset = page * limit - limit
+            console.log(offset)
+            
+            //console.log(limit, page, offset)
+            console.log(chalk.magenta(limit, page, offset))
+
+;
 
             const listMeters = await Models.MainAddMeter.findAndCountAll({
                 where: {
