@@ -16,7 +16,7 @@ const initialState = {
 export const createTestMeter = createAsyncThunk('api/testAddWater', async ({dataWith}, {rejectedWithValue, dispatch}) => {
 
     const {data} = await $authHost.post('api/testAddWater', dataWith)
-
+    
     dispatch(setLastMeters({data}))
 
 })

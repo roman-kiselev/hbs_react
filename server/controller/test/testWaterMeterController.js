@@ -74,9 +74,7 @@ class TestWaterMeterController {
             let offset = page * limit - limit
             
             //console.log(limit, page, offset)
-            console.log(chalk.magenta(limit, page, offset))
-
-;
+            //console.log(chalk.magenta(limit, page, offset))
 
             const listMeters = await Models.MainAddMeter.findAndCountAll({
                 where: {

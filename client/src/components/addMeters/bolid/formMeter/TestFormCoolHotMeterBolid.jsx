@@ -25,6 +25,8 @@ const TestFormCoolHotMeterBolid = ({id}) => {
     const {id: userId} = useSelector((state) => state.users.user)
     // Достаём добавленные счётчики
     const {lastMeters} = useSelector((state) => state.mainTable)
+    
+    const { currentPage, limit } = useSelector((state) => state.mainTable)
 
     // Данные для добавления
     const addMeter = (e) => {
@@ -43,6 +45,8 @@ const TestFormCoolHotMeterBolid = ({id}) => {
             userId: userId,
             objectId: id
         }
+      
+        // В форму передаём 
         const formQuery = {userId, objectId: id}
 
         const setNewAlert = () => {
@@ -51,15 +55,14 @@ const TestFormCoolHotMeterBolid = ({id}) => {
    
         dispatch(createTestMeter({dataWith})).then((d) => {
             dispatch(getAllMetersByUserAndObject({formQuery}))
-            setAlertAdd(true)
+            
             setNumberMeterCool("")
             setNumberMeterHot("")
             setSumMeterCool("")
             setSumMeterHot("")
+            setAlertAdd(true)
             setTimeout(setNewAlert, 5000)
         })
-
-
     }
     // Нечётный канал для воды
     const oddChannel = (e) => {
@@ -211,7 +214,7 @@ const TestFormCoolHotMeterBolid = ({id}) => {
                             <Row>
                                 {
                                     alertAdd ?
-                                        lastMeters.map((meter) => (
+                                        lastMeters.data.map((meter) => (
                                             <TestAlertAddMeters key={meter.id} alertAdd={alertAdd} {...meter} />
                                         )) :
                                         <></>
