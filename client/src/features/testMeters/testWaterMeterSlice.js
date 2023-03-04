@@ -7,7 +7,7 @@ const initialState = {
     perPage: 10,
     totalCount: 0,
     lastMeters: [],
-    limit: 4
+    limit: 6
 }
 
 
@@ -21,13 +21,17 @@ export const createTestMeter = createAsyncThunk('api/testAddWater', async ({data
 
 })
 
-export const getAllMetersByUserAndObject = createAsyncThunk('api/testAddWater',async ({formQuery}, {rejectedWithValue, dispatch}) => {
+export const getAllMetersByUserAndObject = createAsyncThunk('api/testAddWater',async ({formQuery}, {getState, dispatch}) => {
     const {userId, objectId} = formQuery
-    const {limit, currentPage, perPage} = initialState
-    
+    // Получаем лимит и текущую страницу из геттера
+    // Что бы получить state добавляем getState.mainTable
+    const state = getState()
+    const {limit, currentPage} = state.mainTable
+
     const {data} = await $authHost.get(`api/testAddWater?userId=${userId}&objectId=${objectId}&limit=${limit}&page=${currentPage}`)
-    
+
     const {rows, count} = data.listMeters
+
     dispatch(setTotalCount(count))
     dispatch(setMeters({rows}))
 })
@@ -71,10 +75,10 @@ export const testWaterMeterSlice = createSlice({
         setCurrentPage: (state, action) => {
             state.currentPage = action.payload
         }
-
+        
     }
 })
 
 
-export const {addMeters, setMeters, setLastMeters, setTotalCount, setCurrentPage} = testWaterMeterSlice.actions;
+export const {addMeters, setMeters, setLastMeters, setTotalCount, setCurrentPage, getLimitAndCurrentPage} = testWaterMeterSlice.actions;
 export default testWaterMeterSlice.reducer;

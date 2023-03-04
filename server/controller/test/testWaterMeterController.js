@@ -69,10 +69,9 @@ class TestWaterMeterController {
 
             let {userId, objectId, limit, page} = req.query
 
-            page = page || 1
-            limit = limit || 6
+            page = Number(page) || 1
+            limit = Number(limit) || 6
             let offset = page * limit - limit
-            console.log(offset)
             
             //console.log(limit, page, offset)
             console.log(chalk.magenta(limit, page, offset))
@@ -84,8 +83,8 @@ class TestWaterMeterController {
                     objectBuildId: objectId,
                     userId
                 },
-                limit,
-                offset,
+                limit: limit,
+                offset: offset,
                 order: [
                     ['id', 'DESC']
                 ]
