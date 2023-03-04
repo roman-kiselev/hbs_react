@@ -11,15 +11,15 @@ const Pages = ({ totalCount, limit, currentPage }) => {
     const pageCount = Math.ceil(totalCount / limit)
     const pages = []
 
-    if(pageCount > 10) {
-        if(currentPage > 5) {
-            for (let i = currentPage-4; i <= currentPage+5; i++) {
+    if(pageCount > 5) {
+        if(currentPage > 3) {
+            for (let i = currentPage-4; i <= currentPage+3; i++) {
                 pages.push(i)
                 if(i == pageCount) break
             }
         }
         else {
-            for (let i = 1; i <= 10; i++) {
+            for (let i = 1; i <= 5; i++) {
                 pages.push(i)
                 if(i == pageCount) break
             }
@@ -37,6 +37,7 @@ const Pages = ({ totalCount, limit, currentPage }) => {
 
     return (
         <Pagination>
+            
             {
                 pages.map((page) => (
                     <Pagination.Item

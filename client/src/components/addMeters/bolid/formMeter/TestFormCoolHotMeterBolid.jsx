@@ -26,7 +26,6 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
     // Достаём добавленные счётчики
     const { lastMeters } = useSelector((state) => state.mainTable)
 
-    const { currentPage, limit } = useSelector((state) => state.mainTable)
 
     // Данные для добавления
     const addMeter = (e) => {
@@ -61,6 +60,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
             setSumMeterHot("")
             setAlertAdd(true)
             setTimeout(setNewAlert, 5000)
+
         })
     }
     // Нечётный канал для воды
