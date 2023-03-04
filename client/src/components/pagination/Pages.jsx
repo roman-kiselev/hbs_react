@@ -13,7 +13,7 @@ const Pages = ({ totalCount, limit, currentPage }) => {
 
     if(pageCount > 5) {
         if(currentPage > 3) {
-            for (let i = currentPage-4; i <= currentPage+3; i++) {
+            for (let i = currentPage-3; i <= currentPage+3; i++) {
                 pages.push(i)
                 if(i == pageCount) break
             }
