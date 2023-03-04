@@ -56,12 +56,12 @@ const FormEditCoolMeterBolid = ({data}) => {
                         <Form.Select aria-label="Default select example">
                             <option>Выбор</option>
                             {
-                                kdlArr.map((k) => (
+                                kdlArr.map((k, i) => (
 
                                     k.value === data.kdl ?
-                                        <option selected value={k.value}>{k.title}</option>
+                                        <option key={i} selected value={k.value}>{k.title}</option>
                                         :
-                                        <option value={k.value}>{k.title}</option>
+                                        <option key={i} value={k.value}>{k.title}</option>
                                 ))
                             }
                         </Form.Select>

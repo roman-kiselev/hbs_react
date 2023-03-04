@@ -66,9 +66,9 @@ class TestWaterMeterController {
     async getAllByIdUserAndObject (req, res) {
 
         try {
-
+            
+            // Получаем данные для постраничной навигации
             let {userId, objectId, limit, page} = req.query
-
             page = Number(page) || 1
             limit = Number(limit) || 6
             let offset = page * limit - limit

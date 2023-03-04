@@ -13,7 +13,7 @@ const AddSections = ({show, onHide}) => {
 
     const sections = useSelector((state) => state.sections.sections)
     const count = useSelector((state) => state.sections.count)
-    console.log(count)
+
 
     useEffect(() => {
         dispatch(getAllSections({limit: 4, offset: 4}))

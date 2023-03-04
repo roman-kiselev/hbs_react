@@ -1,16 +1,23 @@
 import React, {useState} from 'react';
 import {Alert, Button, ListGroup, Offcanvas, Row, Col, Form} from "react-bootstrap"
 import {Outlet, useParams} from "react-router-dom";
-import MenuOneObject from "../components/addMeters/MenuOneObject";
+import MenuOneObject from "../components/addMeters/leftMenu/MenuOneObject";
+import { useSelector, useDispatch } from "react-redux";
+import { setShow } from '../features/leftMenu/leftMenuSlice';
+
 
 const DescriptionObject = () => {
 
     let {id} = useParams();
+    const dispatch = useDispatch();
 
-    const [show, setShow] = useState(false);
+    const {show} = useSelector((state) => state.leftMenu)
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    
+
+    
+    const handleClose = () => dispatch(setShow(false));
+    const handleShow = () => dispatch(setShow(true));
 
     const [active, setActive] = useState(false)
     const clickActive = () => setActive(true)

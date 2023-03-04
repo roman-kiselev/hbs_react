@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Button, Card, Col, Modal, Row} from "react-bootstrap";
 import FormCoolMeterBolid from "../formMeter/FormCoolMeterBolid";
 import FormEditCoolMeterBolid from "../formMeter/FormEditCoolMeterBolid";
+import TestFormEditMeter from '../formMeter/TestFormEditMeter';
 
 const TestCardMeter = ({id, section, floor, flat, numberKdl, numberAsr, numberMeter, sumMeter, typeMeter}) => {
 
@@ -20,7 +21,7 @@ const TestCardMeter = ({id, section, floor, flat, numberKdl, numberAsr, numberMe
                             <Modal.Title>Редактирование</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <FormEditCoolMeterBolid data={{
+                            {/* <FormEditCoolMeterBolid data={{
                                 id: id,
                                 section: section,
                                 floors: floor,
@@ -29,7 +30,18 @@ const TestCardMeter = ({id, section, floor, flat, numberKdl, numberAsr, numberMe
                                 asr: numberAsr,
                                 numberMeter: numberMeter,
                                 sum: sumMeter
-                            }}/>
+                            }}/> */}
+                            <TestFormEditMeter data={{
+                                id: id,
+                                section: section,
+                                floors: floor,
+                                flat: flat,
+                                kdl: numberKdl,
+                                asr: numberAsr,
+                                numberMeter: numberMeter,
+                                sum: sumMeter
+                            }}
+                            />
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={handleClose}>
