@@ -29,7 +29,6 @@ export const getAllMetersByUserAndObject = createAsyncThunk('api/testAddWater',a
     const {limit, currentPage} = state.mainTable
 
     const {data} = await $authHost.get(`api/testAddWater?userId=${userId}&objectId=${objectId}&limit=${limit}&page=${currentPage}`)
-
     const {rows, count} = data.listMeters
 
     dispatch(setTotalCount(count))
