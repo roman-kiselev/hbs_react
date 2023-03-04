@@ -20,7 +20,18 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
     const [sumMeterHot, setSumMeterHot] = useState("")
     // Состояние уведомлений
     const [alertAdd, setAlertAdd] = useState(false)
-
+    // Создаём массив для проверки перед отправкой данных на сервер
+    const arrForCheck = [section, floors, flat, kdl, channelCool, 
+        channelHot, numberMeterCool, numberMeterHot, sumMeterCool, sumMeterHot]
+    // Фукнция для отправки данных на сервер
+    // Если значения в массиве не пустые, то отправляем данные на сервер
+    const checkData = () => {
+        if (arrForCheck.every(item => item !== "")) {
+            return false
+        } else {
+            return true
+        }
+    }
     // Достаём id пользователя
     const { id: userId } = useSelector((state) => state.users.user)
     // Достаём добавленные счётчики
@@ -66,6 +77,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
     // Нечётный канал для воды
     const oddChannel = (e) => {
         const num = Number(e.target.value)
+        
         if (num % 2 === 0) {
             setChannelCool(num + 1)
         }
@@ -77,9 +89,19 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
         setChannelHot(Number(e.target.value) + 1)
     }
 
+    // Функция проверяет на чётность число
+    // Если число не чётное прибавляем еденицу
+    const evenChannel = (e) => {
+        const num = Number(e.target.value)
 
-
-
+        if (num % 2 !== 0) {
+            
+            setChannelCool(num + 1)
+        }
+        addChannelHot(e)
+        setChannelCool(num)
+    }
+    
 
 
     return (
@@ -91,9 +113,11 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                             <Form.Label>Секции</Form.Label>
                             <Form.Control
                                 type="number"
-                                value={section}
+                                pattern="^[ 0-9]+$"
+                                value={section || "Ошибка"}
                                 onChange={(e) => setSection(e.target.value)}
                             />
+                    
                         </Form.Group>
                     </Col>
                     <Col>
@@ -101,7 +125,8 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                             <Form.Label>Этаж</Form.Label>
                             <Form.Control
                                 type="number"
-                                value={floors}
+                                pattern="^[ 0-9]+$"
+                                value={floors || "Ошибка"}
                                 onChange={(e) => setFloors(e.target.value)}
                             />
                         </Form.Group>
@@ -111,7 +136,8 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                             <Form.Label>Квартира</Form.Label>
                             <Form.Control
                                 type="number"
-                                value={flat}
+                                pattern="[0-9]"
+                                value={flat || "Ошибка"}
                                 onChange={(e) => setFlat(e.target.value)}
                             />
                         </Form.Group>
@@ -123,7 +149,8 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                             <Form.Label>КДЛ</Form.Label>
                             <Form.Control
                                 type="number"
-                                value={kdl}
+                                pattern="[0-9]"
+                                value={kdl || "Ошибка"}
                                 onChange={(e) => setKdl(e.target.value)}
                             />
                         </Form.Group>
@@ -137,7 +164,9 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                                     <Form.Label>Номер Канала</Form.Label>
                                     <Form.Control
                                         type="number"
-                                        value={channelCool}
+                                        pattern="[0-9]"
+                                        value={channelCool || "Ошибка"}
+                                        //onChange={(e) => evenChannel(e)}
                                         onChange={(e) => addChannelHot(e)}
                                     />
                                 </Form.Group>
@@ -146,7 +175,8 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                                 <Form.Label>Номер Счётчика</Form.Label>
                                 <Form.Control
                                     type="number"
-                                    value={numberMeterCool}
+                                    pattern="[0-9]"
+                                    value={numberMeterCool || "Ошибка"}
                                     onChange={(e) => setNumberMeterCool(e.target.value)}
                                 />
                             </Form.Group>
@@ -154,7 +184,8 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                                 <Form.Label>Показания</Form.Label>
                                 <Form.Control
                                     type="number" step="0.01"
-                                    value={sumMeterCool}
+                                    pattern="[0-9]"
+                                    value={sumMeterCool || "Ошибка"}
                                     onChange={(e) => setSumMeterCool(e.target.value)}
                                 />
                             </Form.Group>
@@ -167,7 +198,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                                     <Form.Label>Номер Канала</Form.Label>
                                     <Form.Control
                                         type="number"
-                                        value={channelHot}
+                                        value={channelHot || "Ошибка"}
                                         onChange={(e) => setChannelHot(e.target.value)}
                                         disabled={true}
                                     />
@@ -177,7 +208,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                                 <Form.Label>Номер Счётчика</Form.Label>
                                 <Form.Control
                                     type="number"
-                                    value={numberMeterHot}
+                                    value={numberMeterHot || "Ошибка"}
                                     onChange={(e) => setNumberMeterHot(e.target.value)}
                                 />
                             </Form.Group>
@@ -185,7 +216,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                                 <Form.Label>Показания</Form.Label>
                                 <Form.Control
                                     type="number" step="0.01"
-                                    value={sumMeterHot}
+                                    value={sumMeterHot || "Ошибка"}
                                     onChange={(e) => setSumMeterHot(e.target.value)}
                                 />
                             </Form.Group>
@@ -203,6 +234,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                             variant="primary"
                             type="submit"
                             onClick={(e) => addMeter(e)}
+                            disabled={checkData()}
                         >
                             Добавить
                         </Button>
