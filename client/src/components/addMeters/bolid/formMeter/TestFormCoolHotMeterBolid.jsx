@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {Alert, Button, Col, Form, Row} from "react-bootstrap";
-import {useDispatch, useSelector} from "react-redux";
-import {createTestMeter, getAllMetersByUserAndObject} from "../../../../features/testMeters/testWaterMeterSlice";
+import React, { useState } from 'react';
+import { Alert, Button, Col, Form, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { createTestMeter, getAllMetersByUserAndObject } from "../../../../features/testMeters/testWaterMeterSlice";
 import TestAlertAddMeters from "../alerts/TestAlertAddMeters";
 
-const TestFormCoolHotMeterBolid = ({id}) => {
+const TestFormCoolHotMeterBolid = ({ id }) => {
 
     const dispatch = useDispatch();
     // Состояние форм
@@ -22,10 +22,10 @@ const TestFormCoolHotMeterBolid = ({id}) => {
     const [alertAdd, setAlertAdd] = useState(false)
 
     // Достаём id пользователя
-    const {id: userId} = useSelector((state) => state.users.user)
+    const { id: userId } = useSelector((state) => state.users.user)
     // Достаём добавленные счётчики
-    const {lastMeters} = useSelector((state) => state.mainTable)
-    
+    const { lastMeters } = useSelector((state) => state.mainTable)
+
     const { currentPage, limit } = useSelector((state) => state.mainTable)
 
     // Данные для добавления
@@ -45,17 +45,16 @@ const TestFormCoolHotMeterBolid = ({id}) => {
             userId: userId,
             objectId: id
         }
-      
         // В форму передаём 
-        const formQuery = {userId, objectId: id}
+        const formQuery = { userId, objectId: id }
 
         const setNewAlert = () => {
             setAlertAdd(false)
         }
-   
-        dispatch(createTestMeter({dataWith})).then((d) => {
-            dispatch(getAllMetersByUserAndObject({formQuery}))
-            
+
+        dispatch(createTestMeter({ dataWith })).then((d) => {
+            dispatch(getAllMetersByUserAndObject({ formQuery }))
+
             setNumberMeterCool("")
             setNumberMeterHot("")
             setSumMeterCool("")
@@ -131,7 +130,7 @@ const TestFormCoolHotMeterBolid = ({id}) => {
                     </Col>
 
                     <Row className="m-2">
-                        <Col className="col-sm-6 text-center" style={{border: "1px solid grey", borderRadius: 10}}>
+                        <Col className="col-sm-6 text-center" style={{ border: "1px solid grey", borderRadius: 10 }}>
                             <h5>ХВС</h5>
                             <Col>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -161,7 +160,7 @@ const TestFormCoolHotMeterBolid = ({id}) => {
                             </Form.Group>
                         </Col>
 
-                        <Col className="col-12 col-sm-6 text-center" style={{border: "1px solid grey", borderRadius: 10}}>
+                        <Col className="col-12 col-sm-6 text-center" style={{ border: "1px solid grey", borderRadius: 10 }}>
                             <h5>ГВС</h5>
                             <Col>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -221,10 +220,10 @@ const TestFormCoolHotMeterBolid = ({id}) => {
                                 }
 
                             </Row>
-                            
+
                         </Col>
                     </Row>
-                    
+
 
                 </Row>
 
