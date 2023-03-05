@@ -70,7 +70,8 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
             setSumMeterCool("")
             setSumMeterHot("")
             setAlertAdd(true)
-            setTimeout(setNewAlert, 5000)
+            // Уведомление о добавлении
+            setTimeout(setNewAlert, 2000)
 
         })
     }
@@ -243,13 +244,15 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                         <Col className="col-sm-3">
 
                             <Row>
-                                {
-                                    alertAdd ?
-                                        lastMeters.data.map((meter) => (
-                                            <TestAlertAddMeters key={meter.id} alertAdd={alertAdd} {...meter} />
-                                        )) :
-                                        <></>
-                                }
+                                
+                                    {
+                                        alertAdd ?
+                                            lastMeters.data.map((meter) => (
+                                                <TestAlertAddMeters key={meter.id} alertAdd={alertAdd} {...meter} />
+                                            )) :
+                                            <></>
+                                    }
+                                
 
                             </Row>
 
