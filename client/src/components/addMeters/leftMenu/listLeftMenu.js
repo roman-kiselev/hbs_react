@@ -20,17 +20,17 @@ export const leftMenuItem = [
     },
     
     {
-        toItem: "addHeat",
+        toItem: "addHeatTest",
         action: true,
         variant: "light",
-        title: "Добавить счётчики тепла",
+        title: "Добавить счётчики тепла (Test)",
     },
-    // {
-    //     toItem: "addHeat",
-    //     action: true,
-    //     variant: "light",
-    //     title: "Добавить счётчики электроэнергии",
-    // },
+    {
+        toItem: "addElectricalTest",
+        action: true,
+        variant: "light",
+        title: "Добавить счётчики электроэнергии (Test)",
+    },
     // {
     //     toItem: "addCoolMeterBolid",
     //     action: true,

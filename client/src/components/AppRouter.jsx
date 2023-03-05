@@ -14,6 +14,8 @@ import {useSelector} from "react-redux";
 import AdminLayout from "../pages/admin/AdminLayout";
 import AdminHomePage from "../pages/admin/AdminHomePage";
 import TestAddMeterCoolHotBolid from "./addMeters/bolid/TestAddMeterCoolHotBolid";
+import TestAddMeterHeat from './addMeters/testHeatAndEl/TestAddMeterHeat';
+import TestAddMeterElectrical from './addMeters/testHeatAndEl/TestAddMeterElectrical';
 
 
 const AppRouter = () => {
@@ -37,6 +39,8 @@ const AppRouter = () => {
                         <Route path="addMeterCoolHotBolid" element={< AddMeterCoolHotBolid />}/>
                         <Route path="addCoolMeterPulsar" element={< AddCoolMeterPulsar />}/>
                         <Route path="temporaryPage" element={< TestAddMeterCoolHotBolid />}/>
+                        <Route path="addHeatTest" element={< TestAddMeterHeat />}/>
+                        <Route path="addElectricalTest" element={< TestAddMeterElectrical />}/>
                     </Route>
                     <Route path="/admin" element={< AdminHomePage />}>
 
