@@ -1,5 +1,8 @@
 import chalk from "chalk";
+import pkg from "sequelize";
 import Models from "../../models/models.js";
+
+const { Op } = pkg;
 
 class TestWaterMeterController {
 
@@ -72,14 +75,21 @@ class TestWaterMeterController {
             page = Number(page) || 1
             limit = Number(limit) || 6
             let offset = page * limit - limit
-            
+            // Передаём тип счётчика с условием ИЛИ
+            let typeMeterCool = 'Счётчик холодной воды'
+            let typeMeterHot = 'Счётчик горячей воды'
+
             //console.log(limit, page, offset)
             //console.log(chalk.magenta(limit, page, offset))
 
             const listMeters = await Models.MainAddMeter.findAndCountAll({
                 where: {
                     objectBuildId: objectId,
-                    userId
+                    userId,
+                    [Op.or]: [
+                        {typeMeter: typeMeterCool},
+                        {typeMeter: typeMeterHot}
+                    ]
                 },
                 limit: limit,
                 offset: offset,
@@ -87,6 +97,8 @@ class TestWaterMeterController {
                     ['id', 'DESC']
                 ]
             })
+
+        
 
             return res.json({listMeters})
 
