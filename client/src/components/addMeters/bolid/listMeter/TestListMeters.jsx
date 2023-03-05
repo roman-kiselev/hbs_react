@@ -42,7 +42,7 @@ const TestListMeters = ({ id: objectId }) => {
                 {
                     cardMeter.length !== 0 ?
                         cardMeter.map((card) => (
-                            <TestCardMeter key={card.id} {...card} />
+                            <TestCardMeter key={card.id} {...card} objectId={objectId}/>
                         )) :
                         <p>Пока ничего нет</p>
                 }

@@ -35,7 +35,13 @@ export const getAllMetersByUserAndObject = createAsyncThunk('api/testAddWater',a
     dispatch(setMeters({rows}))
 })
 
-
+// Функция для получения одного счётчика и редактирования
+// Принимает id счётчика и обновляет его в базе данных
+export const getOneMeter = createAsyncThunk('api/testAddWater/:id', async ({formData}, {getState, dispatch}) => {
+    const id = formData.get('id')
+    const state = getState()
+    const {data} = await $authHost.post(`api/testAddWater/${id}`, formData)
+})
 
 
 

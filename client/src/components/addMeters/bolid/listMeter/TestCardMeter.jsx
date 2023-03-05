@@ -4,7 +4,7 @@ import FormCoolMeterBolid from "../formMeter/FormCoolMeterBolid";
 import FormEditCoolMeterBolid from "../formMeter/FormEditCoolMeterBolid";
 import TestFormEditMeter from '../formMeter/TestFormEditMeter';
 
-const TestCardMeter = ({id, section, floor, flat, numberKdl, numberAsr, numberMeter, sumMeter, typeMeter}) => {
+const TestCardMeter = ({id, section, floor, flat, numberKdl, numberAsr, numberMeter, sumMeter, typeMeter, objectId}) => {
 
     const [show, setShow] = useState(false);
 
@@ -16,42 +16,18 @@ const TestCardMeter = ({id, section, floor, flat, numberKdl, numberAsr, numberMe
         <>
             <Col className="col-12 col-xl-4 mt-3 ">
                 <Row>
-                    <Modal show={show} onHide={handleClose}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Редактирование</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            {/* <FormEditCoolMeterBolid data={{
-                                id: id,
-                                section: section,
-                                floors: floor,
-                                flat: flat,
-                                kdl: numberKdl,
-                                asr: numberAsr,
-                                numberMeter: numberMeter,
-                                sum: sumMeter
-                            }}/> */}
-                            <TestFormEditMeter data={{
-                                id: id,
-                                section: section,
-                                floors: floor,
-                                flat: flat,
-                                kdl: numberKdl,
-                                asr: numberAsr,
-                                numberMeter: numberMeter,
-                                sum: sumMeter
-                            }}
-                            />
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={handleClose}>
-                                Закрыть
-                            </Button>
-                            <Button variant="primary" onClick={handleClose}>
-                                Сохранить изменения
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
+                    <TestFormEditMeter data={{
+                        id: id,
+                        section: section,
+                        floors: floor,
+                        flat: flat,
+                        kdl: numberKdl,
+                        asr: numberAsr,
+                        numberMeter: numberMeter,
+                        sum: sumMeter,
+                        typeMeter: typeMeter,
+                        objectId: objectId
+                    }} show={show} handleClose={() => handleClose()}/>
                 </Row>
                 <Card className="text-center">
                     <Card.Header className="text-center">Квартира № {flat}</Card.Header>

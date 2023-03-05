@@ -96,6 +96,47 @@ class TestWaterMeterController {
     }
 
 
+    async getOneMeter (req, res) {
+        try {
+            // Получаем id счётчика
+            const {id} = req.params
+            // Получаем данные о счётчике
+            const {
+                floors,
+                flat,
+                numberMeter,
+                sum,
+                asr,
+                kdl,
+                typeMeter,
+                section
+            } = req.body
+
+            // Тепере получаем устройство по id
+            const device = await Models.MainAddMeter.findOne({
+                where: {
+                    id
+                }
+            })
+            // Добавляем новые данные к этому устройству
+            await device.update({
+                section,
+                floor: floors,
+                flat,
+                numberMeter,
+                sumMeter: sum,
+                numberKdl: kdl,
+                numberAsr: asr,
+            })
+
+            return res.json(device)
+
+             
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
 }
 
 
