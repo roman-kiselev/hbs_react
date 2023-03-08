@@ -1,8 +1,15 @@
 import chalk from "chalk";
 import pkg from "sequelize";
 import Models from "../../models/models.js";
+import TestExcelService from "../../service/testExcel/TestExcelService.js";
 
 const { Op } = pkg;
+
+
+
+
+
+
 
 class TestWaterMeterController {
 
@@ -148,6 +155,27 @@ class TestWaterMeterController {
             console.log(e)
         }
     }
+    
+
+    async getExcelTest (req, res) {
+        
+        const {objectId} = req.query
+        // Устанавливаем id объекта
+        const listMeters = new TestExcelService(1)
+        // Задаём имя excel файлу
+        listMeters.setFileName('Счётчики_1111.xlsx')
+        // Добавляем путь файла
+        listMeters.setPathWithFileName()
+        // Создаём excel файл
+        await listMeters.getExcelWaterMeter()
+        
+        return res.download(listMeters.getPathWithFileName, (err) => {
+            if (err) {
+                console.log(err)
+            }
+        })
+    }
+
 
 }
 

@@ -6,6 +6,6 @@ const router = express.Router();
 router.post('/', TestWaterMeterController.addNewMeter)
 router.get('/', TestWaterMeterController.getAllByIdUserAndObject)
 router.post('/:id', TestWaterMeterController.getOneMeter)
-
+router.get('/excel', TestWaterMeterController.getExcelTest)
 
 export default router;
