@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Col, Modal, Row, Tab, Tabs } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import TestFormHeat from './testForm/TestFormHeat';
+
 import TestListMeters from './testList/TestListMeters';
+import TestFormHeatMeter from "./testForm/TestFormHeatMeter";
 
 
 const TestMainLayoutHeat = () => {
@@ -53,7 +54,7 @@ const TestMainLayoutHeat = () => {
                 >
                     <Tab eventKey="addMeter" title="Добавление">
                         <Row>
-                            < TestFormHeat />
+                            < TestFormHeatMeter />
                         </Row>
                     </Tab>
                     <Tab eventKey="list" title="Список">

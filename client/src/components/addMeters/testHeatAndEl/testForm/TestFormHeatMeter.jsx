@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Col, Form, Row} from "react-bootstrap";
-import TestAlertAddMeters from "../alerts/TestAlertAddMeters";
+import TestAlertAddMeters from "../../bolid/alerts/TestAlertAddMeters";
 
 
 
@@ -10,6 +10,19 @@ const TestFormHeatMeter = () => {
     const [floors, setFloors] = useState("")
     const [flat, setFlat] = useState("")
     const [line, setLine] = useState("")
+    const [number, setNumber] = useState("")
+    const [sum, setSum] = useState("")
+    // Состояние уведомлений
+    const [alertAdd, setAlertAdd] = useState(false)
+    // Создаём массив для проверки перед отправкой данных на сервер
+    const arrForCheck = [section, floors, flat, line, number, sum]
+    const checkData = () => {
+        if (arrForCheck.every(item => item !== "")) {
+            return false
+        } else {
+            return true
+        }
+    }
 
 
     return (
@@ -54,7 +67,7 @@ const TestFormHeatMeter = () => {
                 <Row>
                     <Col>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>КДЛ</Form.Label>
+                            <Form.Label>Линия</Form.Label>
                             <Form.Control
                                 type="number"
                                 pattern="[0-9]"
@@ -64,72 +77,31 @@ const TestFormHeatMeter = () => {
                         </Form.Group>
                     </Col>
 
-                    {/*<Row className="m-2">
-                        <Col className="col-sm-6 text-center" style={{ border: "1px solid grey", borderRadius: 10 }}>
-                            <h5>ХВС</h5>
-                            <Col>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <Form.Label>Номер Канала</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        pattern="[0-9]"
-                                        value={channelCool || "Ошибка"}
-                                        //onChange={(e) => evenChannel(e)}
-                                        onChange={(e) => addChannelHot(e)}
-                                    />
-                                </Form.Group>
-                            </Col>
+                    <Row className="m-2">
+                        <Col className="col-sm-6 text-center">
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Номер Счётчика</Form.Label>
                                 <Form.Control
                                     type="number"
                                     pattern="[0-9]"
-                                    value={numberMeterCool || "Ошибка"}
-                                    onChange={(e) => setNumberMeterCool(e.target.value)}
+                                    value={number || "Ошибка"}
+                                    onChange={(e) => setNumber(e.target.value)}
                                 />
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Показания</Form.Label>
-                                <Form.Control
-                                    type="number" step="0.01"
-                                    pattern="[0-9]"
-                                    value={sumMeterCool || "Ошибка"}
-                                    onChange={(e) => setSumMeterCool(e.target.value)}
-                                />
-                            </Form.Group>
+
                         </Col>
 
-                        <Col className="col-12 col-sm-6 text-center" style={{ border: "1px solid grey", borderRadius: 10 }}>
-                            <h5>ГВС</h5>
-                            <Col>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <Form.Label>Номер Канала</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        value={channelHot || "Ошибка"}
-                                        onChange={(e) => setChannelHot(e.target.value)}
-                                        disabled={true}
-                                    />
-                                </Form.Group>
-                            </Col>
-                            <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Номер Счётчика</Form.Label>
-                                <Form.Control
-                                    type="number"
-                                    value={numberMeterHot || "Ошибка"}
-                                    onChange={(e) => setNumberMeterHot(e.target.value)}
-                                />
-                            </Form.Group>
+                        <Col className="col-12 col-sm-6 text-center">
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Показания</Form.Label>
                                 <Form.Control
                                     type="number" step="0.01"
-                                    value={sumMeterHot || "Ошибка"}
-                                    onChange={(e) => setSumMeterHot(e.target.value)}
+                                    value={sum || "Ошибка"}
+                                    onChange={(e) => setSum(e.target.value)}
                                 />
                             </Form.Group>
                         </Col>
-                    </Row>*/}
+                    </Row>
 
 
 
@@ -141,14 +113,14 @@ const TestFormHeatMeter = () => {
                         <Button
                             variant="primary"
                             type="submit"
-                            onClick={(e) => addMeter(e)}
+                            /*onClick={(e) => addMeter(e)}*/
                             disabled={checkData()}
                         >
                             Добавить
                         </Button>
                     </Col>
                     <Row className="fixed-top justify-content-end mt-3">
-                        <Col className="col-sm-3">
+                        {/*<Col className="col-sm-3">
 
                             <Row>
 
@@ -163,7 +135,7 @@ const TestFormHeatMeter = () => {
 
                             </Row>
 
-                        </Col>
+                        </Col>*/}
                     </Row>
 
 

@@ -5,6 +5,7 @@ import userSlice from "../features/user/userSlice";
 import sectionsSlice from "../features/objectBuild/sectionsSlice";
 import testWaterMeterSlice from "../features/testMeters/testWaterMeterSlice";
 import leftMenuSlice from "../features/leftMenu/leftMenuSlice";
+import testHeatMeterSlice from "../features/testMeters/testHeatMeterSlice";
 
 
 export const store = configureStore({
@@ -14,6 +15,7 @@ export const store = configureStore({
         coolBolid: coolWaterBildSlice,
         sections: sectionsSlice,
         mainTable: testWaterMeterSlice,
-        leftMenu: leftMenuSlice
+        leftMenu: leftMenuSlice,
+        heatMeter: testHeatMeterSlice
     }
 })
