@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button, Col, Modal, Row, Tab, Tabs } from "react-bootstrap";
-import TestListMeters from "../../../addMeters/bolid/listMeter/TestListMeters";
 import TestFormCoolHotMeterBolid from "../form/TestFormCoolHotMeterBolid";
 import { useParams } from "react-router-dom";
 import ListMeterWater from "../listMeters/ListMeterWater";
@@ -64,7 +63,6 @@ const TestMainWaterPage = () => {
                         {/* Лист счётчиков */}
                         Сортировка // Квартиры // Этажи // Секции // КДЛ // АСР
                         // Поиск номера
-                        {/* <TestListMeters id={id}/> */}
                         <ListMeterWater id={id} />
                     </Tab>
                     <Tab eventKey="op" title="Операции">

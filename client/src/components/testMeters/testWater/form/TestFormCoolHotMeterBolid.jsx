@@ -87,7 +87,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
             objectId: id,
         };
         // В форму передаём
-        const formQuery = { userId, objectId: id };
+        const formQuery = { userId, objectBuildId: id };
 
         const setNewAlert = () => {
             setAlertAdd(false);
