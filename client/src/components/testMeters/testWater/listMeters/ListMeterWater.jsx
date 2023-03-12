@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { Col, Row } from "react-bootstrap";
-import TestCardMeter from "./TestCardMeter";
+import { Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllMetersByUserAndObject } from "../../../../features/testMeters/testWaterMeterSlice";
+import ListMeters from "../../../repeat/listMetersCard/ListMeters";
 import Pages from "../../../repeat/pagination/Pages";
 
-const TestListMeters = ({ id: objectId }) => {
+const ListMeterWater = ({ id: objectId }) => {
     const dispatch = useDispatch();
     const { id: userId } = useSelector((state) => state.users.user);
     const cardMeter = useSelector((state) => state.mainTable.mainTable);
@@ -34,17 +34,7 @@ const TestListMeters = ({ id: objectId }) => {
     return (
         <Row>
             <Row>
-                {cardMeter.length !== 0 ? (
-                    cardMeter.map((card) => (
-                        <TestCardMeter
-                            key={card.id}
-                            {...card}
-                            objectId={objectId}
-                        />
-                    ))
-                ) : (
-                    <p>Пока ничего нет</p>
-                )}
+                <ListMeters listCards={cardMeter} objectId={objectId} />
             </Row>
             <Row className="m-3 ">
                 <Col>
@@ -55,4 +45,4 @@ const TestListMeters = ({ id: objectId }) => {
     );
 };
 
-export default TestListMeters;
+export default ListMeterWater;

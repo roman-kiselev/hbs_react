@@ -1,24 +1,25 @@
-import React, {useState} from 'react';
-import {Button, Col, Modal, Row, Tab, Tabs} from "react-bootstrap";
-import TestListMeters from "./listMeter/TestListMeters";
-import TestFormCoolHotMeterBolid from "./formMeter/TestFormCoolHotMeterBolid";
-import {useParams} from "react-router-dom";
+import React, { useState } from "react";
+import { Button, Col, Modal, Row, Tab, Tabs } from "react-bootstrap";
+import TestListMeters from "../../../addMeters/bolid/listMeter/TestListMeters";
+import TestFormCoolHotMeterBolid from "../form/TestFormCoolHotMeterBolid";
+import { useParams } from "react-router-dom";
+import ListMeterWater from "../listMeters/ListMeterWater";
 
+const TestMainWaterPage = () => {
+    // id объекта
+    const { id } = useParams();
 
-const TestAddMeterCoolHotBolid = () => {
-
+    // Переменные и функции для модального окна
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const {id} = useParams()
-
-    const [key, setKey] = useState('list');
+    // Ключи для табов
+    const [key, setKey] = useState("list");
 
     return (
         <Row>
-            <p style={{fontSize: 15}}>Добавление счётчиков воды (Болид)</p>
+            <p style={{ fontSize: 15 }}>Добавление счётчиков воды (Болид)</p>
             <Row>
                 <Row className="justify-content-end">
                     <Col className="text-end">
@@ -32,7 +33,9 @@ const TestAddMeterCoolHotBolid = () => {
                     <Modal.Header closeButton>
                         <Modal.Title>Начальные параметры</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                    <Modal.Body>
+                        Woohoo, you're reading this text in a modal!
+                    </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
                             Закрыть
@@ -53,21 +56,25 @@ const TestAddMeterCoolHotBolid = () => {
                 >
                     <Tab eventKey="addMeter" title="Добавление">
                         <Row>
-                            <TestFormCoolHotMeterBolid id={id}/>
+                            {/* Форма для добавления счётчиков воды */}
+                            <TestFormCoolHotMeterBolid id={id} />
                         </Row>
                     </Tab>
                     <Tab eventKey="list" title="Список">
-                        Сортировка // Квартиры // Этажи // Секции // КДЛ // АСР // Поиск номера
-                        <TestListMeters id={id}/>
+                        {/* Лист счётчиков */}
+                        Сортировка // Квартиры // Этажи // Секции // КДЛ // АСР
+                        // Поиск номера
+                        {/* <TestListMeters id={id}/> */}
+                        <ListMeterWater id={id} />
                     </Tab>
                     <Tab eventKey="op" title="Операции">
+                        {/* Здесь операции __ Скачать excel и т.д. */}
                         Тут разные
                     </Tab>
-
                 </Tabs>
             </Row>
         </Row>
     );
 };
 
-export default TestAddMeterCoolHotBolid;
+export default TestMainWaterPage;
