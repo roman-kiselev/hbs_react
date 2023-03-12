@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Button, Col, Modal, Row, Tab, Tabs } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 
-import TestListMeters from './testList/TestListMeters';
+import TestListMeters from './testList/TestListHeatMeters';
 import TestFormHeatMeter from "./testForm/TestFormHeatMeter";
+import TestListHeatMeters from './testList/TestListHeatMeters';
 
 
 const TestMainLayoutHeat = () => {
@@ -54,12 +55,12 @@ const TestMainLayoutHeat = () => {
                 >
                     <Tab eventKey="addMeter" title="Добавление">
                         <Row>
-                            < TestFormHeatMeter />
+                            < TestFormHeatMeter id={id}/>
                         </Row>
                     </Tab>
                     <Tab eventKey="list" title="Список">
                         Сортировка // Квартиры // Этажи // Секции // КДЛ // АСР // Поиск номера
-                        < TestListMeters />
+                        < TestListHeatMeters id={id}/>
                     </Tab>
                     <Tab eventKey="op" title="Операции">
                         Тут разные

@@ -10,7 +10,7 @@ import lineRoutes from "./objects/lineRoutes.js";
 import officeRouter from "./objects/officeRouter.js";
 import sectionsRouter from "./objects/sectionsRouter.js";
 import testWaterMeterRouter from "./test/testWaterMeterRouter.js";
-
+import testHeatMeterRouter from "./test/testHeatMeterRouter.js";
 
 // User
 router.use('/user', userRouter)
@@ -29,6 +29,7 @@ router.use('/sections', sectionsRouter)
 // Test
 router.use('/testAddWater', testWaterMeterRouter)
 
+router.use('/testAddHeat', testHeatMeterRouter)
 
 
 

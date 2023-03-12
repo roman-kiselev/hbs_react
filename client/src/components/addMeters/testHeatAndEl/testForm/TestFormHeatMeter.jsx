@@ -1,13 +1,17 @@
 import React, {useState} from 'react';
 import {Button, Col, Form, Row} from "react-bootstrap";
-import TestAlertAddMeters from "../../bolid/alerts/TestAlertAddMeters";
+import { useDispatch, useSelector } from 'react-redux';
+import { createTestHeatMeter } from '../../../../features/testMeters/testHeatMeterSlice';
+import TestAlertAddHeatMeters from '../../bolid/alerts/TestAlertAddHeatMeters';
 
 
 
-const TestFormHeatMeter = () => {
 
+const TestFormHeatMeter = ({id: objectBuildId}) => {
+
+    const dispatch = useDispatch();
     const [section, setSection] = useState("")
-    const [floors, setFloors] = useState("")
+    const [floor, setFloor] = useState("")
     const [flat, setFlat] = useState("")
     const [line, setLine] = useState("")
     const [number, setNumber] = useState("")
@@ -15,7 +19,7 @@ const TestFormHeatMeter = () => {
     // Состояние уведомлений
     const [alertAdd, setAlertAdd] = useState(false)
     // Создаём массив для проверки перед отправкой данных на сервер
-    const arrForCheck = [section, floors, flat, line, number, sum]
+    const arrForCheck = [section, floor, flat, line, number, sum]
     const checkData = () => {
         if (arrForCheck.every(item => item !== "")) {
             return false
@@ -23,6 +27,40 @@ const TestFormHeatMeter = () => {
             return true
         }
     }
+
+    // Достаём userId
+    const {id: userId} = useSelector((state) => state.users.user)
+    // Достаём добавленные счётчики для уведомления
+    const {lastMeters} = useSelector((state) => state.heatMeter)
+    
+    // Добавляем счётчик
+    const addMeter = (e) => {
+        e.preventDefault()
+
+        const dataMeter = {
+            section: section,
+            floor: floor,
+            flat: flat,
+            line: line,
+            numberMeter: number,
+            sumMeter: sum,
+            objectBuildId,
+            userId
+        }
+
+        dispatch(createTestHeatMeter({dataMeter})).then((d) => {
+
+            setAlertAdd(true)
+            setTimeout(() => {
+                setAlertAdd(false)
+            }, 3000)
+        })
+    
+
+    }
+
+    
+
 
 
     return (
@@ -47,8 +85,8 @@ const TestFormHeatMeter = () => {
                             <Form.Control
                                 type="number"
                                 pattern="^[ 0-9]+$"
-                                value={floors || "Ошибка"}
-                                onChange={(e) => setFloors(e.target.value)}
+                                value={floor || "Ошибка"}
+                                onChange={(e) => setFloor(e.target.value)}
                             />
                         </Form.Group>
                     </Col>
@@ -113,29 +151,29 @@ const TestFormHeatMeter = () => {
                         <Button
                             variant="primary"
                             type="submit"
-                            /*onClick={(e) => addMeter(e)}*/
+                            onClick={(e) => addMeter(e)}
                             disabled={checkData()}
                         >
                             Добавить
                         </Button>
                     </Col>
                     <Row className="fixed-top justify-content-end mt-3">
-                        {/*<Col className="col-sm-3">
+                        <Col className="col-sm-3">
 
                             <Row>
 
                                 {
                                     alertAdd ?
-                                        lastMeters.data.map((meter) => (
-                                            <TestAlertAddMeters key={meter.id} alertAdd={alertAdd} {...meter} />
-                                        )) :
+                                        
+                                        <TestAlertAddHeatMeters key={lastMeters.id} alertAdd={alertAdd} {...lastMeters} />
+                                         :
                                         <></>
                                 }
 
 
                             </Row>
 
-                        </Col>*/}
+                        </Col>
                     </Row>
 
 
