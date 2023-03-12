@@ -5,18 +5,9 @@ import TestExcelService from "../../service/testExcel/TestExcelService.js";
 
 const { Op } = pkg;
 
-
-
-
-
-
-
 class TestWaterMeterController {
-
-
-    async addNewMeter (req, res) {
+    async addNewMeter(req, res) {
         try {
-
             const {
                 section,
                 floors,
@@ -29,62 +20,56 @@ class TestWaterMeterController {
                 sumMeterCool,
                 sumMeterHot,
                 userId,
-                objectId
-            } = req.body
-
-
+                objectId,
+            } = req.body;
 
             const coolMeter = {
                 section: section,
                 floor: floors,
                 flat: flat,
-                typeMeter: 'Счётчик холодной воды',
+                typeMeter: "Счётчик холодной воды",
                 numberKdl: kdl,
                 numberAsr: channelCool,
                 numberMeter: numberMeterCool,
                 sumMeter: sumMeterCool,
                 objectBuildId: objectId,
-                userId: userId
-            }
+                userId: userId,
+            };
 
             const hotMeter = {
                 section: section,
                 floor: floors,
                 flat: flat,
-                typeMeter: 'Счётчик горячей воды',
+                typeMeter: "Счётчик горячей воды",
                 numberKdl: kdl,
                 numberAsr: channelHot,
                 numberMeter: numberMeterHot,
                 sumMeter: sumMeterHot,
                 objectBuildId: objectId,
-                userId: userId
-            }
-
+                userId: userId,
+            };
 
             const waterMeter = await Models.MainAddMeter.bulkCreate([
-                coolMeter, hotMeter
-            ])
+                coolMeter,
+                hotMeter,
+            ]);
 
-            return res.json(waterMeter)
-
-
+            return res.json(waterMeter);
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
     }
 
-    async getAllByIdUserAndObject (req, res) {
-
+    async getAllByIdUserAndObject(req, res) {
         try {
-            
             // Получаем данные для постраничной навигации
-            let {userId, objectId, limit, page} = req.query
-            page = Number(page) || 1
-            limit = Number(limit) || 6
-            let offset = page * limit - limit
+            let { userId, objectId, limit, page } = req.query;
+            page = Number(page) || 1;
+            limit = Number(limit) || 6;
+            let offset = page * limit - limit;
             // Передаём тип счётчика с условием ИЛИ
-            let typeMeterCool = 'Счётчик холодной воды'
-            let typeMeterHot = 'Счётчик горячей воды'
+            let typeMeterCool = "Счётчик холодной воды";
+            let typeMeterHot = "Счётчик горячей воды";
 
             //console.log(limit, page, offset)
             //console.log(chalk.magenta(limit, page, offset))
@@ -94,90 +79,77 @@ class TestWaterMeterController {
                     objectBuildId: objectId,
                     userId,
                     [Op.or]: [
-                        {typeMeter: typeMeterCool},
-                        {typeMeter: typeMeterHot}
-                    ]
+                        { typeMeter: typeMeterCool },
+                        { typeMeter: typeMeterHot },
+                    ],
                 },
                 limit: limit,
                 offset: offset,
-                order: [
-                    ['id', 'DESC']
-                ]
-            })
+                order: [["id", "DESC"]],
+            });
 
-        
-
-            return res.json({listMeters})
-
+            return res.json({ listMeters });
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
     }
 
-
-    async getOneMeter (req, res) {
+    async getOneMeter(req, res) {
         try {
             // Получаем id счётчика
-            const {id} = req.params
+            const { id } = req.params;
             // Получаем данные о счётчике
             const {
-                floors,
+                floor,
                 flat,
                 numberMeter,
-                sum,
-                asr,
-                kdl,
+                sumMeter,
+                numberAsr,
+                numberKdl,
                 typeMeter,
-                section
-            } = req.body
+                section,
+            } = req.body;
 
             // Тепере получаем устройство по id
             const device = await Models.MainAddMeter.findOne({
                 where: {
-                    id
-                }
-            })
+                    id,
+                },
+            });
             // Добавляем новые данные к этому устройству
             await device.update({
                 section,
-                floor: floors,
+                floor,
                 flat,
                 numberMeter,
-                sumMeter: sum,
-                numberKdl: kdl,
-                numberAsr: asr,
-            })
+                sumMeter,
+                numberKdl,
+                numberAsr,
+            });
 
-            return res.json(device)
-
-             
+            return res.json(device);
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
     }
-    
 
-    async getExcelTest (req, res) {
-        
-        const {objectId} = req.query
+    async getExcelTest(req, res) {
+        const { objectId } = req.query;
         // Устанавливаем id объекта
-        const listMeters = new TestExcelService(1)
+        const listMeters = new TestExcelService(1);
         // Задаём имя excel файлу
-        listMeters.setFileName('Счётчики_1111.xlsx')
+        listMeters.setFileName("Счётчики_1111.xlsx");
         // Добавляем путь файла
-        listMeters.setPathWithFileName()
+        listMeters.setPathWithFileName();
         // Создаём excel файл
-        await listMeters.getExcelWaterMeter()
-        
+        await listMeters.getExcelWaterMeter();
+
         return res.download(listMeters.getPathWithFileName, (err) => {
             if (err) {
-                console.log(err)
+                console.log(err);
             }
-        })
+        });
     }
-
-
 }
-
 
 export default new TestWaterMeterController();

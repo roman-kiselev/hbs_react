@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllMetersByUserAndObject } from "../../../../features/testMeters/testWaterMeterSlice";
 import ListMeters from "../../../repeat/listMetersCard/ListMeters";
 import Pages from "../../../repeat/pagination/Pages";
+import { useQuery } from "react-query";
 
-const ListMeterWater = ({ id: objectId }) => {
+const ListMeterWater = ({ id: objectBuildId }) => {
     const dispatch = useDispatch();
     const { id: userId } = useSelector((state) => state.users.user);
     const cardMeter = useSelector((state) => state.mainTable.mainTable);
@@ -22,7 +23,7 @@ const ListMeterWater = ({ id: objectId }) => {
 
     const formQuery = {
         userId,
-        objectId,
+        objectBuildId,
         limit,
         currentPage,
     };
@@ -34,7 +35,7 @@ const ListMeterWater = ({ id: objectId }) => {
     return (
         <Row>
             <Row>
-                <ListMeters listCards={cardMeter} objectId={objectId} />
+                <ListMeters listCards={cardMeter} objectId={objectBuildId} />
             </Row>
             <Row className="m-3 ">
                 <Col>

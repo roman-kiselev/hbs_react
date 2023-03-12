@@ -31,18 +31,18 @@ const CardMeterEditModal = ({ data, show, handleClose }) => {
         data.numberKdl
     );
 
-    const { id: idMeter, objectId } = data;
+    const { id: idMeter, objectBuildId } = data;
 
     const formQuery = {
         userId,
-        objectId,
+        objectBuildId,
     };
 
     // Сохраняем изменения
     const saveNewData = () => {
         const formData = new FormData();
         formData.append("section", section);
-        formData.append("floor", floor);
+        formData.append("floors", floor);
         formData.append("flat", flat);
         formData.append("numberMeter", numberMeter);
         formData.append("sum", sumMeter);
