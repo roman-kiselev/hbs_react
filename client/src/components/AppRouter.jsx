@@ -18,6 +18,7 @@ import TestMainWaterPage from "./testMeters/testWater/view/TestMainWaterPage";
 import TestAddMeterHeat from "./addMeters/testHeatAndEl/TestAddMeterHeat";
 import TestAddMeterElectrical from "./addMeters/testHeatAndEl/TestAddMeterElectrical";
 import TestMainHeatPage from "./testMeters/testHeat/view/TestMainHeatPage";
+import TestMainElectricalPage from "./testMeters/testElectrical/view/TestMainElectricalPage";
 
 const AppRouter = () => {
     const isAuth = useSelector((state) => state.users.isAuth);
@@ -60,7 +61,7 @@ const AppRouter = () => {
                         />
                         <Route
                             path="addElectricalTest"
-                            element={<TestAddMeterElectrical />}
+                            element={<TestMainElectricalPage />}
                         />
                     </Route>
                     <Route path="/admin" element={<AdminHomePage />}></Route>
