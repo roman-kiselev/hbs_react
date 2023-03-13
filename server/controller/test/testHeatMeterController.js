@@ -64,7 +64,27 @@ class TestHeatMeterController {
     async getHeatMeterById(req, res) {
         try {
             const { id } = req.params;
+            const {
+                floor,
+                flat,
+                section,
+                line,
+                numberMeter,
+                sumMeter,
+                typeMeter,
+            } = req.body;
+
             const heatMeter = await Models.MainAddMeter.findByPk(id);
+
+            await heatMeter.update({
+                floor,
+                flat,
+                section,
+                line,
+                numberMeter,
+                sumMeter,
+            });
+
             return res.json({ heatMeter });
         } catch (e) {
             console.log(e);

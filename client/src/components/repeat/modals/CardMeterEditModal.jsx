@@ -9,7 +9,7 @@ import useNumber from "../../hooks/useNumber";
 import InputNumber from "../inputs/inputsNumber/InputNumber";
 import InputNumberFloating from "../inputs/inputsNumber/InputNumberFloating";
 
-const CardMeterEditModal = ({ data, show, handleClose }) => {
+const CardMeterEditModal = ({ data, show, handleClose, handleEditMeter }) => {
     const dispatch = useDispatch();
 
     const { id: userId } = useSelector((state) => state.users.user);
