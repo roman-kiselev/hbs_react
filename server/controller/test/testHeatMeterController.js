@@ -1,12 +1,10 @@
 // Контроллер для списка счётчиков тепла
-import Models from '../../models/models.js'
+import Models from "../../models/models.js";
 
 class TestHeatMeterController {
     // Создадим счётчик тепла
-    async addNewMeter (req, res) {
-        
+    async addNewMeter(req, res) {
         try {
-            
             const {
                 section,
                 floor,
@@ -15,66 +13,63 @@ class TestHeatMeterController {
                 numberMeter,
                 sumMeter,
                 objectBuildId,
-                userId
+                userId,
             } = req.body;
 
             const heatMeter = await Models.MainAddMeter.create({
                 section: section,
                 floor: floor,
                 flat: flat,
-                typeMeter: 'Счётчик тепла',
+                typeMeter: "Счётчик тепла",
                 line: line,
                 numberMeter: numberMeter,
                 sumMeter: sumMeter,
                 objectBuildId,
-                userId
-            })
+                userId,
+            });
 
-            return res.json({heatMeter})
-
+            return res.json({ heatMeter });
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
     }
-    
-    async getAllHeatMeters (req, res) {
+
+    async getAllHeatMeters(req, res) {
         try {
+            let { userId, objectId, limit, page } = req.query;
 
-            const {userId, objectId, limit, page} = req.query;
-            page = Number(page) || 1
-            limit = Number(limit) || 6
-            let offset = page * limit - limit
-            const typeMeter = 'Счётчик тепла'
-
+            page = Number(page) || 1;
+            limit = Number(limit) || 6;
+            let offset = page * limit - limit;
+            console.log(page, limit, offset);
+            let typeMeter = "Счётчик тепла";
+            console.log(offset);
             const heatMeters = await Models.MainAddMeter.findAndCountAll({
                 where: {
                     objectBuildId: objectId,
                     userId: userId,
-                    typeMeter: typeMeter
+                    typeMeter: typeMeter,
                 },
                 limit,
                 offset,
-                order: [['createdAt', 'DESC']]
-            })
-            return res.json({heatMeters})
+                order: [["createdAt", "DESC"]],
+            });
 
+            return res.json({ heatMeters });
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
     }
 
-    async getHeatMeterById (req, res) {
+    async getHeatMeterById(req, res) {
         try {
-            const {id} = req.params
-            const heatMeter = await Models.MainAddMeter.findByPk(id)
-            return res.json({heatMeter})
-
+            const { id } = req.params;
+            const heatMeter = await Models.MainAddMeter.findByPk(id);
+            return res.json({ heatMeter });
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
     }
-    
 }
-
 
 export default new TestHeatMeterController();

@@ -71,9 +71,6 @@ class TestWaterMeterController {
             let typeMeterCool = "Счётчик холодной воды";
             let typeMeterHot = "Счётчик горячей воды";
 
-            //console.log(limit, page, offset)
-            //console.log(chalk.magenta(limit, page, offset))
-
             const listMeters = await Models.MainAddMeter.findAndCountAll({
                 where: {
                     objectBuildId: objectId,

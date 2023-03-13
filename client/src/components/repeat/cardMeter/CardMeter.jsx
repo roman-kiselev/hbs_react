@@ -46,14 +46,16 @@ const CardMeter = ({ cardData }) => {
                             ) : (
                                 <></>
                             )}
-                            {cardData.numberKdl !== null ? (
+                            {cardData.numberKdl !== 0 &&
+                            cardData.typeMeter === "Счётчик тепла" ? (
                                 <li className="list-unstyled">
                                     КДЛ № {cardData.numberKdl}
                                 </li>
                             ) : (
                                 <></>
                             )}
-                            {cardData.numberAsr !== null ? (
+                            {cardData.numberKdl !== 0 &&
+                            cardData.typeMeter === "Счётчик тепла" ? (
                                 <li className="list-unstyled">
                                     Канал № {cardData.numberAsr}
                                 </li>

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Button, Col, Modal, Row, Tab, Tabs } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import TestFormHeatMeter from "../form/TestFormHeatMeter";
+import ListMeterHeat from "../listMeter/ListMeterHeat";
 
-import TestFormHeatMeter from "../../testMeters/testHeat/form/TestFormHeatMeter";
-import ListMeterHeat from "../../testMeters/testHeat/listMeter/ListMeterHeat";
-
-const TestMainLayoutHeat = () => {
+const TestMainHeatPage = () => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -57,9 +56,10 @@ const TestMainLayoutHeat = () => {
                             <TestFormHeatMeter id={id} />
                         </Row>
                     </Tab>
-                    <Tab eventKey="listHeat" title="Список">
+                    <Tab eventKey="list" title="Список">
                         Сортировка // Квартиры // Этажи // Секции // КДЛ // АСР
                         // Поиск номера
+                        {/* <TestListHeatMeters id={id} /> */}
                         <ListMeterHeat id={id} />
                     </Tab>
                     <Tab eventKey="op" title="Операции">
@@ -71,4 +71,4 @@ const TestMainLayoutHeat = () => {
     );
 };
 
-export default TestMainLayoutHeat;
+export default TestMainHeatPage;

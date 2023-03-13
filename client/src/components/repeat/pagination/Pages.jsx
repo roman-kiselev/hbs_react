@@ -3,11 +3,7 @@ import { Pagination } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "../../../features/testMeters/testWaterMeterSlice";
 
-const Pages = ({ totalCount, limit, currentPage }) => {
-    const dispatch = useDispatch();
-    // const {totalCount} = useSelector((state) => state.mainTable)
-    // const {limit} = useSelector((state) => state.mainTable)
-    // const {currentPage} = useSelector((state) => state.mainTable)
+const Pages = ({ totalCount, limit, currentPage, clickAction }) => {
     const pageCount = Math.ceil(totalCount / limit);
     const pages = [];
 
@@ -29,18 +25,14 @@ const Pages = ({ totalCount, limit, currentPage }) => {
         }
     }
 
-    // for (let i = 0; i < pageCount; i++) {
-
-    //     pages.push(i + 1)
-    // }
-
     return (
         <Pagination>
             {pages.map((page) => (
                 <Pagination.Item
                     active={currentPage === page}
                     key={page}
-                    onClick={() => dispatch(setCurrentPage(page))}
+                    //onClick={() => dispatch(setCurrentPage(page))}
+                    onClick={() => clickAction(page)}
                 >
                     {page}
                 </Pagination.Item>

@@ -30,6 +30,7 @@ const CardMeterEditModal = ({ data, show, handleClose }) => {
     const [numberKdl, setNumberKdl, handleInputChangeNumberKdl] = useNumber(
         data.numberKdl
     );
+    const [line, setLine, handleInputChangeLine] = useNumber(data.line);
 
     const { id: idMeter, objectBuildId } = data;
 
@@ -49,6 +50,7 @@ const CardMeterEditModal = ({ data, show, handleClose }) => {
         formData.append("asr", numberAsr);
         formData.append("kdl", numberKdl);
         formData.append("id", idMeter);
+        formData.append("line", line);
         formData.append("typeMeter", data.typeMeter);
 
         try {
@@ -90,21 +92,42 @@ const CardMeterEditModal = ({ data, show, handleClose }) => {
                             </Col>
                         </Row>
                         <Row>
-                            <Col>
-                                <InputNumber
-                                    prop={{ title: "КДЛ", value: numberKdl }}
-                                    onChange={handleInputChangeNumberKdl}
-                                />
-                            </Col>
-                            <Col>
+                            {data.typeMeter === "Счётчик тепла" &&
+                            "Счётчик электроэнергии" ? (
                                 <InputNumber
                                     prop={{
-                                        title: "Номер канала",
-                                        value: numberAsr,
+                                        title: "Линия",
+                                        value: line,
                                     }}
-                                    onChange={handleInputChangeNumberAsr}
+                                    onChange={handleInputChangeLine}
                                 />
-                            </Col>
+                            ) : (
+                                <>
+                                    <Col>
+                                        <InputNumber
+                                            prop={{
+                                                title: "КДЛ",
+                                                value: numberKdl,
+                                            }}
+                                            onChange={
+                                                handleInputChangeNumberKdl
+                                            }
+                                        />
+                                    </Col>
+                                    <Col>
+                                        <InputNumber
+                                            prop={{
+                                                title: "Номер канала",
+                                                value: numberAsr,
+                                            }}
+                                            onChange={
+                                                handleInputChangeNumberAsr
+                                            }
+                                        />
+                                    </Col>
+                                </>
+                            )}
+
                             <InputNumber
                                 prop={{
                                     title: "Номер счётчика",
