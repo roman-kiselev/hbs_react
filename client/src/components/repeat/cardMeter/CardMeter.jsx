@@ -42,44 +42,37 @@ const CardMeter = ({ cardData, handleClickForEdit }) => {
                             </li>
 
                             {cardData.typeMeter === "Счётчик тепла" ||
-                            "Счётчик электроэнергии" ? (
+                            cardData.typeMeter === "Счётчик электроэнергии" ? (
                                 <li className="list-unstyled">
                                     Линия № {cardData.line}
                                 </li>
                             ) : (
                                 <></>
                             )}
-                            {cardData.typeMeter === "Счётчик холодной воды" ||
-                            "Счётчик горячей воды" ? (
+                            {cardData.typeMeter === "Счётчик тепла" ||
+                            cardData.typeMeter === "Счётчик электроэнергии" ? (
+                                <></>
+                            ) : (
                                 <li className="list-unstyled">
                                     КДЛ № {cardData.numberKdl}
                                 </li>
-                            ) : (
-                                <></>
                             )}
                             {cardData.typeMeter === "Счётчик тепла" ||
-                            "Счётчик электроэнергии" ? (
+                            cardData.typeMeter === "Счётчик электроэнергии" ? (
+                                <></>
+                            ) : (
                                 <li className="list-unstyled">
                                     Канал № {cardData.numberAsr}
                                 </li>
-                            ) : (
-                                <></>
-                            )}
-                            {cardData.numberMeter !== null ? (
-                                <li className="list-unstyled">
-                                    Счётчик № {cardData.numberMeter}
-                                </li>
-                            ) : (
-                                <></>
                             )}
 
-                            {cardData.sumMeter !== null ? (
-                                <li className="list-unstyled">
-                                    Показания: {cardData.sumMeter}
-                                </li>
-                            ) : (
-                                <></>
-                            )}
+                            <li className="list-unstyled">
+                                Счётчик № {cardData.numberMeter}
+                            </li>
+
+                            <li className="list-unstyled">
+                                Показания: {cardData.sumMeter}
+                            </li>
                         </Card.Text>
                         <Button variant="primary" onClick={handleShow}>
                             Редактировать
