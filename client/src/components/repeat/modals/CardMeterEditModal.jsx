@@ -9,7 +9,13 @@ import useNumber from "../../hooks/useNumber";
 import InputNumber from "../inputs/inputsNumber/InputNumber";
 import InputNumberFloating from "../inputs/inputsNumber/InputNumberFloating";
 
-const CardMeterEditModal = ({ data, show, handleClose, handleEditMeter }) => {
+const CardMeterEditModal = ({
+    data,
+    show,
+    handleClose,
+    handleEditMeter,
+    handleClickForEdit,
+}) => {
     const dispatch = useDispatch();
 
     const { id: userId } = useSelector((state) => state.users.user);
@@ -39,29 +45,41 @@ const CardMeterEditModal = ({ data, show, handleClose, handleEditMeter }) => {
         objectBuildId,
     };
 
-    // Сохраняем изменения
-    const saveNewData = () => {
-        const formData = new FormData();
-        formData.append("section", section);
-        formData.append("floors", floor);
-        formData.append("flat", flat);
-        formData.append("numberMeter", numberMeter);
-        formData.append("sum", sumMeter);
-        formData.append("asr", numberAsr);
-        formData.append("kdl", numberKdl);
-        formData.append("id", idMeter);
-        formData.append("line", line);
-        formData.append("typeMeter", data.typeMeter);
+    const formData = new FormData();
+    formData.append("section", section);
+    formData.append("floor", floor);
+    formData.append("flat", flat);
+    formData.append("numberMeter", numberMeter);
+    formData.append("sumMeter", sumMeter);
+    formData.append("asr", numberAsr);
+    formData.append("kdl", numberKdl);
+    formData.append("id", idMeter);
+    formData.append("line", line);
+    formData.append("typeMeter", data.typeMeter);
 
-        try {
-            dispatch(getOneMeter({ formData })).then((d) => {
-                dispatch(getAllMetersByUserAndObject({ formQuery }));
-                handleClose();
-            });
-        } catch (e) {
-            console.log(e);
-        }
-    };
+    // Сохраняем изменения
+    // const saveNewData = () => {
+    //     const formData = new FormData();
+    //     formData.append("section", section);
+    //     formData.append("floors", floor);
+    //     formData.append("flat", flat);
+    //     formData.append("numberMeter", numberMeter);
+    //     formData.append("sum", sumMeter);
+    //     formData.append("asr", numberAsr);
+    //     formData.append("kdl", numberKdl);
+    //     formData.append("id", idMeter);
+    //     formData.append("line", line);
+    //     formData.append("typeMeter", data.typeMeter);
+
+    //     try {
+    //         dispatch(getOneMeter({ formData })).then((d) => {
+    //             dispatch(getAllMetersByUserAndObject({ formQuery }));
+    //             handleClose();
+    //         });
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // };
 
     return (
         <Modal show={show} onHide={handleClose}>
@@ -92,7 +110,7 @@ const CardMeterEditModal = ({ data, show, handleClose, handleEditMeter }) => {
                             </Col>
                         </Row>
                         <Row>
-                            {data.typeMeter === "Счётчик тепла" &&
+                            {data.typeMeter === "Счётчик тепла" ||
                             "Счётчик электроэнергии" ? (
                                 <InputNumber
                                     prop={{
@@ -148,7 +166,12 @@ const CardMeterEditModal = ({ data, show, handleClose, handleEditMeter }) => {
                 <Button variant="secondary" onClick={handleClose}>
                     Закрыть
                 </Button>
-                <Button variant="primary" onClick={() => saveNewData()}>
+                <Button
+                    variant="primary"
+                    onClick={() =>
+                        handleClickForEdit(formData, formQuery, handleClose)
+                    }
+                >
                     Сохранить изменения
                 </Button>
             </Modal.Footer>

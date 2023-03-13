@@ -38,6 +38,19 @@ export const getAllHeatMeter = createAsyncThunk(
     }
 );
 
+export const getOneHeatMeter = createAsyncThunk(
+    "api/testAddHeat/:id",
+    async ({ formData }, { getState, dispatch }) => {
+        const id = formData.get("id");
+        const state = getState();
+
+        const { data } = await $authHost.post(
+            `api/testAddHeat/${id}`,
+            formData
+        );
+    }
+);
+
 export const testHeatMeterSlice = createSlice({
     name: "testHeatMeterSlice",
     initialState,

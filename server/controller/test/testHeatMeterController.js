@@ -41,9 +41,9 @@ class TestHeatMeterController {
             page = Number(page) || 1;
             limit = Number(limit) || 6;
             let offset = page * limit - limit;
-            console.log(page, limit, offset);
+
             let typeMeter = "Счётчик тепла";
-            console.log(offset);
+
             const heatMeters = await Models.MainAddMeter.findAndCountAll({
                 where: {
                     objectBuildId: objectId,
@@ -61,19 +61,14 @@ class TestHeatMeterController {
         }
     }
 
-    async getHeatMeterById(req, res) {
+    async editHeatMeterById(req, res) {
         try {
             const { id } = req.params;
-            const {
-                floor,
-                flat,
-                section,
-                line,
-                numberMeter,
-                sumMeter,
-                typeMeter,
-            } = req.body;
 
+            const { floor, flat, section, line, numberMeter, sumMeter } =
+                req.body;
+
+            console.log(floor, flat, section, line, numberMeter, sumMeter);
             const heatMeter = await Models.MainAddMeter.findByPk(id);
 
             await heatMeter.update({

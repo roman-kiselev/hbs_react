@@ -3,7 +3,10 @@ import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import ListMeters from "../../../repeat/listMetersCard/ListMeters";
 import Pages from "../../../repeat/pagination/Pages";
-import { getAllHeatMeter } from "../../../../features/testMeters/testHeatMeterSlice";
+import {
+    getAllHeatMeter,
+    getOneHeatMeter,
+} from "../../../../features/testMeters/testHeatMeterSlice";
 import { setCurrentPage } from "../../../../features/testMeters/testHeatMeterSlice";
 
 const ListMeterHeat = ({ id: objectBuildId }) => {
@@ -33,6 +36,16 @@ const ListMeterHeat = ({ id: objectBuildId }) => {
         dispatch(setCurrentPage(page));
     };
 
+    const handleClickForEdit = (formData, formQuery, handleClose) => {
+        try {
+            dispatch(getOneHeatMeter({ formData })).then((d) => {
+                dispatch(getAllHeatMeter({ formQuery }));
+                handleClose();
+            });
+        } catch (e) {
+            console.log(e);
+        }
+    };
     useEffect(() => {
         try {
             dispatch(getAllHeatMeter({ formQuery }));
@@ -44,7 +57,11 @@ const ListMeterHeat = ({ id: objectBuildId }) => {
     return (
         <Row>
             <Row>
-                <ListMeters listCards={cardMeter} objectId={objectBuildId} />
+                <ListMeters
+                    listCards={cardMeter}
+                    objectId={objectBuildId}
+                    handleClickForEdit={handleClickForEdit}
+                />
             </Row>
             <Row className="m-3 ">
                 <Col>

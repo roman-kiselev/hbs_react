@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllMetersByUserAndObject } from "../../../../features/testMeters/testWaterMeterSlice";
+import {
+    getAllMetersByUserAndObject,
+    getOneMeter,
+} from "../../../../features/testMeters/testWaterMeterSlice";
 import ListMeters from "../../../repeat/listMetersCard/ListMeters";
 import Pages from "../../../repeat/pagination/Pages";
 import { useQuery } from "react-query";
@@ -33,6 +36,17 @@ const ListMeterWater = ({ id: objectBuildId }) => {
         dispatch(setCurrentPage(page));
     };
 
+    const handleClickForEdit = (formData, formQuery, handleClose) => {
+        try {
+            dispatch(getOneMeter({ formData })).then((d) => {
+                dispatch(getAllMetersByUserAndObject({ formQuery }));
+                handleClose();
+            });
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
     useEffect(() => {
         dispatch(getAllMetersByUserAndObject({ formQuery }));
     }, [dispatch, currentPage]);
@@ -40,7 +54,11 @@ const ListMeterWater = ({ id: objectBuildId }) => {
     return (
         <Row>
             <Row>
-                <ListMeters listCards={cardMeter} objectId={objectBuildId} />
+                <ListMeters
+                    listCards={cardMeter}
+                    objectId={objectBuildId}
+                    handleClickForEdit={handleClickForEdit}
+                />
             </Row>
             <Row className="m-3 ">
                 <Col>

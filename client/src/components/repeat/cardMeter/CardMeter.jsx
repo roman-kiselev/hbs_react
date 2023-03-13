@@ -3,7 +3,7 @@ import { Col, Row, Card, Button } from "react-bootstrap";
 import TestFormEditMeter from "../../addMeters/bolid/formMeter/TestFormEditMeter";
 import CardMeterEditModal from "../modals/CardMeterEditModal";
 
-const CardMeter = ({ cardData }) => {
+const CardMeter = ({ cardData, handleClickForEdit }) => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -25,6 +25,7 @@ const CardMeter = ({ cardData }) => {
                         data={cardData}
                         show={show}
                         handleClose={() => handleClose()}
+                        handleClickForEdit={handleClickForEdit}
                     />
                 </Row>
                 <Card className="text-center">
@@ -39,23 +40,25 @@ const CardMeter = ({ cardData }) => {
                             <li className="list-unstyled">
                                 {cardData.typeMeter}
                             </li>
-                            {cardData.line !== null ? (
+
+                            {cardData.typeMeter === "Счётчик тепла" ||
+                            "Счётчик электроэнергии" ? (
                                 <li className="list-unstyled">
                                     Линия № {cardData.line}
                                 </li>
                             ) : (
                                 <></>
                             )}
-                            {cardData.numberKdl !== 0 &&
-                            cardData.typeMeter === "Счётчик тепла" ? (
+                            {cardData.typeMeter === "Счётчик холодной воды" ||
+                            "Счётчик горячей воды" ? (
                                 <li className="list-unstyled">
                                     КДЛ № {cardData.numberKdl}
                                 </li>
                             ) : (
                                 <></>
                             )}
-                            {cardData.numberKdl !== 0 &&
-                            cardData.typeMeter === "Счётчик тепла" ? (
+                            {cardData.typeMeter === "Счётчик тепла" ||
+                            "Счётчик электроэнергии" ? (
                                 <li className="list-unstyled">
                                     Канал № {cardData.numberAsr}
                                 </li>
