@@ -1,8 +1,10 @@
-import React from "react";
-import { Form, Row } from "react-bootstrap";
+import React, { useState } from "react";
+import { Form, Row, Col, Button } from "react-bootstrap";
 import InputNumber from "../../../repeat/inputs/inputsNumber/InputNumber";
 import InputNumberFloating from "../../../repeat/inputs/inputsNumber/InputNumberFloating";
-
+import useNumber from "../../../hooks/useNumber";
+import { useDispatch, useSelector } from "react-redux";
+import AlertMeters from "../../../repeat/alert/AlertMeters";
 const TestFormElectricalMeter = ({ id: objectBuildId }) => {
     const dispatch = useDispatch();
     const [section, setSection, handleInputChangeSection] = useNumber("");
@@ -28,6 +30,8 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
             return true;
         }
     };
+
+    const { lastMeters } = useSelector((state) => state.mainTable);
 
     return (
         <Row>
@@ -85,7 +89,7 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
                         <Button
                             variant="primary"
                             type="submit"
-                            onClick={(e) => addMeter(e)}
+                            //onClick={(e) => addMeter(e)}
                             disabled={checkData()}
                         >
                             Добавить
@@ -95,10 +99,10 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
                         <Col className="col-sm-3">
                             <Row>
                                 {alertAdd ? (
-                                    <TestAlertAddHeatMeters
+                                    <AlertMeters
                                         key={lastMeters.id}
                                         alertAdd={alertAdd}
-                                        {...lastMeters}
+                                        meterData={lastMeters}
                                     />
                                 ) : (
                                     <></>
