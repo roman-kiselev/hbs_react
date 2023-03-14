@@ -5,6 +5,11 @@ import InputNumberFloating from "../../../repeat/inputs/inputsNumber/InputNumber
 import useNumber from "../../../hooks/useNumber";
 import { useDispatch, useSelector } from "react-redux";
 import AlertMeters from "../../../repeat/alert/AlertMeters";
+import {
+    createTestElectricalMeter,
+    getAllElectricalMeters,
+} from "../../../../features/testMeters/testElectricalMeterSlice";
+
 const TestFormElectricalMeter = ({ id: objectBuildId }) => {
     const dispatch = useDispatch();
     const [section, setSection, handleInputChangeSection] = useNumber("");
@@ -31,7 +36,36 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
         }
     };
 
+    // В форму передаём
+    const formQuery = { userId, objectBuildId };
+
     const { lastMeters } = useSelector((state) => state.mainTable);
+
+    const addMeter = (e) => {
+        e.preventDefault();
+
+        const dataMeter = {
+            userId,
+            objectBuildId,
+            section,
+            floor,
+            flat,
+            line,
+            numberMeter,
+            sumMeter,
+        };
+
+        dispatch(createTestElectricalMeter({ dataMeter })).then((d) => {
+            dispatch(getAllElectricalMeters({ formQuery }));
+            setAlertAdd(true);
+            setFlat("");
+            setNumberMeter("");
+            setSumMeter("");
+            setTimeout(() => {
+                setAlertAdd(false);
+            }, 2000);
+        });
+    };
 
     return (
         <Row>
@@ -89,7 +123,7 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
                         <Button
                             variant="primary"
                             type="submit"
-                            //onClick={(e) => addMeter(e)}
+                            onClick={(e) => addMeter(e)}
                             disabled={checkData()}
                         >
                             Добавить
