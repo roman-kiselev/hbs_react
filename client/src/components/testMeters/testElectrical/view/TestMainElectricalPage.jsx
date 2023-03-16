@@ -63,7 +63,7 @@ const TestMainElectricalPage = () => {
                         <ListMetersElectrical id={id} />
                     </Tab>
                     <Tab eventKey="op" title="Операции">
-                        <OperationsElectrical />
+                        <OperationsElectrical id={id} />
                     </Tab>
                 </Tabs>
             </Row>

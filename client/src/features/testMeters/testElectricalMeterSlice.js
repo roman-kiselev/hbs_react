@@ -22,8 +22,6 @@ export const createTestElectricalMeter = createAsyncThunk(
 export const getAllElectricalMeters = createAsyncThunk(
     "api/getAllElectricalMeters",
     async ({ formQuery }, { getState, dispatch }) => {
-        console.log(formQuery);
-
         const { userId, objectBuildId, currentPage } = formQuery;
 
         const state = getState();
@@ -48,6 +46,13 @@ export const getOneElectricalMeter = createAsyncThunk(
             `api/testElectrical/${id}`,
             formData
         );
+    }
+);
+
+export const getAllExcelMeters = createAsyncThunk(
+    "api/getAllExcelMeters",
+    async ({ formQuery }, { dispatch }) => {
+        const { objectBuildId } = formQuery;
     }
 );
 
