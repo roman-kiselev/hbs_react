@@ -111,7 +111,7 @@ const CardMeterEditModal = ({
                         </Row>
                         <Row>
                             {data.typeMeter === "Счётчик тепла" ||
-                            "Счётчик электроэнергии" ? (
+                            data.typeMeter === "Счётчик электроэнергии" ? (
                                 <InputNumber
                                     prop={{
                                         title: "Линия",

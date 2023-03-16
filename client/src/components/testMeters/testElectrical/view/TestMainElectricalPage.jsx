@@ -3,6 +3,7 @@ import { Button, Col, Modal, Row, Tab, Tabs } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import TestFormElectricalMeter from "../form/TestFormElectricalMeter";
 import ListMetersElectrical from "../listMeters/ListMetersElectrical";
+import OperationsElectrical from "../operations/OperationsElectrical";
 
 const TestMainElectricalPage = () => {
     const [show, setShow] = useState(false);
@@ -62,7 +63,7 @@ const TestMainElectricalPage = () => {
                         <ListMetersElectrical id={id} />
                     </Tab>
                     <Tab eventKey="op" title="Операции">
-                        Тут разные
+                        <OperationsElectrical />
                     </Tab>
                 </Tabs>
             </Row>
