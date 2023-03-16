@@ -39,8 +39,8 @@ class TestElectricalMeterController {
             page = Number(page) || 1;
             limit = Number(limit) || 6;
             let offset = page * limit - limit;
-
-            let typeMeter = "Счётчик электроэнегрии";
+            console.log(limit, page, offset);
+            let typeMeter = "Счётчик электроэнергии";
 
             const meters = await Models.MainAddMeter.findAndCountAll({
                 where: {

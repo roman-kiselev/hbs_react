@@ -22,13 +22,15 @@ export const createTestElectricalMeter = createAsyncThunk(
 export const getAllElectricalMeters = createAsyncThunk(
     "api/getAllElectricalMeters",
     async ({ formQuery }, { getState, dispatch }) => {
+        console.log(formQuery);
+
         const { userId, objectBuildId, currentPage } = formQuery;
 
         const state = getState();
         const { limit } = state.mainTable;
 
         const { data } = await $authHost.get(
-            `api/testElectrical?userId=${userId}&objectBuildId=${objectBuildId}&currentPage=${currentPage}&limit=${limit}`
+            `api/testElectrical?userId=${userId}&objectBuildId=${objectBuildId}&page=${currentPage}&limit=${limit}`
         );
 
         const { rows, count } = data.meters;

@@ -22,7 +22,7 @@ const AlertMeters = ({ alertAdd, meterData }) => {
                     )}
 
                     <Row>
-                        {meterData.typeMeter} № {meterData.numberMeter}{" "}
+                        {meterData.typeMeter} № {meterData.numberMeter}
                         {meterData.sumMeter}
                     </Row>
                 </Row>

@@ -39,7 +39,7 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
     // В форму передаём
     const formQuery = { userId, objectBuildId };
 
-    const { lastMeters } = useSelector((state) => state.mainTable);
+    const { lastMeters } = useSelector((state) => state.electricalMeter);
 
     const addMeter = (e) => {
         e.preventDefault();
@@ -138,9 +138,7 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
                                         alertAdd={alertAdd}
                                         meterData={lastMeters}
                                     />
-                                ) : (
-                                    <></>
-                                )}
+                                ) : null}
                             </Row>
                         </Col>
                     </Row>
