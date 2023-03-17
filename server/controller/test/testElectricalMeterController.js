@@ -1,5 +1,7 @@
 import Models from "../../models/models.js";
 import XLSX from "xlsx";
+import sequelize from "../../db.js";
+import { raw } from "express";
 
 class TestElectricalMeterController {
     async createMeter(req, res) {
@@ -53,7 +55,7 @@ class TestElectricalMeterController {
                 offset,
                 order: [["createdAt", "DESC"]],
             });
-
+            console.log("Я вып");
             return res.json({ meters });
         } catch (e) {
             console.log(e);
@@ -67,17 +69,20 @@ class TestElectricalMeterController {
                 req.body;
 
             const meter = await Models.MainAddMeter.findByPk(id);
+            console.log(meter);
+            // Проверить что все поля не равны нулю
+            if (floor !== 0 && flat !== 0 && line !== 0 && section !== 0) {
+                await meter.update({
+                    floor,
+                    flat,
+                    line,
+                    section,
+                    numberMeter,
+                    sumMeter,
+                });
 
-            await meter.update({
-                floor,
-                flat,
-                line,
-                section,
-                numberMeter,
-                sumMeter,
-            });
-
-            return res.json({ meter });
+                return res.json({ meter });
+            }
         } catch (e) {
             console.log(e);
         }
@@ -136,6 +141,64 @@ class TestElectricalMeterController {
             //     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             // );
             res.send(buffer);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    // Добавляем данные из excel
+    async addAllMetersInObject(req, res) {
+        try {
+            const { objectBuildId, userId } = req.query;
+            console.log(objectBuildId, userId);
+            const { jsonData } = req.body;
+            const data = JSON.parse(jsonData);
+
+            // Создадим массив с повторяющимися счётчиками
+            const repeatMeters = [];
+            // Создаём транзакцию с помощью Sequelize
+
+            await sequelize.transaction(async (t) => {
+                try {
+                    for (const d of data) {
+                        const meter = await Models.MainAddMeter.findOne(
+                            {
+                                where: {
+                                    numberMeter: d.numberMeter,
+                                },
+                                raw: true,
+                            },
+
+                            { transaction: t }
+                        );
+
+                        if (!meter) {
+                            await Models.MainAddMeter.create(
+                                {
+                                    section: d.section,
+                                    floor: d.floor,
+                                    flat: d.flat,
+                                    line: d.line,
+                                    numberMeter: d.numberMeter,
+                                    sumMeter: d.sumMeter,
+                                    objectBuildId,
+                                    userId,
+                                    typeMeter: "Счётчик электроэнергии",
+                                },
+                                { transaction: t }
+                            );
+                        } else {
+                            repeatMeters.push(meter);
+                        }
+                    }
+
+                    return res.json({ repeatMeters, success: true });
+                } catch (e) {
+                    //await transaction.rollback();
+                    console.log(e);
+                }
+            });
+
+            //const meters = await Models.MainAddMeter.bulkCreate(jsonData);
         } catch (e) {
             console.log(e);
         }

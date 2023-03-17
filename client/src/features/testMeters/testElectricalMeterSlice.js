@@ -22,6 +22,8 @@ export const createTestElectricalMeter = createAsyncThunk(
 export const getAllElectricalMeters = createAsyncThunk(
     "api/getAllElectricalMeters",
     async ({ formQuery }, { getState, dispatch }) => {
+        console.log("Тут");
+        console.log(formQuery);
         const { userId, objectBuildId, currentPage } = formQuery;
 
         const state = getState();
@@ -32,6 +34,25 @@ export const getAllElectricalMeters = createAsyncThunk(
         );
 
         const { rows, count } = data.meters;
+        console.log(rows);
+        dispatch(setTotalCount(count));
+        dispatch(setMeters({ rows }));
+    }
+);
+
+export const getAllMeterWithoutParameters = createAsyncThunk(
+    "api/getAllMeterWithoutParameters",
+    async ({ formQuery }, { getState, dispatch }) => {
+        const { userId, objectBuildId } = formQuery;
+        console.log(userId, objectBuildId);
+        const state = getState();
+        const { limit } = state.mainTable;
+
+        const { data } = await $authHost.get(
+            `api/testElectrical?userId=${userId}&objectBuildId=${objectBuildId}&page=${1}&limit=${limit}`
+        );
+        const { rows, count } = data.meters;
+        console.log(rows, count);
         dispatch(setTotalCount(count));
         dispatch(setMeters({ rows }));
     }
@@ -49,12 +70,12 @@ export const getOneElectricalMeter = createAsyncThunk(
     }
 );
 
-export const getAllExcelMeters = createAsyncThunk(
-    "api/getAllExcelMeters",
-    async ({ formQuery }, { dispatch }) => {
-        const { objectBuildId } = formQuery;
-    }
-);
+// export const getAllExcelMeters = createAsyncThunk(
+//     "api/getAllExcelMeters",
+//     async ({ formQuery }, { dispatch }) => {
+//         const { objectBuildId } = formQuery;
+//     }
+// );
 
 export const testElectricalMeterSlice = createSlice({
     name: "testElectricalMeterSlice",

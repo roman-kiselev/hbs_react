@@ -28,3 +28,26 @@ export const getAllMetersElectrical = async (objectBuildId) => {
             }
         });
 };
+
+export const addDataExcel = async (objectBuildId, userId, jsonData) => {
+    try {
+        let n = 0;
+        const { data } = await $authHost.post(
+            `/api/testElectrical/addAllMetersExcel/?objectBuildId=${objectBuildId}&userId=${userId}`,
+            { jsonData },
+            {
+                unUploadProgress: (progressEvent) => {
+                    const percentCompleted = Math.round(
+                        (progressEvent.loaded * 100) / progressEvent.total
+                    );
+                    n = percentCompleted;
+                },
+            }
+        );
+
+        return data;
+    } catch (e) {
+        console.log(e);
+        return e.message;
+    }
+};

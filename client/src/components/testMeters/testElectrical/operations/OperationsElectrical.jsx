@@ -1,10 +1,16 @@
 import React, { URL, useState } from "react";
-import { Button, Col, Form, Nav, Row, Tab } from "react-bootstrap";
+import { Button, Col, Form, Nav, Row, Tab, Table } from "react-bootstrap";
 import { RiFileExcel2Line } from "react-icons/ri";
-import { getAllMetersElectrical } from "../../../../http/electricalMeterApi";
+import {
+    addDataExcel,
+    getAllMetersElectrical,
+} from "../../../../http/electricalMeterApi";
 import * as XLSX from "xlsx";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllElectricalMeters } from "../../../../features/testMeters/testElectricalMeterSlice";
 
 const OperationsElectrical = ({ id: objectBuildId }) => {
+    const dispatch = useDispatch();
     const getExcel = () => {
         try {
             getAllMetersElectrical(objectBuildId);
@@ -12,11 +18,17 @@ const OperationsElectrical = ({ id: objectBuildId }) => {
             console.log(error);
         }
     };
-
+    const { id: userId } = useSelector((state) => state.users.user);
     const [data, setData] = useState([]);
+    const formQuery = {
+        userId,
+        objectBuildId,
+        currentPage: 1,
+    };
 
     const handleFileUpload = async (event) => {
         const file = event.target.files[0];
+
         const reader = new FileReader();
         reader.onload = (evt) => {
             /* Parse data */
@@ -29,32 +41,32 @@ const OperationsElectrical = ({ id: objectBuildId }) => {
             setData(worksheetData);
             const body = JSON.stringify(worksheetData);
             const lengthWorksheet = worksheetData.length + 1;
-            console.log(lengthWorksheet);
 
+            const mainData = [];
             for (let i = 2; i < lengthWorksheet; i++) {
-                const id = worksheet["A" + i].v;
-                const section = worksheet["B" + i].v;
-                const floor = worksheet["C" + i].v;
-                const flat = worksheet["D" + i].v;
-                const line = worksheet["E" + i].v;
-                const numberMeter = worksheet["F" + i].v;
-                const sumMeter = worksheet["G" + i].v;
-                const type = worksheet["H" + i].v;
+                const section = worksheet["A" + i].v;
+                const floor = worksheet["B" + i].v;
+                const flat = worksheet["C" + i].v;
+                const line = worksheet["D" + i].v;
+                const numberMeter = worksheet["E" + i].v;
+                const sumMeter = worksheet["F" + i].v;
 
-                console.log({
-                    id,
+                mainData.push({
                     section,
                     floor,
                     flat,
                     line,
                     numberMeter,
                     sumMeter,
-                    type,
                 });
             }
-            // /* Send data to server */
-            // const body = JSON.stringify(worksheetData);
-            // fetch("http://example.com/api/data", { method: "POST", body });
+            const dataJson = JSON.stringify(mainData);
+
+            addDataExcel(objectBuildId, userId, dataJson).then((res) => {
+                dispatch(getAllElectricalMeters({ formQuery }));
+                // В res лежат счётчики с повторным номером и ответ
+                console.log(res);
+            });
         };
         reader.readAsBinaryString(file);
     };
@@ -89,6 +101,43 @@ const OperationsElectrical = ({ id: objectBuildId }) => {
                         </Tab.Pane>
                         <Tab.Pane eventKey="second">2</Tab.Pane>
                         <Tab.Pane eventKey="three">
+                            <Row>
+                                <Row>
+                                    <h6>Таблица должна быть следующего вида</h6>
+                                </Row>
+                                <Row>
+                                    <Table striped bordered hover>
+                                        <thead>
+                                            <tr>
+                                                <th>Сеция</th>
+                                                <th>Этаж</th>
+                                                <th>Квартира</th>
+                                                <th>Линия</th>
+                                                <th>Номер счётчика</th>
+                                                <th>Показания</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>2</td>
+                                                <td>26</td>
+                                                <td>1</td>
+                                                <td>192168233</td>
+                                                <td>1.2</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>2</td>
+                                                <td>27</td>
+                                                <td>1</td>
+                                                <td>192168234</td>
+                                                <td>1.5</td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>
+                                </Row>
+                            </Row>
                             <Form.Group controlId="formFile" className="mb-3">
                                 <Form.Label>Выберите файл</Form.Label>
                                 <Form.Control
