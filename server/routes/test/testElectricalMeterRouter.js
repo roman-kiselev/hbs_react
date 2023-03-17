@@ -4,10 +4,15 @@ import testElectricalMeterController from "../../controller/test/testElectricalM
 
 router.get("/", testElectricalMeterController.getAllMeters);
 router.post("/", testElectricalMeterController.createMeter);
-router.post("/:id", testElectricalMeterController.editMeterById);
 router.get(
     "/getAllMeters",
     testElectricalMeterController.getExcelAllElectricalMeterInObject
 );
+router.post(
+    "/addAllMetersExcel",
+    testElectricalMeterController.addAllMetersInObject
+);
+
+router.post("/:id", testElectricalMeterController.editMeterById);
 
 export default router;
