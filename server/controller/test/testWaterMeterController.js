@@ -153,18 +153,23 @@ class TestWaterMeterController {
             // Получаем все счётчики электроэнергии в excel
             // Достаём id объекта
             const { objectBuildId } = req.query;
-
+            const typeMeterCool = "Счётчик холодной воды";
+            const typeMeterHot = "Счётчик горячей воды";
             const meters = await Models.MainAddMeter.findAll({
                 where: {
                     objectBuildId,
-                    typeMeter: "Счётчик электроэнергии",
+                    [Op.or]: [
+                        { typeMeter: typeMeterCool },
+                        { typeMeter: typeMeterHot },
+                    ],
                 },
                 attributes: [
                     "id",
                     "section",
                     "floor",
                     "flat",
-                    "line",
+                    "numberKdl",
+                    "numberAsr",
                     "numberMeter",
                     "sumMeter",
                     "typeMeter",
@@ -179,27 +184,18 @@ class TestWaterMeterController {
             worksheet["B1"] = { t: "s", v: "Секция" };
             worksheet["C1"] = { t: "s", v: "Этаж" };
             worksheet["D1"] = { t: "s", v: "Квартира" };
-            worksheet["E1"] = { t: "s", v: "Линия" };
-            worksheet["F1"] = { t: "s", v: "Номер счётчика" };
-            worksheet["G1"] = { t: "s", v: "Показания" };
-            worksheet["H1"] = { t: "s", v: "Тип счётчика" };
+            worksheet["E1"] = { t: "s", v: "Номер КДЛ" };
+            worksheet["F1"] = { t: "s", v: "Номер Канала" };
+            worksheet["G1"] = { t: "s", v: "Номер счётчика" };
+            worksheet["H1"] = { t: "s", v: "Показания" };
+            worksheet["I1"] = { t: "s", v: "Тип счётчика" };
             const workbook = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(
-                workbook,
-                worksheet,
-                "Счётчики электроэнергии"
-            );
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Счётчики воды");
             const buffer = XLSX.write(workbook, {
                 type: "buffer",
                 bookType: "xlsx",
             });
-            // res.setHeader(
-            //     "Content-Disposition",
-            //     "attachment; filename=meters.xlsx"
-            // );
-            // res.type(
-            //     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-            // );
+
             res.send(buffer);
         } catch (e) {
             console.log(e);

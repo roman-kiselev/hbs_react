@@ -97,7 +97,7 @@ class TestHeatMeterController {
             const meters = await Models.MainAddMeter.findAll({
                 where: {
                     objectBuildId,
-                    typeMeter: "Счётчик электроэнергии",
+                    typeMeter: "Счётчик тепла",
                 },
                 attributes: [
                     "id",
@@ -124,22 +124,12 @@ class TestHeatMeterController {
             worksheet["G1"] = { t: "s", v: "Показания" };
             worksheet["H1"] = { t: "s", v: "Тип счётчика" };
             const workbook = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(
-                workbook,
-                worksheet,
-                "Счётчики электроэнергии"
-            );
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Счётчики тепла");
             const buffer = XLSX.write(workbook, {
                 type: "buffer",
                 bookType: "xlsx",
             });
-            // res.setHeader(
-            //     "Content-Disposition",
-            //     "attachment; filename=meters.xlsx"
-            // );
-            // res.type(
-            //     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-            // );
+
             res.send(buffer);
         } catch (e) {
             console.log(e);
@@ -182,7 +172,7 @@ class TestHeatMeterController {
                                     sumMeter: d.sumMeter,
                                     objectBuildId,
                                     userId,
-                                    typeMeter: "Счётчик электроэнергии",
+                                    typeMeter: "Счётчик тепла",
                                 },
                                 { transaction: t }
                             );
@@ -193,12 +183,9 @@ class TestHeatMeterController {
 
                     return res.json({ repeatMeters, success: true });
                 } catch (e) {
-                    //await transaction.rollback();
                     console.log(e);
                 }
             });
-
-            //const meters = await Models.MainAddMeter.bulkCreate(jsonData);
         } catch (e) {
             console.log(e);
         }
