@@ -1,7 +1,6 @@
 import Models from "../../models/models.js";
 import XLSX from "xlsx";
 import sequelize from "../../db.js";
-import { raw } from "express";
 
 class TestElectricalMeterController {
     async createMeter(req, res) {

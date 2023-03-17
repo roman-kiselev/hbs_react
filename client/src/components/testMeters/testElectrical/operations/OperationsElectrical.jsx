@@ -10,7 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllElectricalMeters } from "../../../../features/testMeters/testElectricalMeterSlice";
 
 const OperationsElectrical = ({ id: objectBuildId }) => {
+    //LДиспатч для вызова функции
     const dispatch = useDispatch();
+    // Получаем excel по api
     const getExcel = () => {
         try {
             getAllMetersElectrical(objectBuildId);
@@ -18,6 +20,7 @@ const OperationsElectrical = ({ id: objectBuildId }) => {
             console.log(error);
         }
     };
+    // Формируем query для запроса
     const { id: userId } = useSelector((state) => state.users.user);
     const [data, setData] = useState([]);
     const formQuery = {
@@ -26,6 +29,7 @@ const OperationsElectrical = ({ id: objectBuildId }) => {
         currentPage: 1,
     };
 
+    //Функция для считывания файла
     const handleFileUpload = async (event) => {
         const file = event.target.files[0];
 
@@ -91,15 +95,19 @@ const OperationsElectrical = ({ id: objectBuildId }) => {
                         </Nav.Item>
                     </Nav>
                 </Col>
+                {/*  Здесь вкладки табов */}
                 <Col sm={9}>
                     <Tab.Content>
+                        {/* Первый таб для скачивания общего файла */}
                         <Tab.Pane eventKey="first">
                             <Button variant="success" onClick={getExcel}>
                                 Скачать Excel
                                 <RiFileExcel2Line />
                             </Button>
                         </Tab.Pane>
+                        {/* Второй таб для скачивания шаблонов для загрузки */}
                         <Tab.Pane eventKey="second">2</Tab.Pane>
+                        {/* Третий таб для загрузки файлов */}
                         <Tab.Pane eventKey="three">
                             <Row>
                                 <Row>
@@ -109,7 +117,7 @@ const OperationsElectrical = ({ id: objectBuildId }) => {
                                     <Table striped bordered hover>
                                         <thead>
                                             <tr>
-                                                <th>Сеция</th>
+                                                <th>Секция</th>
                                                 <th>Этаж</th>
                                                 <th>Квартира</th>
                                                 <th>Линия</th>
