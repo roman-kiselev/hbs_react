@@ -104,7 +104,7 @@ export const getTemplateFromServer = async (objectBuildId, template, line) => {
                     downloadLink.href = url;
                     downloadLink.setAttribute(
                         "download",
-                        `Шаблон_электрика_${formattedDate}.xlsx`
+                        `Шаблон_тепло_${formattedDate}.xlsx`
                     );
                     // Append the download link to the body
                     document.body.appendChild(downloadLink);
