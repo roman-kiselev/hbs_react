@@ -2,8 +2,9 @@ import chalk from "chalk";
 import pkg from "sequelize";
 import Models from "../../models/models.js";
 import TestExcelService from "../../service/testExcel/TestExcelService.js";
-
+import * as XLSX from "xlsx";
 const { Op } = pkg;
+import sequelize from "../../db.js";
 
 class TestWaterMeterController {
     async addNewMeter(req, res) {
@@ -233,12 +234,16 @@ class TestWaterMeterController {
                                     section: d.section,
                                     floor: d.floor,
                                     flat: d.flat,
-                                    line: d.line,
+                                    numberKdl: d.numberKdl,
+                                    numberAsr: d.numberAsr,
                                     numberMeter: d.numberMeter,
                                     sumMeter: d.sumMeter,
                                     objectBuildId,
                                     userId,
-                                    typeMeter: "Счётчик электроэнергии",
+                                    typeMeter:
+                                        d.numberAsr % 2 === 0
+                                            ? "Счётчик горячей воды"
+                                            : "Счётчик холодной воды",
                                 },
                                 { transaction: t }
                             );

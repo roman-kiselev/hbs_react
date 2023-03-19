@@ -3,6 +3,7 @@ import { Button, Col, Modal, Row, Tab, Tabs } from "react-bootstrap";
 import TestFormCoolHotMeterBolid from "../form/TestFormCoolHotMeterBolid";
 import { useParams } from "react-router-dom";
 import ListMeterWater from "../listMeters/ListMeterWater";
+import OperationsWater from "../operation/OperationsWater";
 
 const TestMainWaterPage = () => {
     // id объекта
@@ -67,7 +68,7 @@ const TestMainWaterPage = () => {
                     </Tab>
                     <Tab eventKey="op" title="Операции">
                         {/* Здесь операции __ Скачать excel и т.д. */}
-                        Тут разные
+                        <OperationsWater id={id} />
                     </Tab>
                 </Tabs>
             </Row>

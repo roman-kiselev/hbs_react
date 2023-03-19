@@ -1,6 +1,6 @@
 import { $authHost, $host } from "./index";
 
-export const getAllMetersElectrical = async (objectBuildId) => {
+export const getAllWaterMeter = async (objectBuildId) => {
     const date = new Date();
 
     const day = date.getDate().toString().padStart(2, "0");
@@ -9,30 +9,28 @@ export const getAllMetersElectrical = async (objectBuildId) => {
     const hours = date.getHours().toString().padStart(2, "0");
     const minutes = date.getMinutes().toString().padStart(2, "0");
     const seconds = date.getSeconds().toString().padStart(2, "0");
+
     const formattedDate = `${day}.${month}.${year}_${hours}.${minutes}.${seconds}`;
+
     const data = await $authHost
-        .get(
-            `/api/testElectrical/getAllMeters/?objectBuildId=${objectBuildId}`,
-            { responseType: "blob" }
-        )
+        .get(`/api/testAddWater/getAllMeters/?objectBuildId=${objectBuildId}`, {
+            responseType: "blob",
+        })
         .then((res) => {
+            console.log(res);
             try {
                 if (res && res.data) {
                     const blob = new Blob([res.data], {
                         type: "application/octet-stream",
                     });
-                    // Create a download link element
                     const downloadLink = document.createElement("a");
-                    // Set the href and download attributes for the download link
                     const url = URL.createObjectURL(blob);
                     downloadLink.href = url;
                     downloadLink.setAttribute(
                         "download",
-                        `Электрика_${formattedDate}.xlsx`
+                        `Вода_${formattedDate}.xlsx`
                     );
-                    // Append the download link to the body
                     document.body.appendChild(downloadLink);
-                    // Click the download link to start the download
                     downloadLink.click();
                 }
             } catch (e) {
@@ -41,10 +39,10 @@ export const getAllMetersElectrical = async (objectBuildId) => {
         });
 };
 
-export const addDataExcel = async (objectBuildId, userId, jsonData) => {
+export const addDataExcelWater = async (objectBuildId, userId, jsonData) => {
     try {
         const { data } = await $authHost.post(
-            `/api/testElectrical/addAllMetersExcel/?objectBuildId=${objectBuildId}&userId=${userId}`,
+            `/api/testAddWater/addAllMetersExcel/?objectBuildId=${objectBuildId}&userId=${userId}`,
             { jsonData },
             {
                 unUploadProgress: (progressEvent) => {
@@ -54,8 +52,6 @@ export const addDataExcel = async (objectBuildId, userId, jsonData) => {
                 },
             }
         );
-
-        return data;
     } catch (e) {
         console.log(e);
         return e.message;

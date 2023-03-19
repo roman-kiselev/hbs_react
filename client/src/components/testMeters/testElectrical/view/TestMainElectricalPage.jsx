@@ -17,7 +17,9 @@ const TestMainElectricalPage = () => {
 
     return (
         <Row>
-            <p style={{ fontSize: 15 }}>Добавление счётчиков тепла (Test)</p>
+            <p style={{ fontSize: 15 }}>
+                Добавление счётчиков электроэнергии (Test)
+            </p>
             <Row>
                 <Row className="justify-content-end">
                     <Col className="text-end">

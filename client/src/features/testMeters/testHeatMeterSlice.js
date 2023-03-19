@@ -71,7 +71,6 @@ export const testHeatMeterSlice = createSlice({
         },
         setCurrentPage: (state, action) => {
             state.currentPage = action.payload;
-            console.log(action.payload);
         },
     },
 });

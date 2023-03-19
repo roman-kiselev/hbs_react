@@ -3,6 +3,7 @@ import { Button, Col, Modal, Row, Tab, Tabs } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import TestFormHeatMeter from "../form/TestFormHeatMeter";
 import ListMeterHeat from "../listMeter/ListMeterHeat";
+import OperationsHeat from "../operations/OperationsHeat";
 
 const TestMainHeatPage = () => {
     const [show, setShow] = useState(false);
@@ -63,7 +64,7 @@ const TestMainHeatPage = () => {
                         <ListMeterHeat id={id} />
                     </Tab>
                     <Tab eventKey="op" title="Операции">
-                        Тут разные
+                        <OperationsHeat id={id} />
                     </Tab>
                 </Tabs>
             </Row>

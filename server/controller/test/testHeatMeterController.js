@@ -2,6 +2,11 @@
 import Models from "../../models/models.js";
 import XLSX from "xlsx";
 import sequelize from "../../db.js";
+import { Sequelize } from "sequelize";
+import pkg from "sequelize";
+import createHeatTemplate from "../../service/headersConfig/createHeatTemplate.js";
+import HeadersHeatConfig from "../../service/headersConfig/headersHeat/HeadersHeatConfig.js";
+const { Op } = pkg;
 
 class TestHeatMeterController {
     // Создадим счётчик тепла
@@ -139,7 +144,7 @@ class TestHeatMeterController {
     async addAllMetersInObject(req, res) {
         try {
             const { objectBuildId, userId } = req.query;
-            console.log(objectBuildId, userId);
+
             const { jsonData } = req.body;
             const data = JSON.parse(jsonData);
 
@@ -154,6 +159,7 @@ class TestHeatMeterController {
                             {
                                 where: {
                                     numberMeter: d.numberMeter,
+                                    objectBuildId,
                                 },
                                 raw: true,
                             },
@@ -186,6 +192,86 @@ class TestHeatMeterController {
                     console.log(e);
                 }
             });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    // Получим все уникальные линии тепла
+
+    async getAllLines(req, res) {
+        try {
+            const { objectBuildId, line } = req.query;
+            const lines = await Models.MainAddMeter.findAll({
+                where: {
+                    objectBuildId,
+                    line: {
+                        [Op.not]: 0,
+                    },
+                },
+                attributes: [
+                    [Sequelize.fn("DISTINCT", Sequelize.col("line")), "line"],
+                ],
+                order: [["line", "ASC"]],
+            });
+
+            return res.json({ lines });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    // Готовим шаблон к скачиванию
+
+    async getTemplateHeat(req, res) {
+        try {
+            // Получаем с фронтенда данные для заполнения шаблона
+            // Заголовки берём из serviceHeaders
+            // Там функция принимает на вход квартиру, номер счётчика, секцию, этаж, данные из query
+            const { objectBuildId, line, template } = req.query;
+            const meters = await Models.MainAddMeter.findAll({
+                where: {
+                    objectBuildId,
+                    typeMeter: "Счётчик тепла",
+                    line,
+                },
+                attributes: [
+                    "id",
+                    "section",
+                    "floor",
+                    "flat",
+                    "line",
+                    "numberMeter",
+                    "sumMeter",
+                    "typeMeter",
+                ],
+                order: [["floor", "DESC"]],
+                raw: true,
+            });
+            //console.log(meters);
+            switch (template) {
+                case "MeterBus":
+                    const listMeters = [];
+                    meters.map(({ flat, numberMeter, section, floor }) => {
+                        let preparedDevice =
+                            HeadersHeatConfig.getTMBusUniversal_Heat_Counter(
+                                flat,
+                                numberMeter,
+                                section,
+                                floor
+                            );
+                        listMeters.push(preparedDevice);
+                    });
+
+                    const buffer = createHeatTemplate(listMeters);
+
+                    return res.send(buffer);
+                    break;
+                case "Pulsar":
+                    break;
+                default:
+                    return res.json({ message: "Шаблон не выбран" });
+            }
         } catch (e) {
             console.log(e);
         }

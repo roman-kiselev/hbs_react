@@ -12,6 +12,7 @@ import sectionsRouter from "./objects/sectionsRouter.js";
 import testWaterMeterRouter from "./test/testWaterMeterRouter.js";
 import testHeatMeterRouter from "./test/testHeatMeterRouter.js";
 import testElectricalMeterRouter from "./test/testElectricalMeterRouter.js";
+import kdlMainTableRouter from "../routes/devices/kdlMainTableRouter.js";
 
 // User
 router.use("/user", userRouter);
@@ -32,5 +33,8 @@ router.use("/testAddWater", testWaterMeterRouter);
 router.use("/testAddHeat", testHeatMeterRouter);
 
 router.use("/testElectrical", testElectricalMeterRouter);
+
+// Устройства
+router.use("/deviceKdl", kdlMainTableRouter);
 
 export default router;

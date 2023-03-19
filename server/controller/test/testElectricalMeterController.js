@@ -163,6 +163,7 @@ class TestElectricalMeterController {
                             {
                                 where: {
                                     numberMeter: d.numberMeter,
+                                    objectBuildId,
                                 },
                                 raw: true,
                             },

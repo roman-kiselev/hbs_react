@@ -9,6 +9,8 @@ router.get(
     testHeatMeterController.getExcelAllHeatMeterInObject
 );
 router.post("/addAllMetersExcel", testHeatMeterController.addAllMetersInObject);
+router.get("/line", testHeatMeterController.getAllLines);
+router.get("/getHeatTemplate", testHeatMeterController.getTemplateHeat);
 router.post("/:id", testHeatMeterController.editHeatMeterById);
 
 export default router;
