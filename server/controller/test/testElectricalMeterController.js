@@ -235,7 +235,7 @@ class TestElectricalMeterController {
 
     // Готовим шаблон к скачиванию
 
-    async getTemplateHeat(req, res) {
+    async getTemplateElectrical(req, res) {
         try {
             // Получаем с фронтенда данные для заполнения шаблона
             // Заголовки берём из serviceHeaders

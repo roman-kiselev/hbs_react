@@ -12,6 +12,11 @@ router.post(
     "/addAllMetersExcel",
     testElectricalMeterController.addAllMetersInObject
 );
+router.get("/line", testElectricalMeterController.getAllLines);
+router.get(
+    "/getTemplateElectrical",
+    testElectricalMeterController.getTemplateElectrical
+);
 
 router.post("/:id", testElectricalMeterController.editMeterById);
 

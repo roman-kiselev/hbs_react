@@ -8,6 +8,8 @@ import {
 import * as XLSX from "xlsx";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllElectricalMeters } from "../../../../features/testMeters/testElectricalMeterSlice";
+import MainTabReadFileElectrical from "./readFile/MainTabReadFileElectrical";
+import MainTabDownloadListElectrical from "./downloadList/MainTabDownloadListElectrical";
 
 const OperationsElectrical = ({ id: objectBuildId }) => {
     //LДиспатч для вызова функции
@@ -100,16 +102,16 @@ const OperationsElectrical = ({ id: objectBuildId }) => {
                     <Tab.Content>
                         {/* Первый таб для скачивания общего файла */}
                         <Tab.Pane eventKey="first">
-                            <Button variant="success" onClick={getExcel}>
-                                Скачать Excel
-                                <RiFileExcel2Line />
-                            </Button>
+                            <MainTabDownloadListElectrical
+                                objectBuildId={objectBuildId}
+                                getExcel={getExcel}
+                            />
                         </Tab.Pane>
                         {/* Второй таб для скачивания шаблонов для загрузки */}
                         <Tab.Pane eventKey="second">2</Tab.Pane>
                         {/* Третий таб для загрузки файлов */}
                         <Tab.Pane eventKey="three">
-                            <Row>
+                            {/* <Row>
                                 <Row>
                                     <h6>Таблица должна быть следующего вида</h6>
                                 </Row>
@@ -153,7 +155,11 @@ const OperationsElectrical = ({ id: objectBuildId }) => {
                                     accept=".xlsx,.xls"
                                     onChange={handleFileUpload}
                                 />
-                            </Form.Group>
+                            </Form.Group> */}
+                            <MainTabReadFileElectrical
+                                objectBuildId={objectBuildId}
+                                handleFileUpload={handleFileUpload}
+                            />
                         </Tab.Pane>
                     </Tab.Content>
                 </Col>
