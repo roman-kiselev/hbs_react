@@ -1,6 +1,10 @@
 import Models from "../../models/models.js";
 import XLSX from "xlsx";
 import sequelize from "../../db.js";
+import { Sequelize } from "sequelize";
+import pkg from "sequelize";
+import HeadersElectricalConfig from "../../service/headersConfig/headersElectrical/HeadersElectricalConfig.js";
+const { Op } = pkg;
 
 class TestElectricalMeterController {
     async createMeter(req, res) {
@@ -199,6 +203,140 @@ class TestElectricalMeterController {
             });
 
             //const meters = await Models.MainAddMeter.bulkCreate(jsonData);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    // Получим все уникальные линии электроэнергии
+
+    async getAllLines(req, res) {
+        try {
+            const { objectBuildId, line } = req.query;
+            const lines = await Models.MainAddMeter.findAll({
+                where: {
+                    objectBuildId,
+                    typeMeter: "Счётчик электроэнергии",
+                    line: {
+                        [Op.not]: 0,
+                    },
+                },
+                attributes: [
+                    [Sequelize.fn("DISTINCT", Sequelize.col("line")), "line"],
+                ],
+                order: [["line", "ASC"]],
+            });
+
+            return res.json({ lines });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    // Готовим шаблон к скачиванию
+
+    async getTemplateHeat(req, res) {
+        try {
+            // Получаем с фронтенда данные для заполнения шаблона
+            // Заголовки берём из serviceHeaders
+            // Там функция принимает на вход квартиру, номер счётчика, секцию, этаж, данные из query
+            const { objectBuildId, line, template } = req.query;
+            const meters = await Models.MainAddMeter.findAll({
+                where: {
+                    objectBuildId,
+                    typeMeter: "Счётчик электроэнергии",
+                    line,
+                },
+                attributes: [
+                    "id",
+                    "section",
+                    "floor",
+                    "flat",
+                    "line",
+                    "numberMeter",
+                    "sumMeter",
+                    "typeMeter",
+                ],
+                order: [["floor", "DESC"]],
+                raw: true,
+            });
+
+            // Получаем максимальное значение квартиры
+            const maxFlat = await Models.MainAddMeter.findOne({
+                where: {
+                    objectBuildId,
+                    typeMeter: "Счётчик электроэнергии",
+                    line,
+                },
+                attributes: [
+                    [sequelize.fn("MAX", sequelize.col("flat")), "flat"],
+                ],
+                raw: true,
+            });
+            let arrLink = [
+                "секция_TEST_C2000-Ethernet_вода",
+                "ID=",
+                "ClassName=TC2000EthernetChannel",
+                "Активность=Нет",
+                "Описание=секция_TEST_C2000-Ethernet_вода",
+                "IP Адрес=192.168.10.1",
+                "Порт=1",
+                "Режим работы=Надёжный",
+                "Операторы=",
+                "Комментарий=",
+            ];
+
+            // Заголовок листа
+            const nameSheet = "Счётчики электроэнергии";
+
+            switch (template) {
+                case "Энергомера СЕ102-S6/R5 AK":
+                    const listMeters = [];
+                    meters.map(({ flat, numberMeter, section, floor }) => {
+                        let preparedDevice =
+                            HeadersElectricalConfig.getTMagicDevice_RS485_Interface(
+                                flat,
+                                numberMeter,
+                                section,
+                                floor,
+                                maxFlat.flat
+                            );
+                        listMeters.push(preparedDevice);
+                    });
+
+                    const arrInterface = [
+                        "",
+                        "[RS-485] Энергомера СЕ102/102 S7J",
+                        "ID=11592",
+                        "ParentID=11580",
+                        "ClassName=TMagicDevice_RS485_Interface",
+                        "MagicXML=energomera3.device",
+                        "Активность=Да",
+                        "Скорость порта=9600",
+                        "Описание=[RS-485] Энергомера СЕ102/102 S7J",
+                        "Число неответов до потери=3",
+                        "Пауза между командами, мсек=100",
+                        "Тайм-аут чтения, мсек=1000",
+                        "Задержка между счётчиками, мсек=100",
+                        "Совместимость с Карат-911=Нет",
+                        "Режим работы=Основной",
+                        "Комментарий=",
+                    ];
+
+                    const buffer = createHeatTemplate(
+                        listMeters,
+                        arrInterface,
+                        arrLink,
+                        nameSheet
+                    );
+
+                    return res.send(buffer);
+                    break;
+                case "Pulsar":
+                    break;
+                default:
+                    return res.json({ message: "Шаблон не выбран" });
+            }
         } catch (e) {
             console.log(e);
         }

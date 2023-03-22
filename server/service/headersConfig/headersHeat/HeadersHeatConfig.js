@@ -1,12 +1,17 @@
+import { getFlatString } from "../../../helpers/index.js";
+
 class HeadersHeatConfig {
-    getTMBusUniversal_Heat_Counter(flat, numberMeter, section, floor) {
+    getTMBusUniversal_Heat_Counter(flat, numberMeter, section, floor, maxFlat) {
         return {
             name: `Счётчик тепла`,
             id: "ID=",
             parentId: "ParentID=",
             className: "ClassName=TMBusUniversal_Heat_Counter",
             address: "Адрес=0",
-            description: `Описание=Счётчик тепла_${flat}`,
+            description: `Описание=Счётчик тепла_${getFlatString(
+                flat,
+                maxFlat
+            )}`,
             active: "Активность=Нет",
             surveyOn: "Опрос по=Опросному номеру",
             samplingFrequency: "Частота опроса, минуты=600",
@@ -32,7 +37,7 @@ class HeadersHeatConfig {
         };
     }
 
-    getTMagicDevice_Teplo_Counter(flat, numberMeter, section, floor) {
+    getTMagicDevice_Teplo_Counter(flat, numberMeter, section, floor, maxFlat) {
         return {
             name: `Weser, Пульсар_ ${flat}`,
             id: "ID=",
@@ -41,7 +46,10 @@ class HeadersHeatConfig {
             magicXml: "MagicXML=weser_pulsar_heatmeter.device",
             idef: "idef=WESER_PULSAR",
             address: `Адрес=${numberMeter}`,
-            description: `Описание=Weser, Пульсар_ ${flat}`,
+            description: `Описание=Weser, Пульсар_ ${getFlatString(
+                flat,
+                maxFlat
+            )}`,
             active: "Активность=Нет",
             samplingFrequency: "Частота опроса, минуты=600",
             recordingInterval: "Интервал записи показаний, мин=1440",
