@@ -205,6 +205,7 @@ class TestHeatMeterController {
             const lines = await Models.MainAddMeter.findAll({
                 where: {
                     objectBuildId,
+                    typeMeter: "Счётчик тепла",
                     line: {
                         [Op.not]: 0,
                     },
@@ -248,7 +249,35 @@ class TestHeatMeterController {
                 order: [["floor", "DESC"]],
                 raw: true,
             });
-            //console.log(meters);
+
+            // Получаем максимальное значение квартиры
+            const maxFlat = await Models.MainAddMeter.findOne({
+                where: {
+                    objectBuildId,
+                    typeMeter: "Счётчик тепла",
+                    line,
+                },
+                attributes: [
+                    [sequelize.fn("MAX", sequelize.col("flat")), "flat"],
+                ],
+                raw: true,
+            });
+            let arrLink = [
+                "секция_TEST_C2000-Ethernet_вода",
+                "ID=",
+                "ClassName=TC2000EthernetChannel",
+                "Активность=Нет",
+                "Описание=секция_TEST_C2000-Ethernet_вода",
+                "IP Адрес=192.168.10.1",
+                "Порт=1",
+                "Режим работы=Надёжный",
+                "Операторы=",
+                "Комментарий=",
+            ];
+
+            // Заголовок листа
+            const nameSheet = "Счётчики тепла";
+
             switch (template) {
                 case "MeterBus":
                     const listMeters = [];
@@ -258,12 +287,37 @@ class TestHeatMeterController {
                                 flat,
                                 numberMeter,
                                 section,
-                                floor
+                                floor,
+                                maxFlat.flat
                             );
                         listMeters.push(preparedDevice);
                     });
 
-                    const buffer = createHeatTemplate(listMeters);
+                    const arrInterface = [
+                        "",
+                        "[MBus] Счётчики Meter-Bus",
+                        "ID=",
+                        "ParentID=",
+                        "ClassName=TMBus_Interface",
+                        "Активность=Нет",
+                        "Скорость порта=2400",
+                        "Описание=[MBus] Счётчики Meter-Bus",
+                        "Таймаут, мсек=3000",
+                        "Задержка между командами, мсек=400",
+                        "Задержка между счётчиками, мсек=3000",
+                        "Число неответов до потери=3",
+                        "Совместимость с Карат-911=Нет",
+                        "Контроль чётности=EVENPARITY",
+                        "Отображать тревожные состояния=Да",
+                        "Комментарий=",
+                    ];
+
+                    const buffer = createHeatTemplate(
+                        listMeters,
+                        arrInterface,
+                        arrLink,
+                        nameSheet
+                    );
 
                     return res.send(buffer);
                     break;
