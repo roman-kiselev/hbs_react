@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllElectricalMeters } from "../../../../features/testMeters/testElectricalMeterSlice";
 import MainTabReadFileElectrical from "./readFile/MainTabReadFileElectrical";
 import MainTabDownloadListElectrical from "./downloadList/MainTabDownloadListElectrical";
+import MainTabGenerateTemplateElectrical from "./generateTemplate/MainTabGenerateTemplateElectrical";
 
 const OperationsElectrical = ({ id: objectBuildId }) => {
     //LДиспатч для вызова функции
@@ -108,54 +109,13 @@ const OperationsElectrical = ({ id: objectBuildId }) => {
                             />
                         </Tab.Pane>
                         {/* Второй таб для скачивания шаблонов для загрузки */}
-                        <Tab.Pane eventKey="second">2</Tab.Pane>
+                        <Tab.Pane eventKey="second">
+                            <MainTabGenerateTemplateElectrical
+                                objectBuildId={objectBuildId}
+                            />
+                        </Tab.Pane>
                         {/* Третий таб для загрузки файлов */}
                         <Tab.Pane eventKey="three">
-                            {/* <Row>
-                                <Row>
-                                    <h6>Таблица должна быть следующего вида</h6>
-                                </Row>
-                                <Row>
-                                    <Table striped bordered hover>
-                                        <thead>
-                                            <tr>
-                                                <th>Секция</th>
-                                                <th>Этаж</th>
-                                                <th>Квартира</th>
-                                                <th>Линия</th>
-                                                <th>Номер счётчика</th>
-                                                <th>Показания</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>2</td>
-                                                <td>26</td>
-                                                <td>1</td>
-                                                <td>192168233</td>
-                                                <td>1.2</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>2</td>
-                                                <td>27</td>
-                                                <td>1</td>
-                                                <td>192168234</td>
-                                                <td>1.5</td>
-                                            </tr>
-                                        </tbody>
-                                    </Table>
-                                </Row>
-                            </Row>
-                            <Form.Group controlId="formFile" className="mb-3">
-                                <Form.Label>Выберите файл</Form.Label>
-                                <Form.Control
-                                    type="file"
-                                    accept=".xlsx,.xls"
-                                    onChange={handleFileUpload}
-                                />
-                            </Form.Group> */}
                             <MainTabReadFileElectrical
                                 objectBuildId={objectBuildId}
                                 handleFileUpload={handleFileUpload}

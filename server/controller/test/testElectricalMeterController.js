@@ -4,6 +4,7 @@ import sequelize from "../../db.js";
 import { Sequelize } from "sequelize";
 import pkg from "sequelize";
 import HeadersElectricalConfig from "../../service/headersConfig/headersElectrical/HeadersElectricalConfig.js";
+import createHeatTemplate from "../../service/headersConfig/createHeatTemplate.js";
 const { Op } = pkg;
 
 class TestElectricalMeterController {
@@ -307,8 +308,8 @@ class TestElectricalMeterController {
                     const arrInterface = [
                         "",
                         "[RS-485] Энергомера СЕ102/102 S7J",
-                        "ID=11592",
-                        "ParentID=11580",
+                        "ID=",
+                        "ParentID=",
                         "ClassName=TMagicDevice_RS485_Interface",
                         "MagicXML=energomera3.device",
                         "Активность=Да",

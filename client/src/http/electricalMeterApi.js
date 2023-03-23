@@ -63,7 +63,7 @@ export const addDataExcel = async (objectBuildId, userId, jsonData) => {
 };
 
 // Получаем линии счётчиков
-export const getAllLines = async (objectBuildId) => {
+export const getAllLinesElectrical = async (objectBuildId) => {
     try {
         const { data } = await $authHost.get(
             `/api/testElectrical/line/?objectBuildId=${objectBuildId}`
@@ -76,7 +76,11 @@ export const getAllLines = async (objectBuildId) => {
 };
 
 // Получаем шаблон тепло
-export const getTemplateFromServer = async (objectBuildId, template, line) => {
+export const getTemplateFromServerElectrical = async (
+    objectBuildId,
+    template,
+    line
+) => {
     const date = new Date();
 
     const day = date.getDate().toString().padStart(2, "0");
@@ -95,6 +99,7 @@ export const getTemplateFromServer = async (objectBuildId, template, line) => {
                 }
             )
             .then((res) => {
+                console.log(res);
                 if (res && res.data) {
                     const blob = new Blob([res.data], {
                         type: "application/octet-stream",

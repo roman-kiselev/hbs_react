@@ -18,7 +18,7 @@ class HeadersElectricalConfig {
             address: `Адрес=${getLastNumber(numberMeter, 6)}`,
             password: "Пароль=0",
             description: "Описание=Энергомера СЕ102-S6/R5 AK",
-            active: "Активность=Да",
+            active: "Активность=Нет",
             samplingFrequency: "Частота опроса, минуты=60",
             recordingInterval: "Интервал записи показаний, мин=1440",
             transformationRatio: "Коэффициент трансформации=1",

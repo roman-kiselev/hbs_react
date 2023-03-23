@@ -50,6 +50,7 @@ const OperationsHeat = ({ id: objectBuildId }) => {
             const body = JSON.stringify(worksheetData);
             const lengthWorksheet = worksheetData.length + 1;
 
+            console.log(lengthWorksheet, body);
             const mainData = [];
             for (let i = 2; i < lengthWorksheet; i++) {
                 const section = worksheet["A" + i].v;

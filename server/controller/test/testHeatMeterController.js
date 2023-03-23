@@ -147,6 +147,10 @@ class TestHeatMeterController {
 
             const { jsonData } = req.body;
             const data = JSON.parse(jsonData);
+            //Создаём данные для прогрессбара
+            const dataLength = data.length;
+            let loadedData = 0;
+            let progressBar = Math.round((loadedData / dataLength) * 100);
 
             // Создадим массив с повторяющимися счётчиками
             const repeatMeters = [];
@@ -182,12 +186,20 @@ class TestHeatMeterController {
                                 },
                                 { transaction: t }
                             );
+                            loadedData++;
                         } else {
                             repeatMeters.push(meter);
+                            loadedData++;
+                            console.log(progressBar);
                         }
                     }
+                    console.log(loadedData);
 
-                    return res.json({ repeatMeters, success: true });
+                    return res.json({
+                        repeatMeters,
+                        success: true,
+                        progress: progressBar,
+                    });
                 } catch (e) {
                     console.log(e);
                 }
