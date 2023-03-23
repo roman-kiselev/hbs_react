@@ -1,4 +1,4 @@
-import { getLastNumber } from "../../../helpers/index.js";
+import { getFlatString, getLastNumber } from "../../../helpers/index.js";
 
 class HeadersElectricalConfig {
     getTMagicDevice_RS485_Interface(
@@ -17,7 +17,10 @@ class HeadersElectricalConfig {
             idef: "idef=ENERGOMERA102R5",
             address: `Адрес=${getLastNumber(numberMeter, 6)}`,
             password: "Пароль=0",
-            description: "Описание=Энергомера СЕ102-S6/R5 AK",
+            description: `Описание=Энергомера СЕ102-S6/R5 AK_${getFlatString(
+                flat,
+                maxFlat
+            )}`,
             active: "Активность=Нет",
             samplingFrequency: "Частота опроса, минуты=60",
             recordingInterval: "Интервал записи показаний, мин=1440",
