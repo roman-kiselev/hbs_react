@@ -5,6 +5,7 @@ import TestExcelService from "../../service/testExcel/TestExcelService.js";
 import * as XLSX from "xlsx";
 const { Op } = pkg;
 import sequelize from "../../db.js";
+import { getMetersByNumberFlat } from "../../service/serviceWater/serviceWater.js";
 
 class TestWaterMeterController {
     async addNewMeter(req, res) {
@@ -261,6 +262,18 @@ class TestWaterMeterController {
             });
 
             //const meters = await Models.MainAddMeter.bulkCreate(jsonData);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async searchByNumber(req, res) {
+        try {
+            const { num } = req.query;
+
+            const listFlats = await getMetersByNumberFlat(num);
+
+            return res.json({ listFlats });
         } catch (e) {
             console.log(e);
         }
