@@ -51,35 +51,11 @@ const CardMeterEditModal = ({
     formData.append("flat", flat);
     formData.append("numberMeter", numberMeter);
     formData.append("sumMeter", sumMeter);
-    formData.append("asr", numberAsr);
-    formData.append("kdl", numberKdl);
+    formData.append("numberAsr", numberAsr);
+    formData.append("numberKdl", numberKdl);
     formData.append("id", idMeter);
     formData.append("line", line);
     formData.append("typeMeter", data.typeMeter);
-
-    // Сохраняем изменения
-    // const saveNewData = () => {
-    //     const formData = new FormData();
-    //     formData.append("section", section);
-    //     formData.append("floors", floor);
-    //     formData.append("flat", flat);
-    //     formData.append("numberMeter", numberMeter);
-    //     formData.append("sum", sumMeter);
-    //     formData.append("asr", numberAsr);
-    //     formData.append("kdl", numberKdl);
-    //     formData.append("id", idMeter);
-    //     formData.append("line", line);
-    //     formData.append("typeMeter", data.typeMeter);
-
-    //     try {
-    //         dispatch(getOneMeter({ formData })).then((d) => {
-    //             dispatch(getAllMetersByUserAndObject({ formQuery }));
-    //             handleClose();
-    //         });
-    //     } catch (e) {
-    //         console.log(e);
-    //     }
-    // };
 
     return (
         <Modal show={show} onHide={handleClose}>

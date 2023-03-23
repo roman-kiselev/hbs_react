@@ -96,7 +96,7 @@ class TestWaterMeterController {
         try {
             // Получаем id счётчика
             const { id } = req.params;
-            console.log(id);
+
             // Получаем данные о счётчике
             const {
                 floor,
