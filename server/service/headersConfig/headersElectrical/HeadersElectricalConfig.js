@@ -15,7 +15,7 @@ class HeadersElectricalConfig {
             className: "ClassName=TMagicDevice_Electro_Counter",
             magicXML: "MagicXML=energomera3.device",
             idef: "idef=ENERGOMERA102R5",
-            address: `Адрес=${getLastNumber(numberMeter, 6)}`,
+            address: `Адрес=${getLastNumber(numberMeter, 5)}`,
             password: "Пароль=0",
             description: `Описание=Энергомера СЕ102-S6/R5 AK_${getFlatString(
                 flat,
