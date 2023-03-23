@@ -99,6 +99,9 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
             setNumberMeterHot("");
             setSumMeterCool("");
             setSumMeterHot("");
+            setChannelCool("");
+            setChannelHot("");
+            setFlat("");
             setAlertAdd(true);
             // Уведомление о добавлении
             setTimeout(setNewAlert, 2000);
