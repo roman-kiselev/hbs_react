@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
     getAllMetersByUserAndObject,
@@ -13,6 +13,7 @@ import { setCurrentPage } from "../../../../features/testMeters/testWaterMeterSl
 const ListMeterWater = ({ id: objectBuildId }) => {
     const dispatch = useDispatch();
     const { id: userId } = useSelector((state) => state.users.user);
+    // Получаем все счётчики
     const cardMeter = useSelector((state) => state.mainTable.mainTable);
 
     const { currentPage, limit } = useSelector((state) => state.mainTable);
@@ -24,18 +25,18 @@ const ListMeterWater = ({ id: objectBuildId }) => {
         currentPage,
         totalCount,
     };
-
+    // Данные для запроса
     const formQuery = {
         userId,
         objectBuildId,
         limit,
         currentPage,
     };
-
+    // Устанавливаем текущую страницу
     const handleClick = (page) => {
         dispatch(setCurrentPage(page));
     };
-
+    // Функция для редактирования одного счётчика, передаётся в модальное окно
     const handleClickForEdit = (formData, formQuery, handleClose) => {
         try {
             dispatch(getOneMeter({ formData })).then((d) => {
@@ -47,12 +48,30 @@ const ListMeterWater = ({ id: objectBuildId }) => {
         }
     };
 
+    const handleSearch = (e) => {
+        const numSearch = e.target.value;
+    };
+
+    // Получаем все счётчики
     useEffect(() => {
         dispatch(getAllMetersByUserAndObject({ formQuery }));
     }, [dispatch, currentPage]);
 
     return (
         <Row>
+            <Row className="mt-3">
+                <Col sm={3}>
+                    <Form className="d-flex">
+                        <Form.Control
+                            type="number"
+                            placeholder="Поиск"
+                            className="me-2"
+                            aria-label="Search"
+                        />
+                        <Button variant="outline-success">Search</Button>
+                    </Form>
+                </Col>
+            </Row>
             <Row>
                 <ListMeters
                     listCards={cardMeter}

@@ -54,6 +54,25 @@ export const getOneMeter = createAsyncThunk(
     }
 );
 
+// Поиск по номеру квартиры
+export const getMetersByNumberFlat = createAsyncThunk(
+    "api/testAddWater/getMetersByNumberFlat",
+    async (num, { getState, dispatch }) => {
+        const state = getState();
+        const { limit, currentPage } = state.mainTable;
+
+        const { data } = await $authHost.get(
+            `api/testAddWater?userId=${userId}&objectId=${objectBuildId}&limit=${limit}&page=${currentPage}`
+        );
+
+        const { rows, count } = data.listMeters;
+
+        dispatch(setTotalCount(count));
+
+        dispatch(setMeters({ rows }));
+    }
+);
+
 export const testWaterMeterSlice = createSlice({
     name: "testWaterMeterSlice",
     initialState,
