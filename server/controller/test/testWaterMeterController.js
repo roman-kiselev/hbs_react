@@ -72,11 +72,11 @@ class TestWaterMeterController {
             // Передаём тип счётчика с условием ИЛИ
             let typeMeterCool = "Счётчик холодной воды";
             let typeMeterHot = "Счётчик горячей воды";
-
+            console.log(userId);
             const listMeters = await Models.MainAddMeter.findAndCountAll({
                 where: {
                     objectBuildId: objectId,
-                    userId,
+                    userId: userId === 0 ? {} : userId,
                     [Op.or]: [
                         { typeMeter: typeMeterCool },
                         { typeMeter: typeMeterHot },

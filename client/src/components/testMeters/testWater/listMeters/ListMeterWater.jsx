@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -19,6 +19,9 @@ const ListMeterWater = ({ id: objectBuildId }) => {
     const { currentPage, limit } = useSelector((state) => state.mainTable);
     const { perPage } = useSelector((state) => state.mainTable);
     const { totalCount } = useSelector((state) => state.mainTable);
+    // Отслеживаем включения чекбокса
+    const [checked, setChecked] = useState(false);
+
     // Создаём объект для передачи данных для пагинации
     const paginationObject = {
         limit,
@@ -27,11 +30,12 @@ const ListMeterWater = ({ id: objectBuildId }) => {
     };
     // Данные для запроса
     const formQuery = {
-        userId,
+        userId: checked ? userId : 0,
         objectBuildId,
         limit,
         currentPage,
     };
+    console.log(formQuery);
     // Устанавливаем текущую страницу
     const handleClick = (page) => {
         dispatch(setCurrentPage(page));
@@ -51,6 +55,13 @@ const ListMeterWater = ({ id: objectBuildId }) => {
     const handleSearch = (e) => {
         const numSearch = e.target.value;
     };
+    // Функция при переключении check
+    const handleChangeCheck = (e) => {
+        const check = e.target.checked;
+        console.log(check);
+        setChecked(check);
+        dispatch(getAllMetersByUserAndObject({ formQuery }));
+    };
 
     // Получаем все счётчики
     useEffect(() => {
@@ -69,6 +80,17 @@ const ListMeterWater = ({ id: objectBuildId }) => {
                             aria-label="Search"
                         />
                         <Button variant="outline-success">Search</Button>
+                    </Form>
+                </Col>
+                <Col sm={3}>
+                    <Form>
+                        <Form.Check
+                            type="switch"
+                            id="custom-switch"
+                            label="Только мои"
+                            checked={checked}
+                            onChange={(e) => handleChangeCheck(e)}
+                        />
                     </Form>
                 </Col>
             </Row>

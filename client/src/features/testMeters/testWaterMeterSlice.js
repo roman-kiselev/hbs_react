@@ -33,7 +33,7 @@ export const getAllMetersByUserAndObject = createAsyncThunk(
         );
 
         const { rows, count } = data.listMeters;
-
+        console.log(rows, userId);
         dispatch(setTotalCount(count));
 
         dispatch(setMeters({ rows }));
