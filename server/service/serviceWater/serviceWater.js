@@ -16,12 +16,31 @@ export const getMetersByNumberFlat = async (number, objectId, limit, page) => {
         const listFlats = await Models.MainAddMeter.findAndCountAll({
             where: {
                 objectBuildId: objectId,
-                flat: {
-                    [Op.like]: `%${number}%`,
-                },
                 typeMeter: {
                     [Op.or]: [coolWater, hotWater],
                 },
+                [Op.or]: [
+                    {
+                        flat: {
+                            [Op.eq]: number,
+                        },
+                    },
+                    {
+                        numberMeter: {
+                            [Op.eq]: number,
+                        },
+                    },
+                    {
+                        flat: {
+                            [Op.like]: `%${number}%`,
+                        },
+                    },
+                    {
+                        numberMeter: {
+                            [Op.like]: `%${number}%`,
+                        },
+                    },
+                ],
             },
             limit: limit,
             offset: offset,

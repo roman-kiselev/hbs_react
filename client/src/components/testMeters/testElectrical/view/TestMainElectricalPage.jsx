@@ -60,8 +60,6 @@ const TestMainElectricalPage = () => {
                         </Row>
                     </Tab>
                     <Tab eventKey="list" title="Список">
-                        Сортировка // Квартиры // Этажи // Секции // КДЛ // АСР
-                        // Поиск номера
                         <ListMetersElectrical id={id} />
                     </Tab>
                     <Tab eventKey="op" title="Операции">

@@ -3,7 +3,7 @@ import pkg from "sequelize";
 const { Op } = pkg;
 
 // Поиск по номеру
-export const getHeatMetersByNumberFlat = async (
+export const getElectricalMetersByNumberFlat = async (
     number,
     objectId,
     limit,
@@ -16,12 +16,12 @@ export const getHeatMetersByNumberFlat = async (
         limit = Number(limit) || 6;
         let offset = page * limit - limit;
 
-        const heatWater = "Счётчик тепла";
+        const typeMeter = "Счётчик электроэнергии";
 
         const listFlats = await Models.MainAddMeter.findAndCountAll({
             where: {
                 objectBuildId: objectId,
-                typeMeter: heatWater,
+                typeMeter: typeMeter,
                 [Op.or]: [
                     {
                         flat: {

@@ -6,6 +6,7 @@ import { Sequelize } from "sequelize";
 import pkg from "sequelize";
 import createHeatTemplate from "../../service/headersConfig/createHeatTemplate.js";
 import HeadersHeatConfig from "../../service/headersConfig/headersHeat/HeadersHeatConfig.js";
+import { getHeatMetersByNumberFlat } from "../../service/serviceHeat/serviceHeat.js";
 const { Op } = pkg;
 
 class TestHeatMeterController {
@@ -338,6 +339,23 @@ class TestHeatMeterController {
                 default:
                     return res.json({ message: "Шаблон не выбран" });
             }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async searchByNumber(req, res) {
+        try {
+            const { numberFlat, objectId, limit, page } = req.query;
+
+            const listFlats = await getHeatMetersByNumberFlat(
+                numberFlat,
+                objectId,
+                limit,
+                page
+            );
+
+            return res.json({ listFlats });
         } catch (e) {
             console.log(e);
         }

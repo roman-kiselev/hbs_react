@@ -58,8 +58,6 @@ const TestMainHeatPage = () => {
                         </Row>
                     </Tab>
                     <Tab eventKey="list" title="Список">
-                        Сортировка // Квартиры // Этажи // Секции // КДЛ // АСР
-                        // Поиск номера
                         {/* <TestListHeatMeters id={id} /> */}
                         <ListMeterHeat id={id} />
                     </Tab>

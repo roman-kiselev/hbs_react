@@ -51,6 +51,25 @@ export const getOneHeatMeter = createAsyncThunk(
     }
 );
 
+// Поиск по номеру квартиры
+export const getMetersByNumberFlat = createAsyncThunk(
+    "api/testAddWater/getMetersByNumberFlat",
+    async ({ formQuery }, { getState, dispatch }) => {
+        const state = getState();
+
+        const { limit, currentPage } = state.mainTable;
+        const { userId, objectBuildId, num } = formQuery;
+        const { data } = await $authHost.get(
+            `api/testAddHeat/search/?userId=${userId}&objectId=${objectBuildId}&limit=${limit}&page=${currentPage}&numberFlat=${num}`
+        );
+
+        const { rows, count } = data.listFlats;
+
+        dispatch(setTotalCount(count));
+        dispatch(setMeters({ rows }));
+    }
+);
+
 export const testHeatMeterSlice = createSlice({
     name: "testHeatMeterSlice",
     initialState,

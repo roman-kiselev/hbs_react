@@ -11,6 +11,7 @@ router.get(
 router.post("/addAllMetersExcel", testHeatMeterController.addAllMetersInObject);
 router.get("/line", testHeatMeterController.getAllLines);
 router.get("/getHeatTemplate", testHeatMeterController.getTemplateHeat);
+router.get("/search", testHeatMeterController.searchByNumber);
 router.post("/:id", testHeatMeterController.editHeatMeterById);
 
 export default router;

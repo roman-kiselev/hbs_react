@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
     getAllElectricalMeters,
+    getMetersByNumberFlat,
     getOneElectricalMeter,
     setCurrentPage,
 } from "../../../../features/testMeters/testElectricalMeterSlice";
@@ -14,7 +15,7 @@ const ListMetersElectrical = ({ id: objectBuildId }) => {
     const dispatch = useDispatch();
     const { id: userId } = useSelector((state) => state.users.user);
     const cardMeter = useSelector((state) => state.electricalMeter.mainTable);
-
+    const [searchValue, setSearchValue] = useState("");
     const { currentPage, limit, perPage, totalCount } = useSelector(
         (state) => state.electricalMeter
     );
@@ -46,6 +47,20 @@ const ListMetersElectrical = ({ id: objectBuildId }) => {
         }
     };
 
+    const handleSearch = (e) => {
+        const numSearch = e.target.value;
+        setSearchValue(numSearch);
+        const formQuery = {
+            userId,
+            objectBuildId,
+            limit,
+            currentPage,
+            num: numSearch,
+        };
+
+        dispatch(getMetersByNumberFlat({ formQuery }));
+    };
+
     useEffect(() => {
         try {
             dispatch(getAllElectricalMeters({ formQuery }));
@@ -56,6 +71,20 @@ const ListMetersElectrical = ({ id: objectBuildId }) => {
 
     return (
         <Row>
+            <Row className="mt-3">
+                <Col sm={5}>
+                    <Form className="d-flex">
+                        <Form.Control
+                            type="number"
+                            placeholder="Поиск квартиры"
+                            className="me-2"
+                            aria-label="Search"
+                            value={searchValue}
+                            onChange={(e) => handleSearch(e)}
+                        />
+                    </Form>
+                </Col>
+            </Row>
             <Row>
                 <ListMeters
                     listCards={cardMeter}

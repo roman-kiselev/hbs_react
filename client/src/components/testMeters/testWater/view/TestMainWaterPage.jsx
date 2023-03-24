@@ -62,8 +62,7 @@ const TestMainWaterPage = () => {
                     </Tab>
                     <Tab eventKey="list" title="Список">
                         {/* Лист счётчиков */}
-                        Сортировка // Квартиры // Этажи // Секции // КДЛ // АСР
-                        // Поиск номера
+
                         <ListMeterWater id={id} />
                     </Tab>
                     <Tab eventKey="op" title="Операции">

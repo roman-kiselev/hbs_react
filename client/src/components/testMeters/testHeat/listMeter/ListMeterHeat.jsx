@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
-import { Col, Row } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import ListMeters from "../../../repeat/listMetersCard/ListMeters";
 import Pages from "../../../repeat/pagination/Pages";
 import {
     getAllHeatMeter,
+    getMetersByNumberFlat,
     getOneHeatMeter,
 } from "../../../../features/testMeters/testHeatMeterSlice";
 import { setCurrentPage } from "../../../../features/testMeters/testHeatMeterSlice";
@@ -13,7 +14,7 @@ const ListMeterHeat = ({ id: objectBuildId }) => {
     const dispatch = useDispatch();
     const { id: userId } = useSelector((state) => state.users.user);
     const cardMeter = useSelector((state) => state.heatMeter.mainTable);
-
+    const [searchValue, setSearchValue] = useState("");
     const { currentPage, limit } = useSelector((state) => state.heatMeter);
     const { perPage } = useSelector((state) => state.heatMeter);
     const { totalCount } = useSelector((state) => state.heatMeter);
@@ -46,6 +47,21 @@ const ListMeterHeat = ({ id: objectBuildId }) => {
             console.log(e);
         }
     };
+
+    const handleSearch = (e) => {
+        const numSearch = e.target.value;
+        setSearchValue(numSearch);
+        const formQuery = {
+            userId,
+            objectBuildId,
+            limit,
+            currentPage,
+            num: numSearch,
+        };
+
+        dispatch(getMetersByNumberFlat({ formQuery }));
+    };
+
     useEffect(() => {
         try {
             dispatch(getAllHeatMeter({ formQuery }));
@@ -56,6 +72,20 @@ const ListMeterHeat = ({ id: objectBuildId }) => {
 
     return (
         <Row>
+            <Row className="mt-3">
+                <Col sm={5}>
+                    <Form className="d-flex">
+                        <Form.Control
+                            type="number"
+                            placeholder="Поиск квартиры"
+                            className="me-2"
+                            aria-label="Search"
+                            value={searchValue}
+                            onChange={(e) => handleSearch(e)}
+                        />
+                    </Form>
+                </Col>
+            </Row>
             <Row>
                 <ListMeters
                     listCards={cardMeter}

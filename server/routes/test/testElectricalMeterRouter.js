@@ -17,7 +17,7 @@ router.get(
     "/getTemplateElectrical",
     testElectricalMeterController.getTemplateElectrical
 );
-
+router.get("/search", testElectricalMeterController.searchByNumber);
 router.post("/:id", testElectricalMeterController.editMeterById);
 
 export default router;
