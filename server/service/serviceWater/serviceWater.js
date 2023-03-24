@@ -1,4 +1,4 @@
-import Models from "../../../../models/models.js";
+import Models from "../../models/models.js";
 import pkg from "sequelize";
 const { Op } = pkg;
 // Поиск по номеру
