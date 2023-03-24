@@ -5,7 +5,7 @@ import CardMeterEditModal from "../modals/CardMeterEditModal";
 
 const CardMeter = ({ cardData, handleClickForEdit }) => {
     const [show, setShow] = useState(false);
-
+    console.log(cardData);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
@@ -29,9 +29,16 @@ const CardMeter = ({ cardData, handleClickForEdit }) => {
                     />
                 </Row>
                 <Card className="text-center">
-                    <Card.Header className="text-center">
-                        Квартира № {cardData.flat}
-                    </Card.Header>
+                    {cardData.flat ? (
+                        <Card.Header className="text-center">
+                            Квартира № {cardData.flat}
+                        </Card.Header>
+                    ) : (
+                        <Card.Header className="text-center">
+                            Офис № {cardData.office}
+                        </Card.Header>
+                    )}
+
                     <Card.Body>
                         <Card.Title className="text-center">
                             Секция №{cardData.section} - Этаж №{cardData.floor}

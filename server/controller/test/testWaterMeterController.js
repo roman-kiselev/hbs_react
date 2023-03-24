@@ -14,6 +14,7 @@ class TestWaterMeterController {
                 section,
                 floors,
                 flat,
+                office,
                 kdl,
                 channelCool,
                 channelHot,
@@ -28,7 +29,8 @@ class TestWaterMeterController {
             const coolMeter = {
                 section: section,
                 floor: floors,
-                flat: flat,
+                flat: flat ? flat : 0,
+                office: office ? office : 0,
                 typeMeter: "Счётчик холодной воды",
                 numberKdl: kdl,
                 numberAsr: channelCool,
@@ -41,7 +43,8 @@ class TestWaterMeterController {
             const hotMeter = {
                 section: section,
                 floor: floors,
-                flat: flat,
+                flat: flat ? flat : 0,
+                office: office ? office : 0,
                 typeMeter: "Счётчик горячей воды",
                 numberKdl: kdl,
                 numberAsr: channelHot,
@@ -102,6 +105,7 @@ class TestWaterMeterController {
             const {
                 floor,
                 flat,
+                office,
                 numberMeter,
                 sumMeter,
                 numberAsr,
@@ -121,6 +125,7 @@ class TestWaterMeterController {
                 section,
                 floor,
                 flat,
+                office,
                 numberMeter,
                 sumMeter,
                 numberKdl,

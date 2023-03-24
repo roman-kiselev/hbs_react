@@ -9,6 +9,7 @@ import TestAlertAddMeters from "../../../addMeters/bolid/alerts/TestAlertAddMete
 import useNumber from "../../../hooks/useNumber";
 import InputNumber from "../../../repeat/inputs/inputsNumber/InputNumber";
 import InputNumberFloating from "../../../repeat/inputs/inputsNumber/InputNumberFloating";
+import InputNumberSelected from "../../../repeat/inputs/inputsNumber/InputNumberSelected";
 
 const TestFormCoolHotMeterBolid = ({ id }) => {
     const dispatch = useDispatch();
@@ -33,6 +34,9 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
         useNumber("");
     const [sumMeterHot, setSumMeterHot, handleInputChangeSumMeterHot] =
         useNumber("");
+
+    const [selectObject, setSelectObject, handleInputChangeSelectObject] =
+        useNumber("flat");
 
     // Прибавляем канал
     const addChannelHot = (e) => {
@@ -75,7 +79,8 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
         const dataWith = {
             section: section,
             floors: floors,
-            flat: flat,
+            flat: selectObject === "flat" ? flat : 0,
+            office: selectObject === "office" ? flat : 0,
             kdl: kdl,
             channelCool: channelCool,
             channelHot: channelHot,
@@ -125,9 +130,17 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                         />
                     </Col>
                     <Col>
-                        <InputNumber
-                            prop={{ title: "Квартира", value: flat }}
-                            onChange={handleInputChangeFlat}
+                        <InputNumberSelected
+                            prop={{
+                                titles: [
+                                    { title: "Квартира", value: "flat" },
+                                    { title: "Офис", value: "office" },
+                                ],
+                                value: flat,
+                            }}
+                            value={selectObject}
+                            onChangeSelect={handleInputChangeSelectObject}
+                            onChangeFlat={handleInputChangeFlat}
                         />
                     </Col>
                 </Row>

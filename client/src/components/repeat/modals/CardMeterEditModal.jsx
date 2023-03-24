@@ -38,6 +38,7 @@ const CardMeterEditModal = ({
     );
     const [line, setLine, handleInputChangeLine] = useNumber(data.line);
 
+    const [office, setOffice, handleInputChangeOffice] = useNumber(data.office);
     const { id: idMeter, objectBuildId } = data;
 
     const formQuery = {
@@ -49,6 +50,7 @@ const CardMeterEditModal = ({
     formData.append("section", section);
     formData.append("floor", floor);
     formData.append("flat", flat);
+    formData.append("office", office);
     formData.append("numberMeter", numberMeter);
     formData.append("sumMeter", sumMeter);
     formData.append("numberAsr", numberAsr);
@@ -79,10 +81,23 @@ const CardMeterEditModal = ({
                                 />
                             </Col>
                             <Col>
-                                <InputNumber
-                                    prop={{ title: "Квартира", value: flat }}
-                                    onChange={handleInputChangeFlat}
-                                />
+                                {flat ? (
+                                    <InputNumber
+                                        prop={{
+                                            title: "Квартира",
+                                            value: flat,
+                                        }}
+                                        onChange={handleInputChangeFlat}
+                                    />
+                                ) : (
+                                    <InputNumber
+                                        prop={{
+                                            title: "Офис",
+                                            value: office,
+                                        }}
+                                        onChange={handleInputChangeOffice}
+                                    />
+                                )}
                             </Col>
                         </Row>
                         <Row>
