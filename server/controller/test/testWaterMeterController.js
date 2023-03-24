@@ -72,7 +72,7 @@ class TestWaterMeterController {
             // Передаём тип счётчика с условием ИЛИ
             let typeMeterCool = "Счётчик холодной воды";
             let typeMeterHot = "Счётчик горячей воды";
-            console.log(userId);
+
             const listMeters = await Models.MainAddMeter.findAndCountAll({
                 where: {
                     objectBuildId: objectId,
@@ -269,9 +269,14 @@ class TestWaterMeterController {
 
     async searchByNumber(req, res) {
         try {
-            const { num } = req.query;
+            const { numberFlat, objectId, limit, page } = req.query;
 
-            const listFlats = await getMetersByNumberFlat(num);
+            const listFlats = await getMetersByNumberFlat(
+                numberFlat,
+                objectId,
+                limit,
+                page
+            );
 
             return res.json({ listFlats });
         } catch (e) {

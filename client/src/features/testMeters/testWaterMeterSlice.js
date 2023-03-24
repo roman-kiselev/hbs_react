@@ -33,7 +33,7 @@ export const getAllMetersByUserAndObject = createAsyncThunk(
         );
 
         const { rows, count } = data.listMeters;
-        console.log(rows, userId);
+
         dispatch(setTotalCount(count));
 
         dispatch(setMeters({ rows }));
@@ -57,18 +57,18 @@ export const getOneMeter = createAsyncThunk(
 // Поиск по номеру квартиры
 export const getMetersByNumberFlat = createAsyncThunk(
     "api/testAddWater/getMetersByNumberFlat",
-    async (num, { formQuery }, { getState, dispatch }) => {
+    async ({ formQuery }, { getState, dispatch }) => {
         const state = getState();
+
         const { limit, currentPage } = state.mainTable;
-        const { userId, objectBuildId } = formQuery;
+        const { userId, objectBuildId, num } = formQuery;
         const { data } = await $authHost.get(
-            `api/testAddWater?userId=${userId}&objectId=${objectBuildId}&limit=${limit}&page=${currentPage}`
+            `api/testAddWater/search/?userId=${userId}&objectId=${objectBuildId}&limit=${limit}&page=${currentPage}&numberFlat=${num}`
         );
 
-        const { rows, count } = data.listMeters;
+        const { rows, count } = data.listFlats;
 
         dispatch(setTotalCount(count));
-
         dispatch(setMeters({ rows }));
     }
 );

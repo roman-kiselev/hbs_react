@@ -3,6 +3,7 @@ import { Row, Col, Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
     getAllMetersByUserAndObject,
+    getMetersByNumberFlat,
     getOneMeter,
 } from "../../../../features/testMeters/testWaterMeterSlice";
 import ListMeters from "../../../repeat/listMetersCard/ListMeters";
@@ -15,12 +16,12 @@ const ListMeterWater = ({ id: objectBuildId }) => {
     const { id: userId } = useSelector((state) => state.users.user);
     // Получаем все счётчики
     const cardMeter = useSelector((state) => state.mainTable.mainTable);
-
+    const [searchValue, setSearchValue] = useState("");
     const { currentPage, limit } = useSelector((state) => state.mainTable);
     const { perPage } = useSelector((state) => state.mainTable);
     const { totalCount } = useSelector((state) => state.mainTable);
     // Отслеживаем включения чекбокса
-    const [checked, setChecked] = useState(false);
+    // const [checked, setChecked] = useState(false);
 
     // Создаём объект для передачи данных для пагинации
     const paginationObject = {
@@ -30,12 +31,12 @@ const ListMeterWater = ({ id: objectBuildId }) => {
     };
     // Данные для запроса
     const formQuery = {
-        userId: checked ? userId : 0,
+        userId,
         objectBuildId,
         limit,
         currentPage,
     };
-    console.log(formQuery);
+
     // Устанавливаем текущую страницу
     const handleClick = (page) => {
         dispatch(setCurrentPage(page));
@@ -54,14 +55,24 @@ const ListMeterWater = ({ id: objectBuildId }) => {
 
     const handleSearch = (e) => {
         const numSearch = e.target.value;
+        setSearchValue(numSearch);
+        const formQuery = {
+            userId,
+            objectBuildId,
+            limit,
+            currentPage,
+            num: numSearch,
+        };
+
+        dispatch(getMetersByNumberFlat({ formQuery }));
     };
-    // Функция при переключении check
-    const handleChangeCheck = (e) => {
-        const check = e.target.checked;
-        console.log(check);
-        setChecked(check);
-        dispatch(getAllMetersByUserAndObject({ formQuery }));
-    };
+    // // Функция при переключении check
+    // const handleChangeCheck = (e) => {
+    //     const check = e.target.checked;
+    //     console.log(check);
+    //     setChecked(check);
+    //     dispatch(getAllMetersByUserAndObject({ formQuery }));
+    // };
 
     // Получаем все счётчики
     useEffect(() => {
@@ -71,19 +82,20 @@ const ListMeterWater = ({ id: objectBuildId }) => {
     return (
         <Row>
             <Row className="mt-3">
-                <Col sm={3}>
+                <Col sm={5}>
                     <Form className="d-flex">
                         <Form.Control
                             type="number"
-                            placeholder="Поиск"
+                            placeholder="Поиск квартиры"
                             className="me-2"
                             aria-label="Search"
+                            value={searchValue}
+                            onChange={(e) => handleSearch(e)}
                         />
-                        <Button variant="outline-success">Search</Button>
                     </Form>
                 </Col>
                 <Col sm={3}>
-                    <Form>
+                    {/* <Form>
                         <Form.Check
                             type="switch"
                             id="custom-switch"
@@ -91,7 +103,7 @@ const ListMeterWater = ({ id: objectBuildId }) => {
                             checked={checked}
                             onChange={(e) => handleChangeCheck(e)}
                         />
-                    </Form>
+                    </Form> */}
                 </Col>
             </Row>
             <Row>

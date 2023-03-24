@@ -1,6 +1,7 @@
 import Models from "../../models/models.js";
 import pkg from "sequelize";
 const { Op } = pkg;
+
 // Поиск по номеру
 export const getMetersByNumberFlat = async (number, objectId, limit, page) => {
     try {
@@ -10,8 +11,7 @@ export const getMetersByNumberFlat = async (number, objectId, limit, page) => {
         limit = Number(limit) || 6;
         let offset = page * limit - limit;
 
-        const coolWater = "Счётчик холодной воды";
-        const hotWater = "Счётчик горячей воды";
+        const heatWater = "Счётчик тепла";
 
         const listFlats = await Models.MainAddMeter.findAndCountAll({
             where: {
@@ -19,9 +19,7 @@ export const getMetersByNumberFlat = async (number, objectId, limit, page) => {
                 flat: {
                     [Op.like]: `%${number}%`,
                 },
-                typeMeter: {
-                    [Op.or]: [coolWater, hotWater],
-                },
+                typeMeter: heatWater,
             },
             limit: limit,
             offset: offset,
