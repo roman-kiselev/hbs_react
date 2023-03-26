@@ -9,6 +9,7 @@ import {
     createTestElectricalMeter,
     getAllElectricalMeters,
 } from "../../../../features/testMeters/testElectricalMeterSlice";
+import InputNumberSelected from "../../../repeat/inputs/inputsNumber/InputNumberSelected";
 
 const TestFormElectricalMeter = ({ id: objectBuildId }) => {
     const dispatch = useDispatch();
@@ -19,6 +20,8 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
     const [numberMeter, setNumberMeter, handleInputChangeNumberMeter] =
         useNumber("");
     const [sumMeter, setSumMeter, handleInputChangeSumMeter] = useNumber("");
+    const [selectObject, setSelectObject, handleInputChangeSelectObject] =
+        useNumber("flat");
 
     // Состояние уведомлений
     const [alertAdd, setAlertAdd] = useState(false);
@@ -49,7 +52,8 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
             objectBuildId,
             section,
             floor,
-            flat,
+            flat: selectObject === "flat" ? flat : 0,
+            office: selectObject === "office" ? flat : 0,
             line,
             numberMeter,
             sumMeter,
@@ -84,10 +88,22 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
                         />
                     </Col>
                     <Col>
-                        <InputNumber
+                        <InputNumberSelected
+                            prop={{
+                                titles: [
+                                    { title: "Квартира", value: "flat" },
+                                    { title: "Офис", value: "office" },
+                                ],
+                                value: flat,
+                            }}
+                            value={selectObject}
+                            onChangeSelect={handleInputChangeSelectObject}
+                            onChangeFlat={handleInputChangeFlat}
+                        />
+                        {/* <InputNumber
                             prop={{ title: "Квартира", value: flat }}
                             onChange={handleInputChangeFlat}
-                        />
+                        /> */}
                     </Col>
                 </Row>
                 <Row>

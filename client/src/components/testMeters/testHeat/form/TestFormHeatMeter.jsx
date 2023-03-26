@@ -9,6 +9,7 @@ import TestAlertAddHeatMeters from "../../../addMeters/bolid/alerts/TestAlertAdd
 import useNumber from "../../../hooks/useNumber";
 import InputNumber from "../../../repeat/inputs/inputsNumber/InputNumber";
 import InputNumberFloating from "../../../repeat/inputs/inputsNumber/InputNumberFloating";
+import InputNumberSelected from "../../../repeat/inputs/inputsNumber/InputNumberSelected";
 
 const TestFormHeatMeter = ({ id: objectBuildId }) => {
     const dispatch = useDispatch();
@@ -20,6 +21,8 @@ const TestFormHeatMeter = ({ id: objectBuildId }) => {
     const [numberMeter, setNumberMeter, handleInputChangeNumberMeter] =
         useNumber("");
     const [sumMeter, setSumMeter, handleInputChangeSumMeter] = useNumber("");
+    const [selectObject, setSelectObject, handleInputChangeSelectObject] =
+        useNumber("flat");
 
     // Состояние уведомлений
     const [alertAdd, setAlertAdd] = useState(false);
@@ -47,7 +50,8 @@ const TestFormHeatMeter = ({ id: objectBuildId }) => {
         const dataMeter = {
             section: section,
             floor: floor,
-            flat: flat,
+            flat: selectObject === "flat" ? flat : 0,
+            office: selectObject === "office" ? flat : 0,
             line: line,
             numberMeter: numberMeter,
             sumMeter: sumMeter,
@@ -84,10 +88,22 @@ const TestFormHeatMeter = ({ id: objectBuildId }) => {
                         />
                     </Col>
                     <Col>
-                        <InputNumber
+                        <InputNumberSelected
+                            prop={{
+                                titles: [
+                                    { title: "Квартира", value: "flat" },
+                                    { title: "Офис", value: "office" },
+                                ],
+                                value: flat,
+                            }}
+                            value={selectObject}
+                            onChangeSelect={handleInputChangeSelectObject}
+                            onChangeFlat={handleInputChangeFlat}
+                        />
+                        {/* <InputNumber
                             prop={{ title: "Квартира", value: flat }}
                             onChange={handleInputChangeFlat}
-                        />
+                        /> */}
                     </Col>
                 </Row>
                 <Row>

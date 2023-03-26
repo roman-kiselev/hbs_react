@@ -15,6 +15,7 @@ class TestElectricalMeterController {
                 section,
                 floor,
                 flat,
+                office,
                 line,
                 numberMeter,
                 sumMeter,
@@ -25,7 +26,8 @@ class TestElectricalMeterController {
             const newMeter = await Models.MainAddMeter.create({
                 section,
                 floor,
-                flat,
+                flat: flat ? flat : 0,
+                office: office ? office : 0,
                 line,
                 typeMeter: "Счётчик электроэнергии",
                 numberMeter,
@@ -60,7 +62,7 @@ class TestElectricalMeterController {
                 offset,
                 order: [["createdAt", "DESC"]],
             });
-            console.log("Я вып");
+
             return res.json({ meters });
         } catch (e) {
             console.log(e);
@@ -70,8 +72,15 @@ class TestElectricalMeterController {
     async editMeterById(req, res) {
         try {
             const { id } = req.params;
-            const { floor, flat, line, section, numberMeter, sumMeter } =
-                req.body;
+            const {
+                floor,
+                flat,
+                office,
+                line,
+                section,
+                numberMeter,
+                sumMeter,
+            } = req.body;
 
             const meter = await Models.MainAddMeter.findByPk(id);
             console.log(meter);
@@ -80,6 +89,7 @@ class TestElectricalMeterController {
                 await meter.update({
                     floor,
                     flat,
+                    office,
                     line,
                     section,
                     numberMeter,

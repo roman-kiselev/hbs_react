@@ -34,7 +34,7 @@ const CardMeter = ({ cardData, handleClickForEdit }) => {
                             Квартира № {cardData.flat}
                         </Card.Header>
                     ) : (
-                        <Card.Header className="text-center">
+                        <Card.Header className="text-center bg-warning">
                             Офис № {cardData.office}
                         </Card.Header>
                     )}

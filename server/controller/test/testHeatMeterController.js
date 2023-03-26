@@ -17,6 +17,7 @@ class TestHeatMeterController {
                 section,
                 floor,
                 flat,
+                office,
                 line,
                 numberMeter,
                 sumMeter,
@@ -27,7 +28,8 @@ class TestHeatMeterController {
             const heatMeter = await Models.MainAddMeter.create({
                 section: section,
                 floor: floor,
-                flat: flat,
+                flat: flat ? flat : 0,
+                office: office ? office : 0,
                 typeMeter: "Счётчик тепла",
                 line: line,
                 numberMeter: numberMeter,
@@ -73,15 +75,22 @@ class TestHeatMeterController {
         try {
             const { id } = req.params;
 
-            const { floor, flat, section, line, numberMeter, sumMeter } =
-                req.body;
+            const {
+                floor,
+                flat,
+                office,
+                section,
+                line,
+                numberMeter,
+                sumMeter,
+            } = req.body;
 
-            console.log(floor, flat, section, line, numberMeter, sumMeter);
             const heatMeter = await Models.MainAddMeter.findByPk(id);
 
             await heatMeter.update({
                 floor,
                 flat,
+                office,
                 section,
                 line,
                 numberMeter,
