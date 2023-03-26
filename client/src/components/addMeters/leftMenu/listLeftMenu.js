@@ -1,4 +1,3 @@
-
 export const leftMenuItem = [
     // {
     //     toItem: "description",
@@ -18,7 +17,7 @@ export const leftMenuItem = [
         variant: "light",
         title: "Добавить воду (Test)",
     },
-    
+
     {
         toItem: "addHeatTest",
         action: true,
@@ -30,6 +29,12 @@ export const leftMenuItem = [
         action: true,
         variant: "light",
         title: "Добавить счётчики электроэнергии (Test)",
+    },
+    {
+        toItem: "allKdlInObject",
+        action: true,
+        variant: "light",
+        title: "Все КДЛ объекта",
     },
     // {
     //     toItem: "addCoolMeterBolid",
@@ -67,6 +72,4 @@ export const leftMenuItem = [
     //     variant: "light",
     //     title: "Добавить ХГВС - Пульсар",
     // },
-    
-        
-]
+];
