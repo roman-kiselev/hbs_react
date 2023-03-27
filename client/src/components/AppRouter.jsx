@@ -20,6 +20,7 @@ import TestAddMeterElectrical from "./addMeters/testHeatAndEl/TestAddMeterElectr
 import TestMainHeatPage from "./testMeters/testHeat/view/TestMainHeatPage";
 import TestMainElectricalPage from "./testMeters/testElectrical/view/TestMainElectricalPage";
 import MainKdlInObject from "./kdlInObject/view/MainKdlInObject";
+import MainPageUsers from "./admin/users/views/MainPageUsers";
 
 const AppRouter = () => {
     const isAuth = useSelector((state) => state.users.isAuth);
@@ -69,7 +70,9 @@ const AppRouter = () => {
                             element={<MainKdlInObject />}
                         />
                     </Route>
-                    <Route path="/admin" element={<AdminHomePage />}></Route>
+                    <Route path="/admin" element={<AdminHomePage />}>
+                        <Route path="users" element={<MainPageUsers />} />
+                    </Route>
                     <Route path="/*" element={<HomePage />}></Route>
                 </Route>
             ) : (
