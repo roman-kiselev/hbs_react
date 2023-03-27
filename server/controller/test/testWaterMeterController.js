@@ -87,7 +87,7 @@ class TestWaterMeterController {
                 },
                 limit: limit,
                 offset: offset,
-                //order: [["id", "DESC"]],
+                order: [["id", "DESC"]],
             });
 
             return res.json({ listMeters });

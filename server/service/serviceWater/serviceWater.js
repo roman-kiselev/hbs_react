@@ -42,6 +42,7 @@ export const getMetersByNumberFlat = async (number, objectId, limit, page) => {
                     },
                 ],
             },
+            order: [["flat", "ASC"]],
             limit: limit,
             offset: offset,
         });
