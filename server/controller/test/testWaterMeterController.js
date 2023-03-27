@@ -112,6 +112,7 @@ class TestWaterMeterController {
                 numberKdl,
                 typeMeter,
                 section,
+                comment,
             } = req.body;
 
             // Тепере получаем устройство по id
@@ -130,6 +131,7 @@ class TestWaterMeterController {
                 sumMeter,
                 numberKdl,
                 numberAsr,
+                comment,
             });
 
             return res.json(device);

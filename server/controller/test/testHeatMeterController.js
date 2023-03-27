@@ -83,6 +83,7 @@ class TestHeatMeterController {
                 line,
                 numberMeter,
                 sumMeter,
+                comment,
             } = req.body;
 
             const heatMeter = await Models.MainAddMeter.findByPk(id);
@@ -95,6 +96,7 @@ class TestHeatMeterController {
                 line,
                 numberMeter,
                 sumMeter,
+                comment,
             });
 
             return res.json({ heatMeter });

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Row, Button, Modal, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -39,6 +39,7 @@ const CardMeterEditModal = ({
     const [line, setLine, handleInputChangeLine] = useNumber(data.line);
 
     const [office, setOffice, handleInputChangeOffice] = useNumber(data.office);
+    const [comment, setComment] = useState(data.comment);
     const { id: idMeter, objectBuildId } = data;
 
     const formQuery = {
@@ -58,6 +59,7 @@ const CardMeterEditModal = ({
     formData.append("id", idMeter);
     formData.append("line", line);
     formData.append("typeMeter", data.typeMeter);
+    formData.append("comment", comment);
 
     return (
         <Modal show={show} onHide={handleClose}>
@@ -149,6 +151,20 @@ const CardMeterEditModal = ({
                                 prop={{ title: "Показания", value: sumMeter }}
                                 onChange={handleInputChangeSumMeter}
                             />
+                        </Row>
+                        <Row>
+                            <Form.Group
+                                className="mb-3"
+                                controlId="exampleForm.ControlTextarea1"
+                            >
+                                <Form.Label>Комментарий</Form.Label>
+                                <Form.Control
+                                    as="textarea"
+                                    rows={3}
+                                    value={comment === null ? "" : comment}
+                                    onChange={(e) => setComment(e.target.value)}
+                                />
+                            </Form.Group>
                         </Row>
                     </Form>
                 </Row>

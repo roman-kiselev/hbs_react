@@ -80,6 +80,7 @@ class TestElectricalMeterController {
                 section,
                 numberMeter,
                 sumMeter,
+                comment,
             } = req.body;
 
             const meter = await Models.MainAddMeter.findByPk(id);
@@ -94,6 +95,7 @@ class TestElectricalMeterController {
                     section,
                     numberMeter,
                     sumMeter,
+                    comment,
                 });
 
                 return res.json({ meter });

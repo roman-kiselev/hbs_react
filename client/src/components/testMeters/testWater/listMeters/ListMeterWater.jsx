@@ -16,6 +16,7 @@ const ListMeterWater = ({ id: objectBuildId }) => {
     const { id: userId } = useSelector((state) => state.users.user);
     // Получаем все счётчики
     const cardMeter = useSelector((state) => state.mainTable.mainTable);
+
     const [searchValue, setSearchValue] = useState("");
     const { currentPage, limit } = useSelector((state) => state.mainTable);
     const { perPage } = useSelector((state) => state.mainTable);

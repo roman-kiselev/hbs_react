@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Col, Row, Card, Button } from "react-bootstrap";
+import {
+    Col,
+    Row,
+    Card,
+    Button,
+    Popover,
+    OverlayTrigger,
+} from "react-bootstrap";
 import TestFormEditMeter from "../../addMeters/bolid/formMeter/TestFormEditMeter";
 import CardMeterEditModal from "../modals/CardMeterEditModal";
 
@@ -8,6 +15,13 @@ const CardMeter = ({ cardData, handleClickForEdit }) => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const popover = (
+        <Popover id="popover-basic">
+            <Popover.Header as="h3">Комментарий</Popover.Header>
+            <Popover.Body>{cardData.comment}</Popover.Body>
+        </Popover>
+    );
 
     return (
         <>
@@ -81,6 +95,18 @@ const CardMeter = ({ cardData, handleClickForEdit }) => {
                                 Показания: {cardData.sumMeter}
                             </li>
                         </Card.Text>
+                        <OverlayTrigger
+                            trigger={["click", "hover"]}
+                            placement="bottom"
+                            overlay={popover}
+                        >
+                            {cardData.comment === null ||
+                            cardData.comment === "" ? (
+                                <Button variant="warning">Комментарий</Button>
+                            ) : (
+                                <Button variant="success">Комментарий</Button>
+                            )}
+                        </OverlayTrigger>
                         <Button variant="primary" onClick={handleShow}>
                             Редактировать
                         </Button>
