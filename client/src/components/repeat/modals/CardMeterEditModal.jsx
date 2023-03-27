@@ -39,7 +39,9 @@ const CardMeterEditModal = ({
     const [line, setLine, handleInputChangeLine] = useNumber(data.line);
 
     const [office, setOffice, handleInputChangeOffice] = useNumber(data.office);
-    const [comment, setComment] = useState(data.comment);
+    const [comment, setComment] = useState(
+        data.comment === null ? "" : data.comment
+    );
     const { id: idMeter, objectBuildId } = data;
 
     const formQuery = {

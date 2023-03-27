@@ -36,6 +36,7 @@ export const leftMenuItem = [
         variant: "light",
         title: "Все КДЛ объекта",
     },
+
     // {
     //     toItem: "addCoolMeterBolid",
     //     action: true,

@@ -101,7 +101,8 @@ const CardMeter = ({ cardData, handleClickForEdit }) => {
                             overlay={popover}
                         >
                             {cardData.comment === null ||
-                            cardData.comment === "" ? (
+                            cardData.comment === "" ||
+                            cardData.comment === "null" ? (
                                 <Button variant="warning">Комментарий</Button>
                             ) : (
                                 <Button variant="success">Комментарий</Button>
