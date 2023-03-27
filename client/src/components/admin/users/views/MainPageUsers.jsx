@@ -2,14 +2,20 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Modal, Row, Table } from "react-bootstrap";
 import { getAllRoles, getAllUsers } from "../../../../http/userApi";
 import { useQuery } from "react-query";
+import ModalUser from "../modals/ModalUser";
+import ModalRole from "../modals/ModalRole";
 
 const MainPageUsers = () => {
     const [users, setUsers] = useState([]);
     const [roles, setRoles] = useState([]);
-    const [show, setShow] = useState(false);
 
+    const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const [showRole, setShowRole] = useState(false);
+    const handleCloseRole = () => setShowRole(false);
+    const handleShowRole = () => setShowRole(true);
 
     const getAllUsersAdmin = async () => {
         const { users } = await getAllUsers();
@@ -58,30 +64,7 @@ const MainPageUsers = () => {
                                 Добавить пользователя
                             </Button>
                         </Col>
-
-                        <Modal
-                            show={show}
-                            onHide={handleClose}
-                            backdrop="static"
-                            keyboard={false}
-                        >
-                            <Modal.Header closeButton>
-                                <Modal.Title>Modal title</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                I will not close if you click outside me. Don't
-                                even try to press escape key.
-                            </Modal.Body>
-                            <Modal.Footer>
-                                <Button
-                                    variant="secondary"
-                                    onClick={handleClose}
-                                >
-                                    Close
-                                </Button>
-                                <Button variant="primary">Understood</Button>
-                            </Modal.Footer>
-                        </Modal>
+                        <ModalUser show={show} handleClose={handleClose} />
                     </Row>
                     <Row className="mt-3">
                         <Table striped bordered hover size="sm">
@@ -113,6 +96,20 @@ const MainPageUsers = () => {
                 <Col sm={6}>
                     <Row>
                         <h6>Список ролей</h6>
+                    </Row>
+                    <Row className="d-flex justify-content-center align-items-center">
+                        <Col
+                            className="d-flex justify-content-center align-items-center"
+                            sm={10}
+                        >
+                            <Button variant="primary" onClick={handleShowRole}>
+                                Добавить роль
+                            </Button>
+                        </Col>
+                        <ModalRole
+                            showRole={showRole}
+                            handleCloseRole={handleCloseRole}
+                        />
                     </Row>
                     <Row className="mt-3">
                         <Table striped bordered hover size="sm">

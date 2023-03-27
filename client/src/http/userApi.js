@@ -32,3 +32,8 @@ export const getAllRoles = async () => {
     const { data } = await $authHost.get("api/role/");
     return data;
 };
+
+export const createRole = async (name) => {
+    const { data } = await $authHost.post("api/role/", { name });
+    return data;
+};
