@@ -18,6 +18,9 @@ import {
     getAllWaterMeter,
 } from "../../../../http/waterMeterApi";
 import { getAllMetersByUserAndObject } from "../../../../features/testMeters/testWaterMeterSlice";
+import MainTabDownloadListWater from "./downloadList/MainTabDownloadListWater";
+import MainTabReadFileWater from "./readFile/MainTabReadFileWater";
+import MainTabGenerateTemplateWater from "./generateTemplate/MainTabGenerateTemplateWater";
 
 const OperationsWater = ({ id: objectBuildId }) => {
     //Диспатч для вызова функции
@@ -114,70 +117,23 @@ const OperationsWater = ({ id: objectBuildId }) => {
                     <Tab.Content>
                         {/* Первый таб для скачивания общего файла */}
                         <Tab.Pane eventKey="first">
-                            <Button variant="success" onClick={getExcel}>
-                                Скачать Excel
-                                <RiFileExcel2Line />
-                            </Button>
+                            <MainTabDownloadListWater
+                                objectBuildId={objectBuildId}
+                                getExcel={getExcel}
+                            />
                         </Tab.Pane>
                         {/* Второй таб для скачивания шаблонов для загрузки */}
-                        <Tab.Pane eventKey="second">2</Tab.Pane>
+                        <Tab.Pane eventKey="second">
+                            <MainTabGenerateTemplateWater
+                                objectBuildId={objectBuildId}
+                            />
+                        </Tab.Pane>
                         {/* Третий таб для загрузки файлов */}
                         <Tab.Pane eventKey="three">
-                            <Row>
-                                <Row>
-                                    <h6>Таблица должна быть следующего вида</h6>
-                                </Row>
-                                <Row>
-                                    <Table striped bordered hover>
-                                        <thead>
-                                            <tr>
-                                                <th>Секция</th>
-                                                <th>Этаж</th>
-                                                <th>Квартира</th>
-                                                <th>Номер КДЛ</th>
-                                                <th>Номер Канала</th>
-                                                <th>Номер счётчика</th>
-                                                <th>Показания</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>2</td>
-                                                <td>26</td>
-                                                <td>1</td>
-                                                <td>1</td>
-                                                <td>192168233</td>
-                                                <td>1.2</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>2</td>
-                                                <td>27</td>
-                                                <td>1</td>
-                                                <td>1</td>
-                                                <td>192168234</td>
-                                                <td>1.5</td>
-                                            </tr>
-                                        </tbody>
-                                    </Table>
-                                    <Row>
-                                        <Badge bg="warning" text="dark">
-                                            Важно!!! Счётчик холодной воды -
-                                            Канал нечётный! Счётчик горячей воды
-                                            - Канал чётный
-                                        </Badge>
-                                    </Row>
-                                </Row>
-                            </Row>
-                            <Form.Group controlId="formFile" className="mb-3">
-                                <Form.Label>Выберите файл</Form.Label>
-                                <Form.Control
-                                    type="file"
-                                    accept=".xlsx,.xls"
-                                    onChange={handleFileUpload}
-                                />
-                            </Form.Group>
+                            <MainTabReadFileWater
+                                objectBuildId={objectBuildId}
+                                handleFileUpload={handleFileUpload}
+                            />
                         </Tab.Pane>
                     </Tab.Content>
                 </Col>
