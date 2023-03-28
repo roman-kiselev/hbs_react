@@ -55,7 +55,6 @@ class UserController {
         const user = await Model.User.findOne({
             where: { login },
             include: { all: true },
-            raw: true,
         });
 
         if (!user) {
@@ -67,6 +66,7 @@ class UserController {
             return next(ApiError.internal("Указан неверный пароль"));
         }
         const { roles } = user;
+
         const token = generateJwt(user.id, user.login, roles);
         return res.json({ token });
     }
