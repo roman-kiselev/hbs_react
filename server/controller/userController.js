@@ -58,8 +58,6 @@ class UserController {
             raw: true,
         });
 
-        const { roles } = user;
-
         if (!user) {
             return next(ApiError.internal("Пользователь не найден"));
         }
@@ -68,7 +66,7 @@ class UserController {
         if (!comparePassword) {
             return next(ApiError.internal("Указан неверный пароль"));
         }
-
+        const { roles } = user;
         const token = generateJwt(user.id, user.login, roles);
         return res.json({ token });
     }
