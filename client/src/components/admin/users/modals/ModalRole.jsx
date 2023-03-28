@@ -20,8 +20,8 @@ const ModalRole = ({ showRole, handleCloseRole }) => {
 
     const handleClick = (e) => {
         e.preventDefault();
-
         mutate(nameRole);
+        handleCloseRole();
     };
 
     if (isLoading) {

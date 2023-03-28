@@ -18,7 +18,7 @@ const ModalUser = ({ show, handleClose }) => {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Close
+                    Закрыть
                 </Button>
                 <Button variant="primary">Добавить</Button>
             </Modal.Footer>
