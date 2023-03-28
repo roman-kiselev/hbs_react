@@ -57,7 +57,7 @@ class TestHeatMeterController {
             const heatMeters = await Models.MainAddMeter.findAndCountAll({
                 where: {
                     objectBuildId: objectId,
-                    userId: userId,
+                    //userId: userId,
                     typeMeter: typeMeter,
                 },
                 limit,
