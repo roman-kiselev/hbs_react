@@ -55,10 +55,11 @@ class UserController {
         const user = await Model.User.findOne({
             where: { login },
             include: { all: true },
+            raw: true,
         });
+        console.log(user);
+        //const { roles } = user;
 
-        const { roles } = user;
-        console.log(roles);
         if (!user) {
             return next(ApiError.internal("Пользователь не найден"));
         }
