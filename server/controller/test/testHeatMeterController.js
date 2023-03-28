@@ -91,7 +91,7 @@ class TestHeatMeterController {
             await heatMeter.update({
                 floor,
                 flat,
-                office,
+                office: heatMeter.office === null ? 0 : heatMeter.office,
                 section,
                 line,
                 numberMeter,

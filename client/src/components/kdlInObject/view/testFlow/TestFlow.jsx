@@ -25,9 +25,45 @@ const initialNodes = [
         data: { label: "Two" },
         position: { x: 150, y: 150 },
     },
+    {
+        id: "new-element",
+        type: "custom-node",
+        data: { label: "New Element" },
+        position: { x: 30, y: 30 },
+        sourcePosition: "bottom",
+        targetPosition: "top",
+    },
 ];
 
 const initialEdges = [];
+
+const CustomControls = () => {
+    const newElement = {
+        id: "new-element",
+        type: "custom-node",
+        data: { label: "New Element" },
+        position: { x: 30, y: 30 },
+        sourcePosition: "bottom",
+        targetPosition: "top",
+    };
+
+    const handleClick = () => {
+        console.log("Component 1 clicked");
+        initialNodes.push(newElement);
+    };
+    return (
+        <Controls>
+            <div>
+                <button onClick={() => handleClick()}>Объект</button>
+            </div>
+            <div>
+                <button onClick={() => console.log("Component 2 clicked")}>
+                    Component 2
+                </button>
+            </div>
+        </Controls>
+    );
+};
 
 function TestFlow() {
     const [nodes, setNodes] = useState(initialNodes);
@@ -57,7 +93,7 @@ function TestFlow() {
         >
             <Background />
 
-            <Controls />
+            <CustomControls />
         </ReactFlow>
     );
 }
