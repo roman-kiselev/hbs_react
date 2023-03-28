@@ -1,5 +1,5 @@
 import Models from "../../models/models.js";
-import pkg from "sequelize";
+import pkg, { Sequelize } from "sequelize";
 const { Op } = pkg;
 // Поиск по номеру
 export const getMetersByNumberFlat = async (number, objectId, limit, page) => {
