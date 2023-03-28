@@ -56,8 +56,9 @@ class UserController {
             where: { login },
             include: { all: true },
         });
-        const { roles } = user;
 
+        const { roles } = user;
+        console.log(roles);
         if (!user) {
             return next(ApiError.internal("Пользователь не найден"));
         }
