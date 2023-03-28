@@ -45,6 +45,17 @@ export const getElectricalMetersByNumberFlat = async (
                     },
                 ],
             },
+            order: [
+                Sequelize.literal(
+                    `
+                    CASE 
+                         WHEN flat = '${number}' THEN 1
+                         WHEN numberMeter = '${number}' THEN 2
+                         ELSE 3
+                       END
+                       `
+                ),
+            ],
             limit: limit,
             offset: offset,
         });

@@ -42,6 +42,17 @@ export const getMetersByNumberFlat = async (number, objectId, limit, page) => {
                     },
                 ],
             },
+            order: [
+                Sequelize.literal(
+                    `
+                    CASE 
+                         WHEN flat = '${number}' THEN 1
+                         WHEN numberMeter = '${number}' THEN 2
+                         ELSE 3
+                       END
+                       `
+                ),
+            ],
             order: [["flat", "ASC"]],
             limit: limit,
             offset: offset,
