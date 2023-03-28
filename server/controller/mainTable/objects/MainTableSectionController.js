@@ -11,6 +11,7 @@ class MainTableSectionController {
                 [Sequelize.fn("DISTINCT", Sequelize.col("section")), "section"],
             ],
         });
+
         res.json({ sections });
     }
 }
