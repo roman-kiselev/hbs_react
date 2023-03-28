@@ -116,3 +116,10 @@ export const getTemplateFromServer = async (objectBuildId, template, line) => {
         console.log(e);
     }
 };
+
+// Удаление по  id
+export const deleteHeatMeter = async ({ id }) => {
+    const { data } = await $authHost.delete(`api/testAddHeat/${id}`);
+
+    return data;
+};

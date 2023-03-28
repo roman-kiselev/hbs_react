@@ -57,3 +57,10 @@ export const addDataExcelWater = async (objectBuildId, userId, jsonData) => {
         return e.message;
     }
 };
+
+// Удаление по  id
+export const deleteWaterMeter = async ({ id }) => {
+    const { data } = await $authHost.delete(`api/testAddWater/${id}`);
+
+    return data;
+};

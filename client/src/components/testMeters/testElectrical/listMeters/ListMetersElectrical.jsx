@@ -8,6 +8,8 @@ import {
     getOneElectricalMeter,
     setCurrentPage,
 } from "../../../../features/testMeters/testElectricalMeterSlice";
+import { deleteElectricalMeter } from "../../../../http/electricalMeterApi";
+import { deleteHeatMeter } from "../../../../http/heatMeterApi";
 import ListMeters from "../../../repeat/listMetersCard/ListMeters";
 import Pages from "../../../repeat/pagination/Pages";
 
@@ -35,7 +37,7 @@ const ListMetersElectrical = ({ id: objectBuildId }) => {
     const handleClick = (page) => {
         dispatch(setCurrentPage(page));
     };
-
+    // Функция для редактирования данных в карточке
     const handleClickForEdit = (formData, formQuery, handleClose) => {
         try {
             dispatch(getOneElectricalMeter({ formData })).then((d) => {
@@ -46,7 +48,23 @@ const ListMetersElectrical = ({ id: objectBuildId }) => {
             console.log(e);
         }
     };
+    // Функция для удаления счётчика
+    const handleClickDel = async (id) => {
+        try {
+            const confirmDelete = window.confirm(
+                "Вы уверены что хотите удалить этот счётчик?"
+            );
+            if (confirmDelete) {
+                await deleteElectricalMeter({ id }).then((d) => {
+                    dispatch(getAllElectricalMeters({ formQuery }));
+                });
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    };
 
+    // Функция для поиска
     const handleSearch = (e) => {
         const numSearch = e.target.value;
         setSearchValue(numSearch);
@@ -90,6 +108,7 @@ const ListMetersElectrical = ({ id: objectBuildId }) => {
                     listCards={cardMeter}
                     objectId={objectBuildId}
                     handleClickForEdit={handleClickForEdit}
+                    handleClickDel={handleClickDel}
                 />
             </Row>
             <Row className="m-3 ">

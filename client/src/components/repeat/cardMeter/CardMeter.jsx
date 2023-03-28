@@ -9,8 +9,9 @@ import {
 } from "react-bootstrap";
 import TestFormEditMeter from "../../addMeters/bolid/formMeter/TestFormEditMeter";
 import CardMeterEditModal from "../modals/CardMeterEditModal";
+import { AiFillDelete } from "react-icons/ai";
 
-const CardMeter = ({ cardData, handleClickForEdit }) => {
+const CardMeter = ({ cardData, handleClickForEdit, handleClickDel }) => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -23,18 +24,16 @@ const CardMeter = ({ cardData, handleClickForEdit }) => {
         </Popover>
     );
 
+    const del = (e) => {
+        e.preventDefault();
+
+        handleClickDel(cardData.id);
+    };
+
     return (
         <>
             <Col className="col-12 col-xl-4 mt-3 ">
                 <Row>
-                    {/* <TestFormEditMeter
-                        data={{
-                            cardData,
-                        }}
-                        show={show}
-                        handleClose={() => handleClose()}
-                    /> */}
-
                     <CardMeterEditModal
                         data={cardData}
                         show={show}
@@ -45,11 +44,35 @@ const CardMeter = ({ cardData, handleClickForEdit }) => {
                 <Card className="text-center">
                     {cardData.flat ? (
                         <Card.Header className="text-center">
-                            Квартира № {cardData.flat}
+                            <Row>
+                                <Col sm={10}>Квартира № {cardData.flat}</Col>
+                                <Col sm={2}>
+                                    <AiFillDelete
+                                        size={30}
+                                        color="red"
+                                        style={{
+                                            cursor: "pointer",
+                                        }}
+                                        onClick={(e) => del(e)}
+                                    />
+                                </Col>
+                            </Row>
                         </Card.Header>
                     ) : (
                         <Card.Header className="text-center bg-warning">
-                            Офис № {cardData.office}
+                            <Row>
+                                <Col sm={10}>Офис № {cardData.office}</Col>
+                                <Col sm={2}>
+                                    <AiFillDelete
+                                        size={30}
+                                        color="red"
+                                        style={{
+                                            cursor: "pointer",
+                                        }}
+                                        onClick={(e) => del(e)}
+                                    />
+                                </Col>
+                            </Row>
                         </Card.Header>
                     )}
 

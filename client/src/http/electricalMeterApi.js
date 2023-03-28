@@ -123,3 +123,10 @@ export const getTemplateFromServerElectrical = async (
         console.log(e);
     }
 };
+
+// Удаление по  id
+export const deleteElectricalMeter = async ({ id }) => {
+    const { data } = await $authHost.delete(`api/testElectrical/${id}`);
+
+    return data;
+};

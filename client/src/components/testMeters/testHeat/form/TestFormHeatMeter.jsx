@@ -41,6 +41,9 @@ const TestFormHeatMeter = ({ id: objectBuildId }) => {
     // Достаём добавленные счётчики для уведомления
     const { lastMeters } = useSelector((state) => state.heatMeter);
 
+    // Создаём ref для того что бы после нажатия проставилась фокусировка
+    const inputRef = React.useRef(null);
+
     // В форму передаём
     const formQuery = { userId, objectBuildId };
     // Добавляем счётчик
@@ -58,6 +61,8 @@ const TestFormHeatMeter = ({ id: objectBuildId }) => {
             objectBuildId,
             userId,
         };
+
+        inputRef.current.focus();
 
         dispatch(createTestHeatMeter({ dataMeter })).then((d) => {
             dispatch(getAllHeatMeter({ formQuery }));
@@ -99,6 +104,7 @@ const TestFormHeatMeter = ({ id: objectBuildId }) => {
                             value={selectObject}
                             onChangeSelect={handleInputChangeSelectObject}
                             onChangeFlat={handleInputChangeFlat}
+                            inputRef={inputRef}
                         />
                         {/* <InputNumber
                             prop={{ title: "Квартира", value: flat }}

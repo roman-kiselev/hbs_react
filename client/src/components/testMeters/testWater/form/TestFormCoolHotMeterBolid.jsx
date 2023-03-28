@@ -44,6 +44,9 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
         setChannelHot(Number(e.target.value) + 1);
     };
 
+    // Создаём ref для того что бы после нажатия проставилась фокусировка
+    const inputRef = React.useRef(null);
+
     // Состояние уведомлений
     const [alertAdd, setAlertAdd] = useState(false);
     // Создаём массив для проверки перед отправкой данных на сервер
@@ -97,7 +100,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
         const setNewAlert = () => {
             setAlertAdd(false);
         };
-
+        inputRef.current.focus();
         dispatch(createTestMeter({ dataWith })).then((d) => {
             dispatch(getAllMetersByUserAndObject({ formQuery }));
             setNumberMeterCool("");
@@ -141,6 +144,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                             value={selectObject}
                             onChangeSelect={handleInputChangeSelectObject}
                             onChangeFlat={handleInputChangeFlat}
+                            inputRef={inputRef}
                         />
                     </Col>
                 </Row>

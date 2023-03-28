@@ -10,6 +10,7 @@ import ListMeters from "../../../repeat/listMetersCard/ListMeters";
 import Pages from "../../../repeat/pagination/Pages";
 import { useQuery } from "react-query";
 import { setCurrentPage } from "../../../../features/testMeters/testWaterMeterSlice";
+import { deleteWaterMeter } from "../../../../http/waterMeterApi";
 
 const ListMeterWater = ({ id: objectBuildId }) => {
     const dispatch = useDispatch();
@@ -67,6 +68,23 @@ const ListMeterWater = ({ id: objectBuildId }) => {
 
         dispatch(getMetersByNumberFlat({ formQuery }));
     };
+
+    // Функция для удаления счётчика
+    const handleClickDel = async (id) => {
+        try {
+            const confirmDelete = window.confirm(
+                "Вы уверены что хотите удалить этот счётчик?"
+            );
+            if (confirmDelete) {
+                await deleteWaterMeter({ id }).then((d) => {
+                    dispatch(getAllMetersByUserAndObject({ formQuery }));
+                });
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
     // // Функция при переключении check
     // const handleChangeCheck = (e) => {
     //     const check = e.target.checked;
@@ -112,6 +130,7 @@ const ListMeterWater = ({ id: objectBuildId }) => {
                     listCards={cardMeter}
                     objectId={objectBuildId}
                     handleClickForEdit={handleClickForEdit}
+                    handleClickDel={handleClickDel}
                 />
             </Row>
             <Row className="m-3 ">

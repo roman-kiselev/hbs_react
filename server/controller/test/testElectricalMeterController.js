@@ -372,6 +372,24 @@ class TestElectricalMeterController {
             console.log(e);
         }
     }
+
+    // Удаление по id счётчика
+    async deleteMeter(req, res) {
+        try {
+            const { id } = req.params;
+
+            const meter = await Models.MainAddMeter.destroy({
+                where: {
+                    id,
+                    typeMeter: "Счётчик электроэнергии",
+                },
+            });
+
+            return res.json({ meter });
+        } catch (e) {
+            console.log(e);
+        }
+    }
 }
 
 export default new TestElectricalMeterController();

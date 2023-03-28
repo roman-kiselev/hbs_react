@@ -1,7 +1,12 @@
 import React from "react";
 import CardMeter from "../cardMeter/CardMeter";
 
-const ListMeters = ({ listCards, objectId, handleClickForEdit }) => {
+const ListMeters = ({
+    listCards,
+    objectId,
+    handleClickForEdit,
+    handleClickDel,
+}) => {
     return (
         <>
             {listCards.length !== 0 ? (
@@ -11,6 +16,7 @@ const ListMeters = ({ listCards, objectId, handleClickForEdit }) => {
                         cardData={card}
                         objectId={objectId}
                         handleClickForEdit={handleClickForEdit}
+                        handleClickDel={handleClickDel}
                     />
                 ))
             ) : (

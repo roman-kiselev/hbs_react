@@ -9,6 +9,7 @@ import {
     getOneHeatMeter,
 } from "../../../../features/testMeters/testHeatMeterSlice";
 import { setCurrentPage } from "../../../../features/testMeters/testHeatMeterSlice";
+import { deleteHeatMeter } from "../../../../http/heatMeterApi";
 
 const ListMeterHeat = ({ id: objectBuildId }) => {
     const dispatch = useDispatch();
@@ -47,7 +48,21 @@ const ListMeterHeat = ({ id: objectBuildId }) => {
             console.log(e);
         }
     };
-
+    // Функция для удаления счётчика
+    const handleClickDel = async (id) => {
+        try {
+            const confirmDelete = window.confirm(
+                "Вы уверены что хотите удалить этот счётчик?"
+            );
+            if (confirmDelete) {
+                await deleteHeatMeter({ id }).then((d) => {
+                    dispatch(getAllHeatMeter({ formQuery }));
+                });
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    };
     const handleSearch = (e) => {
         const numSearch = e.target.value;
         setSearchValue(numSearch);
@@ -91,6 +106,7 @@ const ListMeterHeat = ({ id: objectBuildId }) => {
                     listCards={cardMeter}
                     objectId={objectBuildId}
                     handleClickForEdit={handleClickForEdit}
+                    handleClickDel={handleClickDel}
                 />
             </Row>
             <Row className="m-3 ">

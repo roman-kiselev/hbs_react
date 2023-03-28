@@ -1,7 +1,13 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-const InputNumberSelected = ({ prop, onChangeFlat, value, onChangeSelect }) => {
+const InputNumberSelected = ({
+    prop,
+    onChangeFlat,
+    value,
+    onChangeSelect,
+    inputRef,
+}) => {
     return (
         <>
             <Form.Select size="sm" value={value} onChange={onChangeSelect}>
@@ -17,6 +23,7 @@ const InputNumberSelected = ({ prop, onChangeFlat, value, onChangeSelect }) => {
                     pattern="^[ 0-9]+$"
                     value={prop.value || "Ошибка"}
                     onChange={onChangeFlat}
+                    ref={inputRef}
                 />
             </Form.Group>
         </>

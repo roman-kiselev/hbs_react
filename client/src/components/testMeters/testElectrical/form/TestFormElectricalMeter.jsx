@@ -38,6 +38,8 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
             return true;
         }
     };
+    // Создаём ref для того что бы после нажатия проставилась фокусировка
+    const inputRef = React.useRef(null);
 
     // В форму передаём
     const formQuery = { userId, objectBuildId };
@@ -58,7 +60,7 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
             numberMeter,
             sumMeter,
         };
-
+        inputRef.current.focus();
         dispatch(createTestElectricalMeter({ dataMeter })).then((d) => {
             dispatch(getAllElectricalMeters({ formQuery }));
             setAlertAdd(true);
@@ -99,11 +101,8 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
                             value={selectObject}
                             onChangeSelect={handleInputChangeSelectObject}
                             onChangeFlat={handleInputChangeFlat}
+                            inputRef={inputRef}
                         />
-                        {/* <InputNumber
-                            prop={{ title: "Квартира", value: flat }}
-                            onChange={handleInputChangeFlat}
-                        /> */}
                     </Col>
                 </Row>
                 <Row>
