@@ -14,7 +14,7 @@ const MainTabGenerateTemplateWater = ({ objectBuildId }) => {
     };
     const handleChangeKdl = (e) => {
         setSelectedKdl(e.target.value);
-        //
+        // Получаем все КДЛ при изменении секции
     };
     // Список всех секций
     const [sections, setSections] = React.useState([]);
