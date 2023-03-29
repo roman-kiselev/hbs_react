@@ -7,9 +7,11 @@ import sequelize from "../../../db.js";
 class DeviceKdlController {
     async getAllKdl(req, res) {
         try {
+            const { id } = req.params;
+
             const listKdl = await Models.MainAddMeter.findAll({
                 where: {
-                    objectBuildId,
+                    objectBuildId: id,
                 },
                 attributes: [
                     [

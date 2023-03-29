@@ -6,7 +6,12 @@ import sequelize from "../../../db.js";
 
 class MainTableSectionController {
     async getAllSections(req, res) {
+        const { id } = req.params;
+
         const sections = await Models.MainAddMeter.findAll({
+            where: {
+                objectBuildId: id,
+            },
             attributes: [
                 [Sequelize.fn("DISTINCT", Sequelize.col("section")), "section"],
             ],

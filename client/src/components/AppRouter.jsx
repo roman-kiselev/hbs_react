@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 import AdminLayout from "../pages/admin/AdminLayout";
 import AdminHomePage from "../pages/admin/AdminHomePage";
 import TestMainWaterPage from "./testMeters/testWater/view/TestMainWaterPage";
-//import TestAddMeterCoolHotBolid from "./addMeters/bolid/TestAddMeterCoolHotBolid";
+
 import TestAddMeterHeat from "./addMeters/testHeatAndEl/TestAddMeterHeat";
 import TestAddMeterElectrical from "./addMeters/testHeatAndEl/TestAddMeterElectrical";
 import TestMainHeatPage from "./testMeters/testHeat/view/TestMainHeatPage";
@@ -73,11 +73,11 @@ const AppRouter = () => {
                     <Route path="/admin" element={<AdminHomePage />}>
                         <Route path="users" element={<MainPageUsers />} />
                     </Route>
-                    <Route path="/*" element={<HomePage />}></Route>
+                    <Route path="/*" element={<Auth />}></Route>
                 </Route>
             ) : (
                 <Route>
-                    <Route path="/" element={<Auth />} />
+                    <Route path="*" element={<Auth />} />
                 </Route>
             )}
         </Routes>
