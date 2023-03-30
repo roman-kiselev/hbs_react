@@ -6,6 +6,9 @@ import * as XLSX from "xlsx";
 const { Op } = pkg;
 import sequelize from "../../db.js";
 import { getMetersByNumberFlat } from "../../service/serviceWater/serviceWater.js";
+import HeadersWaterConfig from "../../service/headersConfig/headersWater/HeadersWaterConfig.js";
+import createHeatTemplate from "../../service/headersConfig/createHeatTemplate.js";
+import createWaterTemplate from "../../service/headersConfig/createWaterTemplate.js";
 
 class TestWaterMeterController {
     async addNewMeter(req, res) {
@@ -290,6 +293,7 @@ class TestWaterMeterController {
             console.log(e);
         }
     }
+
     // Удаление по id счётчика
     async deleteMeter(req, res) {
         try {
@@ -302,6 +306,111 @@ class TestWaterMeterController {
             });
 
             return res.json({ meter });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async getWaterTemplate(req, res) {
+        try {
+            const {
+                objectBuildId,
+                section,
+                numberKdl,
+                multiplier: multiplierN,
+            } = req.query;
+
+            const heatMeter = "Счётчик горячей воды";
+            const coolMeter = "Счётчик холодной воды";
+
+            const meters = await Models.MainAddMeter.findAll({
+                where: {
+                    objectBuildId,
+                    section,
+                    numberKdl,
+                },
+                attributes: [
+                    "id",
+                    "section",
+                    "floor",
+                    "flat",
+                    "numberKdl",
+                    "numberAsr",
+                    "numberMeter",
+                    "sumMeter",
+                    "typeMeter",
+                ],
+                order: [["flat", "DESC"]],
+                raw: true,
+            });
+
+            // Получаем максимальное значение квартиры
+            const maxFlat = meters.reduce((prev, curr) => {
+                return prev.flat > curr.flat ? prev : curr;
+            });
+
+            let arrLink = [
+                "секция_TEST_C2000-Ethernet_вода",
+                "ID=",
+                "ClassName=TC2000EthernetChannel",
+                "Активность=Нет",
+                "Описание=секция_TEST_C2000-Ethernet_вода",
+                "IP Адрес=192.168.10.1",
+                "Порт=1",
+                "Режим работы=Надёжный",
+                "Операторы=",
+                "Комментарий=",
+            ];
+            // Заголовок листа
+            const nameSheet = "Счётчики воды";
+
+            const arrInterface = [
+                "",
+                "[RS-485] Болид",
+                "ID=",
+                "ParentID=",
+                "ClassName=TOrion_RS485_Interface",
+                "Активность=Да",
+                "Описание=[RS-485] Болид",
+                "Тайм-аут чтения, мсек=3000",
+                "Пауза между командами, мс=4",
+                "Число неответов до потери=3",
+                "Комментарий=",
+            ];
+
+            const arrBolidKdl = [
+                "",
+                "",
+                "С2000-КДЛ",
+                "ID=",
+                "ParentID=",
+                "ClassName=TKDLRegistrator",
+                `Адрес прибора=${numberKdl}`,
+                "Активность=Да",
+                `Описание=С2000-КДЛ_${numberKdl}`,
+                "Частота опроса, мин=0",
+                `Комментарий=Секция №${section}`,
+            ];
+
+            const listMeters = [];
+            meters.map((meter) => {
+                let preparedDevice =
+                    HeadersWaterConfig.getTBolid_HotWater_Counter(
+                        meter,
+                        maxFlat.flat,
+                        multiplierN
+                    );
+                listMeters.push(preparedDevice);
+            });
+
+            const buffer = createWaterTemplate(
+                listMeters,
+                arrLink,
+                arrInterface,
+                arrBolidKdl,
+                nameSheet
+            );
+            return res.send(buffer);
         } catch (e) {
             console.log(e);
         }

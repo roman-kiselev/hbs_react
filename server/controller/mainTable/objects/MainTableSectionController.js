@@ -6,7 +6,7 @@ import sequelize from "../../../db.js";
 
 class MainTableSectionController {
     async getAllSections(req, res) {
-        const { id } = req.params;
+        const { id } = req.query;
 
         const sections = await Models.MainAddMeter.findAll({
             where: {

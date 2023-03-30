@@ -13,3 +13,12 @@ export const getFlatString = (num, maxNum) => {
 export const getLastNumber = (num, n) => {
     return num.toString().substring(num.toString().length - n);
 };
+
+// Функция принимает тип счётчика холодной или горячей воды и возвращает класс счётчика
+export const getClassCounter = (type) => {
+    if (type === "Счётчик холодной воды") {
+        return "TBolid_ColdWater_Counter";
+    } else if (type === "Счётчик горячей воды") {
+        return "TBolid_HotWater_Counter";
+    }
+};

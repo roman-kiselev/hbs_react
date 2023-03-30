@@ -12,8 +12,10 @@ router.post(
     "/addAllMetersExcel",
     TestWaterMeterController.addAllMetersInObject
 );
+
 router.get("/search", TestWaterMeterController.searchByNumber);
 //router.get("/excel", TestWaterMeterController.getExcelTest);
+router.get("/getTemplateWater", TestWaterMeterController.getWaterTemplate);
 router.delete("/:id", TestWaterMeterController.deleteMeter);
 router.post("/:id", TestWaterMeterController.getOneMeter);
 

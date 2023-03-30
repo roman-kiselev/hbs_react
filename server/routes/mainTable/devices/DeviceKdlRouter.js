@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
-import DeviceKdlController from "../../../controller/mainTable/devices/DeviceKdlController";
+import DeviceKdlController from "../../../controller/mainTable/devices/DeviceKdlController.js";
 
-router.get("/kdl/:id", DeviceKdlController.getAllKdl);
+router.get("/kdl", DeviceKdlController.getAllKdl);
 
 export default router;

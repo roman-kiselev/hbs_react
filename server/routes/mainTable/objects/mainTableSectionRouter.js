@@ -3,6 +3,6 @@ const router = express.Router();
 
 import MainTableSectionController from "../../../controller/mainTable/objects/MainTableSectionController.js";
 
-router.get("/sections/:id", MainTableSectionController.getAllSections);
+router.get("/sections", MainTableSectionController.getAllSections);
 
 export default router;

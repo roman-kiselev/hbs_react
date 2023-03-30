@@ -99,7 +99,6 @@ export const getTemplateFromServerElectrical = async (
                 }
             )
             .then((res) => {
-                console.log(res);
                 if (res && res.data) {
                     const blob = new Blob([res.data], {
                         type: "application/octet-stream",

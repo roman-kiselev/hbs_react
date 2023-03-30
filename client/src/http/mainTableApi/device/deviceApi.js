@@ -1,8 +1,11 @@
-import { $authHost } from "../index";
+import { $authHost } from "../../index";
 
 // Получаем все уникальные КДЛ
 
-export const getAllKdl = async (objectBuildId) => {
-    const { data } = await $authHost.get(`api/mainTable/kdl/${objectBuildId}`);
+export const getAllKdlBySectionId = async (objectBuildId, section) => {
+    const { data } = await $authHost.get(
+        `api/mainTable/kdl/?id=${objectBuildId}&section=${section}`
+    );
+
     return data;
 };
