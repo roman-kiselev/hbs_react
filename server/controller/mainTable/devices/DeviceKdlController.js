@@ -13,6 +13,9 @@ class DeviceKdlController {
                 where: {
                     objectBuildId: id,
                     section,
+                    numberKdl: {
+                        [Op.not]: 0,
+                    },
                 },
                 attributes: [
                     [
@@ -20,6 +23,7 @@ class DeviceKdlController {
                         "numberKdl",
                     ],
                 ],
+                order: [["numberKdl", "ASC"]],
             });
 
             return res.json({ listKdl });

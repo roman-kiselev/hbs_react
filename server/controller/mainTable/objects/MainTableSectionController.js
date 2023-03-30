@@ -11,10 +11,14 @@ class MainTableSectionController {
         const sections = await Models.MainAddMeter.findAll({
             where: {
                 objectBuildId: id,
+                section: {
+                    [Op.not]: 0,
+                },
             },
             attributes: [
                 [Sequelize.fn("DISTINCT", Sequelize.col("section")), "section"],
             ],
+            order: [["section", "ASC"]],
         });
 
         res.json({ sections });
