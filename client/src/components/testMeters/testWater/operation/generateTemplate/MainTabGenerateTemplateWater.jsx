@@ -82,6 +82,7 @@ const MainTabGenerateTemplateWater = ({ objectBuildId }) => {
                         onChange={handleChangeSection}
                         aria-label="Default select example"
                     >
+                        <option>Выберите секцию</option>
                         {sections.map((section, i) => (
                             <option key={i} value={section.section}>
                                 {section.section}
