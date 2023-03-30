@@ -36,6 +36,12 @@ export const leftMenuItem = [
         variant: "light",
         title: "Все КДЛ объекта",
     },
+    {
+        toItem: "formHouse",
+        action: true,
+        variant: "light",
+        title: "Сформировать дом",
+    }
 
     // {
     //     toItem: "addCoolMeterBolid",

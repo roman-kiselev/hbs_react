@@ -21,6 +21,7 @@ import TestMainHeatPage from "./testMeters/testHeat/view/TestMainHeatPage";
 import TestMainElectricalPage from "./testMeters/testElectrical/view/TestMainElectricalPage";
 import MainKdlInObject from "./kdlInObject/view/MainKdlInObject";
 import MainPageUsers from "./admin/users/views/MainPageUsers";
+import FormHousePage from "./formHouse/view/FormHousePage";
 
 const AppRouter = () => {
     const isAuth = useSelector((state) => state.users.isAuth);
@@ -68,6 +69,10 @@ const AppRouter = () => {
                         <Route
                             path="allKdlInObject"
                             element={<MainKdlInObject />}
+                        />
+                        <Route
+                            path="formHouse"
+                            element={<FormHousePage />}
                         />
                     </Route>
                     <Route path="/admin" element={<AdminHomePage />}>
