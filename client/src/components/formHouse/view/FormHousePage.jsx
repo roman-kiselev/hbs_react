@@ -12,20 +12,22 @@ import ModalInfoHome from "../modals/ModalInfoHome";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { useDispatch, useSelector } from "react-redux";
 import { setActive } from "../../../features/formHouse/formHouseSlice";
-
-// Для заголовка линии
+import LineRowHeader from "../form/formTable/LineRowHeader";
 
 const FormHousePage = () => {
   const [show, setShow] = useState(false);
-
+  const [activeNumberSection, setActiveNumberSection] = useState("");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const { formHouse } = useSelector((state) => state.formHouse);
   const dispatch = useDispatch();
   const handleClickForActive = (numberSection) => {
+    setActiveNumberSection(numberSection);
     dispatch(setActive(numberSection));
   };
+
+  console.log(activeNumberSection);
 
   return (
     <Container>
@@ -66,20 +68,7 @@ const FormHousePage = () => {
           <Container style={{ width: "100%", height: "100%" }}>
             <Scrollbars style={{ width: "100%", height: "100%" }}>
               <Table striped bordered hover>
-                <thead>
-                  <tr>
-                    <th>Этаж</th>
-                    <th>Линия №1</th>
-                    <th>Линия №2</th>
-                    <th>Линия №3</th>
-                    <th>Линия №4</th>
-                    <th>Линия №5</th>
-                    <th>Линия №6</th>
-                    <th>Линия №7</th>
-                    <th>Линия №8</th>
-                    <th>Линия №9</th>
-                  </tr>
-                </thead>
+                <LineRowHeader numberSection={activeNumberSection} />
                 <tbody>
                   <tr>
                     <td>1</td>
