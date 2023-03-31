@@ -7,16 +7,18 @@ import testWaterMeterSlice from "../features/testMeters/testWaterMeterSlice";
 import leftMenuSlice from "../features/leftMenu/leftMenuSlice";
 import testHeatMeterSlice from "../features/testMeters/testHeatMeterSlice";
 import testElectricalMeterSlice from "../features/testMeters/testElectricalMeterSlice";
+import formHouseSlice from "../features/formHouse/formHouseSlice";
 
 export const store = configureStore({
-    reducer: {
-        users: userSlice,
-        objectBuilds: objectSlice,
-        coolBolid: coolWaterBildSlice,
-        sections: sectionsSlice,
-        mainTable: testWaterMeterSlice,
-        leftMenu: leftMenuSlice,
-        heatMeter: testHeatMeterSlice,
-        electricalMeter: testElectricalMeterSlice,
-    },
+  reducer: {
+    users: userSlice,
+    objectBuilds: objectSlice,
+    coolBolid: coolWaterBildSlice,
+    sections: sectionsSlice,
+    mainTable: testWaterMeterSlice,
+    leftMenu: leftMenuSlice,
+    heatMeter: testHeatMeterSlice,
+    electricalMeter: testElectricalMeterSlice,
+    formHouse: formHouseSlice,
+  },
 });
