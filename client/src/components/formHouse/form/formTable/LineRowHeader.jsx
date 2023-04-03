@@ -9,25 +9,22 @@ const LineRowHeader = ({ numberSection }) => {
 
   // Сформируем из числа массив количество линий
   let arrCountLines = [];
+  if (countLine.length === 0) {
+    return <></>;
+  }
   for (let i = 1; i <= countLine[0].lines; i++) {
     arrCountLines.push({
       numberLine: i,
     });
   }
 
-  console.log(countLine);
   return (
     <thead>
       <tr>
         <th>Этаж</th>
-        <th>Линия №2</th>
-        <th>Линия №3</th>
-        <th>Линия №4</th>
-        <th>Линия №5</th>
-        <th>Линия №6</th>
-        <th>Линия №7</th>
-        <th>Линия №8</th>
-        <th>Линия №9</th>
+        {arrCountLines.map((item) => {
+          return <th key={item.numberLine}>Линия №{item.numberLine}</th>;
+        })}
       </tr>
     </thead>
   );

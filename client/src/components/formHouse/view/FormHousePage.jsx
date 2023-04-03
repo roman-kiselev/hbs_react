@@ -13,10 +13,120 @@ import { Scrollbars } from "react-custom-scrollbars-2";
 import { useDispatch, useSelector } from "react-redux";
 import { setActive } from "../../../features/formHouse/formHouseSlice";
 import LineRowHeader from "../form/formTable/LineRowHeader";
+import ColFloors from "../form/formTable/ColFloors";
+import Kdl from "../config/Kdl.js";
+import ConfigHouse from "../config/ConfigHouse";
+import Sections from "../config/Sections";
 
 const FormHousePage = () => {
+  let sectionObject = [
+    {
+      numberSection: 1,
+      sumFloors: 18,
+      lines: 5,
+      typeAsr: ["ASR2", "ASR8"],
+      active: false,
+    },
+    {
+      numberSection: 2,
+      sumFloors: 18,
+      lines: 4,
+      typeAsr: ["ASR2", "ASR8"],
+      active: false,
+    },
+  ];
+
+  const configHome = new ConfigHouse(sectionObject);
+  const nSection = new Sections({
+    numberSection: 2,
+    sumFloors: 18,
+    lines: 7,
+    typeAsr: ["ASR2", "ASR8"],
+    active: false,
+  });
+
+  nSection.dataCount();
+  //console.log(nSection.getArrFloors());
+
+  const myKdl = new Kdl();
+
+  let data = [
+    {
+      typeAsr: "ASR2",
+      numberMeter: "1234541",
+      typeMeter: "Счётчик холодной воды",
+      sumMeter: "0.1",
+    },
+    {
+      typeAsr: "ASR2",
+      numberMeter: "1234541",
+      typeMeter: "Счётчик горячей воды",
+      sumMeter: "0.1",
+    },
+  ];
+
+  let data2 = [
+    {
+      typeAsr: "ASR2",
+      numberMeter: "1234541",
+      typeMeter: "Счётчик холодной воды",
+      sumMeter: "0.1",
+    },
+  ];
+
+  let data8 = [
+    {
+      typeAsr: "ASR8",
+      numberMeter: "1234541",
+      typeMeter: "Счётчик холодной воды",
+      sumMeter: "0.1",
+    },
+    {
+      typeAsr: "ASR8",
+      numberMeter: "1234541",
+      typeMeter: "Счётчик горячей воды",
+      sumMeter: "0.1",
+    },
+    {
+      typeAsr: "ASR8",
+      numberMeter: "1234541",
+      typeMeter: "Счётчик горячей воды",
+      sumMeter: "0.1",
+    },
+    {
+      typeAsr: "ASR8",
+      numberMeter: "1234541",
+      typeMeter: "Счётчик холодной воды",
+      sumMeter: "0.1",
+    },
+    {
+      typeAsr: "ASR8",
+      numberMeter: "1234541",
+      typeMeter: "Счётчик горячей воды",
+      sumMeter: "0.1",
+    },
+    {
+      typeAsr: "ASR8",
+      numberMeter: "1234541",
+      typeMeter: "Счётчик горячей воды",
+      sumMeter: "0.1",
+    },
+  ];
+
+  // myKdl.addAsr2(data);
+  // myKdl.addAsr2(data);
+  // myKdl.addAsr2(data);
+  // myKdl.addAsr2(data);
+  // myKdl.addAsr2(data);
+  // myKdl.addAsr8(data8);
+  // myKdl.addAsr2(data2);
+  // console.log(myKdl.getTypeAsrOnChannels());
+  // console.log(myKdl.getBusyChannels());
+  // console.log(myKdl.getFreeChannels());
+
   const [show, setShow] = useState(false);
   const [activeNumberSection, setActiveNumberSection] = useState("");
+  const [floors, setFloors] = useState();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -24,10 +134,13 @@ const FormHousePage = () => {
   const dispatch = useDispatch();
   const handleClickForActive = (numberSection) => {
     setActiveNumberSection(numberSection);
+    // Установить этаж в соответствии с номероом секции
+    const floor = formHouse.find(
+      (item) => item.numberSection === numberSection
+    );
+    setFloors(floor.sumFloors);
     dispatch(setActive(numberSection));
   };
-
-  console.log(activeNumberSection);
 
   return (
     <Container>
@@ -70,41 +183,7 @@ const FormHousePage = () => {
               <Table striped bordered hover>
                 <LineRowHeader numberSection={activeNumberSection} />
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>
-                      <Card
-                        bg={"light"}
-                        key={"light"}
-                        text={"light" === "light" ? "dark" : "white"}
-                        style={{ width: "20rem" }}
-                        className="mb-2"
-                      >
-                        <Card.Header>АСР</Card.Header>
-                        <Card.Body>
-                          {/* <Card.Title>Card Title</Card.Title> */}
-
-                          <Row>
-                            <Table striped bordered hover>
-                              <tbody>
-                                <tr>
-                                  <td>1</td>
-                                  <td>1</td>
-                                </tr>
-                                <tr>
-                                  <td>2</td>
-                                  <td>2</td>
-                                </tr>
-                                <tr>
-                                  <td colSpan={2}>3</td>
-                                </tr>
-                              </tbody>
-                            </Table>
-                          </Row>
-                        </Card.Body>
-                      </Card>
-                    </td>
-                  </tr>
+                  <ColFloors floors={formHouse.sumFloors} />
                 </tbody>
               </Table>
             </Scrollbars>
