@@ -119,6 +119,7 @@ const MainTabGenerateTemplateWater = ({ objectBuildId }) => {
                         onChange={handleChangeMultiplier}
                         aria-label="Default select example"
                     >
+                        <option>Выберите множитель</option>
                         {listMultiplier.map((item, i) => (
                             <option key={i} value={item.name}>
                                 {item.name}
