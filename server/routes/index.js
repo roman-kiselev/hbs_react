@@ -15,6 +15,7 @@ import testElectricalMeterRouter from "./test/testElectricalMeterRouter.js";
 import kdlMainTableRouter from "../routes/devices/kdlMainTableRouter.js";
 import mainTableSectionRouter from "../routes/mainTable/objects/mainTableSectionRouter.js";
 import deviceKdlRouter from "../routes/mainTable/devices/deviceKdlRouter.js";
+import brandRouter from "../routes/admin/brandsRouter.js";
 
 // User
 router.use("/user", userRouter);
@@ -41,5 +42,7 @@ router.use("/deviceKdl", kdlMainTableRouter);
 
 // Роутер от общей таблицы
 router.use("/mainTable", mainTableSectionRouter, deviceKdlRouter);
+// Роутер создания брендов
+router.use("/brands", brandRouter);
 
 export default router;
