@@ -19,10 +19,14 @@ const Brands = sequelize.define("brands", {
 
 Brands.createBrands = async ({ name }) => {
     try {
-        const brands = await Brands.create({ name });
-        return brands;
+        const brand = await Brands.create({ name });
+        if (!brand) {
+            throw new Error("Бренд не добавлен");
+        }
+        return { brand };
     } catch (e) {
         console.error(e);
+        return { error: e.message, status: 404 };
     }
 };
 
@@ -32,10 +36,10 @@ Brands.getOneBrandById = async (id) => {
         if (!brand) {
             throw new Error("Бренд не найден");
         }
-        return brand;
+        return { brand };
     } catch (e) {
         console.error(e);
-        return { error: "Бренд не найден", status: 500 };
+        return { error: e.message, status: 404 };
     }
 };
 
@@ -56,14 +60,14 @@ Brands.deleteBrands = async (id) => {
     try {
         const brand = await Brands.findByPk(id);
         if (!brand) {
-            throw new Error("Бренд не найден");
+            throw new Error("Ошибка при удалении бренда");
         }
         await Brands.destroy({ where: { id } });
 
-        return brand;
+        return { brand };
     } catch (e) {
         console.error(e);
-        return { error: "Ошибка при удалении бренда", status: 500 };
+        return { error: e.message, status: 404 };
     }
 };
 
@@ -71,15 +75,15 @@ Brands.updateBrands = async ({ id, name }) => {
     try {
         const brand = await Brands.findByPk(id);
         if (!brand) {
-            throw new Error("Бренд не найден");
+            throw new Error("Ошибка редактирования бренда");
         }
         await Brands.update({ name }, { where: { id } });
         const newBrand = await Brands.findByPk(id);
 
-        return newBrand;
+        return { newBrand };
     } catch (e) {
         console.error(e);
-        return { error: "Ошибка редактирования бренда", status: 500 };
+        return { error: e.message, status: 404 };
     }
 };
 

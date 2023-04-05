@@ -17,9 +17,9 @@ class BrandsController {
     async getOneBrandById(req, res) {
         try {
             const { id } = req.params;
-            const brand = await Brands.getOneBrandById(id);
-            if (!brand) {
-                return res.status(404).json({ message: "Не найден бренд" });
+            const { brand, error, status } = await Brands.getOneBrandById(id);
+            if (error) {
+                return res.status(status).json({ message: error });
             }
             return res.status(200).json({ brand });
         } catch (e) {
@@ -31,7 +31,17 @@ class BrandsController {
     async createBrands(req, res) {
         try {
             const { name } = req.body;
-            const brand = await Brands.createBrands({ name });
+            if (!name) {
+                return res
+                    .status(400)
+                    .json({ message: "Не задано название бренда" });
+            }
+            const { brand, error, status } = await Brands.createBrands({
+                name,
+            });
+            if (error) {
+                return res.status(status).json({ message: error });
+            }
             return res.status(201).json({ brand });
         } catch (e) {
             console.error(e);
@@ -42,7 +52,10 @@ class BrandsController {
     async deleteBrands(req, res) {
         try {
             const { id } = req.params;
-            const brand = await Brands.deleteBrands(id);
+            const { brand, error, status } = await Brands.deleteBrands(id);
+            if (error) {
+                return res.status(status).json({ message: error });
+            }
             return res.status(200).json({ brand });
         } catch (e) {
             console.error(e);
@@ -54,7 +67,20 @@ class BrandsController {
         try {
             const { id } = req.params;
             const { name } = req.body;
-            const brand = await Brands.updateBrands({ id, name });
+            if (!name) {
+                return res
+                    .status(400)
+                    .json({ message: "Не задано название бренда" });
+            }
+            const {
+                newBrand: brand,
+                error,
+                status,
+            } = await Brands.updateBrands({ id, name });
+
+            if (error) {
+                return res.status(status).json({ message: error });
+            }
             return res.status(200).json({ brand });
         } catch (e) {
             console.error(e);
