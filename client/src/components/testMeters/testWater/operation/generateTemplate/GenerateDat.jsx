@@ -17,7 +17,7 @@ const GenerateDat = ({
         let timeString = `{"Time":"${time}","Показания":[`;
         let stringChannelsSum = channels
             .map((ch) => `{"${ch.channel}":${ch.sum}}`)
-            .join(", ");
+            .join(",");
         let mainString = `${timeString}${stringChannelsSum}]}`;
         setStateText(mainString);
     };
