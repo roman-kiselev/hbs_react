@@ -1,5 +1,7 @@
-import { Sequelize } from "sequelize/types";
-import sequelize from "../db";
+import { Sequelize } from "sequelize";
+import sequelize from "../db.js";
+import Devices from "./Devices.js";
+import Meters from "./Meters.js";
 
 const Brands = sequelize.define("brands", {
     id: {
@@ -59,7 +61,5 @@ Brands.updateBrands = async ({ id, name }) => {
         console.error(e);
     }
 };
-
-// Создаём связь брендов и магазинов между пользователями
 
 export default Brands;

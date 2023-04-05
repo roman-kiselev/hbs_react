@@ -1,3 +1,7 @@
+import Brands from "./Brands.js";
+import sequelize from "../db.js";
+import { Sequelize } from "sequelize";
+
 const Meters = sequelize.define("meters", {
     id: {
         type: Sequelize.INTEGER,
