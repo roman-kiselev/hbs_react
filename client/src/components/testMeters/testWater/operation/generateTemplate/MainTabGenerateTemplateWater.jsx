@@ -147,7 +147,11 @@ const MainTabGenerateTemplateWater = ({ objectBuildId }) => {
                 />
             </Row>
             <Row className="mt-3">
-                <UpdateDat />
+                <UpdateDat
+                    objectBuildId={objectBuildId}
+                    selectedSection={selectedSection}
+                    selectedKdl={selectedKdl}
+                />
             </Row>
         </Row>
     );
