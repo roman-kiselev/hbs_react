@@ -60,6 +60,6 @@ Brands.updateBrands = async ({ id, name }) => {
     }
 };
 
-// Создаём связь
+// Создаём связь брендов и магазинов между пользователями
 
 export default Brands;
