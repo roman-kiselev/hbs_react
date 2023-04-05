@@ -9,6 +9,7 @@ import { getMetersByNumberFlat } from "../../service/serviceWater/serviceWater.j
 import HeadersWaterConfig from "../../service/headersConfig/headersWater/HeadersWaterConfig.js";
 import createHeatTemplate from "../../service/headersConfig/createHeatTemplate.js";
 import createWaterTemplate from "../../service/headersConfig/createWaterTemplate.js";
+import { getDatFile } from "../../service/serviceWater/getDatFileWater.js";
 
 class TestWaterMeterController {
     async addNewMeter(req, res) {
@@ -411,6 +412,25 @@ class TestWaterMeterController {
                 nameSheet
             );
             return res.send(buffer);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    // Получение dat текста
+    async getDatText(req, res) {
+        try {
+            console.log("first");
+            const { id: objectBuildId } = req.params;
+            const { section, numberKdl } = req.query;
+
+            const { time, channels } = await getDatFile(
+                objectBuildId,
+                section,
+                numberKdl
+            );
+
+            return res.json({ time, channels });
         } catch (e) {
             console.log(e);
         }

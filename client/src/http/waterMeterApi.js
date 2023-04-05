@@ -114,3 +114,11 @@ export const deleteWaterMeter = async ({ id }) => {
 
     return data;
 };
+
+export const getDat = async (objectBuildId, section, numberKdl) => {
+    const { data } = await $authHost.get(
+        `api/testAddWater/getDat/${objectBuildId}/?section=${section}&numberKdl=${numberKdl}`
+    );
+
+    return data;
+};

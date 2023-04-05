@@ -5,6 +5,8 @@ import { useQuery } from "react-query";
 import { getAllKdlBySectionId } from "../../../../../http/mainTableApi/device/deviceApi";
 import { getAllSections } from "../../../../../http/mainTableApi/objects/sectionsApi";
 import { getTemplateFromServerWater } from "../../../../../http/waterMeterApi";
+import GenerateDat from "./GenerateDat";
+import UpdateDat from "./UpdateDat";
 
 const MainTabGenerateTemplateWater = ({ objectBuildId }) => {
     // Состояние selected
@@ -134,6 +136,17 @@ const MainTabGenerateTemplateWater = ({ objectBuildId }) => {
                         <RiFileExcel2Line />
                     </Button>
                 </Col>
+            </Row>
+            <Row className="mt-3">
+                <GenerateDat
+                    stateButton={stateButton}
+                    objectBuildId={objectBuildId}
+                    selectedSection={selectedSection}
+                    selectedKdl={selectedKdl}
+                />
+            </Row>
+            <Row className="mt-3">
+                <UpdateDat />
             </Row>
         </Row>
     );

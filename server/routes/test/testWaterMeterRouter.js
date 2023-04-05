@@ -16,6 +16,7 @@ router.post(
 router.get("/search", TestWaterMeterController.searchByNumber);
 //router.get("/excel", TestWaterMeterController.getExcelTest);
 router.get("/getTemplateWater", TestWaterMeterController.getWaterTemplate);
+router.get("/getDat/:id", TestWaterMeterController.getDatText);
 router.delete("/:id", TestWaterMeterController.deleteMeter);
 router.post("/:id", TestWaterMeterController.getOneMeter);
 

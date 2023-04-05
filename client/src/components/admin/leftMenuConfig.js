@@ -6,10 +6,10 @@ export const leftMenuConfig = [
     title: "Пользователи",
   },
   {
-    toItem: `brends`,
+    toItem: `brendsAndType`,
     action: true,
     variant: "light",
-    title: "Бренды",
+    title: "Бренды и типы",
   },
   {
     toItem: `createMeters`,

@@ -106,7 +106,7 @@ Section.updateSectionById = async (dataSection) => {
     console.error(e);
   }
 };
-
+// Удаление секции по id
 Section.deleteSectionById = async (id) => {
   try {
     const section = await Section.findByPk(id);
