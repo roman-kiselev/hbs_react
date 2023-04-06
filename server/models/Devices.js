@@ -1,6 +1,5 @@
 import { Sequelize } from "sequelize";
 import sequelize from "../db.js";
-import Brands from "./Brands.js";
 
 const Devices = sequelize.define("devices", {
     id: {

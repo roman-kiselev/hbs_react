@@ -219,9 +219,10 @@ class TestWaterMeterController {
     async addAllMetersInObject(req, res) {
         try {
             const { objectBuildId, userId } = req.query;
-            console.log(objectBuildId, userId);
+
             const { jsonData } = req.body;
             const data = JSON.parse(jsonData);
+            console.log(data);
 
             // Создадим массив с повторяющимися счётчиками
             const repeatMeters = [];
@@ -232,6 +233,8 @@ class TestWaterMeterController {
                     for (const d of data) {
                         const meter = await Models.MainAddMeter.findOne(
                             {
+                                // / !!!!!!!!!!  Важно !!!!!!!!!!!!!!
+                                // Временно отключаю что бы добавить с 0
                                 where: {
                                     numberMeter: d.numberMeter,
                                 },
