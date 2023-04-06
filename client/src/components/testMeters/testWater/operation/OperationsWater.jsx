@@ -41,6 +41,11 @@ const OperationsWater = ({ id: objectBuildId }) => {
         objectBuildId,
         currentPage: 1,
     };
+    const [stateCheck, setStateCheck] = useState(false);
+    const handleSelectCheck = () => {
+        setStateCheck(!stateCheck);
+    };
+    console.log(stateCheck);
 
     //Функция для считывания файла
     const handleFileUpload = async (event) => {
@@ -80,9 +85,11 @@ const OperationsWater = ({ id: objectBuildId }) => {
             }
             const dataJson = JSON.stringify(mainData);
 
-            addDataExcelWater(objectBuildId, userId, dataJson).then((res) => {
-                dispatch(getAllMetersByUserAndObject({ formQuery }));
-            });
+            addDataExcelWater(objectBuildId, userId, stateCheck, dataJson).then(
+                (res) => {
+                    dispatch(getAllMetersByUserAndObject({ formQuery }));
+                }
+            );
             // addDataExcel(objectBuildId, userId, dataJson).then((res) => {
             //     dispatch(getAllElectricalMeters({ formQuery }));
             //     // В res лежат счётчики с повторным номером и ответ
@@ -133,6 +140,8 @@ const OperationsWater = ({ id: objectBuildId }) => {
                             <MainTabReadFileWater
                                 objectBuildId={objectBuildId}
                                 handleFileUpload={handleFileUpload}
+                                stateCheck={stateCheck}
+                                handleSelectCheck={handleSelectCheck}
                             />
                         </Tab.Pane>
                     </Tab.Content>

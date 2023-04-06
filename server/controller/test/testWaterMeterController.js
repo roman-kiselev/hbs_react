@@ -218,33 +218,64 @@ class TestWaterMeterController {
     // Добавляем данные из excel
     async addAllMetersInObject(req, res) {
         try {
-            const { objectBuildId, userId } = req.query;
+            const { objectBuildId, userId, checkSelected } = req.query;
 
             const { jsonData } = req.body;
             const data = JSON.parse(jsonData);
-            console.log(data);
 
             // Создадим массив с повторяющимися счётчиками
             const repeatMeters = [];
             // Создаём транзакцию с помощью Sequelize
 
-            await sequelize.transaction(async (t) => {
-                try {
-                    for (const d of data) {
-                        const meter = await Models.MainAddMeter.findOne(
-                            {
-                                // / !!!!!!!!!!  Важно !!!!!!!!!!!!!!
-                                // Временно отключаю что бы добавить с 0
-                                where: {
-                                    numberMeter: d.numberMeter,
+            if (checkSelected === "false") {
+                await sequelize.transaction(async (t) => {
+                    try {
+                        for (const d of data) {
+                            const meter = await Models.MainAddMeter.findOne(
+                                {
+                                    where: {
+                                        numberMeter: d.numberMeter,
+                                    },
+                                    raw: true,
                                 },
-                                raw: true,
-                            },
 
-                            { transaction: t }
-                        );
+                                { transaction: t }
+                            );
 
-                        if (!meter) {
+                            if (!meter) {
+                                await Models.MainAddMeter.create(
+                                    {
+                                        section: d.section,
+                                        floor: d.floor,
+                                        flat: d.flat,
+                                        numberKdl: d.numberKdl,
+                                        numberAsr: d.numberAsr,
+                                        numberMeter: d.numberMeter,
+                                        sumMeter: d.sumMeter,
+                                        objectBuildId,
+                                        userId,
+                                        typeMeter:
+                                            d.numberAsr % 2 === 0
+                                                ? "Счётчик горячей воды"
+                                                : "Счётчик холодной воды",
+                                    },
+                                    { transaction: t }
+                                );
+                            } else {
+                                repeatMeters.push(meter);
+                            }
+                        }
+
+                        return res.json({ repeatMeters, success: true });
+                    } catch (e) {
+                        //await transaction.rollback();
+                        console.log(e);
+                    }
+                });
+            } else {
+                await sequelize.transaction(async (t) => {
+                    try {
+                        for (const d of data) {
                             await Models.MainAddMeter.create(
                                 {
                                     section: d.section,
@@ -263,17 +294,15 @@ class TestWaterMeterController {
                                 },
                                 { transaction: t }
                             );
-                        } else {
-                            repeatMeters.push(meter);
                         }
-                    }
 
-                    return res.json({ repeatMeters, success: true });
-                } catch (e) {
-                    //await transaction.rollback();
-                    console.log(e);
-                }
-            });
+                        return res.json({ success: true });
+                    } catch (e) {
+                        //await transaction.rollback();
+                        console.log(e);
+                    }
+                });
+            }
 
             //const meters = await Models.MainAddMeter.bulkCreate(jsonData);
         } catch (e) {
