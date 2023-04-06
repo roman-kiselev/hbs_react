@@ -3,6 +3,9 @@ import { Sequelize } from "sequelize";
 import Brands from "./Brands.js";
 import Meters from "./Meters.js";
 import Devices from "./Devices.js";
+import Section from "./Section.js";
+import Parameters from "./Parameters.js";
+import Property from "./Property.js";
 
 class User extends Sequelize.Model {}
 User.init(
@@ -162,16 +165,26 @@ User.hasMany(MainAddMeter);
 MainAddMeter.belongsTo(User);
 
 // Создаём связь брендов с счётчиками и устройствами
-// У брендов много счётчиков
+// У одного бренда много счётчиков
 Brands.hasMany(Meters);
-// У брендов много устройств
+// У одного бренда много устройств
 Brands.hasMany(Devices);
 // Связь с брендами
-// У счётчиков только один бренд
+// А у одного счётчика много брендов
 Meters.belongsTo(Brands);
 // Связь с брендами
-// У устройств только один бренд
+// А у одного устройства много брендов
 Devices.belongsTo(Brands);
+
+// У одного дома много секций
+ObjectBuilds.hasMany(Section);
+// А у одной секции один дом
+Section.belongsTo(ObjectBuilds);
+
+//  У одного параметра много свойств
+Parameters.hasOne(Property);
+// А у одного свойства один параметр
+Property.belongsTo(Parameters);
 
 export default {
     User,
@@ -182,4 +195,7 @@ export default {
     Brands,
     Devices,
     Meters,
+    Section,
+    Parameters,
+    Property,
 };
