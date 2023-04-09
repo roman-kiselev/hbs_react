@@ -39,10 +39,15 @@ export const getAllWaterMeter = async (objectBuildId) => {
         });
 };
 
-export const addDataExcelWater = async (objectBuildId, userId, jsonData) => {
+export const addDataExcelWater = async (
+    objectBuildId,
+    userId,
+    checkSelected,
+    jsonData
+) => {
     try {
         const { data } = await $authHost.post(
-            `/api/testAddWater/addAllMetersExcel/?objectBuildId=${objectBuildId}&userId=${userId}`,
+            `/api/testAddWater/addAllMetersExcel/?objectBuildId=${objectBuildId}&userId=${userId}&checkSelected=${checkSelected}`,
             { jsonData },
             {
                 unUploadProgress: (progressEvent) => {

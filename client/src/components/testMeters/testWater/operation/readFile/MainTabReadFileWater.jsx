@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Badge, Form, Row, Table } from "react-bootstrap";
 
-const MainTabReadFileWater = ({ objectBuildId, handleFileUpload }) => {
+const MainTabReadFileWater = ({
+    objectBuildId,
+    handleFileUpload,
+    stateCheck,
+    handleSelectCheck,
+}) => {
     return (
         <>
             <Row>
@@ -47,6 +52,17 @@ const MainTabReadFileWater = ({ objectBuildId, handleFileUpload }) => {
                             Важно!!! Счётчик холодной воды - Канал нечётный!
                             Счётчик горячей воды - Канал чётный
                         </Badge>
+                    </Row>
+                    <Row className="mt-3">
+                        <Form>
+                            <Form.Check
+                                type="switch"
+                                id="custom-switch"
+                                value={stateCheck}
+                                onChange={handleSelectCheck}
+                                label="Разрешить загрузку с повторными номерами"
+                            />
+                        </Form>
                     </Row>
                 </Row>
             </Row>

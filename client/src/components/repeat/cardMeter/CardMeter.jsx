@@ -45,7 +45,9 @@ const CardMeter = ({ cardData, handleClickForEdit, handleClickDel }) => {
                     {cardData.flat ? (
                         <Card.Header className="text-center">
                             <Row>
-                                <Col sm={10}>Квартира № {cardData.flat}</Col>
+                                <Col sm={10}>
+                                    <Row>Квартира № {cardData.flat}</Row>
+                                </Col>
                                 <Col sm={2}>
                                     <AiFillDelete
                                         size={30}
