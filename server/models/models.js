@@ -6,6 +6,9 @@ import Devices from "./Devices.js";
 import Section from "./Section.js";
 import Parameters from "./Parameters.js";
 import Property from "./Property.js";
+import Flats from "./Flats.js";
+import Floors from "./Floors.js";
+import Office from "./Office.js";
 
 class User extends Sequelize.Model {}
 User.init(
@@ -181,6 +184,21 @@ ObjectBuilds.hasMany(Section);
 // А у одной секции один дом
 Section.belongsTo(ObjectBuilds);
 
+Section.hasMany(Flats);
+Flats.belongsTo(Section);
+
+Section.hasMany(Office);
+Office.belongsTo(Section);
+
+Section.hasMany(Floors);
+Floors.belongsTo(Section);
+
+Floors.hasMany(Flats);
+Flats.belongsTo(Floors);
+
+Floors.hasMany(Office);
+Office.belongsTo(Floors);
+
 //  У одного параметра много свойств
 Parameters.hasOne(Property);
 // А у одного свойства один параметр
@@ -198,4 +216,7 @@ export default {
     Section,
     Parameters,
     Property,
+    Flats,
+    Floors,
+    Office,
 };
