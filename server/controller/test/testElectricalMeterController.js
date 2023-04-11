@@ -84,7 +84,7 @@ class TestElectricalMeterController {
             } = req.body;
 
             const meter = await Models.MainAddMeter.findByPk(id);
-            console.log(meter);
+
             // Проверить что все поля не равны нулю
             if (floor !== 0 && flat !== 0 && line !== 0 && section !== 0) {
                 await meter.update({

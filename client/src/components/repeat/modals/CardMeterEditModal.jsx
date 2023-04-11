@@ -53,7 +53,7 @@ const CardMeterEditModal = ({
     formData.append("section", section);
     formData.append("floor", floor);
     formData.append("flat", flat);
-    formData.append("office", office);
+    formData.append("office", office === null ? 0 : office);
     formData.append("numberMeter", numberMeter);
     formData.append("sumMeter", sumMeter);
     formData.append("numberAsr", numberAsr);
