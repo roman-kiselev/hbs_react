@@ -14,7 +14,6 @@ import InputNumberSelected from "../../../repeat/inputs/inputsNumber/InputNumber
 const TestFormCoolHotMeterBolid = ({ id }) => {
     const dispatch = useDispatch();
     // Состояние форм
-
     const [section, setSection, handleInputChangeSection] = useNumber("");
     const [floors, setFloors, handleInputChangeFloors] = useNumber("");
     const [flat, setFlat, handleInputChangeFlat] = useNumber("");
