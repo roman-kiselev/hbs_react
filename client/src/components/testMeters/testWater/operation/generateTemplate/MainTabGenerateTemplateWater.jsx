@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { RiFileExcel2Line } from "react-icons/ri";
 import { useQuery } from "react-query";
@@ -33,6 +33,12 @@ const MainTabGenerateTemplateWater = ({ objectBuildId }) => {
     const [multiplier, setMultiplier] = React.useState("");
     // Отслеживаем состояние кнопки для скачивания
     const [stateButton, setStateButton] = React.useState(true);
+    // Состояние текстового поля
+    const [stateTextMain, setStateTextMain] = useState({});
+    const addText = (value) => {
+        setStateTextMain(value);
+    };
+
     const handleGetKdl = async (objectBuildId, section) => {
         const { listKdl } = await getAllKdlBySectionId(objectBuildId, section);
 
@@ -144,6 +150,7 @@ const MainTabGenerateTemplateWater = ({ objectBuildId }) => {
                     objectBuildId={objectBuildId}
                     selectedSection={selectedSection}
                     selectedKdl={selectedKdl}
+                    addText={addText}
                 />
             </Row>
             <Row className="mt-3">
@@ -151,6 +158,7 @@ const MainTabGenerateTemplateWater = ({ objectBuildId }) => {
                     objectBuildId={objectBuildId}
                     selectedSection={selectedSection}
                     selectedKdl={selectedKdl}
+                    stateTextMain={stateTextMain}
                 />
             </Row>
         </Row>

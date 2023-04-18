@@ -8,9 +8,17 @@ const GenerateDat = ({
     objectBuildId,
     selectedSection,
     selectedKdl,
+    stateTextMain,
+    addText,
 }) => {
     // Состояние текстового поля
     const [stateText, setStateText] = React.useState("");
+
+    // Функция из главной страницы для изменения данных
+    const handleChangeText = (e) => {
+        addText(e);
+        setStateText(e.target.value);
+    };
 
     // Функция формирует текст
     const configDatText = (channels, time) => {
@@ -20,6 +28,7 @@ const GenerateDat = ({
             .join(",");
         let mainString = `${timeString}${stringChannelsSum}]}`;
         setStateText(mainString);
+        addText(mainString);
     };
 
     const handleGetDat = async () => {
@@ -58,8 +67,9 @@ const GenerateDat = ({
                                         ? "Пока нет данных"
                                         : stateText
                                 }
+                                disabled={true}
                                 onChange={(e) => {
-                                    setStateText(e.target.value);
+                                    handleChangeText(e);
                                 }}
                             />
                         </Form.Group>
