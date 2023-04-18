@@ -21,6 +21,34 @@ const generateObject = (value) => {
     };
 };
 
+// Поиск по ключу в массиве с объектами
+const findKey = (arrOne, key) => {
+    let result = arrOne.find((item) => item.hasOwnProperty(key));
+    if (result) {
+        return result[key];
+    } else {
+        return 0;
+    }
+};
+// Функция для массива
+const findIndex = (arrOne, arrTwo) => {
+    let x = arrOne.map((a) => {
+        let key = Object.keys(a)[0];
+        let value = a[key];
+        let valueTwo = findKey(arrTwo, key);
+
+        return { [key]: (a[key] += valueTwo) };
+    });
+
+    return x;
+};
+
+function updateArray(arrMain, arrTwo) {
+    let finishArr = findIndex(arrMain, arrTwo);
+
+    return finishArr;
+}
+
 const UpdateDat = ({
     objectBuildId,
     selectedSection,
@@ -28,7 +56,7 @@ const UpdateDat = ({
     stateTextMain,
 }) => {
     // Это массив с показаниями из БД
-    const { timeForArr, arrSum } = generateObject(stateTextMain);
+    const { timeForArr, arrSum: arrSumMain } = generateObject(stateTextMain);
     // Состояние текстового поля
     const [stateText, setStateText] = React.useState("");
     // Состояние отредактированного поля
@@ -48,29 +76,11 @@ const UpdateDat = ({
         const { timeForArr, arrSum } = generateObject(stateText);
         timeForArr2 = timeForArr;
         arrSum2 = arrSum;
-        let editedMain = [...arrSum];
-        updateArray(arrSum, arrSum2);
 
-        setStateTextEdit(JSON.stringify(editedMain));
+        const finishArr = updateArray(arrSumMain, arrSum2);
+
+        setStateTextEdit(JSON.stringify(finishArr));
     };
-
-    function updateArray(arrMain, arrTwo) {
-        arrMain.forEach((obj1, index) => {
-            // перебираем все объекты в arr1
-            const key = Object.keys(obj1)[0]; // получаем ключ первого (и единственного) свойства объекта
-            const value = Object.values(obj1)[0]; // получаем значение первого (и единственного) свойства объекта
-            const obj2 = arrTwo.find((item) => item.hasOwnProperty(key)); // ищем объект в arr2 с тем же ключом
-
-            if (obj2) {
-                let key2 = Object.keys(obj2)[0]; // получаем ключ второго (и единственного) свойства объекта
-                let value2 = Object.values(obj2)[0]; // получаем значение второго (и единственного) свойства объекта
-                console.log(
-                    `Value 1: ${key}:${value} - Value 2: ${key2}:${value2}// ${index}`
-                );
-                obj1[key] += obj2[key2]; // обновляем значение ключа в объекте из arr1
-            }
-        });
-    }
 
     return (
         <Row>
