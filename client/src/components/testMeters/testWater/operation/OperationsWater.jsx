@@ -45,7 +45,7 @@ const OperationsWater = ({ id: objectBuildId }) => {
     const handleSelectCheck = () => {
         setStateCheck(!stateCheck);
     };
-    console.log(stateCheck);
+    
 
     //Функция для считывания файла
     const handleFileUpload = async (event) => {

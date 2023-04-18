@@ -55,12 +55,19 @@ const UpdateDat = ({
     };
 
     function updateArray(arrMain, arrTwo) {
-        arrMain.forEach((obj1) => {
+        arrMain.forEach((obj1, index) => {
             // перебираем все объекты в arr1
             const key = Object.keys(obj1)[0]; // получаем ключ первого (и единственного) свойства объекта
+            const value = Object.values(obj1)[0]; // получаем значение первого (и единственного) свойства объекта
             const obj2 = arrTwo.find((item) => item.hasOwnProperty(key)); // ищем объект в arr2 с тем же ключом
+
             if (obj2) {
-                obj1[key] += obj2[key]; // обновляем значение ключа в объекте из arr1
+                let key2 = Object.keys(obj2)[0]; // получаем ключ второго (и единственного) свойства объекта
+                let value2 = Object.values(obj2)[0]; // получаем значение второго (и единственного) свойства объекта
+                console.log(
+                    `Value 1: ${key}:${value} - Value 2: ${key2}:${value2}// ${index}`
+                );
+                obj1[key] += obj2[key2]; // обновляем значение ключа в объекте из arr1
             }
         });
     }
