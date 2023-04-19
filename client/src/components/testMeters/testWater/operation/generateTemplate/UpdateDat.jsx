@@ -77,7 +77,7 @@ const UpdateDat = ({
         timeForArr2 = timeForArr;
         arrSum2 = arrSum;
 
-        const finishArr = updateArray(arrSumMain, arrSum2);
+        const finishArr = updateArray(arrSum2, arrSumMain);
 
         setStateTextEdit(JSON.stringify(finishArr));
     };
