@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Card, Container, Form, Row, Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+//import { useDispatch } from "react-redux";
 //import {setUser, setIsAuth, loginIn} from "../features/user/userSlice";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
 const Auth: React.FC = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+    //const dispatch = useDispatch();
+    //const navigate = useNavigate();
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
 
@@ -52,7 +52,7 @@ const Auth: React.FC = () => {
                     />
                     <Row className="d-flex justify-content-between">
                         <Button
-                            onClick={() => checkAndRedirect()}
+                            //onClick={() => checkAndRedirect()}
                             className="mt-3 pointer-event"
                             variant={"outline-success"}
                         >
