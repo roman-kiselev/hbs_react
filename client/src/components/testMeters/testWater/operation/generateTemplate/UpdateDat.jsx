@@ -37,7 +37,7 @@ const findIndex = (arrOne, arrTwo) => {
         let value = a[key];
         let valueTwo = findKey(arrTwo, key);
 
-        return { [key]: (a[key] += valueTwo) };
+        return { [key]: (a[key] += valueTwo).toFixed(2) };
     });
 
     return x;
