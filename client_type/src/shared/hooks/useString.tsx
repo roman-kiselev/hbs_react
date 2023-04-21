@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
-const useNumber = (initialValue: number) => {
+const useString = (initialValue: string) => {
     const [value, setValue] = useState(initialValue);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setValue(Number(e.target.value));
+        setValue(String(e.target.value));
     };
 
     return [value, setValue, handleInputChange];
 };
 
-export default useNumber;
+export default useString;

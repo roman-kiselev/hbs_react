@@ -1,2 +1,5 @@
 //shared/hooks — кастомные хуки.
-export {};
+import useNumber from "./useNumber";
+import useString from "./useString";
+
+export { useNumber, useString };
