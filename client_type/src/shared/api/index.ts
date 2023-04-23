@@ -1,2 +1,4 @@
 //shared/api — работа с API.
-export {};
+import { $host, $authHost } from "./main";
+
+export { $host, $authHost };

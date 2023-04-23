@@ -1,5 +1,6 @@
 import React from "react";
 interface IInputStringProps {
+    type: string;
     value: string;
     title?: string;
     disabled: boolean;

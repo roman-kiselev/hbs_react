@@ -2,5 +2,6 @@
 import { InputNumber } from "./inputs/inputsNumber";
 import { InputNumberFloat } from "./inputs/inputsNumber";
 import { InputString } from "./inputs/inputsString";
+import { ButtonUI } from "./buttons";
 
-export { InputNumber, InputNumberFloat, InputString };
+export { InputNumber, InputNumberFloat, InputString, ButtonUI };
