@@ -1,12 +1,22 @@
 import React from "react";
 import NavLinkAskue from "./NavLinkAskue";
-import { IConfig } from "../../../shared/interfaces";
+import {
+    IConfig,
+    IUser,
+    IRole,
+    INavLinkAskueProps,
+} from "../../../shared/interfaces";
 
-const NavAskue: React.FC<IConfig> = ({ configData }) => {
+interface INavAskue {
+    configData: INavLinkAskueProps[];
+    role: IRole[];
+}
+
+const NavAskue: React.FC<INavAskue> = ({ configData, role }) => {
     return (
         <>
             {configData.map((item) => (
-                <NavLinkAskue key={item.to} {...item} />
+                <NavLinkAskue key={item.to} {...item} role={role} />
             ))}
         </>
     );
