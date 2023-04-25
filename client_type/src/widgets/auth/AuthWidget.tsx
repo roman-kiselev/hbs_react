@@ -31,7 +31,10 @@ const AuthWidget: React.FC = () => {
                     <h2>Авторизация</h2>
                     <InputString {...loginProps} />
                     <InputString {...passwordProps} />
-                    <ButtonUI label="Вход" />
+                    <ButtonUI
+                        label="Вход"
+                        onClick={() => console.log("hello")}
+                    />
                 </Form>
             </Card>
         </Container>

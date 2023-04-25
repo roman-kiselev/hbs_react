@@ -1,14 +1,12 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import NavbarAskue from "../entities/navbar";
+import { NavbarAskueFeaters } from "../features";
 import { Routing } from "../pages";
 
 const App = () => {
-    const isAuth = true;
-
     return (
         <BrowserRouter>
-            <>{isAuth ? <NavbarAskue /> : <></>}</>
+            <NavbarAskueFeaters />
             <Routing />
         </BrowserRouter>
     );

@@ -4,6 +4,7 @@ import IConfig from "./navbar/IConfig";
 import IInputNumber from "./ui/inputsNumber/IInputNumberProps";
 import IRequireAuthProps from "./auth/IRequireAuthProps";
 import IButtonUI from "./ui/buttons/IButtonUI";
+import { IRole, IUser, IUserLogin, IUserSlice } from "./store";
 
 export type {
     INavLinkAskueProps,
@@ -12,4 +13,8 @@ export type {
     IInputNumber,
     IRequireAuthProps,
     IButtonUI,
+    IRole,
+    IUser,
+    IUserLogin,
+    IUserSlice,
 };
