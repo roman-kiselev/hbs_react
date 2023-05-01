@@ -7,6 +7,8 @@ import { loginUser } from "../../shared/models/users/userSlice";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { AppState } from "../../shared/interfaces/store";
+import { LoadingSpin } from "../../entities";
+import { LoadingVariant } from "../../shared/config";
 
 const useLogin = () => {
     const [login, setLogin] = useState("");
@@ -56,20 +58,11 @@ const AuthWidget: React.FC = () => {
     const { isError, isLoading } = useSelector(
         (state: AppState) => state.users
     );
-    const isAuth = true;
 
     if (isLoading) {
-        return (
-            <Container
-                className="d-flex justify-content-center align-items-center"
-                style={{ height: window.innerHeight - 54 }}
-            >
-                <Spinner animation="border" />
-            </Container>
-        );
+        return <LoadingSpin variant={LoadingVariant.DARK} />;
     }
 
-    //console.log(users);
     const handleClick = async (dispatch: (action: any) => Promise<any>) => {
         const data = await dispatch(loginUser(userData));
         if (data) {

@@ -26,11 +26,10 @@ export const loginUser = createAsyncThunk(
     }
 );
 
-export const check = createAsyncThunk("user/check", async () => {
+export const checkAuth = createAsyncThunk("user/check", async () => {
     try {
-        const { data } = await $authHost.get("/auth/check");
-        localStorage.setItem("token", data.token);
-        return jwt_decode(data.token);
+        const { data } = await $authHost.get("api/user/auth");
+        return data;
     } catch (e) {
         throw new Error(e.message);
     }
@@ -72,13 +71,29 @@ export const userSlice = createSlice({
             state.isLoading = false;
         });
         builder.addCase(loginUser.rejected, (state, action) => {
-            //console.log(action.error.message);
             state.isLoading = false;
             state.isError = true;
         });
 
-        // Check
-        builder.addCase(check.fulfilled, (state, action) => {});
+        //
+        builder.addCase(checkAuth.pending, (state, action) => {
+            state.isLoading = true;
+        });
+        // Проверка
+        builder.addCase(checkAuth.fulfilled, (state, action) => {
+            const { token } = action.payload;
+            const user: IUser = jwt_decode(token);
+            localStorage.setItem("token", token);
+            const { id, login, role } = user;
+            state.user = { id, login, role };
+            state.isAuth = true;
+            state.isLoading = false;
+        });
+        // Ошибка
+        builder.addCase(checkAuth.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+        });
     },
 });
 
