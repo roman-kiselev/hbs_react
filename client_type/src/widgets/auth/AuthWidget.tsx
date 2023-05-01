@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Alert, Card, Container, Form, Spinner } from "react-bootstrap";
+import { Alert, Card, Container, Form } from "react-bootstrap";
 import { ButtonUI, InputString } from "../../shared/ui";
-import { IInputStringProps, IUserLogin } from "../../shared/interfaces";
+import { IInputStringProps } from "../../shared/interfaces";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../shared/models/users/userSlice";
 import { useNavigate } from "react-router";
@@ -33,18 +33,18 @@ const usePassword = () => {
     return [password, passwordProps] as const;
 };
 // Проверить state isAuth  и переадресовать на главную страницу
-const checkAndRedirect = async (
-    dispatch: (action: any) => Promise<any>,
-    navigate: ReturnType<typeof useNavigate>,
-    userBody: IUserLogin
-) => {
-    try {
-        const { login, password } = userBody;
-        let data = await dispatch(loginUser(userBody));
-    } catch (e) {
-        console.log(e);
-    }
-};
+// const checkAndRedirect = async (
+//     dispatch: (action: any) => Promise<any>,
+//     navigate: ReturnType<typeof useNavigate>,
+//     userBody: IUserLogin
+// ) => {
+//     try {
+//         const { login, password } = userBody;
+//         let data = await dispatch(loginUser(userBody));
+//     } catch (e) {
+//         console.log(e);
+//     }
+// };
 
 const AuthWidget: React.FC = () => {
     const [login, loginProps] = useLogin();
