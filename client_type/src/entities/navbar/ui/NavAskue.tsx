@@ -1,11 +1,6 @@
 import React from "react";
 import NavLinkAskue from "./NavLinkAskue";
-import {
-    IConfig,
-    IUser,
-    IRole,
-    INavLinkAskueProps,
-} from "../../../shared/interfaces";
+import { IRole, INavLinkAskueProps } from "../../../shared/interfaces";
 
 interface INavAskue {
     configData: INavLinkAskueProps[];

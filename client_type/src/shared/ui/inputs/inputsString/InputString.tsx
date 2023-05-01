@@ -7,13 +7,14 @@ const InputString: React.FC<IInputStringProps> = ({
     value,
     disabled,
     onChange,
+    type = "text",
 }) => {
     return (
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             {title ? <Form.Label>{title}</Form.Label> : <></>}
 
             <Form.Control
-                type="text"
+                type={type}
                 value={value}
                 disabled={disabled}
                 onChange={onChange}

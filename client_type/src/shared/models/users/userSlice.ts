@@ -1,7 +1,7 @@
 import jwt_decode from "jwt-decode";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { $authHost } from "../../api";
-import { IUserLogin, IUserSlice } from "../../interfaces";
+import { $authHost, $host } from "../../api";
+import { IUser, IUserLogin, IUserSlice } from "../../interfaces";
 
 // Интерфейс для входа
 
@@ -15,15 +15,12 @@ const initialState: IUserSlice = {
 
 export const loginUser = createAsyncThunk(
     "user/login",
-    async (userData: IUserLogin) => {
-        const { login, password } = userData;
+    async (userData: IUserLogin, { rejectWithValue, dispatch }) => {
         try {
-            const response = await $authHost.post("/auth/login", {
-                login,
-                password,
-            });
-            return response.data;
+            const { data } = await $host.post("/api/user/login", userData);
+            return data;
         } catch (e) {
+            console.log("erroe");
             throw new Error(e.message);
         }
     }
@@ -66,14 +63,16 @@ export const userSlice = createSlice({
             state.isLoading = true;
         });
         builder.addCase(loginUser.fulfilled, (state, action) => {
-            const token = action.payload.token;
+            const { token } = action.payload;
+            const user: IUser = jwt_decode(token);
             localStorage.setItem("token", token);
-            // const { id, login, role } = jwt_decode(token);
-            // state.user = { id, login, role };
+            const { id, login, role } = user;
+            state.user = { id, login, role };
             state.isAuth = true;
             state.isLoading = false;
         });
-        builder.addCase(loginUser.rejected, (state) => {
+        builder.addCase(loginUser.rejected, (state, action) => {
+            //console.log(action.error.message);
             state.isLoading = false;
             state.isError = true;
         });

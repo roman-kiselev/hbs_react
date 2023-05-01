@@ -1,3 +1,3 @@
 import AuthWidget from "./AuthWidget";
-
-export { AuthWidget };
+import CheckAuthAndRole from "./CheckAuthAndRole";
+export { AuthWidget, CheckAuthAndRole };
