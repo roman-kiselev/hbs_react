@@ -9,22 +9,24 @@ import { AppState } from "../../shared/interfaces/store";
 import { checkAuth } from "../../shared/models/users/userSlice";
 
 const checkIsAuth = async (dispatch: (action: any) => Promise<any>) => {
-    const response = await dispatch(checkAuth());
-    console.log(response);
-    return response;
+    const { data } = await dispatch(checkAuth());
+    if (data) {
+        return true;
+    } else {
+        return false;
+    }
 };
 
 // Компонент обрабатывает проверку авторизации
 const RequireAuth: React.FC<IRequireAuthProps> = ({ children }) => {
     const location = useLocation();
     const dispatch = useDispatch();
-    const { isAuth, isError, isLoading, user } = useSelector(
-        (state: AppState) => state.users
-    );
-    //console.log(localStorage);
+    const { isAuth, isLoading } = useSelector((state: AppState) => state.users);
+
     useEffect(() => {
-        checkIsAuth(dispatch);
-    }, []);
+        const check = checkIsAuth(dispatch);
+        console.log(check);
+    }, [dispatch]);
     if (isLoading) {
         return <LoadingSpin variant={LoadingVariant.INFO} />;
     }
