@@ -228,6 +228,11 @@ MetersLogs.init(
         modelName: "meters_logs",
     }
 );
+
+MetersLogs.getAllMeters = async () => {
+    return await MetersLogs.findAll();
+};
+
 MainAddMeter.hasOne(ObjectBuildSettingUp);
 ObjectBuildSettingUp.belongsTo(MainAddMeter);
 
