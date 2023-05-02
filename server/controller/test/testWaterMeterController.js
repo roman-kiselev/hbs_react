@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import pkg from "sequelize";
+import pkg, { Sequelize } from "sequelize";
 import Models from "../../models/models.js";
 import TestExcelService from "../../service/testExcel/TestExcelService.js";
 import * as XLSX from "xlsx";
@@ -463,6 +463,23 @@ class TestWaterMeterController {
             );
 
             return res.json({ time, channels });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    // Получение всех счётчиков воды по объекту
+    async getAllMetersInObject(req, res) {
+        try {
+            const { id: objectBuildId } = req.params;
+            const meters = await Models.MainAddMeter.findAll({
+                where: {
+                    objectBuildId,
+                },
+                limit: 500,
+            });
+
+            return res.json({ meters });
         } catch (e) {
             console.log(e);
         }

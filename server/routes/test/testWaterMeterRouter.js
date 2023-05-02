@@ -8,6 +8,7 @@ router.get(
     "/getAllMeters",
     TestWaterMeterController.getExcelAllWaterMeterInObject
 );
+router.get("/getAllTable/:id", TestWaterMeterController.getAllMetersInObject);
 router.post(
     "/addAllMetersExcel",
     TestWaterMeterController.addAllMetersInObject

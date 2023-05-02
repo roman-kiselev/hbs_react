@@ -41,7 +41,13 @@ export const leftMenuItem = [
         action: true,
         variant: "light",
         title: "Сформировать дом",
-    }
+    },
+    {
+        toItem: `settingsUp`,
+        action: true,
+        variant: "light",
+        title: "Наладка",
+    },
 
     // {
     //     toItem: "addCoolMeterBolid",

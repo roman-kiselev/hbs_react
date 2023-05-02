@@ -1,5 +1,7 @@
 import sequelize from "../db.js";
 import { Sequelize } from "sequelize";
+import pkg from "sequelize";
+const { DataTypes } = pkg;
 import Brands from "./Brands.js";
 import Meters from "./Meters.js";
 import Devices from "./Devices.js";
@@ -162,6 +164,76 @@ MainAddMeter.init(
     }
 );
 
+class ObjectBuildSettingUp extends Sequelize.Model {}
+ObjectBuildSettingUp.init(
+    {
+        id: {
+            type: Sequelize.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+            allowNull: false,
+        },
+        status: {
+            type: DataTypes.ENUM(
+                "Работает",
+                "Не работает",
+                "Отключен",
+                "Не определен",
+                "Проблемы связи",
+                "Села батарея"
+            ),
+            defaultValue: "Работает",
+        },
+        replacement: {
+            type: DataTypes.BOOLEAN,
+            allowNull: true,
+            defaultValue: false,
+        },
+        comment: {
+            type: Sequelize.BOOLEAN,
+            allowNull: true,
+            defaultValue: false,
+        },
+    },
+    {
+        sequelize,
+        modelName: "object_build_setting_up",
+    }
+);
+
+class MetersLogs extends Sequelize.Model {}
+MetersLogs.init(
+    {
+        id: {
+            type: Sequelize.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+            allowNull: false,
+        },
+        comment: {
+            type: DataTypes.TEXT,
+            allowNull: true,
+        },
+        action: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        date: {
+            type: Sequelize.DATE,
+            allowNull: false,
+        },
+    },
+    {
+        sequelize,
+        modelName: "meters_logs",
+    }
+);
+MainAddMeter.hasOne(ObjectBuildSettingUp);
+ObjectBuildSettingUp.belongsTo(MainAddMeter);
+
+ObjectBuildSettingUp.hasMany(MetersLogs);
+MetersLogs.belongsTo(ObjectBuildSettingUp);
+
 ObjectBuilds.hasMany(MainAddMeter);
 MainAddMeter.belongsTo(ObjectBuilds);
 User.hasMany(MainAddMeter);
@@ -219,4 +291,6 @@ export default {
     Flats,
     Floors,
     Office,
+    ObjectBuildSettingUp,
+    MetersLogs,
 };
