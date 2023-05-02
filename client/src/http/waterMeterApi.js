@@ -127,3 +127,11 @@ export const getDat = async (objectBuildId, section, numberKdl) => {
 
     return data;
 };
+
+export const getMeters = async (objectBuildId) => {
+    const { data } = await $authHost.get(
+        `api/testAddWater/getAllTable/${objectBuildId}`
+    );
+
+    return data;
+};
