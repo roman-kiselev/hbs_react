@@ -476,6 +476,7 @@ class TestWaterMeterController {
                 where: {
                     objectBuildId,
                 },
+                include: { all: true },
                 limit: 500,
             });
 

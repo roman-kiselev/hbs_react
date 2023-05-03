@@ -1,6 +1,8 @@
 .idea
 client/node_modules
 server/node_modules
+server_type/node_modules
+server_type/dist
 client/.env
 server/.env
 server/static

@@ -4,11 +4,11 @@
     "colId": "history",
     "containerId": "",
     "name": "http://192.168.3.16:7777/api/testAddWater/getAllTable/3",
-    "url": "http://192.168.3.16:7777/api/testAddWater/getAllTable/3",
+    "url": "http://192.168.1.14:7777/api/testAddWater/getAllTable/1",
     "method": "GET",
     "sortNum": 0,
     "created": "2023-05-02T07:44:23.250Z",
-    "modified": "2023-05-02T07:44:23.250Z",
+    "modified": "2023-05-02T18:32:36.841Z",
     "headers": [],
     "params": [],
     "tests": []
