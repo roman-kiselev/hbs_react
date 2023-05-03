@@ -484,6 +484,82 @@ class TestWaterMeterController {
             console.log(e);
         }
     }
+
+    // Синхронизация с таблицами статусов и логов
+    // Для воды
+    async synchronizationTable(req, res) {
+        try {
+            // Получаем id объекта
+            const { id: objectBuildId } = req.params;
+            // Получаем счётчики воды
+            let typeMeterCool = "Счётчик холодной воды";
+            let typeMeterHot = "Счётчик горячей воды";
+            const meters = await Models.MainAddMeter.findAll({
+                where: {
+                    objectBuildId,
+                    [Op.or]: [
+                        { typeMeter: typeMeterCool },
+                        { typeMeter: typeMeterHot },
+                    ],
+                },
+                raw: true,
+            });
+
+            for (const meter of meters) {
+                const [meterStatus, created] =
+                    await Models.ObjectBuildSettingUp.findOrCreate({
+                        where: {
+                            mainMeterId: meter.id,
+                        },
+                        defaults: {
+                            status: "Работает",
+                            replacement: false,
+                            comment: false,
+                            objectBuildId: meter.objectBuildId,
+                        },
+                    });
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    // Отдадим таблицу с изменениями
+    async getChangeTable(req, res) {
+        try {
+            const { id: objectBuildId } = req.params;
+            const metersChange = await Models.ObjectBuildSettingUp.findAll({
+                where: {
+                    objectBuildId,
+                },
+                include: [Models.MainAddMeter, Models.MetersLogs],
+            });
+
+            return res.json({ metersChange });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async setObjectBuildSettingUp(req, res) {
+        try {
+            const { id } = req.params;
+            const { status, replacement, comment } = req.body;
+            const objectBuildSettingUp =
+                await Models.ObjectBuildSettingUp.findByPk(id);
+            await objectBuildSettingUp.update({
+                status,
+                replacement,
+                comment,
+            });
+
+            return res.json({
+                objectBuildSettingUp,
+            });
+        } catch (e) {
+            console.log(e);
+        }
+    }
 }
 
 export default new TestWaterMeterController();

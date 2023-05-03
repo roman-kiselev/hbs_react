@@ -163,6 +163,23 @@ MainAddMeter.init(
         modelName: "main_meter",
     }
 );
+// Добавляем хук
+MainAddMeter.hooks.add("afterCreate", async (mainAddMeter, option) => {
+    await ObjectBuildSettingUp.create({
+        mainMeterId: mainAddMeter.id,
+        status: "Работает",
+        replacement: false,
+        comment: false,
+    });
+});
+// MainAddMeter.afterCreate(async (mainAddMeter, option) => {
+//     await ObjectBuildSettingUp.create({
+//         mainMeterId: mainAddMeter.id,
+//         status: "Работает",
+//         replacement: false,
+//         comment: false,
+//     });
+// });
 
 class ObjectBuildSettingUp extends Sequelize.Model {}
 ObjectBuildSettingUp.init(
@@ -229,11 +246,39 @@ MetersLogs.init(
     }
 );
 
-MetersLogs.getAllMeters = async () => {
-    return await MetersLogs.findAll();
+MetersLogs.addLogs = async (objectBuildSettingUpId, data) => {
+    try {
+        const { comment, action, date } = data;
+        const up = await MetersLogs.create({
+            comment,
+            action,
+            date,
+            objectBuildSettingUpId: objectBuildSettingUpId,
+        });
+
+        return up;
+    } catch (e) {
+        console.log(e);
+    }
+};
+MetersLogs.getLogsMeters = async (idMainMeters) => {
+    try {
+        return await MetersLogs.findAll({
+            where: {
+                objectBuildSettingUpId: idMainMeters,
+            },
+        });
+    } catch (e) {
+        console.log(e);
+    }
 };
 
-MainAddMeter.hasOne(ObjectBuildSettingUp);
+ObjectBuilds.hasMany(MetersLogs);
+ObjectBuildSettingUp.belongsTo(ObjectBuilds);
+
+MainAddMeter.hasOne(ObjectBuildSettingUp, {
+    onDelete: "cascade",
+});
 ObjectBuildSettingUp.belongsTo(MainAddMeter);
 
 ObjectBuildSettingUp.hasMany(MetersLogs);
