@@ -55,12 +55,15 @@ const AuthWidget: React.FC = () => {
     };
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { isError, isLoading } = useSelector(
+    const { isError, isLoading, isAuth } = useSelector(
         (state: AppState) => state.users
     );
 
     if (isLoading) {
         return <LoadingSpin variant={LoadingVariant.DARK} />;
+    }
+    if (isAuth) {
+        navigate("/");
     }
 
     const handleClick = async (dispatch: (action: any) => Promise<any>) => {
