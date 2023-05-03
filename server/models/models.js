@@ -163,6 +163,23 @@ MainAddMeter.init(
         modelName: "main_meter",
     }
 );
+// Добавляем хук
+MainAddMeter.hooks.add("afterCreate", async (mainAddMeter, option) => {
+    await ObjectBuildSettingUp.create({
+        mainMeterId: mainAddMeter.id,
+        status: "Работает",
+        replacement: false,
+        comment: false,
+    });
+});
+// MainAddMeter.afterCreate(async (mainAddMeter, option) => {
+//     await ObjectBuildSettingUp.create({
+//         mainMeterId: mainAddMeter.id,
+//         status: "Работает",
+//         replacement: false,
+//         comment: false,
+//     });
+// });
 
 class ObjectBuildSettingUp extends Sequelize.Model {}
 ObjectBuildSettingUp.init(
@@ -196,6 +213,22 @@ ObjectBuildSettingUp.init(
         },
     },
     {
+        hooks: {
+            afterCreate: async (MetersLogs, option) => {
+                try {
+                    await MetersLogs.create({
+                        comment: "Создан счётчик",
+                        action: "Create",
+                        date: new Date(),
+                        objectBuildSettingUpId: option.objectBuildSettingUpId,
+                    });
+                } catch (e) {
+                    console.log(e);
+                }
+            },
+        },
+    },
+    {
         sequelize,
         modelName: "object_build_setting_up",
     }
@@ -223,17 +256,90 @@ MetersLogs.init(
             allowNull: false,
         },
     },
+
     {
         sequelize,
         modelName: "meters_logs",
     }
 );
 
-MetersLogs.getAllMeters = async () => {
-    return await MetersLogs.findAll();
+// ObjectBuildSettingUp.hooks.add(
+//     "afterCreate",
+//     async (ObjectBuildSettingUp, option) => {
+//         try {
+//             await MetersLogs.create({
+//                 comment: "Создан счётчик",
+//                 action: "Create",
+//                 date: new Date(),
+//                 objectBuildSettingUpId: ObjectBuildSettingUp.id,
+//             });
+//         } catch (e) {
+//             console.log(e);
+//         }
+//     }
+// );
+
+MetersLogs.addLogs = async (objectBuildSettingUpId, action, comment) => {
+    try {
+        const dateNew = new Date();
+        const day = dateNew.getDate().toString().padStart(2, "0");
+        const month = (dateNew.getMonth() + 1).toString().padStart(2, "0");
+        const year = dateNew.getFullYear().toString();
+        const hours = dateNew.getHours().toString().padStart(2, "0");
+        const minutes = dateNew.getMinutes().toString().padStart(2, "0");
+        const seconds = dateNew.getSeconds().toString().padStart(2, "0");
+
+        const formattedDate = `${day}.${month}.${year}_${hours}.${minutes}.${seconds}`;
+
+        const { comment = "", action } = data;
+        const up = await MetersLogs.create({
+            comment,
+            action,
+            date: dateNew,
+            objectBuildSettingUpId: objectBuildSettingUpId,
+        });
+
+        return up;
+    } catch (e) {
+        console.log(e);
+    }
 };
 
-MainAddMeter.hasOne(ObjectBuildSettingUp);
+ObjectBuildSettingUp.updatePlusLog = async (id, data) => {
+    try {
+        const { status, replacement, comment } = data;
+        const meter = await ObjectBuildSettingUp.findByPk(id);
+        meter.status = data.status;
+        meter.replacement = data.replacement;
+        meter.comment = data.comment;
+        const result = await meter.save();
+        if (result) {
+            await MetersLogs.addLogs(id);
+        }
+
+        return result;
+    } catch (e) {
+        console.log(e);
+    }
+};
+MetersLogs.getLogsMeters = async (idMainMeters) => {
+    try {
+        return await MetersLogs.findAll({
+            where: {
+                objectBuildSettingUpId: idMainMeters,
+            },
+        });
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+ObjectBuilds.hasMany(MetersLogs);
+ObjectBuildSettingUp.belongsTo(ObjectBuilds);
+
+MainAddMeter.hasOne(ObjectBuildSettingUp, {
+    onDelete: "cascade",
+});
 ObjectBuildSettingUp.belongsTo(MainAddMeter);
 
 ObjectBuildSettingUp.hasMany(MetersLogs);

@@ -3,11 +3,18 @@ import TestWaterMeterController from "../../controller/test/testWaterMeterContro
 const router = express.Router();
 
 router.post("/", TestWaterMeterController.addNewMeter);
+
 router.get("/", TestWaterMeterController.getAllByIdUserAndObject);
 router.get(
     "/getAllMeters",
     TestWaterMeterController.getExcelAllWaterMeterInObject
 );
+router.get("/getAllMetersChange/:id", TestWaterMeterController.getChangeTable);
+router.get(
+    "/synchronization/:id",
+    TestWaterMeterController.synchronizationTable
+);
+
 router.get("/getAllTable/:id", TestWaterMeterController.getAllMetersInObject);
 router.post(
     "/addAllMetersExcel",

@@ -135,3 +135,17 @@ export const getMeters = async (objectBuildId) => {
 
     return data;
 };
+export const getChangeTable = async (objectBuildId) => {
+    const { data } = await $authHost.get(
+        `api/testAddWater/getAllMetersChange/${objectBuildId}`
+    );
+
+    return data;
+};
+
+export const sincMeters = async (objectBuildId) => {
+    const { data } = await $authHost.get(
+        `api/testAddWater/synchronization/${objectBuildId}`
+    );
+    return data;
+};
