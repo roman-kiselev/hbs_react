@@ -1,15 +1,13 @@
 // Создаём модель пользователя
 
 import { DataTypes } from "sequelize";
-import { Table, Model, Column } from "sequelize-typescript";
+import { Table, Model, Column, BelongsToMany } from "sequelize-typescript";
+import { IUserCreate } from "../../interfaces";
+import { Role } from "./roles";
+import { UsersRole } from "./users_role";
 
-interface UserAttr {
-    login: string;
-    password: string;
-}
-
-@Table
-export class User extends Model<User, UserAttr> {
+@Table({ tableName: "users" })
+export class User extends Model<User, IUserCreate> {
     @Column({
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -28,4 +26,7 @@ export class User extends Model<User, UserAttr> {
         allowNull: false,
     })
     password: string;
+
+    @BelongsToMany(() => Role, () => UsersRole)
+    roles: Role[];
 }
