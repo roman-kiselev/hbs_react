@@ -2,19 +2,25 @@ import ApiError from "../../lib";
 import { Role } from "../../models/user";
 import { CreateRoleDto } from "../../dto";
 
+interface R {}
+
 export const createRole = async (dto: CreateRoleDto) => {
     try {
         const [role, created] = await Role.findOrCreate({
             where: { name: dto.name },
             defaults: dto,
         });
+
         if (!created) {
-            return ApiError.badRequest("Роль с таким именем уже существует");
+            return ApiError.notFound(
+                "Роль с таким именем уже существует",
+                role
+            );
         }
         if (!role) {
             return ApiError.badRequest("Не удаётся создать роль");
         }
-        return role;
+        return ApiError.ok("Роль успешно создана", role);
     } catch (e) {
         console.log(e);
         return ApiError.serverError("Ошибка сервера");

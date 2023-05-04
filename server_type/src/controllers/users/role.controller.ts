@@ -7,7 +7,7 @@ class RoleController {
         try {
             const dto = req.body as CreateRoleDto;
             const role = await createRole(dto);
-            return res.status(201).json({ role });
+            return res.status(201).json(role);
         } catch (err) {
             console.log(err);
             res.status(500).json({ message: "Internal server error" });
