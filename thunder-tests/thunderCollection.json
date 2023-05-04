@@ -1,1 +1,24 @@
-[]
+[
+  {
+    "_id": "a7d0c96d-902d-4e7d-bde9-1374fe65d3f6",
+    "colName": "askue",
+    "created": "2023-05-04T13:28:16.720Z",
+    "sortNum": 10000,
+    "folders": [
+      {
+        "_id": "c7035e48-f44c-4d5f-a10e-cbb030ada3fa",
+        "name": "users",
+        "containerId": "",
+        "created": "2023-05-04T13:28:27.260Z",
+        "sortNum": 10000
+      },
+      {
+        "_id": "126cd008-9bfd-44cf-9b60-d476c3f41056",
+        "name": "roles",
+        "containerId": "",
+        "created": "2023-05-04T13:28:34.674Z",
+        "sortNum": 20000
+      }
+    ]
+  }
+]
