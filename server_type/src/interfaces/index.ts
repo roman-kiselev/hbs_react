@@ -1,3 +1,11 @@
-import { IUserCreate, IRoleCreate } from "./models";
+import { IUserCreate, IRoleCreate, IUserLogin } from "./models";
+import { IRoleService } from "./service";
 import AuthenticatedRequest from "./middlewares/AuthenticatedRequest";
-export { IUserCreate, IRoleCreate, AuthenticatedRequest };
+
+export {
+    IUserCreate,
+    IRoleCreate,
+    AuthenticatedRequest,
+    IRoleService,
+    IUserLogin,
+};

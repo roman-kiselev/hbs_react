@@ -1,58 +1,49 @@
-// import { Request, Response } from "express";
-// import {
-//   createUser,
-//   getUserById,
-//   getUsers,
-//   deleteUser,
-//   updateUser,
-// } from "./user.service";
+import { Request, Response } from "express";
+import { IUserCreate, IUserLogin } from "../../interfaces";
+import { User } from "../../models/user";
+import { UsersService } from "../../services";
 
-// export const createUserController = (req: Request, res: Response) => {
-//   try {
-//     const user = createUser(req, res);
-//     res.status(201).json(user);
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json({ message: "Internal server error" });
-//   }
-// };
+interface RequestUser extends Request {
+    user: User;
+}
 
-// export const getUsersController = (req: Request, res: Response) => {
-//   try {
-//     const users = getUsers(req, res);
-//     res.status(200).json(users);
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json({ message: "Internal server error" });
-//   }
-// };
+interface IUserController {
+    registration(req: Request, res: Response): void;
+    login(req: Request, res: Response): void;
+    check(req: RequestUser, res: Response): void;
+}
 
-// export const getUserByIdController = (req: Request, res: Response) => {
-//   try {
-//     const user = getUserById(req, res);
-//     res.status(200).json(user);
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json({ message: "Internal server error" });
-//   }
-// };
+class UserController implements IUserController {
+    async registration(req: Request, res: Response) {
+        try {
+            const dto = req.body as IUserCreate;
+            const token = await UsersService.registrationUser(dto);
+            return res.status(201).json({ token });
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
-// export const updateUserController = (req: Request, res: Response) => {
-//   try {
-//     const user = updateUser(req, res);
-//     res.status(200).json(user);
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json({ message: "Internal server error" });
-//   }
-// };
+    async login(req: Request, res: Response) {
+        try {
+            const dto = req.body as IUserLogin;
+            const token = await UsersService.loginUser(dto);
+            return res.status(200).json({ token });
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
-// export const deleteUserController = (req: Request, res: Response) => {
-//   try {
-//     deleteUser(req, res);
-//     res.status(204).end();
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json({ message: "Internal server error" });
-//   }
-// };
+    async check(req: RequestUser, res: Response) {
+        try {
+            const user = req.user;
+            const token = await UsersService.check(user);
+            //console.log(user);
+            return res.status(200).json({ token });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+}
+
+export default new UserController();

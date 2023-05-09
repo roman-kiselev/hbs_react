@@ -1,3 +1,4 @@
-import { createRole } from "./role.service";
+import RoleService from "./role.service";
+import UsersService from "./users.service";
 
-export { createRole };
+export { RoleService, UsersService };

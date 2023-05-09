@@ -6,8 +6,14 @@ import { IUserCreate } from "../../interfaces";
 import { Role } from "./roles";
 import { UsersRole } from "./users_role";
 
+interface UserAttr {
+    id: number;
+    login: string;
+    password: string;
+}
+
 @Table({ tableName: "users" })
-export class User extends Model<User, IUserCreate> {
+export class User extends Model<User, UserAttr> {
     @Column({
         type: DataTypes.INTEGER,
         autoIncrement: true,

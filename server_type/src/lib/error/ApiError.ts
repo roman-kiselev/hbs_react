@@ -1,9 +1,10 @@
 import { Response } from "express";
+import { Model } from "sequelize-typescript";
 
 class ApiError extends Error {
     status: number;
     message: string;
-    data?: any;
+    data?: Model;
     constructor(status: number, message: string, data?: any) {
         super();
         this.status = status;

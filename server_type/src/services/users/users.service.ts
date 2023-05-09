@@ -1,60 +1,121 @@
-import { User, UsersRole } from "../../models/user";
-import { IUserCreate } from "../../interfaces";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
+import { Role, User, UsersRole } from "../../models/user";
+import { IUserCreate, IUserLogin } from "../../interfaces";
 import ApiError from "../../lib";
+import { RoleService } from ".";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 class CreateUserDto {
     login: string;
     password: string;
 }
 
-export const createUser = async (dto: CreateUserDto) => {
-    try {
-        const user = await User.create(dto);
-        if (!user) {
-            return ApiError.badRequest("Не удаётся создать пользователя");
-        }
-
-        return user;
-    } catch (e) {
-        console.log(e);
-        return ApiError.serverError("Ошибка сервера");
-    }
+const generateJwt = (id: string, login: string, role: any) => {
+    return jwt.sign(
+        {
+            id: id,
+            login: login,
+            roles: role,
+        },
+        process.env.SECRET_KEY,
+        { expiresIn: "8h" }
+    );
 };
 
-// export const createUser = (req: Request, res: Response) => {
-//     const { name, email } = req.body;
-//     const newUser: User = { id: Date.now().toString(), name, email };
-//     users.push(newUser);
-//     res.status(201).json(newUser);
-//   };
+interface IUserService {
+    registrationUser(dto: IUserCreate): Promise<any>;
+    loginUser(dto: IUserLogin): Promise<User | ApiError>;
+    check(user: User): any;
+    // getAll(): Promise<User[]>;
+    // getById(id: string): Promise<User>;
+    // update(id: string, dto: IUserCreate): Promise<User>;
+    // delete(id: string): Promise<User>;
+}
 
-//   export const getUsers = (req: Request, res: Response) => {
-//     res.status(200).json(users);
-//   };
+class UserService implements IUserService {
+    async registrationUser(dto: IUserCreate): Promise<any> {
+        try {
+            const { login, password, role = "user" } = dto;
 
-//   export const getUserById = (req: Request, res: Response) => {
-//     const user = users.find((u) => u.id === req.params.id);
-//     if (!user) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
-//     res.status(200).json(user);
-//   };
+            if (!login || !password) {
+                return ApiError.badRequest("Не удаётся создать пользователя");
+            }
+            const candidate = await User.findOne({
+                where: { login },
+            });
+            if (candidate) {
+                return ApiError.badRequest(
+                    "Пользователь с таким логином уже существует"
+                );
+            }
+            // Хэшируем пароль
+            const hashPassword = await bcrypt.hash(password, 5);
+            const roleFind = await RoleService.getRoleByNameS(role);
 
-//   export const updateUser = (req: Request, res: Response) => {
-//     const userIndex = users.findIndex((u) => u.id === req.params.id);
-//     if (userIndex === -1) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
-//     const { name, email } = req.body;
-//     users[userIndex] = { ...users[userIndex], name, email };
-//     res.status(200).json(users[userIndex]);
-//   };
+            if (roleFind instanceof ApiError) {
+                return roleFind;
+            }
 
-//   export const deleteUser = (req: Request, res: Response) => {
-//     const userIndex = users.findIndex((u) => u.id === req.params.id);
-//     if (userIndex === -1) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
-//     users.splice(userIndex, 1);
-//     res.status(204).end();
-//   };
+            const user = await User.create({
+                login,
+                password: hashPassword,
+            });
+            const token = generateJwt(user.id.toString(), user.login, [
+                roleFind,
+            ]);
+
+            await user.$add("roles", roleFind);
+            user.roles = [roleFind];
+            return token;
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async loginUser(dto: IUserLogin): Promise<User | ApiError> {
+        try {
+            const { login, password } = dto;
+            const user = await User.findOne({
+                where: { login },
+                include: { model: Role },
+            });
+
+            if (!user) {
+                return ApiError.badRequest("Пользователь не найден");
+            }
+
+            let comparePassword = bcrypt.compareSync(password, user.password);
+            if (!comparePassword) {
+                return ApiError.forbidden("Неверный логин или пароль");
+            }
+            const token = generateJwt(
+                user.id.toString(),
+                user.login,
+                user.roles
+            );
+
+            return token;
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async check(user: User) {
+        try {
+            console.log(user.id, user.login, user.roles);
+            const token = generateJwt(
+                user.id.toString(),
+                user.login,
+                user.roles
+            );
+            return token;
+        } catch (e) {
+            console.log(e);
+        }
+    }
+}
+
+export default new UserService();

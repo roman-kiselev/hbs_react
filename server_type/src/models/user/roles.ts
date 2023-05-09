@@ -17,6 +17,7 @@ export class Role extends Model<Role, IRoleCreate> {
         type: DataTypes.STRING,
         unique: true,
         allowNull: false,
+        defaultValue: "user",
     })
     name: string;
 

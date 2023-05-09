@@ -1,3 +1,3 @@
-import { RoleController } from "./users";
+import { RoleController, UsersController } from "./users";
 
-export { RoleController };
+export { RoleController, UsersController };

@@ -1,3 +1,5 @@
 import IUserCreate from "./IUserCreate";
 import IRoleCreate from "./IRoleCreate";
-export { IUserCreate, IRoleCreate };
+import IUserLogin from "./IUserLogin";
+
+export { IUserCreate, IRoleCreate, IUserLogin };
