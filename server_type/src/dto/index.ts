@@ -1,3 +1,3 @@
-import { CreateRoleDto } from "./createDto";
+import { CreateRoleDto, CreateObjectBuildsDto } from "./createDto";
 
-export { CreateRoleDto };
+export { CreateRoleDto, CreateObjectBuildsDto };

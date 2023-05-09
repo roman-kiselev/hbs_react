@@ -1,3 +1,4 @@
 import { IRoleService } from "./IRoleService";
+import { IObjectBuildsService } from "./objects";
 
-export { IRoleService };
+export { IRoleService, IObjectBuildsService };

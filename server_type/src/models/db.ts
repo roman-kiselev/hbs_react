@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import * as dotenv from "dotenv";
 import { User, Role, UsersRole } from "./user";
+import { ObjectsBuilds } from "./objects";
 dotenv.config();
 
 const db = new Sequelize(
@@ -12,7 +13,7 @@ const db = new Sequelize(
         port: Number(process.env.PORT_DB),
         dialect: "mysql",
         define: {},
-        models: [User, Role, UsersRole],
+        models: [User, Role, UsersRole, ObjectsBuilds],
     }
 );
 
