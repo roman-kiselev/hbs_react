@@ -9,6 +9,7 @@ router.get(
     "/getAllMeters",
     TestWaterMeterController.getExcelAllWaterMeterInObject
 );
+router.put("/updateBulk", TestWaterMeterController.updateDataBase);
 router.get("/getAllMetersChange/:id", TestWaterMeterController.getChangeTable);
 router.get(
     "/synchronization/:id",

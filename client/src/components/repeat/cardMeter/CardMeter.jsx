@@ -8,7 +8,7 @@ import {
     OverlayTrigger,
 } from "react-bootstrap";
 import TestFormEditMeter from "../../addMeters/bolid/formMeter/TestFormEditMeter";
-import CardMeterEditModal from "../modals/CardMeterEditModal";
+import CardMeterEditModal from "../modals/CardMeterEditModalOffline";
 import { AiFillDelete } from "react-icons/ai";
 
 const CardMeter = ({ cardData, handleClickForEdit, handleClickDel }) => {

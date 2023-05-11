@@ -219,10 +219,10 @@ class TestWaterMeterController {
     async addAllMetersInObject(req, res) {
         try {
             const { objectBuildId, userId, checkSelected } = req.query;
-
+            console.log(checkSelected);
             const { jsonData } = req.body;
             const data = JSON.parse(jsonData);
-
+            console.log(data);
             // Создадим массив с повторяющимися счётчиками
             const repeatMeters = [];
             // Создаём транзакцию с помощью Sequelize
@@ -559,6 +559,20 @@ class TestWaterMeterController {
             });
         } catch (e) {
             console.log(e);
+        }
+    }
+
+    // Обновление данных в базе данных
+    async updateDataBase(req, res) {
+        try {
+            const { jsonData } = req.body;
+            const data = JSON.parse(jsonData);
+            const meters = await Models.MainAddMeter.bulkUpdate(data, {
+                individualHooks: true,
+            });
+            return res.json({ meters });
+        } catch (e) {
+            console.error(e);
         }
     }
 }

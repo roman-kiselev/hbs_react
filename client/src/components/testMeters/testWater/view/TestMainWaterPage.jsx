@@ -4,6 +4,7 @@ import TestFormCoolHotMeterBolid from "../form/TestFormCoolHotMeterBolid";
 import { useParams } from "react-router-dom";
 import ListMeterWater from "../listMeters/ListMeterWater";
 import OperationsWater from "../operation/OperationsWater";
+import FormEditOffline from "../formEditOffline/FormEditOffline";
 
 const TestMainWaterPage = () => {
     // id объекта
@@ -21,13 +22,13 @@ const TestMainWaterPage = () => {
         <Row>
             <p style={{ fontSize: 15 }}>Добавление счётчиков воды (Болид)</p>
             <Row>
-                <Row className="justify-content-end">
+                {/* <Row className="justify-content-end">
                     <Col className="text-end">
                         <Button variant="info" onClick={handleShow}>
                             Задать параметры
                         </Button>
                     </Col>
-                </Row>
+                </Row> */}
 
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
@@ -68,6 +69,9 @@ const TestMainWaterPage = () => {
                     <Tab eventKey="op" title="Операции">
                         {/* Здесь операции __ Скачать excel и т.д. */}
                         <OperationsWater id={id} />
+                    </Tab>
+                    <Tab eventKey="edit" title="КДЛ/АСР">
+                        <FormEditOffline id={id} />
                     </Tab>
                 </Tabs>
             </Row>
