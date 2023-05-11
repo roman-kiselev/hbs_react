@@ -2,7 +2,6 @@
 
 import { DataTypes } from "sequelize";
 import { Table, Model, Column, BelongsToMany } from "sequelize-typescript";
-import { IUserCreate } from "../../interfaces";
 import { Role } from "./roles";
 import { UsersRole } from "./users_role";
 

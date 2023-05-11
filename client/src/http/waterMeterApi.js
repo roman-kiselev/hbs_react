@@ -149,3 +149,11 @@ export const sincMeters = async (objectBuildId) => {
     );
     return data;
 };
+
+export const updateBulk = async (data) => {
+    const { data: result } = await $authHost.put(
+        `api/testAddWater/updateBulk`,
+        data
+    );
+    return result;
+};
