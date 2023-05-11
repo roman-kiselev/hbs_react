@@ -212,22 +212,7 @@ ObjectBuildSettingUp.init(
             defaultValue: false,
         },
     },
-    {
-        hooks: {
-            afterCreate: async (MetersLogs, option) => {
-                try {
-                    await MetersLogs.create({
-                        comment: "Создан счётчик",
-                        action: "Create",
-                        date: new Date(),
-                        objectBuildSettingUpId: option.objectBuildSettingUpId,
-                    });
-                } catch (e) {
-                    console.log(e);
-                }
-            },
-        },
-    },
+
     {
         sequelize,
         modelName: "object_build_setting_up",
