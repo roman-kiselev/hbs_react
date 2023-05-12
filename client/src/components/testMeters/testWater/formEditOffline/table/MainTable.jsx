@@ -54,6 +54,7 @@ const MainTable = ({ data }) => {
                         <th>Канал</th>
                         <th>№Счётчика</th>
                         <th>Показания</th>
+                        <th>№Кв.</th>
                         <th>Ред.</th>
                     </tr>
                 </thead>
@@ -65,6 +66,7 @@ const MainTable = ({ data }) => {
                                 <td>{meter.numberAsr}</td>
                                 <td>{meter.numberMeter}</td>
                                 <td>{meter.sumMeter}</td>
+                                <td>{meter.flat}</td>
                                 <td>
                                     <Button
                                         variant="primary"
