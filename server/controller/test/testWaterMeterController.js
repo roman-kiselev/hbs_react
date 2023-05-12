@@ -565,6 +565,7 @@ class TestWaterMeterController {
     // Обновление данных в базе данных
     async updateDataBase(req, res) {
         try {
+            console.log("====>  update");
             const { jsonData } = req.body;
             console.log(jsonData);
             const data = JSON.parse(jsonData);
@@ -578,7 +579,7 @@ class TestWaterMeterController {
                 });
             }
 
-            return res.json({ status: "ok" });
+            return res.json({ status: "true" });
         } catch (e) {
             console.error(e);
         }
@@ -587,7 +588,6 @@ class TestWaterMeterController {
     // возвращаем таблицу для оффлайна
     async getTableForOffline(req, res) {
         try {
-            console.log("===> Hello");
             const { id: objectBuildId } = req.params;
             console.log(objectBuildId);
             const table = await Models.MainAddMeter.findAll({

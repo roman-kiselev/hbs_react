@@ -155,7 +155,7 @@ export const updateBulk = async (jsonData) => {
         const { data } = await $authHost.put(`api/testAddWater/updateBulk`, {
             jsonData,
         });
-        return { data };
+        return data;
     } catch (e) {
         console.error(e);
     }

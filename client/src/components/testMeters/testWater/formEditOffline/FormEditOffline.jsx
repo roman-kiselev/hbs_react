@@ -15,6 +15,8 @@ import getRowsByNumberKdl from "../db/service/getRowsByNumberKdl";
 import useLiveQuery from "dexie-react-hooks";
 import getAllTable from "../db/service/getAllTable";
 import { delDbAndClose } from "../db/service/delDb";
+import { AiOutlineCheckCircle } from "react-icons/ai";
+
 // Добавляем все счётчики из БД
 const getWaterMeters = async (idObject, dataOld, setState) => {
     try {
@@ -53,19 +55,45 @@ const getArrOneKdl = async (kdl, setState) => {
 };
 
 // Получаем всю таблицу
-const getAllTableWater = async () => {
+const getAllTableWater = async (setStatus) => {
     try {
         const data = await getAllTable();
         if (data) {
+            setStatus(false);
             // Преобразуем данные в json
             const jsonData = JSON.stringify(data);
-            console.log(jsonData);
-            const result = await updateBulk(jsonData);
-            console.log(result);
+
+            const { data: result } = await updateBulk(jsonData);
+
+            if (result) {
+                setStatus(true);
+                setTimeout(() => {
+                    setStatus(null);
+                }, 3000);
+            }
         }
     } catch (e) {
         console.log(e);
     }
+};
+
+const CheckSuccess = ({ status }) => {
+    if (status === null) {
+        return <></>;
+    }
+
+    if (status === true) {
+        return (
+            <>
+                <AiOutlineCheckCircle style={{ color: "green" }} size={30} />
+            </>
+        );
+    }
+    return (
+        <>
+            <AiOutlineCheckCircle style={{ color: "yellow" }} size={30} />
+        </>
+    );
 };
 
 const FormEditOffline = ({ id }) => {
@@ -73,6 +101,7 @@ const FormEditOffline = ({ id }) => {
         getWaterMeters(id);
         // Перезагрузить страницу
     };
+    const [status, setStatus] = useState(null);
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -123,9 +152,13 @@ const FormEditOffline = ({ id }) => {
                     </Button>
                 </Col>
                 <Col className="mt-3" sm={4}>
-                    <Button variant="success" onClick={getAllTableWater}>
+                    <Button
+                        variant="success"
+                        onClick={() => getAllTableWater(setStatus)}
+                    >
                         Отправить данные
                     </Button>
+                    <CheckSuccess status={status} />
                 </Col>
                 <Col className="mt-3" sm={4}>
                     <Button variant="danger" onClick={delDbAndClose}>
