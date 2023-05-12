@@ -566,13 +566,53 @@ class TestWaterMeterController {
     async updateDataBase(req, res) {
         try {
             const { jsonData } = req.body;
+            console.log(jsonData);
             const data = JSON.parse(jsonData);
-            const meters = await Models.MainAddMeter.bulkUpdate(data, {
-                individualHooks: true,
-            });
-            return res.json({ meters });
+            console.log(data);
+
+            for (const meter of data) {
+                await Models.MainAddMeter.update(meter, {
+                    where: {
+                        id: meter.id,
+                    },
+                });
+            }
+
+            return res.json({ status: "ok" });
         } catch (e) {
             console.error(e);
+        }
+    }
+
+    // возвращаем таблицу для оффлайна
+    async getTableForOffline(req, res) {
+        try {
+            console.log("===> Hello");
+            const { id: objectBuildId } = req.params;
+            console.log(objectBuildId);
+            const table = await Models.MainAddMeter.findAll({
+                where: {
+                    objectBuildId,
+                },
+                attributes: [
+                    "id",
+                    "section",
+                    "floor",
+                    "flat",
+                    "office",
+                    "line",
+                    "typeMeter",
+                    "sumMeter",
+                    "numberKdl",
+                    "numberAsr",
+                    "numberMeter",
+                    "comment",
+                ],
+            });
+
+            return res.json({ table });
+        } catch (e) {
+            console.log(e);
         }
     }
 }

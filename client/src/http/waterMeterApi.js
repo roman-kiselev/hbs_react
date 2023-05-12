@@ -150,10 +150,21 @@ export const sincMeters = async (objectBuildId) => {
     return data;
 };
 
-export const updateBulk = async (data) => {
-    const { data: result } = await $authHost.put(
-        `api/testAddWater/updateBulk`,
-        data
+export const updateBulk = async (jsonData) => {
+    try {
+        const { data } = await $authHost.put(`api/testAddWater/updateBulk`, {
+            jsonData,
+        });
+        return { data };
+    } catch (e) {
+        console.error(e);
+    }
+};
+
+export const getTable = async (objectBuildId) => {
+    const { data } = await $authHost.get(
+        `api/testAddWater/getTableForOffline/${objectBuildId}`
     );
-    return result;
+    console.log(data);
+    return data;
 };
