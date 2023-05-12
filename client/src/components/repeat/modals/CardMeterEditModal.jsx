@@ -168,6 +168,9 @@ const CardMeterEditModal = ({
                                 />
                             </Form.Group>
                         </Row>
+                        <Row>
+                            <Button variant="primary">Изменить на офис</Button>
+                        </Row>
                     </Form>
                 </Row>
             </Modal.Body>

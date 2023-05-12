@@ -28,6 +28,7 @@ class UserController implements IUserController {
         try {
             const dto = req.body as IUserLogin;
             const token = await UsersService.loginUser(dto);
+            //console.log(token);
             return res.status(200).json({ token });
         } catch (e) {
             console.log(e);

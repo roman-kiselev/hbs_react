@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { Alert, Card, Container, Form } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { ButtonUI, InputString } from "../../shared/ui";
 import { IInputStringProps } from "../../shared/interfaces";
-import { useDispatch } from "react-redux";
-import { loginUser } from "../../shared/models/users/userSlice";
-import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
-import { AppState } from "../../shared/interfaces/store";
+import { loginUser, checkAuth } from "../../shared/models";
+import { AppState, IUserLogin } from "../../shared/interfaces/store";
 import { LoadingSpin } from "../../entities";
 import { LoadingVariant } from "../../shared/config";
 
@@ -33,18 +32,19 @@ const usePassword = () => {
     return [password, passwordProps] as const;
 };
 // Проверить state isAuth  и переадресовать на главную страницу
-// const checkAndRedirect = async (
-//     dispatch: (action: any) => Promise<any>,
-//     navigate: ReturnType<typeof useNavigate>,
-//     userBody: IUserLogin
-// ) => {
-//     try {
-//         const { login, password } = userBody;
-//         let data = await dispatch(loginUser(userBody));
-//     } catch (e) {
-//         console.log(e);
-//     }
-// };
+const checkAndRedirect = async (
+    dispatch: (action: any) => Promise<any>,
+    navigate: ReturnType<typeof useNavigate>
+) => {
+    try {
+        const data = await dispatch(checkAuth());
+        if (data) {
+            navigate("/");
+        }
+    } catch (e) {
+        console.log(e);
+    }
+};
 
 const AuthWidget: React.FC = () => {
     const [login, loginProps] = useLogin();
@@ -62,9 +62,9 @@ const AuthWidget: React.FC = () => {
     if (isLoading) {
         return <LoadingSpin variant={LoadingVariant.DARK} />;
     }
-    if (isAuth) {
-        navigate("/");
-    }
+    // if (isAuth) {
+    //     navigate("/");
+    // }
 
     const handleClick = async (dispatch: (action: any) => Promise<any>) => {
         const data = await dispatch(loginUser(userData));

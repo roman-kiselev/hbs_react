@@ -11,9 +11,9 @@ const NavbarAskueFeaters: React.FC = () => {
     if (!isAuth || user === null) {
         return <></>;
     }
-    const { role } = user;
+    const { roles } = user;
 
-    return <NavbarAskue role={role} />;
+    return <NavbarAskue role={roles} />;
 };
 
 export default NavbarAskueFeaters;

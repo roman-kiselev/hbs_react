@@ -17,10 +17,10 @@ export const loginUser = createAsyncThunk(
     "user/login",
     async (userData: IUserLogin, { rejectWithValue, dispatch }) => {
         try {
-            const { data } = await $host.post("/api/user/login", userData);
+            const { data } = await $host.post("/user/login", userData);
             return data;
         } catch (e) {
-            console.log("erroe");
+            console.log("error");
             throw new Error(e.message);
         }
     }
@@ -28,7 +28,7 @@ export const loginUser = createAsyncThunk(
 
 export const checkAuth = createAsyncThunk("user/check", async () => {
     try {
-        const { data } = await $authHost.get("api/user/auth");
+        const { data } = await $authHost.get("/user/check");
         return data;
     } catch (e) {
         throw new Error(e.message);
@@ -65,8 +65,8 @@ export const userSlice = createSlice({
             const { token } = action.payload;
             const user: IUser = jwt_decode(token);
             localStorage.setItem("token", token);
-            const { id, login, role } = user;
-            state.user = { id, login, role };
+            const { id, login, roles } = user;
+            state.user = { id, login, roles };
             state.isAuth = true;
             state.isLoading = false;
         });
@@ -84,8 +84,8 @@ export const userSlice = createSlice({
             const { token } = action.payload;
             const user: IUser = jwt_decode(token);
             localStorage.setItem("token", token);
-            const { id, login, role } = user;
-            state.user = { id, login, role };
+            const { id, login, roles } = user;
+            state.user = { id, login, roles };
             state.isAuth = true;
             state.isLoading = false;
         });

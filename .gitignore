@@ -4,6 +4,7 @@ server/node_modules
 server_type/node_modules
 server_type/dist
 server_type/.env
+client_type/.env
 client/.env
 server/.env
 server/static
