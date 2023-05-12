@@ -26,7 +26,6 @@ const CardMeter = ({ cardData, handleClickForEdit, handleClickDel }) => {
 
     const del = (e) => {
         e.preventDefault();
-
         handleClickDel(cardData.id);
     };
 
