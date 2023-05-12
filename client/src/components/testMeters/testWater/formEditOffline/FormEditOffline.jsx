@@ -160,11 +160,11 @@ const FormEditOffline = ({ id }) => {
                     </Button>
                     <CheckSuccess status={status} />
                 </Col>
-                <Col className="mt-3" sm={4}>
+                {/* <Col className="mt-3" sm={4}>
                     <Button variant="danger" onClick={delDbAndClose}>
                         Удалить
                     </Button>
-                </Col>
+                </Col> */}
             </Row>
             <Row className="mt-3">
                 <MainTable data={meters} />
