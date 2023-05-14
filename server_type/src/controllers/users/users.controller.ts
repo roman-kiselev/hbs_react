@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { IUserCreate, IUserLogin } from "../../interfaces";
 import { User } from "../../models/user";
 import { UsersService } from "../../services";
+import {IUserService} from "../../services/users/users.service";
 
 interface RequestUser extends Request {
     user: User;
@@ -27,7 +28,9 @@ class UserController implements IUserController {
     async login(req: Request, res: Response) {
         try {
             const dto = req.body as IUserLogin;
+
             const token = await UsersService.loginUser(dto);
+
             //console.log(token);
             return res.status(200).json({ token });
         } catch (e) {

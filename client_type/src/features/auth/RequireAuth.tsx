@@ -23,10 +23,10 @@ const RequireAuth: React.FC<IRequireAuthProps> = ({ children }) => {
     const dispatch = useDispatch();
     const { isAuth, isLoading } = useSelector((state: AppState) => state.users);
 
-    useEffect(() => {
-        const check = checkIsAuth(dispatch);
-        console.log(check);
-    }, [dispatch]);
+    // useEffect(() => {
+    //     const check = checkIsAuth(dispatch);
+    //     console.log(check);
+    // }, [dispatch]);
     if (isLoading) {
         return <LoadingSpin variant={LoadingVariant.INFO} />;
     }

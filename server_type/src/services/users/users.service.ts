@@ -13,6 +13,8 @@ class CreateUserDto {
     password: string;
 }
 
+
+
 const generateJwt = (id: string, login: string, role: any) => {
     return jwt.sign(
         {
@@ -25,7 +27,7 @@ const generateJwt = (id: string, login: string, role: any) => {
     );
 };
 
-interface IUserService {
+export interface IUserService {
     registrationUser(dto: IUserCreate): Promise<any>;
     loginUser(dto: IUserLogin): Promise<User | ApiError>;
     check(user: User): any;
@@ -63,6 +65,7 @@ class UserService implements IUserService {
                 login,
                 password: hashPassword,
             });
+
             const token = generateJwt(user.id.toString(), user.login, [
                 roleFind,
             ]);
@@ -83,6 +86,7 @@ class UserService implements IUserService {
                 include: { model: Role },
             });
 
+
             if (!user) {
                 return ApiError.badRequest("Пользователь не найден");
             }
@@ -96,6 +100,7 @@ class UserService implements IUserService {
                 user.login,
                 user.roles
             );
+
 
             return token;
         } catch (e) {

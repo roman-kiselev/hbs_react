@@ -46,6 +46,12 @@ const checkAndRedirect = async (
     }
 };
 
+const check = (isLoading) => {
+    if (isLoading) {
+        return <LoadingSpin variant={LoadingVariant.DARK} />;
+    }
+};
+
 const AuthWidget: React.FC = () => {
     const [login, loginProps] = useLogin();
     const [password, passwordProps] = usePassword();
@@ -59,12 +65,9 @@ const AuthWidget: React.FC = () => {
         (state: AppState) => state.users
     );
 
-    if (isLoading) {
-        return <LoadingSpin variant={LoadingVariant.DARK} />;
-    }
-    // if (isAuth) {
-    //     navigate("/");
-    // }
+    useEffect(() => {
+        check(isLoading);
+    }, [isLoading]);
 
     const handleClick = async (dispatch: (action: any) => Promise<any>) => {
         const data = await dispatch(loginUser(userData));

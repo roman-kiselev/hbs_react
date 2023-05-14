@@ -63,6 +63,7 @@ export const userSlice = createSlice({
         });
         builder.addCase(loginUser.fulfilled, (state, action) => {
             const { token } = action.payload;
+            console.log(token.status);
             const user: IUser = jwt_decode(token);
             localStorage.setItem("token", token);
             const { id, login, roles } = user;

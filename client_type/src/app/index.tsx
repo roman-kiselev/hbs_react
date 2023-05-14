@@ -6,7 +6,7 @@ import { Routing } from "../pages";
 const App = () => {
     return (
         <BrowserRouter>
-            <NavbarAskueFeaters />
+            {/* <NavbarAskueFeaters /> */}
             <Routing />
         </BrowserRouter>
     );
