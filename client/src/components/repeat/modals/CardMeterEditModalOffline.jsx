@@ -3,6 +3,7 @@ import { Col, Row, Button, Modal, Form } from "react-bootstrap";
 import useNumber from "../../hooks/useNumber";
 import InputNumber from "../inputs/inputsNumber/InputNumber";
 import InputNumberFloating from "../inputs/inputsNumber/InputNumberFloating";
+import InputNumberSelected from "../inputs/inputsNumber/InputNumberSelected";
 
 const CardMeterEditModalOffline = ({
     data,
@@ -15,7 +16,9 @@ const CardMeterEditModalOffline = ({
         data.section
     );
     const [floor, setFloors, handleInputChangeFloor] = useNumber(data.floor);
-    const [flat, setFlat, handleInputChangeFlat] = useNumber(data.flat);
+    const [object, setObject, handleInputChangeObject] = useNumber(
+        data.flat !== 0 ? data.flat : data.office
+    );
     const [numberMeter, setNumberMeter, handleInputChangeNumberMeter] =
         useNumber(data.numberMeter);
     const [sumMeter, setSumMeter, handleInputChangeSumMeter] = useNumber(
@@ -29,16 +32,22 @@ const CardMeterEditModalOffline = ({
     );
     const [line, setLine, handleInputChangeLine] = useNumber(data.line);
 
-    const [office, setOffice, handleInputChangeOffice] = useNumber(data.office);
+    //const [office, setOffice, handleInputChangeOffice] = useNumber(data.office);
     const [comment, setComment] = useState(
         data.comment === null ? "" : data.comment
     );
+
+    // Для выбора офис или квартиры
+    const [selectObject, setSelectObject, handleInputChangeSelectObject] =
+        useNumber(data.flat !== null ? "flat" : "office");
+
     const { id: idMeter, objectBuildId } = data;
     const isDisabledHeat =
-        !section || !floor || !flat || !numberMeter || !sumMeter || !line;
+        !section || !floor || !object || !numberMeter || !sumMeter || !line;
     const isDisabledWater =
         !section ||
         !floor ||
+        !object ||
         !numberMeter ||
         !sumMeter ||
         !numberKdl ||
@@ -46,8 +55,8 @@ const CardMeterEditModalOffline = ({
     const formData = {
         section,
         floor,
-        flat,
-        office: office === null ? 0 : office,
+        flat: selectObject === "flat" ? object : null,
+        office: selectObject === "office" ? object : null,
         numberMeter,
         sumMeter,
         numberAsr,
@@ -57,6 +66,9 @@ const CardMeterEditModalOffline = ({
         typeMeter: data.typeMeter,
         comment,
     };
+    // Создаём ref для того что бы после нажатия проставилась фокусировка
+    const inputRef = React.useRef(null);
+    console.log(object);
 
     return (
         <Modal show={show} onHide={handleClose}>
@@ -80,23 +92,24 @@ const CardMeterEditModalOffline = ({
                                 />
                             </Col>
                             <Col>
-                                {flat ? (
-                                    <InputNumber
-                                        prop={{
-                                            title: "Квартира",
-                                            value: flat,
-                                        }}
-                                        onChange={handleInputChangeFlat}
-                                    />
-                                ) : (
-                                    <InputNumber
-                                        prop={{
-                                            title: "Офис",
-                                            value: office,
-                                        }}
-                                        onChange={handleInputChangeOffice}
-                                    />
-                                )}
+                                <InputNumberSelected
+                                    prop={{
+                                        titles: [
+                                            {
+                                                title: "Квартира",
+                                                value: "flat",
+                                            },
+                                            { title: "Офис", value: "office" },
+                                        ],
+                                        value: object,
+                                    }}
+                                    value={selectObject}
+                                    onChangeSelect={
+                                        handleInputChangeSelectObject
+                                    }
+                                    onChangeFlat={handleInputChangeObject}
+                                    inputRef={inputRef}
+                                />
                             </Col>
                         </Row>
                         <Row>
