@@ -8,6 +8,10 @@ router.get(
     "/getAllMeters",
     testHeatMeterController.getExcelAllHeatMeterInObject
 );
+router.get(
+    "/getForOffline/:id",
+    testHeatMeterController.getAllHeatMetersForOffline
+);
 router.post("/addAllMetersExcel", testHeatMeterController.addAllMetersInObject);
 router.get("/line", testHeatMeterController.getAllLines);
 router.get("/getHeatTemplate", testHeatMeterController.getTemplateHeat);

@@ -123,3 +123,16 @@ export const deleteHeatMeter = async ({ id }) => {
 
     return data;
 };
+
+// Получаем все счётчики для оффлайн
+export const getAllMetersForOffline = async (objectBuildId) => {
+    try {
+        const { data } = await $authHost.get(
+            `/api/testAddHeat/getForOffline/${objectBuildId}`
+        );
+        console.log(data);
+        return data;
+    } catch (e) {
+        console.log(e);
+    }
+};

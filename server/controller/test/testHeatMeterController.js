@@ -389,6 +389,35 @@ class TestHeatMeterController {
             console.log(e);
         }
     }
+
+    // Отдаём для оффлайн
+    async getAllHeatMetersForOffline(req, res) {
+        try {
+            const { id } = req.params;
+            const table = await Models.MainAddMeter.findAll({
+                where: {
+                    objectBuildId: id,
+                    typeMeter: "Счётчик тепла",
+                },
+                attributes: [
+                    ["id", "idDb"],
+                    "section",
+                    "floor",
+                    "flat",
+                    "office",
+                    "line",
+                    "typeMeter",
+                    "numberMeter",
+                    "sumMeter",
+                    "comment",
+                ],
+            });
+
+            return res.json({ table });
+        } catch (e) {
+            console.log(e);
+        }
+    }
 }
 
 export default new TestHeatMeterController();

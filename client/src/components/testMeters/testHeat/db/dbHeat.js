@@ -1,8 +1,8 @@
 import Dexie from "dexie";
 
-export const db = new Dexie("waterDatabase");
-db.version(1).stores({
-    main: "++id,idMain,section, floor, flat, office, line, typeMeter, numberMeter, sumMeter, comment",
+export const dbHeat = new Dexie("heatDatabase");
+dbHeat.version(1).stores({
+    main: "++id,section, floor, flat, office, line, typeMeter, numberMeter, sumMeter, comment",
 });
 
-export default db;
+export default dbHeat;
