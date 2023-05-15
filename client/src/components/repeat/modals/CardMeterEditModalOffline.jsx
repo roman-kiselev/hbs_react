@@ -34,7 +34,15 @@ const CardMeterEditModalOffline = ({
         data.comment === null ? "" : data.comment
     );
     const { id: idMeter, objectBuildId } = data;
-
+    const isDisabledHeat =
+        !section || !floor || !flat || !numberMeter || !sumMeter || !line;
+    const isDisabledWater =
+        !section ||
+        !floor ||
+        !numberMeter ||
+        !sumMeter ||
+        !numberKdl ||
+        !numberAsr;
     const formData = {
         section,
         floor,
@@ -164,6 +172,11 @@ const CardMeterEditModalOffline = ({
                 </Button>
                 <Button
                     variant="primary"
+                    disabled={
+                        data.typeMeter === "Счётчик тепла"
+                            ? isDisabledHeat
+                            : isDisabledWater
+                    }
                     onClick={() => handleClickForEdit(formData, handleClose)}
                 >
                     Сохранить изменения
