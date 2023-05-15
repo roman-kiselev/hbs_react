@@ -1,10 +1,5 @@
 import React, { useState } from "react";
 import { Col, Row, Button, Modal, Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import {
-    getAllMetersByUserAndObject,
-    getOneMeter,
-} from "../../../features/testMeters/testWaterMeterSlice";
 import useNumber from "../../hooks/useNumber";
 import InputNumber from "../inputs/inputsNumber/InputNumber";
 import InputNumberFloating from "../inputs/inputsNumber/InputNumberFloating";
@@ -16,10 +11,6 @@ const CardMeterEditModalOffline = ({
     handleEditMeter,
     handleClickForEdit,
 }) => {
-    const dispatch = useDispatch();
-
-    const { id: userId } = useSelector((state) => state.users.user);
-
     const [section, setSection, handleInputChangeSection] = useNumber(
         data.section
     );
@@ -44,24 +35,6 @@ const CardMeterEditModalOffline = ({
     );
     const { id: idMeter, objectBuildId } = data;
 
-    const formQuery = {
-        userId,
-        objectBuildId,
-    };
-
-    // const formData = new FormData();
-    // formData.append("section", section);
-    // formData.append("floor", floor);
-    // formData.append("flat", flat);
-    // formData.append("office", office === null ? 0 : office);
-    // formData.append("numberMeter", numberMeter);
-    // formData.append("sumMeter", sumMeter);
-    // formData.append("numberAsr", numberAsr);
-    // formData.append("numberKdl", numberKdl);
-    // formData.append("id", idMeter);
-    // formData.append("line", line);
-    // formData.append("typeMeter", data.typeMeter);
-    // formData.append("comment", comment);
     const formData = {
         section,
         floor,
