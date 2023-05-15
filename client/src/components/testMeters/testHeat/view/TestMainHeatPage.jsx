@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Col, Modal, Row, Tab, Tabs } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import TestFormHeatMeter from "../form/TestFormHeatMeter";
+import FormOfflineHeat from "../formEditOffline/FormOfflineHeat";
 import ListMeterHeat from "../listMeter/ListMeterHeat";
 import OperationsHeat from "../operations/OperationsHeat";
 
@@ -63,6 +64,9 @@ const TestMainHeatPage = () => {
                     </Tab>
                     <Tab eventKey="op" title="Операции">
                         <OperationsHeat id={id} />
+                    </Tab>
+                    <Tab eventKey="offline" title="Оффлайн">
+                        <FormOfflineHeat id={id} />
                     </Tab>
                 </Tabs>
             </Row>

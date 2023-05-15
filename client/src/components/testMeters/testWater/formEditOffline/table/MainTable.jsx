@@ -47,7 +47,7 @@ const MainTable = ({ data }) => {
 
     return (
         <>
-            <Table striped bordered hover>
+            <Table striped bordered hover size="sm">
                 <thead>
                     <tr style={{ fontSize: "12px" }}>
                         <th>КДЛ</th>
