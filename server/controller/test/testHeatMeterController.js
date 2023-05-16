@@ -464,7 +464,32 @@ class TestHeatMeterController {
                     });
                 } else {
                     console.log(meter);
-                    await Models.MainAddMeter.create(meter);
+                    const {
+                        section,
+                        floor,
+                        flat,
+                        office,
+                        line,
+                        typeMeter,
+                        numberMeter,
+                        sumMeter,
+                        comment,
+                        objectBuildId,
+                        userId,
+                    } = meter;
+                    await Models.MainAddMeter.create({
+                        section,
+                        floor,
+                        flat,
+                        office,
+                        line,
+                        typeMeter,
+                        numberMeter,
+                        sumMeter,
+                        comment,
+                        objectBuildId,
+                        userId,
+                    });
                 }
             }
 
