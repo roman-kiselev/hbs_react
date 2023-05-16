@@ -423,7 +423,6 @@ class TestHeatMeterController {
     async addOrUpdateMeter(req, res) {
         try {
             const { id } = req.params;
-            console.log(id);
             const { dataJson } = req.body;
             // [
             //     {
@@ -464,6 +463,7 @@ class TestHeatMeterController {
                         },
                     });
                 } else {
+                    console.log(meter);
                     await Models.MainAddMeter.create(meter);
                 }
             }
