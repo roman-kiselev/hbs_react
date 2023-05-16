@@ -110,13 +110,31 @@ const FormOfflineHeat = ({ id }) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const handleClick = (data, hClose) => {
+    const handleClick = (
+        data,
+        hClose,
+        setSection,
+        setFloors,
+        setFlat,
+        setNumberMeter,
+        setSumMeter,
+        setLine,
+        setComment
+    ) => {
         const mainData = {
             ...data,
             objectBuildId: id,
             userId,
         };
         addMeter(mainData);
+        setSection(0);
+        setFloors(0);
+        setFlat(0);
+        setNumberMeter(0);
+        setSumMeter(0);
+        setLine(0);
+        setComment("");
+
         hClose();
     };
 

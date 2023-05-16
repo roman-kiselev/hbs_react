@@ -141,7 +141,19 @@ const CardCreateMeter = ({
                 </Button>
                 <Button
                     variant="primary"
-                    onClick={() => handleClickForEdit(formData, handleClose)}
+                    onClick={() =>
+                        handleClickForEdit(
+                            formData,
+                            handleClose,
+                            setSection,
+                            setFloors,
+                            setFlat,
+                            setNumberMeter,
+                            setSumMeter,
+                            setLine,
+                            setComment
+                        )
+                    }
                     disabled={isDisabled}
                 >
                     Сохранить изменения
