@@ -457,12 +457,40 @@ class TestHeatMeterController {
             for (const meter of data) {
                 // Если есть id из базы данных то обновляем
                 if (meter.idDb) {
+                    const {
+                        section,
+                        floor,
+                        flat,
+                        office,
+                        line,
+                        typeMeter,
+                        numberMeter,
+                        sumMeter,
+                        comment,
+                        objectBuildId,
+                        userId,
+                    } = meter;
                     console.log(`Обновляем данные счётчика ${meter.idDb}`);
-                    await Models.MainAddMeter.update(meter, {
-                        where: {
-                            id: meter.idDb,
+                    await Models.MainAddMeter.update(
+                        {
+                            section,
+                            floor,
+                            flat,
+                            office,
+                            line,
+                            typeMeter,
+                            numberMeter,
+                            sumMeter,
+                            comment,
+                            objectBuildId,
+                            userId,
                         },
-                    });
+                        {
+                            where: {
+                                id: meter.idDb,
+                            },
+                        }
+                    );
                 } else {
                     console.log(meter);
                     const {
