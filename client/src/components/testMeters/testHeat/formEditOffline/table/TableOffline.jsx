@@ -28,6 +28,7 @@ const TableOffline = ({ data, handleUpdateMeter }) => {
                         <tr style={{ fontSize: "12px" }}>
                             <th>№Секц.</th>
                             <th>№Эт.</th>
+                            <th>№Лин.</th>
                             <th>№Счётчика</th>
                             <th>№Кв</th>
                             <th>Ред</th>
@@ -42,6 +43,7 @@ const TableOffline = ({ data, handleUpdateMeter }) => {
                             <tr key={meter.id}>
                                 <td>{meter.section}</td>
                                 <td>{meter.floor}</td>
+                                <td>{meter.line}</td>
                                 <td>{meter.numberMeter}</td>
                                 <td>{meter.flat}</td>
                                 <td>
