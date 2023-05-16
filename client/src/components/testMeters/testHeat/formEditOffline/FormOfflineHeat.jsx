@@ -11,7 +11,10 @@ import addMeter from "../db/service/addMeters";
 import { useLiveQuery } from "dexie-react-hooks";
 import dbHeat from "../db/dbHeat";
 import editRecordById from "../db/service/editRecordById";
-import { getAllMetersForOffline } from "../../../../http/heatMeterApi";
+import {
+    getAllMetersForOffline,
+    sendAllMetersForOffline,
+} from "../../../../http/heatMeterApi";
 import { delDbAndClose } from "../db/service/delDb";
 import { addAllDataInDb } from "../db/service/addAllDataInDb";
 
@@ -118,10 +121,17 @@ const FormOfflineHeat = ({ id }) => {
     };
 
     const handleUpdateMeter = (data, handleClose) => {
+        console.log(data.id, data);
         editRecordById(data.id, data);
-        getAllMetersForOffline(data.id);
-        console.log(data);
         handleClose();
+    };
+    // Отправляем данные на сервер
+    const sendToServer = async () => {
+        // Получаем все записи из базы данных
+        const list = await dbHeat.main.toArray();
+        const data = JSON.stringify(list);
+        // Отправляем данные на сервер
+        sendAllMetersForOffline(id, data);
     };
 
     return (
@@ -139,7 +149,9 @@ const FormOfflineHeat = ({ id }) => {
                     </Button>
                 </Col>
                 <Col className="d-flex justify-content-center mt-3">
-                    <Button variant="success">Отправить на сервер</Button>
+                    <Button variant="success" onClick={() => sendToServer()}>
+                        Отправить на сервер
+                    </Button>
                 </Col>
             </Row>
 

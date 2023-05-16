@@ -13,6 +13,7 @@ router.get(
     testHeatMeterController.getAllHeatMetersForOffline
 );
 router.post("/addAllMetersExcel", testHeatMeterController.addAllMetersInObject);
+router.post("/sendForOffline/:id", testHeatMeterController.addOrUpdateMeter);
 router.get("/line", testHeatMeterController.getAllLines);
 router.get("/getHeatTemplate", testHeatMeterController.getTemplateHeat);
 router.get("/search", testHeatMeterController.searchByNumber);

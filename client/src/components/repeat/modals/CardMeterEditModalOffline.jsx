@@ -66,10 +66,35 @@ const CardMeterEditModalOffline = ({
         typeMeter: data.typeMeter,
         comment,
     };
+
+    const dataHeat = {
+        section,
+        floor,
+        flat: selectObject === "flat" ? object : null,
+        office: selectObject === "office" ? object : null,
+        numberMeter,
+        sumMeter,
+        idIndex: idMeter,
+        idDb: data.idDb,
+        line,
+        typeMeter: data.typeMeter,
+        comment,
+    };
+
+    const getDataByTypeMeter = (typeMeter) => {
+        if (
+            typeMeter === "Счётчик горячей воды" ||
+            typeMeter === "Счётчик холодной воды"
+        ) {
+            return formData;
+        } else {
+            return dataHeat;
+        }
+    };
+
     // Создаём ref для того что бы после нажатия проставилась фокусировка
     const inputRef = React.useRef(null);
-    console.log(object);
-
+    //console.log(dataHeat);
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
@@ -190,7 +215,12 @@ const CardMeterEditModalOffline = ({
                             ? isDisabledHeat
                             : isDisabledWater
                     }
-                    onClick={() => handleClickForEdit(formData, handleClose)}
+                    onClick={() =>
+                        handleClickForEdit(
+                            getDataByTypeMeter(data.typeMeter),
+                            handleClose
+                        )
+                    }
                 >
                     Сохранить изменения
                 </Button>

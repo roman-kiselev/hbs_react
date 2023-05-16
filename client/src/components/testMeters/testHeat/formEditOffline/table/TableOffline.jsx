@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import CardMeterEditModalOffline from "../../../../repeat/modals/CardMeterEditModalOffline";
+import editRecordById from "../../db/service/editRecordById";
 
 const TableOffline = ({ data, handleUpdateMeter }) => {
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+    const [selectedMeter, setSelectedMeter] = useState(null);
+    const handleClose = () => {
+        setSelectedMeter(null);
+        setShow(false);
+    };
     const handleShow = (data) => {
-        console.log(data);
         setSelectedMeter(data);
         setShow(true);
     };
-    const [selectedMeter, setSelectedMeter] = useState(null);
+
+    const handleClickForEdit = (formData, handleClose) => {
+        const response = editRecordById(formData.idIndex, formData);
+        handleClose();
+    };
 
     return (
         <>
@@ -58,9 +66,7 @@ const TableOffline = ({ data, handleUpdateMeter }) => {
                     show={show}
                     handleClose={handleClose}
                     handleShow={handleShow}
-                    handleClickForEdit={() =>
-                        handleUpdateMeter(selectedMeter, handleClose)
-                    }
+                    handleClickForEdit={handleClickForEdit}
                 />
             )}
         </>

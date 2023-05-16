@@ -130,7 +130,20 @@ export const getAllMetersForOffline = async (objectBuildId) => {
         const { data } = await $authHost.get(
             `/api/testAddHeat/getForOffline/${objectBuildId}`
         );
-        console.log(data);
+        return data;
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+// Отправляем все счётчики для оффлайн
+export const sendAllMetersForOffline = async (objectBuildId, dataJson) => {
+    try {
+        console.log(dataJson);
+        const { data } = await $authHost.post(
+            `/api/testAddHeat/sendForOffline/${objectBuildId}`,
+            { dataJson }
+        );
         return data;
     } catch (e) {
         console.log(e);

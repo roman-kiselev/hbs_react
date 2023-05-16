@@ -418,6 +418,61 @@ class TestHeatMeterController {
             console.log(e);
         }
     }
+
+    // Добавляем данные или обновляем
+    async addOrUpdateMeter(req, res) {
+        try {
+            const { id } = req.params;
+            console.log(id);
+            const { dataJson } = req.body;
+            // [
+            //     {
+            //       idDb: 1799,
+            //       section: 1,
+            //       floor: 2,
+            //       flat: 3,
+            //       office: 0,
+            //       line: 6,
+            //       typeMeter: 'Счётчик тепла',
+            //       numberMeter: '1',
+            //       sumMeter: 1.96,
+            //       comment: null,
+            //       id: 1
+            //     },
+            //     {
+            //       section: '2',
+            //       floor: '1',
+            //       flat: '2',
+            //       office: 0,
+            //       numberMeter: '123',
+            //       sumMeter: '1',
+            //       line: '1',
+            //       typeMeter: 'Счётчик тепла',
+            //       comment: '',
+            //       objectBuildId: '4',
+            //       userId: 1,
+            //       id: 2
+            //     }
+            //   ]
+            const data = JSON.parse(dataJson);
+            for (const meter of data) {
+                // Если есть id из базы данных то обновляем
+                if (meter.idDb) {
+                    await Models.MainAddMeter.update(meter, {
+                        where: {
+                            id: meter.idDb,
+                        },
+                    });
+                } else {
+                    await Models.MainAddMeter.create(meter);
+                }
+            }
+
+            return res.json({ message: "Данные обновлены" });
+        } catch (e) {
+            console.log(e);
+        }
+    }
 }
 
 export default new TestHeatMeterController();
