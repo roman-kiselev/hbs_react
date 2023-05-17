@@ -30,7 +30,6 @@ const CardMeterEditModalOffline = ({
     const [numberMeter, setNumberMeter, handleInputChangeNumberMeter] =
         useNumber(getMeter(data.numberMeter));
     const getSumMeter = (number) => {
-        console.log(number);
         if (Number(number) === 0) {
             return 0.1;
         } else {
