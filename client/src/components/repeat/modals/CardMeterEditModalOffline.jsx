@@ -19,10 +19,25 @@ const CardMeterEditModalOffline = ({
     const [object, setObject, handleInputChangeObject] = useNumber(
         data.flat !== 0 ? data.flat : data.office
     );
+    // Если есть data => data иначе 2
+    const getMeter = (number) => {
+        if (Number(number) === 0) {
+            return 2;
+        } else {
+            return number;
+        }
+    };
     const [numberMeter, setNumberMeter, handleInputChangeNumberMeter] =
-        useNumber(data.numberMeter);
+        useNumber(getMeter(data.numberMeter));
+    const getSumMeter = (number) => {
+        if (Number(number) === 0) {
+            return 0.1;
+        } else {
+            return number;
+        }
+    };
     const [sumMeter, setSumMeter, handleInputChangeSumMeter] = useNumber(
-        data.sumMeter
+        getSumMeter(data.sumMeter)
     );
     const [numberAsr, setNumberAsr, handleInputChangeNumberAsr] = useNumber(
         data.numberAsr
@@ -30,6 +45,7 @@ const CardMeterEditModalOffline = ({
     const [numberKdl, setNumberKdl, handleInputChangeNumberKdl] = useNumber(
         data.numberKdl
     );
+
     const [line, setLine, handleInputChangeLine] = useNumber(data.line);
 
     //const [office, setOffice, handleInputChangeOffice] = useNumber(data.office);
