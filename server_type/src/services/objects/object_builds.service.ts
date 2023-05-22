@@ -3,13 +3,26 @@ import { IObjectBuildsService } from "../../interfaces";
 import ApiError from "../../lib";
 import { ObjectsBuilds } from "../../models";
 
-export class ObjectsBuildsService implements IObjectBuildsService {
+import { FilesService } from "../files";
+
+class ObjectsBuildsService implements IObjectBuildsService {
     // Сошздаём объекты
     async createObjectBuilds(
-        dto: CreateObjectBuildsDto
+        dto: CreateObjectBuildsDto,
+        img: any
     ): Promise<ObjectsBuilds | ApiError> {
         try {
-            const object = await ObjectsBuilds.create(dto);
+            const { name, description } = dto;
+
+            const fileName = FilesService.createFile(img);
+            if (typeof fileName !== "string") {
+                return ApiError.badRequest("Не удаётся создать объект");
+            }
+
+            const object = await ObjectsBuilds.create({
+                ...dto,
+                img: fileName,
+            });
             if (!object) {
                 return ApiError.badRequest("Не удаётся создать объект");
             }
@@ -56,7 +69,7 @@ export class ObjectsBuildsService implements IObjectBuildsService {
             if (!object) {
                 return ApiError.badRequest("Не удаётся обновить объект");
             }
-            await object.update(dto);
+            //await object.update(dto);
             return object;
         } catch (e) {
             console.log(e);
@@ -77,3 +90,5 @@ export class ObjectsBuildsService implements IObjectBuildsService {
         }
     }
 }
+
+export default new ObjectsBuildsService();

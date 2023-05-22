@@ -153,5 +153,119 @@
       "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgiLCJsb2dpbiI6InJvbWFuIiwicm9sZXMiOlt7ImlkIjo0LCJuYW1lIjoidXNlciIsImNyZWF0ZWRBdCI6IjIwMjMtMDUtMDdUMDc6Mzk6MjcuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjMtMDUtMDdUMDc6Mzk6MjcuMDAwWiIsIlVzZXJzUm9sZSI6eyJpZCI6NSwidXNlcklkIjo4LCJyb2xlSWQiOjQsImNyZWF0ZWRBdCI6IjIwMjMtMDUtMDdUMDk6NDI6MzMuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjMtMDUtMDdUMDk6NDI6MzMuMDAwWiJ9fV0sImlhdCI6MTY4MzU3NDAxMywiZXhwIjoxNjgzNjAyODEzfQ.1QRYSr9vkikAR-slWLM-srVSTOf39mW4EaoDk-jsP-4"
     },
     "tests": []
+  },
+  {
+    "_id": "c96993f6-8015-4b58-8ed6-39430c8a1ff3",
+    "colId": "a7d0c96d-902d-4e7d-bde9-1374fe65d3f6",
+    "containerId": "baed3df2-9823-4aaa-9d17-ba2dfb5767b0",
+    "name": "create",
+    "url": "http://localhost:7777/object",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2023-05-21T06:39:24.546Z",
+    "modified": "2023-05-21T10:48:15.453Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "name",
+          "value": "adfaf"
+        },
+        {
+          "name": "description",
+          "value": "dsfs"
+        }
+      ],
+      "files": [
+        {
+          "name": "img",
+          "value": "..\\..\\..\\..\\Downloads\\udHvbKwV-IMG-Dubai-UAE-1.jpg"
+        }
+      ]
+    },
+    "tests": []
+  },
+  {
+    "_id": "524dcce7-5b68-4ab7-9911-de93b73ddb5e",
+    "colId": "a7d0c96d-902d-4e7d-bde9-1374fe65d3f6",
+    "containerId": "baed3df2-9823-4aaa-9d17-ba2dfb5767b0",
+    "name": "getAll",
+    "url": "http://localhost:7777/role",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2023-05-21T06:39:24.548Z",
+    "modified": "2023-05-21T06:39:24.547Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "8ecd9527-b00b-4261-9916-411db6a88ef5",
+    "colId": "a7d0c96d-902d-4e7d-bde9-1374fe65d3f6",
+    "containerId": "baed3df2-9823-4aaa-9d17-ba2dfb5767b0",
+    "name": "getOneById",
+    "url": "http://localhost:7777/role/1",
+    "method": "GET",
+    "sortNum": 30000,
+    "created": "2023-05-21T06:39:24.549Z",
+    "modified": "2023-05-21T06:39:24.547Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "ad7be6a4-4235-4514-9e0b-f3205c4aa480",
+    "colId": "a7d0c96d-902d-4e7d-bde9-1374fe65d3f6",
+    "containerId": "baed3df2-9823-4aaa-9d17-ba2dfb5767b0",
+    "name": "getOneByName",
+    "url": "http://localhost:7777/role/getByName",
+    "method": "GET",
+    "sortNum": 35000,
+    "created": "2023-05-21T06:39:24.550Z",
+    "modified": "2023-05-21T06:39:24.547Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\":\"admin\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "3fbf0500-a1c2-43d9-bfe2-574b960f5410",
+    "colId": "a7d0c96d-902d-4e7d-bde9-1374fe65d3f6",
+    "containerId": "baed3df2-9823-4aaa-9d17-ba2dfb5767b0",
+    "name": "update",
+    "url": "http://localhost:7777/role/6",
+    "method": "PUT",
+    "sortNum": 40000,
+    "created": "2023-05-21T06:39:24.551Z",
+    "modified": "2023-05-21T06:39:24.547Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"КИП\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "f6559fc8-53d3-4e60-bfe1-b87356034f4f",
+    "colId": "a7d0c96d-902d-4e7d-bde9-1374fe65d3f6",
+    "containerId": "baed3df2-9823-4aaa-9d17-ba2dfb5767b0",
+    "name": "delete",
+    "url": "http://localhost:7777/role/2",
+    "method": "DELETE",
+    "sortNum": 50000,
+    "created": "2023-05-21T06:39:24.552Z",
+    "modified": "2023-05-21T06:39:24.547Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]

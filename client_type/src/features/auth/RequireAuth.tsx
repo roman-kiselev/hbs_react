@@ -8,14 +8,14 @@ import { IRequireAuthProps } from "../../shared/interfaces";
 import { AppState } from "../../shared/interfaces/store";
 import { checkAuth } from "../../shared/models/users/userSlice";
 
-const checkIsAuth = async (dispatch: (action: any) => Promise<any>) => {
-    const { data } = await dispatch(checkAuth());
-    if (data) {
-        return true;
-    } else {
-        return false;
-    }
-};
+// const checkIsAuth = async (dispatch: (action: any) => Promise<any>) => {
+//     const { data } = await dispatch(checkAuth());
+//     if (data) {
+//         return true;
+//     } else {
+//         return false;
+//     }
+// };
 
 // Компонент обрабатывает проверку авторизации
 const RequireAuth: React.FC<IRequireAuthProps> = ({ children }) => {
@@ -24,9 +24,9 @@ const RequireAuth: React.FC<IRequireAuthProps> = ({ children }) => {
     const { isAuth, isLoading } = useSelector((state: AppState) => state.users);
 
     // useEffect(() => {
-    //     const check = checkIsAuth(dispatch);
-    //     console.log(check);
+    //     dispatch(checkAuth())
     // }, [dispatch]);
+
     if (isLoading) {
         return <LoadingSpin variant={LoadingVariant.INFO} />;
     }

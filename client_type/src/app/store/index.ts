@@ -7,10 +7,10 @@ import {
 } from "@reduxjs/toolkit";
 import { AppState } from "../../shared/interfaces/store";
 
-export const rootReducer: Reducer<AppState> = combineReducers<AppState>({
-    users: userSlice.reducer,
-});
+// export const rootReducer: Reducer<AppState> = combineReducers<AppState>({
+//     users: userSlice.reducer,
+// });
 
-export const store = configureStore({
-    reducer: rootReducer,
-});
+// export const store = configureStore({
+//     reducer: rootReducer,
+// });
