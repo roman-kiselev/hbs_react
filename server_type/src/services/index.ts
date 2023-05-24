@@ -1,3 +1,6 @@
 import { RoleService, UsersService } from "./users";
+import { FilesService } from "./files";
+import { ObjectsBuildsService } from "./objects";
 
-export { RoleService, UsersService };
+export { ObjectsBuildsService };
+export { RoleService, UsersService, FilesService };

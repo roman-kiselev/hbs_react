@@ -4,7 +4,8 @@ import { ObjectsBuilds } from "../../../models";
 
 interface IObjectBuildsService {
     createObjectBuilds(
-        dto: CreateObjectBuildsDto
+        dto: CreateObjectBuildsDto,
+        img
     ): Promise<ObjectsBuilds | ApiError>;
     getAllObjectBuilds(): Promise<ObjectsBuilds[] | ApiError>;
     getObjectBuildsById(id: number): Promise<ObjectsBuilds | ApiError>;
