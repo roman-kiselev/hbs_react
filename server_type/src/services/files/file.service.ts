@@ -20,7 +20,7 @@ class FilesService {
             if (!fs.existsSync(filePath)) {
                 fs.mkdirSync(filePath, { recursive: true });
             }
-
+            console.log(file.);
             fs.writeFileSync(path.join(filePath, fileName), file.buffer);
             return fileName;
         } catch (e) {
