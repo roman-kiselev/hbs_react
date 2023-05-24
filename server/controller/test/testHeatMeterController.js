@@ -261,16 +261,13 @@ class TestHeatMeterController {
                     line,
                 },
                 attributes: [
-                    [
-                        Sequelize.fn("DISTINCT", Sequelize.col("numberMeter")),
-                        "numberMeter",
-                    ],
+                    [Sequelize.fn("DISTINCT", Sequelize.col("flat")), "flat"],
                     "id",
                     "section",
                     "floor",
-                    "flat",
                     "line",
                     "sumMeter",
+                    "numberMeter",
                     "typeMeter",
                 ],
                 order: [["floor", "DESC"]],
