@@ -261,12 +261,15 @@ class TestHeatMeterController {
                     line,
                 },
                 attributes: [
+                    [
+                        Sequelize.fn("DISTINCT", Sequelize.col("numberMeter")),
+                        "numberMeter",
+                    ],
                     "id",
                     "section",
                     "floor",
                     "flat",
                     "line",
-                    "numberMeter",
                     "sumMeter",
                     "typeMeter",
                 ],
@@ -492,7 +495,6 @@ class TestHeatMeterController {
                         }
                     );
                 } else {
-                    console.log(meter);
                     const {
                         section,
                         floor,
@@ -506,19 +508,38 @@ class TestHeatMeterController {
                         objectBuildId,
                         userId,
                     } = meter;
-                    await Models.MainAddMeter.create({
-                        section,
-                        floor,
-                        flat,
-                        office,
-                        line,
-                        typeMeter,
-                        numberMeter,
-                        sumMeter,
-                        comment,
-                        objectBuildId,
-                        userId,
-                    });
+                    const [meter, created] =
+                        await Models.MainAddMeter.findOrCreate({
+                            where: {
+                                flat,
+                                numberMeter,
+                                objectBuildId,
+                            },
+                            defaults: {
+                                section,
+                                floor,
+                                office,
+                                line,
+                                typeMeter,
+                                sumMeter,
+                                comment,
+                                objectBuildId,
+                                userId,
+                            },
+                        });
+                    // await Models.MainAddMeter.create({
+                    //     section,
+                    //     floor,
+                    //     flat,
+                    //     office,
+                    //     line,
+                    //     typeMeter,
+                    //     numberMeter,
+                    //     sumMeter,
+                    //     comment,
+                    //     objectBuildId,
+                    //     userId,
+                    // });
                 }
             }
 
