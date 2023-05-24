@@ -8,7 +8,6 @@ class FilesService {
         try {
             console.log(file);
             const fileName = uuidv4() + ".jpg";
-            console.log(fileName);
             const filePath = path.resolve(
                 __dirname,
                 "..",
@@ -20,7 +19,7 @@ class FilesService {
             if (!fs.existsSync(filePath)) {
                 fs.mkdirSync(filePath, { recursive: true });
             }
-            console.log(file.);
+            console.log(file);
             fs.writeFileSync(path.join(filePath, fileName), file.buffer);
             return fileName;
         } catch (e) {

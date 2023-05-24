@@ -2,9 +2,10 @@ import { CreateObjectBuildsDto } from "../../dto";
 import { IObjectBuildsService } from "../../interfaces";
 import ApiError from "../../lib";
 import { ObjectsBuilds } from "../../models";
-
 import { FilesService } from "../files";
-
+import { v4 as uuidv4 } from "uuid";
+import path from "path";
+import fs from "fs";
 class ObjectsBuildsService implements IObjectBuildsService {
     // Сошздаём объекты
     async createObjectBuilds(
@@ -14,11 +15,25 @@ class ObjectsBuildsService implements IObjectBuildsService {
         try {
             const { name, description } = dto;
 
-            const fileName = FilesService.createFile(img);
-            if (typeof fileName !== "string") {
-                return ApiError.badRequest("Не удаётся создать объект");
-            }
+            // const fileName = FilesService.createFile(img);
+            // if (typeof fileName !== "string") {
+            //     return ApiError.badRequest("Не удаётся создать объект");
+            // }
 
+            let fileName = uuidv4() + ".jpg";
+            const filePath = path.resolve(
+                __dirname,
+                "..",
+                "..",
+                "static",
+                fileName
+            );
+            // console.log(filePath);
+            // if (!fs.existsSync(filePath)) {
+            //     fs.mkdirSync(filePath, { recursive: true });
+            // }
+
+            await img.mv(filePath);
             const object = await ObjectsBuilds.create({
                 ...dto,
                 img: fileName,
