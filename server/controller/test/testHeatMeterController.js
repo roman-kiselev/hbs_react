@@ -247,6 +247,118 @@ class TestHeatMeterController {
     }
 
     // Готовим шаблон к скачиванию
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Изменить
+    // async getTemplateHeat(req, res) {
+    //     try {
+    //         // Получаем с фронтенда данные для заполнения шаблона
+    //         // Заголовки берём из serviceHeaders
+    //         // Там функция принимает на вход квартиру, номер счётчика, секцию, этаж, данные из query
+    //         const { objectBuildId, line, template } = req.query;
+    //         const meters = await Models.MainAddMeter.findAll({
+    //             where: {
+    //                 objectBuildId,
+    //                 typeMeter: "Счётчик тепла",
+    //                 line,
+    //             },
+    //             attributes: [
+    //                 [
+    //                     Sequelize.fn("DISTINCT", Sequelize.col("numberMeter")),
+    //                     "numberMeter",
+    //                 ],
+    //                 "id",
+    //                 "section",
+    //                 "floor",
+    //                 "flat",
+    //                 "line",
+    //                 "sumMeter",
+    //                 "numberMeter",
+    //                 "typeMeter",
+    //             ],
+    //             order: [["floor", "DESC"]],
+    //             raw: true,
+    //         });
+    //         console.log(meters);
+
+    //         // Получаем максимальное значение квартиры
+    //         const maxFlat = await Models.MainAddMeter.findOne({
+    //             where: {
+    //                 objectBuildId,
+    //                 typeMeter: "Счётчик тепла",
+    //                 line,
+    //             },
+    //             attributes: [
+    //                 [sequelize.fn("MAX", sequelize.col("flat")), "flat"],
+    //             ],
+    //             raw: true,
+    //         });
+    //         let arrLink = [
+    //             "секция_TEST_C2000-Ethernet_вода",
+    //             "ID=",
+    //             "ClassName=TC2000EthernetChannel",
+    //             "Активность=Нет",
+    //             "Описание=секция_TEST_C2000-Ethernet_вода",
+    //             "IP Адрес=192.168.10.1",
+    //             "Порт=1",
+    //             "Режим работы=Надёжный",
+    //             "Операторы=",
+    //             "Комментарий=",
+    //         ];
+
+    //         // Заголовок листа
+    //         const nameSheet = "Счётчики тепла";
+
+    //         switch (template) {
+    //             case "MeterBus":
+    //                 const listMeters = [];
+    //                 meters.map(({ flat, numberMeter, section, floor }) => {
+    //                     let preparedDevice =
+    //                         HeadersHeatConfig.getTMBusUniversal_Heat_Counter(
+    //                             flat,
+    //                             numberMeter,
+    //                             section,
+    //                             floor,
+    //                             maxFlat.flat
+    //                         );
+    //                     listMeters.push(preparedDevice);
+    //                 });
+
+    //                 const arrInterface = [
+    //                     "",
+    //                     "[MBus] Счётчики Meter-Bus",
+    //                     "ID=",
+    //                     "ParentID=",
+    //                     "ClassName=TMBus_Interface",
+    //                     "Активность=Нет",
+    //                     "Скорость порта=2400",
+    //                     "Описание=[MBus] Счётчики Meter-Bus",
+    //                     "Таймаут, мсек=3000",
+    //                     "Задержка между командами, мсек=400",
+    //                     "Задержка между счётчиками, мсек=3000",
+    //                     "Число неответов до потери=3",
+    //                     "Совместимость с Карат-911=Нет",
+    //                     "Контроль чётности=EVENPARITY",
+    //                     "Отображать тревожные состояния=Да",
+    //                     "Комментарий=",
+    //                 ];
+
+    //                 const buffer = createHeatTemplate(
+    //                     listMeters,
+    //                     arrInterface,
+    //                     arrLink,
+    //                     nameSheet
+    //                 );
+
+    //                 return res.send(buffer);
+    //                 break;
+    //             case "Pulsar":
+    //                 break;
+    //             default:
+    //                 return res.json({ message: "Шаблон не выбран" });
+    //         }
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // }
 
     async getTemplateHeat(req, res) {
         try {
@@ -254,7 +366,28 @@ class TestHeatMeterController {
             // Заголовки берём из serviceHeaders
             // Там функция принимает на вход квартиру, номер счётчика, секцию, этаж, данные из query
             const { objectBuildId, line, template } = req.query;
-            const meters = await Models.MainAddMeter.findAll({
+            const metersAll = await Models.MainAddMeter.findAll({
+                where: {
+                    objectBuildId,
+                    typeMeter: "Счётчик тепла",
+                    line,
+                },
+                attributes: [
+                    "id",
+                    "section",
+                    "floor",
+                    "flat",
+                    "line",
+                    "sumMeter",
+                    "numberMeter",
+                    "typeMeter",
+                ],
+                order: [["floor", "DESC"]],
+                raw: true,
+            });
+            const meters = [];
+            // Получаем уникальные значения
+            const x = await Models.MainAddMeter.findAll({
                 where: {
                     objectBuildId,
                     typeMeter: "Счётчик тепла",
@@ -265,19 +398,33 @@ class TestHeatMeterController {
                         Sequelize.fn("DISTINCT", Sequelize.col("numberMeter")),
                         "numberMeter",
                     ],
-                    // "id",
-                    // "section",
-                    // "floor",
-                    // "flat",
-                    // "line",
-                    // "sumMeter",
-                    // "numberMeter",
-                    // "typeMeter",
                 ],
                 order: [["floor", "DESC"]],
                 raw: true,
             });
-            console.log(meters);
+
+            for (const { numberMeter } of x) {
+                const meter = await Models.MainAddMeter.findOne({
+                    where: {
+                        numberMeter,
+                    },
+                    attributes: [
+                        "id",
+                        "section",
+                        "floor",
+                        "flat",
+                        "line",
+                        "sumMeter",
+                        "numberMeter",
+                        "typeMeter",
+                    ],
+                    order: [["floor", "DESC"]],
+                    raw: true,
+                });
+                meters.push(meter);
+            }
+
+            //console.log(meters);
 
             // Получаем максимальное значение квартиры
             const maxFlat = await Models.MainAddMeter.findOne({
@@ -510,7 +657,7 @@ class TestHeatMeterController {
                         objectBuildId,
                         userId,
                     } = meter;
-                    const [meter, created] =
+                    const [meterAdd, created] =
                         await Models.MainAddMeter.findOrCreate({
                             where: {
                                 flat,
@@ -525,7 +672,6 @@ class TestHeatMeterController {
                                 typeMeter,
                                 sumMeter,
                                 comment,
-                                objectBuildId,
                                 userId,
                             },
                         });
