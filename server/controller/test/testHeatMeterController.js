@@ -261,10 +261,14 @@ class TestHeatMeterController {
                     line,
                 },
                 attributes: [
-                    [Sequelize.fn("DISTINCT", Sequelize.col("flat")), "flat"],
+                    [
+                        Sequelize.fn("DISTINCT", Sequelize.col("numberMeter")),
+                        "numberMeter",
+                    ],
                     "id",
                     "section",
                     "floor",
+                    "flat",
                     "line",
                     "sumMeter",
                     "numberMeter",
@@ -273,6 +277,7 @@ class TestHeatMeterController {
                 order: [["floor", "DESC"]],
                 raw: true,
             });
+            console.log(meters);
 
             // Получаем максимальное значение квартиры
             const maxFlat = await Models.MainAddMeter.findOne({
