@@ -1,4 +1,3 @@
-// import { checkAuth, loginUser } from "./users/userSlice";
+import { checkAuth, loginUser } from "./users/userSlice";
 
-// export { checkAuth, loginUser };
-export {};
+export { checkAuth, loginUser };
