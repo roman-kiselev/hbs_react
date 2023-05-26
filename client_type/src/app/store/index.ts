@@ -1,4 +1,5 @@
 import { userSlice } from "./../../shared/models/users/userSlice";
+import { useReducer } from "react";
 import {
     combineReducers,
     configureStore,
@@ -7,12 +8,17 @@ import {
 } from "@reduxjs/toolkit";
 import { AppState } from "../../shared/interfaces/store";
 import { useDispatch } from "react-redux";
+import { api } from "../../shared/api/main";
 
 const rootReducer = combineReducers({
-    user: userSlice.reducer,
+    useReducer,
+    [api.reducerPath]: api.reducer,
 });
 const store = configureStore({
     reducer: rootReducer,
+    middleware(getDefaultMiddleware) {
+        return getDefaultMiddleware().concat(api.middleware);
+    },
 });
 
 export type AppDispatch = typeof store.dispatch;

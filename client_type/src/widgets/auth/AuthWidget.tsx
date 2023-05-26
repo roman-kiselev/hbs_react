@@ -9,6 +9,7 @@ import { AppState, IUserLogin } from "../../shared/interfaces/store";
 import { LoadingSpin } from "../../entities";
 import { LoadingVariant } from "../../shared/config";
 import { useLoginMutation } from "../../shared/api";
+import { authApi } from "../../shared/api/auth";
 
 const useLogin = () => {
     const [login, setLogin] = useState("");
@@ -67,6 +68,7 @@ const AuthWidget: React.FC = () => {
         (state: AppState) => state.users
     );
 
+    const {} = authApi.useCheckQuery();
     useEffect(() => {
         check(isLoading);
     }, [isLoading]);
