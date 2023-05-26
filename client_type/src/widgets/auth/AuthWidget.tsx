@@ -4,10 +4,11 @@ import { Alert, Card, Container, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { ButtonUI, InputString } from "../../shared/ui";
 import { IInputStringProps } from "../../shared/interfaces";
-import { loginUser, checkAuth } from "../../shared/models";
+//import { loginUser, checkAuth } from "../../shared/models";
 import { AppState, IUserLogin } from "../../shared/interfaces/store";
 import { LoadingSpin } from "../../entities";
 import { LoadingVariant } from "../../shared/config";
+import { useLoginMutation } from "../../shared/api";
 
 const useLogin = () => {
     const [login, setLogin] = useState("");
@@ -32,19 +33,19 @@ const usePassword = () => {
     return [password, passwordProps] as const;
 };
 // Проверить state isAuth  и переадресовать на главную страницу
-const checkAndRedirect = async (
-    dispatch: (action: any) => Promise<any>,
-    navigate: ReturnType<typeof useNavigate>
-) => {
-    try {
-        const data = await dispatch(checkAuth());
-        if (data) {
-            navigate("/");
-        }
-    } catch (e) {
-        console.log(e);
-    }
-};
+// const checkAndRedirect = async (
+//     dispatch: (action: any) => Promise<any>,
+//     navigate: ReturnType<typeof useNavigate>
+// ) => {
+//     try {
+//         const data = await dispatch(checkAuth());
+//         if (data) {
+//             navigate("/");
+//         }
+//     } catch (e) {
+//         console.log(e);
+//     }
+// };
 
 const check = (isLoading) => {
     if (isLoading) {
@@ -59,6 +60,7 @@ const AuthWidget: React.FC = () => {
         login,
         password,
     };
+    const [loginUser, loginUserResult] = useLoginMutation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { isError, isLoading, isAuth } = useSelector(
@@ -70,9 +72,14 @@ const AuthWidget: React.FC = () => {
     }, [isLoading]);
 
     const handleClick = async (dispatch: (action: any) => Promise<any>) => {
-        const data = await dispatch(loginUser(userData));
-        if (data) {
-            navigate("/");
+        try {
+            //const data = await dispatch(loginUser(userData));
+            const data = await dispatch(loginUser(userData));
+            if (data) {
+                navigate("/");
+            }
+        } catch (e) {
+            console.log(e);
         }
     };
 

@@ -6,7 +6,7 @@ import { LoadingSpin } from "../../entities";
 import { LoadingVariant } from "../../shared/config";
 import { IRequireAuthProps } from "../../shared/interfaces";
 import { AppState } from "../../shared/interfaces/store";
-import { checkAuth } from "../../shared/models/users/userSlice";
+// import { checkAuth } from "../../shared/models/users/userSlice";
 
 // const checkIsAuth = async (dispatch: (action: any) => Promise<any>) => {
 //     const { data } = await dispatch(checkAuth());
