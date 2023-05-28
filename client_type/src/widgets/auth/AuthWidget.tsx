@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
-import { Alert, Card, Container, Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { ButtonUI, InputString } from "../../shared/ui";
+import React, { useState } from "react";
+
+import { Card, Container, Form } from "react-bootstrap";
+import { InputString } from "../../shared/ui";
 import { IInputStringProps } from "../../shared/interfaces";
-//import { loginUser, checkAuth } from "../../shared/models";
-import { AppState, IUserLogin } from "../../shared/interfaces/store";
 import { LoadingSpin } from "../../entities";
 import { LoadingVariant } from "../../shared/config";
-import { useLoginMutation } from "../../shared/api";
-import { authApi } from "../../shared/api/auth";
 
 const useLogin = () => {
     const [login, setLogin] = useState("");
@@ -33,20 +28,6 @@ const usePassword = () => {
     };
     return [password, passwordProps] as const;
 };
-// Проверить state isAuth  и переадресовать на главную страницу
-// const checkAndRedirect = async (
-//     dispatch: (action: any) => Promise<any>,
-//     navigate: ReturnType<typeof useNavigate>
-// ) => {
-//     try {
-//         const data = await dispatch(checkAuth());
-//         if (data) {
-//             navigate("/");
-//         }
-//     } catch (e) {
-//         console.log(e);
-//     }
-// };
 
 const check = (isLoading) => {
     if (isLoading) {
@@ -61,29 +42,6 @@ const AuthWidget: React.FC = () => {
         login,
         password,
     };
-    const [loginUser, loginUserResult] = useLoginMutation();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const { isError, isLoading, isAuth } = useSelector(
-        (state: AppState) => state.users
-    );
-
-    const {} = authApi.useCheckQuery();
-    useEffect(() => {
-        check(isLoading);
-    }, [isLoading]);
-
-    const handleClick = async (dispatch: (action: any) => Promise<any>) => {
-        try {
-            //const data = await dispatch(loginUser(userData));
-            const data = await dispatch(loginUser(userData));
-            if (data) {
-                navigate("/");
-            }
-        } catch (e) {
-            console.log(e);
-        }
-    };
 
     return (
         <Container
@@ -95,17 +53,17 @@ const AuthWidget: React.FC = () => {
                     <h2>Авторизация</h2>
                     <InputString {...loginProps} />
                     <InputString {...passwordProps} />
-                    <ButtonUI
+                    {/* <ButtonUI
                         label="Вход"
                         onClick={() => handleClick(dispatch)}
-                    />
-                    {isError ? (
+                    /> */}
+                    {/* {isError ? (
                         <Alert className="text-center mt-3" variant={"danger"}>
                             Неверный логин или пароль
                         </Alert>
                     ) : (
                         <></>
-                    )}
+                    )} */}
                 </Form>
             </Card>
         </Container>

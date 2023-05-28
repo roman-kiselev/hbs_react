@@ -1,17 +1,15 @@
-import { userSlice } from "./../../shared/models/users/userSlice";
-import { useReducer } from "react";
 import {
     combineReducers,
     configureStore,
     Reducer,
     ThunkAction,
 } from "@reduxjs/toolkit";
-import { AppState } from "../../shared/interfaces/store";
+import { userReducer } from "../../shared/models";
 import { useDispatch } from "react-redux";
 import { api } from "../../shared/api/main";
 
 const rootReducer = combineReducers({
-    useReducer,
+    user: userReducer,
     [api.reducerPath]: api.reducer,
 });
 const store = configureStore({
@@ -26,10 +24,3 @@ export const useAppDispatch: () => AppDispatch = useDispatch;
 export type RootState = ReturnType<typeof rootReducer>;
 
 export default store;
-// export const rootReducer: Reducer<AppState> = combineReducers<AppState>({
-//     users: userSlice.reducer,
-// });
-
-// export const store = configureStore({
-//     reducer: rootReducer,
-// });

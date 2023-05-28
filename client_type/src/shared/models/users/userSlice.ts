@@ -2,7 +2,6 @@ import jwt_decode from "jwt-decode";
 import { createSlice } from "@reduxjs/toolkit";
 import { IUser, IUserSlice } from "../../interfaces";
 import { authApi } from "../../api/auth";
-import { RootState } from "../../../app/store";
 
 // Интерфейс для входа
 
@@ -59,10 +58,10 @@ export const userSlice = createSlice({
 });
 
 export const { logout } = userSlice.actions;
-export default userSlice.reducer;
+export const userReducer = userSlice.reducer;
 
-export const selectIsAuth = (state: RootState) => state.user.isAuth;
-export const selectUser = (state: RootState) => state.user.user;
+// export const selectIsAuth = (state: RootState) => state.user.isAuth;
+// export const selectUser = (state: RootState) => state.user.user;
 
 // export const loginUser = createAsyncThunk(
 //     "user/login",

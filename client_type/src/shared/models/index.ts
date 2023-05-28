@@ -1,5 +1,3 @@
-// import { checkAuth, loginUser } from "./users/userSlice";
+import { userReducer } from "./users/userSlice";
 
-// export { checkAuth, loginUser };
-
-export {};
+export { userReducer };

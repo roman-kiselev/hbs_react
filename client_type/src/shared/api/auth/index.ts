@@ -1,4 +1,4 @@
-import { IUser, IUserLogin } from "../../interfaces";
+import { IUserLogin } from "../../interfaces";
 import { api } from "../main";
 
 export type UserData = IUserLogin;

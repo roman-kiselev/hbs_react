@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router";
 import { LoadingSpin } from "../../entities";
 import { LoadingVariant } from "../../shared/config";
+import { useAppSelector } from "../../shared/hooks";
 import { ICheckRoleAuth } from "../../shared/interfaces";
 import { AppState } from "../../shared/interfaces/store";
 import { IRole } from "../../shared/interfaces/store";
@@ -22,7 +23,7 @@ function findRole(role: string[], roleState: IRole[]): boolean {
 
 const CheckRoleAuth: React.FC<ICheckRoleAuth> = ({ children, role }) => {
     const location = useLocation();
-    const { isLoading } = useSelector((state: AppState) => state.users);
+    const { isLoading } = useAppSelector((state) => state.user);
     const { roles: roleState } = useSelector(
         (state: AppState) => state.users.user
     );
