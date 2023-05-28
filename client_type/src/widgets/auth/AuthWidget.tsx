@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-
-import { Card, Container, Form } from "react-bootstrap";
-import { InputString } from "../../shared/ui";
+import { Alert, Card, Container, Form } from "react-bootstrap";
+import { ButtonUI, InputString } from "../../shared/ui";
 import { IInputStringProps } from "../../shared/interfaces";
 import { LoadingSpin } from "../../entities";
 import { LoadingVariant } from "../../shared/config";
+import { useAppSelector } from "../../shared/hooks";
+import { useLoginMutation } from "../../shared/api";
 
 const useLogin = () => {
     const [login, setLogin] = useState("");
@@ -38,10 +39,17 @@ const check = (isLoading) => {
 const AuthWidget: React.FC = () => {
     const [login, loginProps] = useLogin();
     const [password, passwordProps] = usePassword();
+
     const userData = {
         login,
         password,
     };
+
+    const { user, isLoading, isAuth, isError } = useAppSelector(
+        (state) => state.user
+    );
+
+    console.log(useLoginMutation());
 
     return (
         <Container
@@ -53,17 +61,17 @@ const AuthWidget: React.FC = () => {
                     <h2>Авторизация</h2>
                     <InputString {...loginProps} />
                     <InputString {...passwordProps} />
-                    {/* <ButtonUI
+                    <ButtonUI
+                        onClick={() => console.log("Hello")}
                         label="Вход"
-                        onClick={() => handleClick(dispatch)}
-                    /> */}
-                    {/* {isError ? (
+                    />
+                    {isError ? (
                         <Alert className="text-center mt-3" variant={"danger"}>
                             Неверный логин или пароль
                         </Alert>
                     ) : (
                         <></>
-                    )} */}
+                    )}
                 </Form>
             </Card>
         </Container>
