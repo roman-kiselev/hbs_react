@@ -49,8 +49,6 @@ const AuthWidget: React.FC = () => {
         (state) => state.user
     );
 
-    console.log(useLoginMutation());
-
     return (
         <Container
             className="d-flex justify-content-center align-items-center"
