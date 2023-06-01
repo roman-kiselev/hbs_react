@@ -45,9 +45,15 @@ const AuthWidget: React.FC = () => {
         password,
     };
 
-    const { user, isLoading, isAuth, isError } = useAppSelector(
-        (state) => state.user
-    );
+    const [loginMutation, { isLoading, isError }] = useLoginMutation();
+
+    const handleSubmit = (
+        e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+        e.preventDefault();
+        loginMutation(userData);
+        console.log(userData);
+    };
 
     return (
         <Container
@@ -60,7 +66,9 @@ const AuthWidget: React.FC = () => {
                     <InputString {...loginProps} />
                     <InputString {...passwordProps} />
                     <ButtonUI
-                        onClick={() => console.log("Hello")}
+                        onClick={(
+                            e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+                        ) => handleSubmit(e)}
                         label="Вход"
                     />
                     {isError ? (

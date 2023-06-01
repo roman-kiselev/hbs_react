@@ -1,6 +1,6 @@
 interface IButtonUI {
     label: string;
-    onClick: () => void;
+    onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 export default IButtonUI;

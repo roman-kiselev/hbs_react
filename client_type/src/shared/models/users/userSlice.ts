@@ -35,7 +35,6 @@ export const userSlice = createSlice({
             authApi.endpoints.login.matchFulfilled,
             (state, action) => {
                 const { token } = action.payload;
-                console.log(token);
                 const user: IUser = jwt_decode(token);
                 localStorage.setItem("token", token);
                 const { id, login, roles } = user;

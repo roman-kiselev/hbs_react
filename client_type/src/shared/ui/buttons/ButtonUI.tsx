@@ -6,7 +6,9 @@ const ButtonUI: React.FC<IButtonUI> = ({ label, onClick }) => {
     return (
         <Row className="d-flex justify-content-between">
             <Button
-                onClick={onClick}
+                onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+                    onClick(e)
+                }
                 className="mt-3 pointer-event"
                 variant={"outline-success"}
             >
