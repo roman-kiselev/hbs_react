@@ -4,7 +4,7 @@ import { RootState } from "../../app/store";
 const baseQuery = fetchBaseQuery({
     baseUrl: process.env.REACT_APP_URL_API,
     prepareHeaders: (headers, { getState }) => {
-        const token = (getState() as RootState).api;
+        const token = getState() as RootState;
     },
 });
 

@@ -1,9 +1,4 @@
-import {
-    combineReducers,
-    configureStore,
-    Reducer,
-    ThunkAction,
-} from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { userReducer } from "../../shared/models";
 import { useDispatch } from "react-redux";
 import { api } from "../../shared/api/main";
