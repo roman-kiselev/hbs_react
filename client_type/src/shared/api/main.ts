@@ -4,7 +4,15 @@ import { RootState } from "../../app/store";
 const baseQuery = fetchBaseQuery({
     baseUrl: process.env.REACT_APP_URL_API,
     prepareHeaders: (headers, { getState }) => {
-        const token = getState() as RootState;
+        const token =
+            (getState() as RootState).user.token ||
+            localStorage.getItem("token");
+
+        if (token) {
+            headers.set("Authorization", `Bearer ${token}`);
+        }
+        console.log(localStorage);
+        return headers;
     },
 });
 

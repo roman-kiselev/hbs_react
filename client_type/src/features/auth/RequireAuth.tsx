@@ -1,22 +1,20 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import { useLocation, Navigate } from "react-router";
 import { LoadingSpin } from "../../entities";
+import { useCheckQuery } from "../../shared/api";
 import { LoadingVariant } from "../../shared/config";
 import { useAppSelector } from "../../shared/hooks";
 import { IRequireAuthProps } from "../../shared/interfaces";
-import { AppState } from "../../shared/interfaces/store";
+import { authApi } from "../../shared/api";
 
 // Компонент обрабатывает проверку авторизации
 const RequireAuth: React.FC<IRequireAuthProps> = ({ children }) => {
     const location = useLocation();
-    const dispatch = useDispatch();
     const { isLoading, isAuth } = useAppSelector((state) => state.user);
-
-    // useEffect(() => {
-    //     dispatch(checkAuth())
-    // }, [dispatch]);
+    const { isLoading: isCheckLoading, isSuccess } = authApi.useCheckQuery();
+    useEffect(() => {
+        console.log(isCheckLoading);
+    }, []);
 
     if (isLoading) {
         return <LoadingSpin variant={LoadingVariant.INFO} />;

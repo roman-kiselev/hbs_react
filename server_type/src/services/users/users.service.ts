@@ -13,8 +13,6 @@ class CreateUserDto {
     password: string;
 }
 
-
-
 const generateJwt = (id: string, login: string, role: any) => {
     return jwt.sign(
         {
@@ -86,7 +84,6 @@ class UserService implements IUserService {
                 include: { model: Role },
             });
 
-
             if (!user) {
                 return ApiError.badRequest("Пользователь не найден");
             }
@@ -101,7 +98,6 @@ class UserService implements IUserService {
                 user.roles
             );
 
-
             return token;
         } catch (e) {
             console.log(e);
@@ -110,7 +106,6 @@ class UserService implements IUserService {
 
     async check(user: User) {
         try {
-            console.log(user.id, user.login, user.roles);
             const token = generateJwt(
                 user.id.toString(),
                 user.login,
