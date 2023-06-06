@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router";
-import { lazy, startTransition, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import React from "react";
 //import Simple from "./simple";
 //import Auth from "./auth";

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Alert, Card, Container, Form } from "react-bootstrap";
 import { ButtonUI, InputString } from "../../shared/ui";
 import { IInputStringProps } from "../../shared/interfaces";
 import { LoadingSpin } from "../../entities";
 import { LoadingVariant } from "../../shared/config";
-import { useAppSelector } from "../../shared/hooks";
 import { authApi, useLoginMutation } from "../../shared/api";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router";
@@ -32,12 +31,6 @@ const usePassword = () => {
     return [password, passwordProps] as const;
 };
 
-const check = (isLoading) => {
-    if (isLoading) {
-        return <LoadingSpin variant={LoadingVariant.DARK} />;
-    }
-};
-
 const AuthWidget: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -49,13 +42,8 @@ const AuthWidget: React.FC = () => {
         password,
     };
 
-    const [loginMutation, { isLoading, isError, isSuccess }] =
-        useLoginMutation();
-    const {
-        isError: isCheckError,
-        isLoading: isCheckLoading,
-        data,
-    } = authApi.useCheckQuery();
+    const [loginMutation, { isLoading, isError }] = useLoginMutation();
+    const { isLoading: isCheckLoading, data } = authApi.useCheckQuery();
 
     const handleSubmit = (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>

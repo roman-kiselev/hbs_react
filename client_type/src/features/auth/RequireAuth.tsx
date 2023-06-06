@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useLocation, Navigate } from "react-router";
 import { LoadingSpin } from "../../entities";
-import { useCheckQuery } from "../../shared/api";
 import { LoadingVariant } from "../../shared/config";
 import { useAppSelector } from "../../shared/hooks";
 import { IRequireAuthProps } from "../../shared/interfaces";
