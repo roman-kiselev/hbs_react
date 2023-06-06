@@ -6,7 +6,7 @@ const objectBuildsRouter = express.Router();
 
 objectBuildsRouter.get(
     "/",
-    checkRoleMiddleware([EnRole.ADMIN]),
+    checkRoleMiddleware([EnRole.USER, EnRole.ADMIN]),
     ObjectsBuildController.getAllObjects
 );
 objectBuildsRouter.post("/", ObjectsBuildController.createObject);
