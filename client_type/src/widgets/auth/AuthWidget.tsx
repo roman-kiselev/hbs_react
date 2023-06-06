@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Alert, Card, Container, Form } from "react-bootstrap";
 import { ButtonUI, InputString } from "../../shared/ui";
 import { IInputStringProps } from "../../shared/interfaces";
 import { LoadingSpin } from "../../entities";
 import { LoadingVariant } from "../../shared/config";
 import { useAppSelector } from "../../shared/hooks";
-import { useLoginMutation } from "../../shared/api";
+import { authApi, useLoginMutation } from "../../shared/api";
+import { useNavigate } from "react-router";
+import { useLocation } from "react-router";
 
 const useLogin = () => {
     const [login, setLogin] = useState("");
@@ -37,6 +39,8 @@ const check = (isLoading) => {
 };
 
 const AuthWidget: React.FC = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
     const [login, loginProps] = useLogin();
     const [password, passwordProps] = usePassword();
 
@@ -45,15 +49,30 @@ const AuthWidget: React.FC = () => {
         password,
     };
 
-    const [loginMutation, { isLoading, isError }] = useLoginMutation();
+    const [loginMutation, { isLoading, isError, isSuccess }] =
+        useLoginMutation();
+    const {
+        isError: isCheckError,
+        isLoading: isCheckLoading,
+        data,
+    } = authApi.useCheckQuery();
 
     const handleSubmit = (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
         e.preventDefault();
-        loginMutation(userData);
-        console.log(userData);
+        const login = loginMutation(userData);
+        if (login) {
+            navigate(location.state?.from || "/", { replace: true });
+        }
     };
+
+    if (isLoading || isCheckLoading) {
+        return <LoadingSpin variant={LoadingVariant.INFO} />;
+    }
+    if (data) {
+        navigate("/", { replace: true });
+    }
 
     return (
         <Container

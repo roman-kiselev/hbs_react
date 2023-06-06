@@ -12,11 +12,12 @@ const RequireAuth: React.FC<IRequireAuthProps> = ({ children }) => {
     const location = useLocation();
     const { isLoading, isAuth } = useAppSelector((state) => state.user);
     const { isLoading: isCheckLoading, isSuccess } = authApi.useCheckQuery();
-    useEffect(() => {
-        console.log(isCheckLoading);
-    }, []);
 
-    if (isLoading) {
+    if (isSuccess) {
+        return <>{children}</>;
+    }
+
+    if (isLoading || isCheckLoading) {
         return <LoadingSpin variant={LoadingVariant.INFO} />;
     }
 

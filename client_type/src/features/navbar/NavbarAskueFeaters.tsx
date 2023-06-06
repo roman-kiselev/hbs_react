@@ -1,12 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { NavbarAskue } from "../../entities";
-import { AppState } from "../../shared/interfaces/store";
+import { useAppSelector } from "../../shared/hooks";
 
 const NavbarAskueFeaters: React.FC = () => {
-    const { isAuth, user, isLoading, isError } = useSelector(
-        (state: AppState) => state.users
-    );
+    const { isAuth, user } = useAppSelector((store) => store.user);
 
     if (!isAuth || user === null) {
         return <></>;
