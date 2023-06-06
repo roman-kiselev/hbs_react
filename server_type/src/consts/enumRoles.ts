@@ -7,3 +7,13 @@ export enum EnRole {
     DIRECTOR = "director",
     DEV = "dev",
 }
+
+export const enumAllRoles = [
+    EnRole.ADMIN,
+    EnRole.USER,
+    EnRole.MASTER,
+    EnRole.DRIVER,
+    EnRole.KIP,
+    EnRole.DIRECTOR,
+    EnRole.DEV,
+];

@@ -18,6 +18,15 @@ class ObjectsBuildsController {
             console.log(e);
         }
     }
+
+    async getAllObjects(req: Request, res: Response) {
+        try {
+            const objects = await ObjectsBuildsService.getAllObjectBuilds();
+            return res.status(200).json(objects);
+        } catch (e) {
+            console.log(e);
+        }
+    }
 }
 
 export default new ObjectsBuildsController();
