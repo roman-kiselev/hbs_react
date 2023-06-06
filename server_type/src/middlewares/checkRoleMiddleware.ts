@@ -40,7 +40,7 @@ export default (roles: string[]) => {
             req.user = decoded;
             next();
         } catch (e) {
-            res.status(401).json({
+            return res.status(401).json({
                 message: "Пользователь не авторизован _______",
             });
         }
