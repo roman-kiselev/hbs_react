@@ -6,6 +6,8 @@ import { FilesService } from "../files";
 import { v4 as uuidv4 } from "uuid";
 import path from "path";
 import fs from "fs";
+import { UpdateOptions } from "sequelize";
+
 class ObjectsBuildsService implements IObjectBuildsService {
     // Сошздаём объекты
     async createObjectBuilds(
@@ -74,18 +76,82 @@ class ObjectsBuildsService implements IObjectBuildsService {
         }
     }
 
+    // Получить объект по наименованию
+    async getObjectBuildsByName<nameObject>(
+        name: nameObject
+    ): Promise<ObjectsBuilds | ApiError> {
+        try {
+            const object = await ObjectsBuilds.findOne({
+                where: { name },
+            });
+            if (!object) {
+                return ApiError.badRequest("Не удаётся получить объект");
+            }
+            return object;
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     // Обновить
     async updateObjectBuilds(
         id: number,
-        dto: CreateObjectBuildsDto
+        dto: CreateObjectBuildsDto,
+        img?: any
     ): Promise<ObjectsBuilds | ApiError> {
         try {
             const object = await ObjectsBuilds.findByPk(id);
-            if (!object) {
-                return ApiError.badRequest("Не удаётся обновить объект");
+            if (img) {
+                const imgObject = object.img;
+                const oldFileName = path.resolve(
+                    __dirname,
+                    "..",
+                    "..",
+                    "static",
+                    imgObject
+                );
+                if (fs.existsSync(oldFileName)) {
+                    fs.unlinkSync(oldFileName);
+                }
+                let fileName = uuidv4() + ".jpg";
+                // Для начала перемещаем фото в папку
+                const newFilePath = path.resolve(
+                    __dirname,
+                    "..",
+                    "..",
+                    "static",
+                    fileName
+                );
+
+                await img.mv(newFilePath);
+                const newObject = await ObjectsBuilds.update(
+                    {
+                        ...dto,
+                        img: fileName,
+                    },
+                    {
+                        where: { id },
+                    }
+                );
+                const objectUpdate = await ObjectsBuilds.findByPk(id);
+
+                if (!newObject) {
+                    return ApiError.badRequest("Не удаётся обновить объект");
+                }
+
+                return objectUpdate;
             }
-            //await object.update(dto);
-            return object;
+
+            const newObject = await ObjectsBuilds.update(
+                {
+                    ...dto,
+                },
+                {
+                    where: { id },
+                }
+            );
+            const objectUpdate = await ObjectsBuilds.findByPk(id);
+            return objectUpdate;
         } catch (e) {
             console.log(e);
         }

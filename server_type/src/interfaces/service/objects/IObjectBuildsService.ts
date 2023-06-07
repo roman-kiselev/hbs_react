@@ -11,7 +11,8 @@ interface IObjectBuildsService {
     getObjectBuildsById(id: number): Promise<ObjectsBuilds | ApiError>;
     updateObjectBuilds(
         id: number,
-        dto: CreateObjectBuildsDto
+        dto: CreateObjectBuildsDto,
+        img: any
     ): Promise<ObjectsBuilds | ApiError>;
     deleteObjectBuilds(id: number): Promise<ObjectsBuilds | ApiError>;
 }

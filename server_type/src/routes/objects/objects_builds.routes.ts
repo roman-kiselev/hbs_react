@@ -10,5 +10,8 @@ objectBuildsRouter.get(
     ObjectsBuildController.getAllObjects
 );
 objectBuildsRouter.post("/", ObjectsBuildController.createObject);
+objectBuildsRouter.get("/getByName", ObjectsBuildController.getObjectByName);
+objectBuildsRouter.get("/:id", ObjectsBuildController.getObjectById);
+objectBuildsRouter.put("/:id", ObjectsBuildController.updateObject);
 
 export default objectBuildsRouter;

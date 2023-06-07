@@ -126,7 +126,7 @@
     "method": "POST",
     "sortNum": 70000,
     "created": "2023-05-07T09:37:24.248Z",
-    "modified": "2023-06-06T13:11:33.598Z",
+    "modified": "2023-06-07T07:24:00.568Z",
     "headers": [],
     "params": [],
     "body": {
@@ -145,12 +145,12 @@
     "method": "GET",
     "sortNum": 80000,
     "created": "2023-05-08T07:42:28.116Z",
-    "modified": "2023-05-08T19:27:04.800Z",
+    "modified": "2023-06-07T07:19:09.512Z",
     "headers": [],
     "params": [],
     "auth": {
       "type": "bearer",
-      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgiLCJsb2dpbiI6InJvbWFuIiwicm9sZXMiOlt7ImlkIjo0LCJuYW1lIjoidXNlciIsImNyZWF0ZWRBdCI6IjIwMjMtMDUtMDdUMDc6Mzk6MjcuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjMtMDUtMDdUMDc6Mzk6MjcuMDAwWiIsIlVzZXJzUm9sZSI6eyJpZCI6NSwidXNlcklkIjo4LCJyb2xlSWQiOjQsImNyZWF0ZWRBdCI6IjIwMjMtMDUtMDdUMDk6NDI6MzMuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjMtMDUtMDdUMDk6NDI6MzMuMDAwWiJ9fV0sImlhdCI6MTY4MzU3NDAxMywiZXhwIjoxNjgzNjAyODEzfQ.1QRYSr9vkikAR-slWLM-srVSTOf39mW4EaoDk-jsP-4"
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJsb2dpbiI6ImFkbWluIiwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDA1OjA3OjQ4LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDA1OjA3OjQ4LjAwMFoiLCJVc2Vyc1JvbGUiOnsiaWQiOjEsInVzZXJJZCI6MSwicm9sZUlkIjoxLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDA1OjA3OjU4LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDA1OjA3OjU4LjAwMFoifX1dLCJpYXQiOjE2ODYxMjEzMTksImV4cCI6MTY4NjE1MDExOX0.sWDBoqJ8PIfG6C6gq-5Bt1Ze1uqXgaoJc_NZ27Etelw"
     },
     "tests": []
   },
@@ -197,12 +197,12 @@
     "method": "GET",
     "sortNum": 20000,
     "created": "2023-05-21T06:39:24.548Z",
-    "modified": "2023-06-06T13:20:04.481Z",
+    "modified": "2023-06-07T07:19:21.105Z",
     "headers": [],
     "params": [],
     "auth": {
       "type": "bearer",
-      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJsb2dpbiI6ImFkbWluIiwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDA1OjA3OjQ4LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDA1OjA3OjQ4LjAwMFoiLCJVc2Vyc1JvbGUiOnsiaWQiOjEsInVzZXJJZCI6MSwicm9sZUlkIjoxLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDA1OjA3OjU4LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDA1OjA3OjU4LjAwMFoifX1dLCJpYXQiOjE2ODYwNTc1OTUsImV4cCI6MTY4NjA4NjM5NX0.Sha5sae_HGmHZcGokAsk2gXYHvb7On1MWIUMk3AZnSw"
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJsb2dpbiI6ImFkbWluIiwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDA1OjA3OjQ4LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDA1OjA3OjQ4LjAwMFoiLCJVc2Vyc1JvbGUiOnsiaWQiOjEsInVzZXJJZCI6MSwicm9sZUlkIjoxLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDA1OjA3OjU4LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDA1OjA3OjU4LjAwMFoifX1dLCJpYXQiOjE2ODYxMjIzNTAsImV4cCI6MTY4NjE1MTE1MH0.tVU66NrLadmmr8vDIGKznLLwUBVCc962KFcP2H-oYCU"
     },
     "tests": []
   },
@@ -211,11 +211,11 @@
     "colId": "a7d0c96d-902d-4e7d-bde9-1374fe65d3f6",
     "containerId": "baed3df2-9823-4aaa-9d17-ba2dfb5767b0",
     "name": "getOneById",
-    "url": "http://localhost:7777/role/1",
+    "url": "http://localhost:7777/object/2",
     "method": "GET",
     "sortNum": 30000,
     "created": "2023-05-21T06:39:24.549Z",
-    "modified": "2023-05-21T06:39:24.547Z",
+    "modified": "2023-06-07T08:34:07.435Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -225,18 +225,19 @@
     "colId": "a7d0c96d-902d-4e7d-bde9-1374fe65d3f6",
     "containerId": "baed3df2-9823-4aaa-9d17-ba2dfb5767b0",
     "name": "getOneByName",
-    "url": "http://localhost:7777/role/getByName",
+    "url": "http://localhost:7777/object/getByName/?name=1213213",
     "method": "GET",
     "sortNum": 35000,
     "created": "2023-05-21T06:39:24.550Z",
-    "modified": "2023-05-21T06:39:24.547Z",
+    "modified": "2023-06-07T08:48:02.498Z",
     "headers": [],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"name\":\"admin\"\n}",
-      "form": []
-    },
+    "params": [
+      {
+        "name": "name",
+        "value": "1213213",
+        "isPath": false
+      }
+    ],
     "tests": []
   },
   {
@@ -244,17 +245,32 @@
     "colId": "a7d0c96d-902d-4e7d-bde9-1374fe65d3f6",
     "containerId": "baed3df2-9823-4aaa-9d17-ba2dfb5767b0",
     "name": "update",
-    "url": "http://localhost:7777/role/6",
+    "url": "http://localhost:7777/object/2",
     "method": "PUT",
     "sortNum": 40000,
     "created": "2023-05-21T06:39:24.551Z",
-    "modified": "2023-05-21T06:39:24.547Z",
+    "modified": "2023-06-07T11:15:04.832Z",
     "headers": [],
     "params": [],
     "body": {
-      "type": "json",
-      "raw": "{\n  \"name\": \"КИП\"\n}",
-      "form": []
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "name",
+          "value": "Зеландия"
+        },
+        {
+          "name": "description",
+          "value": "г. Пенза"
+        }
+      ],
+      "files": [
+        {
+          "name": "img",
+          "value": "c:\\Users\\Roman\\Downloads\\o_zelandiya-penza-jk-1043741121-10.jpg"
+        }
+      ]
     },
     "tests": []
   },
