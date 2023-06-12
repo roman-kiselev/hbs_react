@@ -30,3 +30,5 @@ const start = async () => {
 };
 app.use(ErrorHandlerMiddleware);
 start();
+
+export default app;

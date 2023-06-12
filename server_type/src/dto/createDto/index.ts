@@ -1,4 +1,13 @@
 import CreateRoleDto from "./users/CreateRoleDto";
-import { CreateObjectBuildsDto } from "./objects";
+import {
+    CreateObjectBuildsDto,
+    CreateSectionsDto,
+    CreateFloorsDto,
+} from "./objects";
 
-export { CreateRoleDto, CreateObjectBuildsDto };
+export {
+    CreateRoleDto,
+    CreateObjectBuildsDto,
+    CreateSectionsDto,
+    CreateFloorsDto,
+};

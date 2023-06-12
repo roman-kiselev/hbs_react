@@ -1,4 +1,5 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { Sections } from "./sections";
 
 interface ObjectsBuildsAttr {
     id: number;
@@ -34,4 +35,7 @@ export class ObjectsBuilds extends Model<ObjectsBuilds, ObjectsBuildsAttr> {
         allowNull: false,
     })
     img: string;
+
+    @HasMany(() => Sections)
+    sections: Sections[];
 }

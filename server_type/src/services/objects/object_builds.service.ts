@@ -52,7 +52,9 @@ class ObjectsBuildsService implements IObjectBuildsService {
     // Получим все объекты
     async getAllObjectBuilds(): Promise<ObjectsBuilds[] | ApiError> {
         try {
-            const objects = await ObjectsBuilds.findAll();
+            const objects = await ObjectsBuilds.findAll({
+                include: { all: true },
+            });
             if (!objects) {
                 return ApiError.badRequest("Не удаётся получить все объекты");
             }

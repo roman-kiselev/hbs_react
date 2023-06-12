@@ -1,3 +1,4 @@
-import { ObjectsBuilds } from "./objects";
+import { ObjectsBuilds, Sections, Floors } from "./objects";
+import MainAddMeter from "./mainTable";
 
-export { ObjectsBuilds };
+export { ObjectsBuilds, Sections, Floors, MainAddMeter };
