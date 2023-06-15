@@ -1,6 +1,6 @@
 import { CreateObjectBuildsDto } from "../../dto";
 import { IObjectBuildsService } from "../../interfaces";
-import ApiError from "../../lib";
+import { ApiError } from "../../lib";
 import { ObjectsBuilds } from "../../models";
 import { FilesService } from "../files";
 import { v4 as uuidv4 } from "uuid";

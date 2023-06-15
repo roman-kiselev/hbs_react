@@ -1,3 +1,5 @@
 import ApiError from "./error/ApiError";
 
-export default ApiError;
+import { WaterMeter } from "./mainTable";
+
+export { ApiError, WaterMeter };

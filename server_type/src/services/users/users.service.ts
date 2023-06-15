@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 
 import { Role, User, UsersRole } from "../../models/user";
 import { IUserCreate, IUserLogin } from "../../interfaces";
-import ApiError from "../../lib";
+import { ApiError } from "../../lib";
 import { RoleService } from ".";
 import * as dotenv from "dotenv";
 dotenv.config();

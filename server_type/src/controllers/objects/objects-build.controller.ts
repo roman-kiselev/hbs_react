@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { CreateObjectBuildsDto } from "../../dto";
-import ApiError from "../../lib";
+import { ApiError } from "../../lib";
 import { FilesService, ObjectsBuildsService } from "../../services";
 import { ObjectsBuilds } from "../../models";
 

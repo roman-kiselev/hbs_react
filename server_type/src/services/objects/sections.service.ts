@@ -1,6 +1,6 @@
 import { ObjectsBuildsService } from ".";
 import CreateSectionsDto from "../../dto/createDto/objects/CreateSectionsDto";
-import ApiError from "../../lib";
+import { ApiError } from "../../lib";
 import { ObjectsBuilds, Sections } from "../../models/objects";
 
 class SectionsService {

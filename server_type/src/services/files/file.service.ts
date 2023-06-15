@@ -1,4 +1,4 @@
-import ApiError from "../../lib";
+import { ApiError } from "../../lib";
 
 import path from "path";
 import fs from "fs";

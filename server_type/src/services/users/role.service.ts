@@ -1,4 +1,4 @@
-import ApiError from "../../lib";
+import { ApiError } from "../../lib";
 import { Role } from "../../models/user";
 import { CreateRoleDto } from "../../dto";
 import { IRoleService } from "../../interfaces";

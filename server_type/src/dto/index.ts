@@ -3,6 +3,7 @@ import {
     CreateObjectBuildsDto,
     CreateSectionsDto,
     CreateFloorsDto,
+    CreateMainWaterDto,
 } from "./createDto";
 
 export {
@@ -10,4 +11,5 @@ export {
     CreateObjectBuildsDto,
     CreateSectionsDto,
     CreateFloorsDto,
+    CreateMainWaterDto,
 };

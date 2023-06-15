@@ -1,5 +1,5 @@
 import { CreateFloorsDto } from "../../dto";
-import ApiError from "../../lib";
+import { ApiError } from "../../lib";
 import { Floors, Sections } from "../../models";
 
 class FloorsService {
