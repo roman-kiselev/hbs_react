@@ -18,7 +18,7 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
     const [flat, setFlat, handleInputChangeFlat] = useNumber("");
     const [line, setLine, handleInputChangeLine] = useNumber("");
     const [numberMeter, setNumberMeter, handleInputChangeNumberMeter] =
-        useNumber("");
+        useNumber("01283517740");
     const [sumMeter, setSumMeter, handleInputChangeSumMeter] = useNumber("");
     const [selectObject, setSelectObject, handleInputChangeSelectObject] =
         useNumber("flat");
