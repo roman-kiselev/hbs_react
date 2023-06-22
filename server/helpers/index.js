@@ -257,48 +257,41 @@ const getNumberResourse = (arr) => {
     return numbersOnly;
 };
 
-export const getFirstParamsResourse = (arr, typeMeter, flat) => {
+export const getFirstParamsResourse = (arr, typeMeter, flat, numberAsr) => {
+    //console.log(arr);
     // Поиск по квартире
     const newFlat = findFlat(arr, flat);
-    console.log(newFlat);
+    //console.log(newFlat);
     if (newFlat) {
         // Возвращаем массив с квартирой и работаем с ней
+
         const arrayFlats = getNewArrayFlats(arr, flat);
         //console.log(arrayFlats);
         // Теперь проверяем что в параметрах
         // Что бы определить что далее
+        const numberResourse = getNumberResourse(arrayFlats);
+
         //console.log(getNumberResourse(arrayFlats));
+        if (numberResourse.length >= 2) {
+            if (typeMeter === "Счётчик горячей воды") {
+                return "Объём4(м3)";
+            } else if (typeMeter === "Счётчик холодной воды") {
+                return "Объём3(м3)";
+            }
+        } else {
+            if (typeMeter === "Счётчик горячей воды") {
+                return "Объём2(м3)";
+            } else if (typeMeter === "Счётчик холодной воды") {
+                return "Объём1(м3)";
+            }
+        }
 
         // console.log(`arrayFlats: ${arrayFlats}`);
         // console.log(arrayFlats);
     } else {
-        console.log("Сработал");
+        // console.log("Сработал");
+        // console.log(getResourseFirst(typeMeter));
         return getResourseFirst(typeMeter);
-    }
-};
-
-export const funcSwitch = (numberAsr) => {
-    switch (numberAsr) {
-        case 1:
-            return "Объём1(м3)";
-        case 2:
-            return "Объём1(м3)";
-        case 3:
-            return "Объём2(м3)";
-        case 4:
-            return "Объём2(м3)";
-        case 5:
-            return "Объём1(м3)";
-        case 6:
-            return "Объём1(м3)";
-        case 7:
-            return "Объём2(м3)";
-        case 8:
-            return "Объём2(м3)";
-        case 9:
-            return "Объём1(м3)";
-        case 10:
-            return "Объём1(м3)";
     }
 };
 
