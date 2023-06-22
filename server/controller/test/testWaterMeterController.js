@@ -10,11 +10,7 @@ import HeadersWaterConfig from "../../service/headersConfig/headersWater/Headers
 import createHeatTemplate from "../../service/headersConfig/createHeatTemplate.js";
 import createWaterTemplate from "../../service/headersConfig/createWaterTemplate.js";
 import { getDatFile } from "../../service/serviceWater/getDatFileWater.js";
-import {
-    funcSwitch,
-    getFirstParamsResourse,
-    getFlatString,
-} from "../../helpers/index.js";
+import { getFlatString, getNewArrayFlats } from "../../helpers/index.js";
 
 class TestWaterMeterController {
     async addNewMeter(req, res) {
@@ -267,7 +263,38 @@ class TestWaterMeterController {
             let editArr = [];
 
             /// ----------------***************************----------------
-
+            const funcSwitch = (numberAsr, flat) => {
+                switch (numberAsr) {
+                    case 1:
+                        const newArr = getNewArrayFlats(editArr, flat);
+                        if (newArr.length >= 2) {
+                            return "Объём2(м3)";
+                        }
+                        return "Объём1(м3)";
+                    case 2:
+                        const newArr2 = getNewArrayFlats(editArr, flat);
+                        if (newArr2.length >= 2) {
+                            return "Объём2(м3)";
+                        }
+                        return "Объём1(м3)";
+                    case 3:
+                        return "Объём2(м3)";
+                    case 4:
+                        return "Объём2(м3)";
+                    case 5:
+                        return "Объём1(м3)";
+                    case 6:
+                        return "Объём1(м3)";
+                    case 7:
+                        return "Объём2(м3)";
+                    case 8:
+                        return "Объём2(м3)";
+                    case 9:
+                        return "Объём1(м3)";
+                    case 10:
+                        return "Объём1(м3)";
+                }
+            };
             // Преобразуем данные
             const newMeters = meters.map((meter) => {
                 const {
@@ -290,7 +317,7 @@ class TestWaterMeterController {
                     flat: flat,
                     numberAsr,
                     typeMeter,
-                    params: getFirstParamsResourse(editArr, typeMeter, flat),
+                    //params: getFirstParamsResourse(editArr, typeMeter, flat),
                     //param:
                     //Если уже есть там квартира
                     // создаём новый массив из имеющихся квартир
@@ -314,7 +341,7 @@ class TestWaterMeterController {
                     typePlace: "Квартира",
                     resourse:
                         typeMeter === "Счётчик холодной воды" ? "ХВС" : "ГВС",
-                    paramResurs: funcSwitch(numberAsr),
+                    paramResurs: funcSwitch(numberAsr, flat),
                 };
             });
 

@@ -214,7 +214,7 @@ const getNextResourse = (num, resourse) => {
 // Для выставления объёмов
 // Задача 1
 // Выставляем первый параметр в зависимости от типа счётчика и канала
-const findFlat = (arr, flat) => {
+export const findFlat = (arr, flat) => {
     let isFlat = false;
     for (let i = 0; i < arr.length; i++) {
         if (arr[i].flat === flat) {
@@ -234,7 +234,7 @@ const getResourseFirst = (typeMeter) => {
 };
 
 // Создаём новый массив из повторяющихся квартир
-const getNewArrayFlats = (arr, flat) => {
+export const getNewArrayFlats = (arr, flat) => {
     const newArray = [];
     for (let i = 0; i < arr.length; i++) {
         if (arr[i].flat === flat) {
