@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     addDataExcelWater,
     getAllWaterMeter,
+    getAllWaterMeterPulsar,
 } from "../../../../http/waterMeterApi";
 import { getAllMetersByUserAndObject } from "../../../../features/testMeters/testWaterMeterSlice";
 import MainTabDownloadListWater from "./downloadList/MainTabDownloadListWater";
@@ -33,6 +34,14 @@ const OperationsWater = ({ id: objectBuildId }) => {
             console.log(error);
         }
     };
+
+    const getPulsarExcel = () => {
+        try {
+            getAllWaterMeterPulsar(objectBuildId);
+        } catch (error) {
+            console.log(error);
+        }
+    };
     // Формируем query для запроса
     const { id: userId } = useSelector((state) => state.users.user);
     const [data, setData] = useState([]);
@@ -45,7 +54,6 @@ const OperationsWater = ({ id: objectBuildId }) => {
     const handleSelectCheck = () => {
         setStateCheck(!stateCheck);
     };
-    
 
     //Функция для считывания файла
     const handleFileUpload = async (event) => {
@@ -127,6 +135,7 @@ const OperationsWater = ({ id: objectBuildId }) => {
                             <MainTabDownloadListWater
                                 objectBuildId={objectBuildId}
                                 getExcel={getExcel}
+                                getPulsarExcel={getPulsarExcel}
                             />
                         </Tab.Pane>
                         {/* Второй таб для скачивания шаблонов для загрузки */}

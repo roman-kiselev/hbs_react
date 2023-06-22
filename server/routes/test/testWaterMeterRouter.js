@@ -7,6 +7,10 @@ router.get(
     "/getAllMeters",
     TestWaterMeterController.getExcelAllWaterMeterInObject
 );
+router.get(
+    "/getAllMetersPulsar",
+    TestWaterMeterController.getExcelAllWaterMeterPulsarInObject
+);
 router.get("/search", TestWaterMeterController.searchByNumber);
 router.get("/getTemplateWater", TestWaterMeterController.getWaterTemplate);
 

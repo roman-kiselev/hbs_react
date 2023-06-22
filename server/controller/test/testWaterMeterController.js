@@ -10,6 +10,11 @@ import HeadersWaterConfig from "../../service/headersConfig/headersWater/Headers
 import createHeatTemplate from "../../service/headersConfig/createHeatTemplate.js";
 import createWaterTemplate from "../../service/headersConfig/createWaterTemplate.js";
 import { getDatFile } from "../../service/serviceWater/getDatFileWater.js";
+import {
+    funcSwitch,
+    getFirstParamsResourse,
+    getFlatString,
+} from "../../helpers/index.js";
 
 class TestWaterMeterController {
     async addNewMeter(req, res) {
@@ -203,6 +208,130 @@ class TestWaterMeterController {
             worksheet["G1"] = { t: "s", v: "Номер счётчика" };
             worksheet["H1"] = { t: "s", v: "Показания" };
             worksheet["I1"] = { t: "s", v: "Тип счётчика" };
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Счётчики воды");
+            const buffer = XLSX.write(workbook, {
+                type: "buffer",
+                bookType: "xlsx",
+            });
+
+            res.send(buffer);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async getExcelAllWaterMeterPulsarInObject(req, res) {
+        try {
+            // Получаем все счётчики электроэнергии в excel
+            // Достаём id объекта
+            const { objectBuildId } = req.query;
+            const typeMeterCool = "Счётчик холодной воды";
+            const typeMeterHot = "Счётчик горячей воды";
+            const meters = await Models.MainAddMeter.findAll({
+                where: {
+                    objectBuildId,
+                    [Op.or]: [
+                        { typeMeter: typeMeterCool },
+                        { typeMeter: typeMeterHot },
+                    ],
+                },
+                attributes: [
+                    "id",
+                    "section",
+                    "floor",
+                    "flat",
+                    "numberKdl",
+                    "numberAsr",
+                    "numberMeter",
+                    "sumMeter",
+                    "typeMeter",
+                ],
+                order: [["createdAt", "DESC"]],
+                raw: true,
+            });
+            const arrForResourse = meters.map((meter) => {
+                return {
+                    flat: meter.flat,
+                    numberAsr: meter.numberAsr,
+                    typeMeter: meter.typeMeter,
+                };
+            });
+
+            // Получаем максимальное значение квартиры
+            const maxFlat = meters.reduce((prev, curr) => {
+                return prev.flat > curr.flat ? prev : curr;
+            });
+
+            /// ----------------***************************----------------
+            let editArr = [];
+
+            /// ----------------***************************----------------
+
+            // Преобразуем данные
+            const newMeters = meters.map((meter) => {
+                const {
+                    id,
+                    section,
+                    floor,
+                    flat,
+                    numberKdl,
+                    numberAsr,
+                    numberMeter,
+                    sumMeter,
+                    typeMeter,
+                } = meter;
+
+                // Добавляем в другой массив построчно
+                // проверяем
+                // если в массиве была уже квартира смотрим на Объём и тип
+                // Добавляем paramResourse
+                editArr.push({
+                    flat: flat,
+                    numberAsr,
+                    typeMeter,
+                    params: getFirstParamsResourse(editArr, typeMeter, flat),
+                    //param:
+                    //Если уже есть там квартира
+                    // создаём новый массив из имеющихся квартир
+                    // Смотрим что уже есть
+                    // Далее смотрим какой тип пришёл
+                    // Далее определяем что выставить
+                    // Эта функция и будет возвращать параметр который нужно выставить
+                    // в return
+                });
+
+                return {
+                    id,
+                    section,
+                    floor,
+                    flat: getFlatString(flat, maxFlat.flat),
+                    numberKdl,
+                    numberAsr,
+                    numberMeter,
+                    sumMeter,
+                    typeMeter,
+                    typePlace: "Квартира",
+                    resourse:
+                        typeMeter === "Счётчик холодной воды" ? "ХВС" : "ГВС",
+                    paramResurs: funcSwitch(numberAsr),
+                };
+            });
+
+            const worksheet = XLSX.utils.json_to_sheet(newMeters);
+            // добавление заголовков в ячейки
+            worksheet["A1"] = { t: "s", v: "ID" };
+            worksheet["B1"] = { t: "s", v: "Секция" };
+            worksheet["C1"] = { t: "s", v: "Этаж" };
+            worksheet["D1"] = { t: "s", v: "Квартира" };
+            worksheet["E1"] = { t: "s", v: "Номер КДЛ" };
+            worksheet["F1"] = { t: "s", v: "Номер Канала" };
+            worksheet["G1"] = { t: "s", v: "Номер счётчика" };
+            worksheet["H1"] = { t: "s", v: "Показания" };
+            worksheet["I1"] = { t: "s", v: "Тип счётчика" };
+            worksheet["J1"] = { t: "s", v: "Тип места" };
+            worksheet["K1"] = { t: "s", v: "Ресурс" };
+            worksheet["L1"] = { t: "s", v: "Параметр ресурса" };
             const workbook = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(workbook, worksheet, "Счётчики воды");
             const buffer = XLSX.write(workbook, {
