@@ -3,7 +3,7 @@ class CreateMainWaterDto {
     floors: number;
     flat: number;
     office: number;
-    kdl: number;
+    numberKdl: number;
     channelCool: number;
     channelHot: number;
     numberMeterCool: number;
@@ -11,7 +11,7 @@ class CreateMainWaterDto {
     sumMeterCool: number;
     sumMeterHot: number;
     userId: number;
-    objectId: number;
+    objectBuildId: number;
 }
 
 export default CreateMainWaterDto;
