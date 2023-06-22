@@ -334,7 +334,7 @@ class TestWaterMeterController {
                     floor,
                     flat: getFlatString(flat, maxFlat.flat),
                     numberKdl,
-                    numberAsr,
+                    numberAsr: `Канал${numberAsr}`,
                     numberMeter,
                     sumMeter,
                     typeMeter,
@@ -342,6 +342,8 @@ class TestWaterMeterController {
                     resourse:
                         typeMeter === "Счётчик холодной воды" ? "ХВС" : "ГВС",
                     paramResurs: funcSwitch(numberAsr, flat),
+                    twoDevice: "Пульсар10-М",
+                    description: `Квартира_${flat}`,
                 };
             });
 
@@ -359,6 +361,8 @@ class TestWaterMeterController {
             worksheet["J1"] = { t: "s", v: "Тип места" };
             worksheet["K1"] = { t: "s", v: "Ресурс" };
             worksheet["L1"] = { t: "s", v: "Параметр ресурса" };
+            worksheet["M1"] = { t: "s", v: "Вторичный прибор" };
+            worksheet["N1"] = { t: "s", v: "Доп описание" };
             const workbook = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(workbook, worksheet, "Счётчики воды");
             const buffer = XLSX.write(workbook, {
