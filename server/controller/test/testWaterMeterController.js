@@ -10,11 +10,7 @@ import HeadersWaterConfig from "../../service/headersConfig/headersWater/Headers
 import createHeatTemplate from "../../service/headersConfig/createHeatTemplate.js";
 import createWaterTemplate from "../../service/headersConfig/createWaterTemplate.js";
 import { getDatFile } from "../../service/serviceWater/getDatFileWater.js";
-import {
-    getFirstParamsResourse,
-    getFlatString,
-    getNewArrayFlats,
-} from "../../helpers/index.js";
+import { getFlatString } from "../../helpers/index.js";
 
 class TestWaterMeterController {
     async addNewMeter(req, res) {
@@ -250,55 +246,39 @@ class TestWaterMeterController {
                 order: [["createdAt", "DESC"]],
                 raw: true,
             });
-            const arrForResourse = meters.map((meter) => {
-                return {
-                    flat: meter.flat,
-                    numberAsr: meter.numberAsr,
-                    typeMeter: meter.typeMeter,
-                };
-            });
 
             // Получаем максимальное значение квартиры
             const maxFlat = meters.reduce((prev, curr) => {
                 return prev.flat > curr.flat ? prev : curr;
             });
 
-            /// ----------------***************************----------------
-            let editArr = [];
+            let paramsCount = {};
+            const metersWithParams = meters.map((meter) => {
+                const { numberAsr, typeMeter } = meter;
+                let paramResourse = "";
 
-            /// ----------------***************************----------------
-            // const funcSwitch = (numberAsr, flat) => {
-            //     switch (numberAsr) {
-            //         case 1:
-            //             const newArr = getNewArrayFlats(editArr, flat);
-            //             if (newArr.length >= 2) {
-            //                 return "Объём2(м3)";
-            //             }
-            //             return "Объём1(м3)";
-            //         case 2:
-            //             const newArr2 = getNewArrayFlats(editArr, flat);
-            //             if (newArr2.length >= 2) {
-            //                 return "Объём2(м3)";
-            //             }
-            //             return "Объём1(м3)";
-            //         case 3:
-            //             return "Объём2(м3)";
-            //         case 4:
-            //             return "Объём2(м3)";
-            //         case 5:
-            //             return "Объём1(м3)";
-            //         case 6:
-            //             return "Объём1(м3)";
-            //         case 7:
-            //             return "Объём2(м3)";
-            //         case 8:
-            //             return "Объём2(м3)";
-            //         case 9:
-            //             return "Объём1(м3)";
-            //         case 10:
-            //             return "Объём1(м3)";
-            //     }
-            // };
+                if (!paramsCount[numberAsr]) {
+                    paramsCount[numberAsr] = 1;
+                }
+
+                if (paramsCount[numberAsr] > 2) {
+                    paramResourse = `Объём${paramsCount[numberAsr] - 2}`;
+                } else {
+                    paramResourse = `Объём${paramsCount[numberAsr]}`;
+                }
+
+                if (typeMeter === "Счётчик холодной воды") {
+                    paramResourse += " Холодной воды";
+                } else if (typeMeter === "Счётчик горячей воды") {
+                    paramResourse += " Горячей воды";
+                }
+
+                paramsCount[numberAsr] += 1;
+
+                return { ...meter, paramResourse };
+            });
+            console.log(metersWithParams);
+
             // Преобразуем данные
             const newMeters = meters.map((meter) => {
                 const {
@@ -312,32 +292,6 @@ class TestWaterMeterController {
                     sumMeter,
                     typeMeter,
                 } = meter;
-
-                // Добавляем в другой массив построчно
-                // проверяем
-                // если в массиве была уже квартира смотрим на Объём и тип
-                // Добавляем paramResourse
-                const newObj = {
-                    flat: flat,
-                    numberAsr,
-                    typeMeter,
-                    params: getFirstParamsResourse(
-                        editArr,
-                        typeMeter,
-                        flat,
-                        numberAsr
-                    ),
-                    //param:
-                    //Если уже есть там квартира
-                    // создаём новый массив из имеющихся квартир
-                    // Смотрим что уже есть
-                    // Далее смотрим какой тип пришёл
-                    // Далее определяем что выставить
-                    // Эта функция и будет возвращать параметр который нужно выставить
-                    // в return
-                };
-                // console.log(newObj);
-                editArr.push(newObj);
 
                 return {
                     id,
@@ -381,7 +335,7 @@ class TestWaterMeterController {
                 bookType: "xlsx",
             });
 
-            res.send(buffer);
+            //res.send(buffer);
         } catch (e) {
             console.log(e);
         }
