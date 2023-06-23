@@ -10,7 +10,7 @@ import HeadersWaterConfig from "../../service/headersConfig/headersWater/Headers
 import createHeatTemplate from "../../service/headersConfig/createHeatTemplate.js";
 import createWaterTemplate from "../../service/headersConfig/createWaterTemplate.js";
 import { getDatFile } from "../../service/serviceWater/getDatFileWater.js";
-import { getFlatString } from "../../helpers/index.js";
+import { getFlatString, changeArrMeter } from "../../helpers/index.js";
 
 class TestWaterMeterController {
     async addNewMeter(req, res) {
@@ -252,35 +252,101 @@ class TestWaterMeterController {
                 return prev.flat > curr.flat ? prev : curr;
             });
 
-            let paramsCount = {};
-            const metersWithParams = meters.map((meter) => {
-                const { numberAsr, typeMeter } = meter;
-                let paramResourse = "";
+            // const x = [
+            //     {
+            //         id: 2129,
+            //         section: 1,
+            //         floor: 2,
+            //         flat: 2,
+            //         numberKdl: 1,
+            //         numberAsr: 9,
+            //         numberMeter: "65865",
+            //         sumMeter: 2,
+            //         typeMeter: "Счётчик холодной воды",
+            //     },
+            //     {
+            //         id: 2130,
+            //         section: 1,
+            //         floor: 2,
+            //         flat: 2,
+            //         numberKdl: 1,
+            //         numberAsr: 10,
+            //         numberMeter: "135264",
+            //         sumMeter: 2,
+            //         typeMeter: "Счётчик горячей воды",
+            //     },
+            //     {
+            //         id: 2127,
+            //         section: 1,
+            //         floor: 2,
+            //         flat: 2,
+            //         numberKdl: 1,
+            //         numberAsr: 7,
+            //         numberMeter: "6875233",
+            //         sumMeter: 1,
+            //         typeMeter: "Счётчик холодной воды",
+            //     },
+            //     {
+            //         id: 2128,
+            //         section: 1,
+            //         floor: 2,
+            //         flat: 2,
+            //         numberKdl: 1,
+            //         numberAsr: 8,
+            //         numberMeter: "34858",
+            //         sumMeter: 1,
+            //         typeMeter: "Счётчик горячей воды",
+            //     },
+            //     {
+            //         id: 2128,
+            //         section: 1,
+            //         floor: 2,
+            //         flat: 1,
+            //         numberKdl: 1,
+            //         numberAsr: 8,
+            //         numberMeter: "34858",
+            //         sumMeter: 1,
+            //         typeMeter: "Счётчик холодной воды",
+            //     },
+            //     {
+            //         id: 2128,
+            //         section: 1,
+            //         floor: 2,
+            //         flat: 1,
+            //         numberKdl: 1,
+            //         numberAsr: 8,
+            //         numberMeter: "34858",
+            //         sumMeter: 1,
+            //         typeMeter: "Счётчик горячей воды",
+            //     },
+            //     {
+            //         id: 2128,
+            //         section: 1,
+            //         floor: 2,
+            //         flat: 1,
+            //         numberKdl: 1,
+            //         numberAsr: 8,
+            //         numberMeter: "34858",
+            //         sumMeter: 1,
+            //         typeMeter: "Счётчик холодной воды",
+            //     },
+            //     {
+            //         id: 2128,
+            //         section: 1,
+            //         floor: 2,
+            //         flat: 1,
+            //         numberKdl: 1,
+            //         numberAsr: 8,
+            //         numberMeter: "34858",
+            //         sumMeter: 1,
+            //         typeMeter: "Счётчик холодной воды",
+            //     },
+            // ];
 
-                if (!paramsCount[numberAsr]) {
-                    paramsCount[numberAsr] = 1;
-                }
-
-                if (paramsCount[numberAsr] > 2) {
-                    paramResourse = `Объём${paramsCount[numberAsr] - 2}`;
-                } else {
-                    paramResourse = `Объём${paramsCount[numberAsr]}`;
-                }
-
-                if (typeMeter === "Счётчик холодной воды") {
-                    paramResourse += " Холодной воды";
-                } else if (typeMeter === "Счётчик горячей воды") {
-                    paramResourse += " Горячей воды";
-                }
-
-                paramsCount[numberAsr] += 1;
-
-                return { ...meter, paramResourse };
-            });
-            console.log(metersWithParams);
+            const editMeter = changeArrMeter(meters);
 
             // Преобразуем данные
-            const newMeters = meters.map((meter) => {
+            const newMeters = editMeter.map((meter) => {
                 const {
                     id,
                     section,
@@ -291,6 +357,7 @@ class TestWaterMeterController {
                     numberMeter,
                     sumMeter,
                     typeMeter,
+                    params,
                 } = meter;
 
                 return {
@@ -306,7 +373,7 @@ class TestWaterMeterController {
                     typePlace: "Квартира",
                     resourse:
                         typeMeter === "Счётчик холодной воды" ? "ХВС" : "ГВС",
-                    //paramResurs: funcSwitch(numberAsr, flat),
+                    paramResurs: params,
                     twoDevice: "Пульсар10-М",
                     description: `Квартира_${flat}`,
                 };
@@ -335,7 +402,7 @@ class TestWaterMeterController {
                 bookType: "xlsx",
             });
 
-            //res.send(buffer);
+            res.send(buffer);
         } catch (e) {
             console.log(e);
         }

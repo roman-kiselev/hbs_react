@@ -26,62 +26,6 @@ const changeMeter = (arr: IMeter[]) => {
             sumMeter,
             typeMeter,
         } = meter;
-
-        if (saveArr.length === 0) {
-            if (typeMeter === "Счётчик холодной воды") {
-                saveArr.push({
-                    id,
-                    section,
-                    floor,
-                    flat,
-                    numberKdl,
-                    numberAsr,
-                    sumMeter,
-                    typeMeter,
-                    params: "Объём1",
-                });
-            } else {
-                saveArr.push({
-                    id,
-                    section,
-                    floor,
-                    flat,
-                    numberKdl,
-                    numberAsr,
-                    sumMeter,
-                    typeMeter,
-                    params: "Объём2",
-                });
-            }
-        }
-
-        if (saveArr.length === 2) {
-            if (typeMeter === "Счётчик холодной воды") {
-                saveArr.push({
-                    id,
-                    section,
-                    floor,
-                    flat,
-                    numberKdl,
-                    numberAsr,
-                    sumMeter,
-                    typeMeter,
-                    params: "Объём1",
-                });
-            } else {
-                saveArr.push({
-                    id,
-                    section,
-                    floor,
-                    flat,
-                    numberKdl,
-                    numberAsr,
-                    sumMeter,
-                    typeMeter,
-                    params: "Объём1",
-                });
-            }
-        }
     });
 };
 
