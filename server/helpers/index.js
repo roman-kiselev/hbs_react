@@ -29,14 +29,12 @@ export const getResourse = (arr, typeMeter) => {
     const parityLength = arr.length % 2;
 
     let resourse;
-    console.log(`Я тут ${typeMeter} ${parity} ${parityLength}`);
+
     if (parity && parityLength === 0) {
         return `Объём${arr.length * 2 + 2}(м3)`;
     } else if (!parity && parityLength !== 0) {
-        console.log(`Я тут ${typeMeter} ${parity}`);
         return `Объём${arr.length * 2 + 1}(м3)`;
     } else if (parity && parityLength !== 0) {
-        console.log(arr.length);
         return `Объём${arr.length * 2 + 2}(м3)`;
     } else if (!parity && parityLength === 0) {
         return `Объём${arr.length * 2 + 1}(м3)`;
@@ -124,7 +122,6 @@ export const changeArrMeter = (arr) => {
             typeMeter,
             params,
         });
-        console.log(newArr);
 
         return {
             id,
