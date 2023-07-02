@@ -2,8 +2,7 @@ import jwt_decode from "jwt-decode";
 import { createSlice } from "@reduxjs/toolkit";
 import { IUser, IUserSlice } from "../../interfaces";
 import { authApi } from "../../api/auth";
-
-// Интерфейс для входа
+import { IDataError } from "../../interfaces/store";
 
 // Задаём начальное значение
 const initialState: IUserSlice = {
@@ -12,6 +11,7 @@ const initialState: IUserSlice = {
     isLoading: false,
     isError: false,
     token: null,
+    dataError: null,
 };
 
 export const userSlice = createSlice({
@@ -54,6 +54,11 @@ export const userSlice = createSlice({
                 state.isAuth = false;
                 localStorage.removeItem("token");
                 state.token = null;
+                const { status, data } = action.payload as IDataError;
+                state.dataError = {
+                    status: Number(status),
+                    data,
+                };
             }
         );
         builder.addMatcher(
@@ -84,6 +89,11 @@ export const userSlice = createSlice({
                 state.isAuth = false;
                 localStorage.removeItem("token");
                 state.token = null;
+                const { status, data } = action.payload as IDataError;
+                state.dataError = {
+                    status: Number(status),
+                    data,
+                };
             }
         );
     },

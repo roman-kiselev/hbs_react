@@ -1,8 +1,6 @@
 import { Routes, Route } from "react-router";
 import { lazy, Suspense } from "react";
 import React from "react";
-//import Simple from "./simple";
-//import Auth from "./auth";
 import NoAccess from "./noAccess";
 import { CheckAuthAndRole } from "../widgets";
 import { EnRole } from "../shared/config/enumRole";
@@ -12,6 +10,8 @@ import { LoadingVariant } from "../shared/config";
 
 const SimplePage = lazy(() => import("./simple"));
 const Auth = lazy(() => import("./auth"));
+const AdminPanelRoute = lazy(() => import("./admin"));
+//const AdminPanel = lazy(() => import("./admin/AdminPanel"));
 
 export const Routing = () => {
     return (
@@ -25,7 +25,7 @@ export const Routing = () => {
                 }
             >
                 <Route
-                    path="/"
+                    index
                     element={
                         <Suspense
                             fallback={
@@ -39,15 +39,24 @@ export const Routing = () => {
                     }
                 />
             </Route>
-            {/* <Route
-                path="/"
+            <Route
+                path="admin/*"
                 element={
-                    <CheckAuthAndRole role={[EnRole.ADMIN, EnRole.USER]}>
-                        <SimplePage />
+                    <CheckAuthAndRole role={[EnRole.ADMIN]}>
+                        <Suspense
+                            fallback={
+                                <LoadingSpin
+                                    variant={LoadingVariant.SECONDARY}
+                                />
+                            }
+                        >
+                            <AdminPanelRoute />
+                        </Suspense>
+                        {/* <AdminPanelRoute /> */}
                     </CheckAuthAndRole>
                 }
-            /> */}
-            {/* <Route path="/login" element={<Auth />} /> */}
+            />
+
             <Route
                 path="/login"
                 element={

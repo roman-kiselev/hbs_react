@@ -3,10 +3,11 @@ import {
     configureStore,
     createListenerMiddleware,
 } from "@reduxjs/toolkit";
-import { userReducer } from "../../shared/models";
+import { oneUserReducer, userReducer } from "../../shared/models";
 import { useDispatch } from "react-redux";
 import { api } from "../../shared/api/main";
 import { authApi } from "../../shared/api/auth";
+import { listUserReducer } from "../../shared/models/users/listUsersSlice";
 const listenerMiddleware = createListenerMiddleware();
 
 listenerMiddleware.startListening({
@@ -22,6 +23,8 @@ listenerMiddleware.startListening({
 
 const rootReducer = combineReducers({
     user: userReducer,
+    listUser: listUserReducer,
+    oneUser: oneUserReducer,
     [api.reducerPath]: api.reducer,
 });
 const store = configureStore({

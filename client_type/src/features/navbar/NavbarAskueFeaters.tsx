@@ -1,8 +1,13 @@
 import React from "react";
 import { NavbarAskue } from "../../entities";
 import { useAppSelector } from "../../shared/hooks";
+import { INavLinkAskueProps, IRole } from "../../shared/interfaces";
 
-const NavbarAskueFeaters: React.FC = () => {
+interface INavAskue {
+    configData: INavLinkAskueProps[];
+}
+
+const NavbarAskueFeaters: React.FC<INavAskue> = ({ configData }) => {
     const { isAuth, user } = useAppSelector((store) => store.user);
 
     if (!isAuth || user === null) {
@@ -10,7 +15,7 @@ const NavbarAskueFeaters: React.FC = () => {
     }
     const { roles } = user;
 
-    return <NavbarAskue role={roles} />;
+    return <NavbarAskue roles={roles} configData={configData} />;
 };
 
 export default NavbarAskueFeaters;

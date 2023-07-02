@@ -6,17 +6,26 @@ import { useAppSelector } from "../../shared/hooks";
 import { ICheckRoleAuth } from "../../shared/interfaces";
 import { IRole } from "../../shared/interfaces/store";
 
-function findRole(role: string[], roleState: IRole[]): boolean {
+function findRole(roles: string[], roleState: IRole[]): boolean {
     //const { role, roleState } = arg;
     // Пробегаеимся по roleState
     // Разрешённые роли в массиве role
-    for (let i = 0; i < role.length; i++) {
-        if (roleState.some((oneRole: IRole) => oneRole.name === role[i])) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    let foundMatch = false;
+    roleState.forEach((oneRole: IRole) => {
+        roles.forEach((role: string) => {
+            if (role === oneRole.name) {
+                foundMatch = true;
+            }
+        });
+    });
+    return foundMatch;
+    // for (let i = 0; i < role.length; i++) {
+    //     if (roleState.some((oneRole: IRole) => oneRole.name === role[i])) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 }
 
 const CheckRoleAuth: React.FC<ICheckRoleAuth> = ({ children, role }) => {

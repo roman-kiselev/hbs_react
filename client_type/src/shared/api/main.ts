@@ -11,7 +11,7 @@ const baseQuery = fetchBaseQuery({
         if (token) {
             headers.set("Authorization", `Bearer ${token}`);
         }
-        console.log(localStorage);
+
         return headers;
     },
 });

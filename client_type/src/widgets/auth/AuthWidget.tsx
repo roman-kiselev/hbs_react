@@ -7,7 +7,8 @@ import { LoadingVariant } from "../../shared/config";
 import { authApi, useLoginMutation } from "../../shared/api";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router";
-
+import { useAppSelector } from "../../shared/hooks";
+import { unlink } from "fs";
 const useLogin = () => {
     const [login, setLogin] = useState("");
     const loginProps: IInputStringProps = {
@@ -36,22 +37,36 @@ const AuthWidget: React.FC = () => {
     const location = useLocation();
     const [login, loginProps] = useLogin();
     const [password, passwordProps] = usePassword();
+    // Получим статус и ошибку
+    const { isError, dataError } = useAppSelector((store) => store.user);
+
+    if (dataError) {
+        const { data: dataMessage, status } = dataError;
+    }
 
     const userData = {
         login,
         password,
     };
 
-    const [loginMutation, { isLoading, isError }] = useLoginMutation();
-    const { isLoading: isCheckLoading, data } = authApi.useCheckQuery();
+    const [loginMutation, { isLoading }] = useLoginMutation();
+    const {
+        isLoading: isCheckLoading,
+        data,
+        isError: isCheckError,
+    } = authApi.useCheckQuery();
 
     const handleSubmit = (
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
         e.preventDefault();
-        const login = loginMutation(userData);
-        if (login) {
-            navigate(location.state?.from || "/", { replace: true });
+        try {
+            const login = loginMutation(userData);
+            if (login) {
+                navigate(location.state?.from || "/", { replace: true });
+            }
+        } catch (e) {
+            console.error(e);
         }
     };
 
@@ -73,14 +88,15 @@ const AuthWidget: React.FC = () => {
                     <InputString {...loginProps} />
                     <InputString {...passwordProps} />
                     <ButtonUI
+                        variant="success"
                         onClick={(
                             e: React.MouseEvent<HTMLButtonElement, MouseEvent>
                         ) => handleSubmit(e)}
                         label="Вход"
                     />
-                    {isError ? (
+                    {isError && dataError.data ? (
                         <Alert className="text-center mt-3" variant={"danger"}>
-                            Неверный логин или пароль
+                            {dataError.data.message}
                         </Alert>
                     ) : (
                         <></>
