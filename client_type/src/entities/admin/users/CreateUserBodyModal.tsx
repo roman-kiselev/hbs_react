@@ -7,6 +7,9 @@ interface ICreateUserBodyModal {
     password: string;
     handleInputChangeLogin: (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleInputChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    isError: boolean;
+    isLoading: boolean;
+    dataError: string;
 }
 
 const CreateUserBodyModal: React.FC<ICreateUserBodyModal> = ({
@@ -14,6 +17,9 @@ const CreateUserBodyModal: React.FC<ICreateUserBodyModal> = ({
     password,
     handleInputChangeLogin,
     handleInputChangePassword,
+    isError,
+    isLoading,
+    dataError,
 }) => {
     return (
         <Row>
@@ -32,6 +38,7 @@ const CreateUserBodyModal: React.FC<ICreateUserBodyModal> = ({
                         value={password}
                     />
                 </Row>
+                {isError && <h6>{dataError}</h6>}
             </Form>
         </Row>
     );

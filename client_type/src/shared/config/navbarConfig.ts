@@ -7,9 +7,19 @@ const configNav: INavLinkAskueProps[] = [
         accessFor: [EnRole.USER, EnRole.ADMIN],
     },
     {
-        title: "Вторая",
+        title: "Test",
         to: "/two",
         accessFor: [EnRole.USER, EnRole.ADMIN],
+    },
+    {
+        title: "Управление",
+        to: "/managment",
+        accessFor: [EnRole.MANAGER, EnRole.ADMIN],
+    },
+    {
+        title: "Менеджер",
+        to: "/manager",
+        accessFor: [EnRole.MANAGER, EnRole.ADMIN],
     },
     {
         title: "Администратор",

@@ -3,9 +3,14 @@ import {
     configureStore,
     createListenerMiddleware,
 } from "@reduxjs/toolkit";
-import { oneUserReducer, userReducer } from "../../shared/models";
+import {
+    createObjectReducer,
+    oneUserReducer,
+    rolesReducer,
+    userReducer,
+} from "../../shared/models";
 import { useDispatch } from "react-redux";
-import { api } from "../../shared/api/main";
+import { api, objectsMainApi } from "../../shared/api/main";
 import { authApi } from "../../shared/api/auth";
 import { listUserReducer } from "../../shared/models/users/listUsersSlice";
 const listenerMiddleware = createListenerMiddleware();
@@ -25,7 +30,10 @@ const rootReducer = combineReducers({
     user: userReducer,
     listUser: listUserReducer,
     oneUser: oneUserReducer,
+    roles: rolesReducer,
+    createObject: createObjectReducer,
     [api.reducerPath]: api.reducer,
+    [objectsMainApi.reducerPath]: objectsMainApi.reducer,
 });
 const store = configureStore({
     reducer: rootReducer,

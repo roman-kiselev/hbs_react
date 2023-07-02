@@ -3,9 +3,9 @@ import { Row } from "react-bootstrap";
 import { IUserDescription } from "../../../shared/interfaces";
 import { InputStringFormGroup } from "../../../shared/ui";
 
-interface IRowUserDescriptionProps {
-    data: IUserDescription;
-}
+// interface IRowUserDescriptionProps {
+//     data: IUserDescription;
+// }
 
 const RowUserDescription: React.FC<IUserDescription> = ({
     name = "",

@@ -19,19 +19,13 @@ function findRole(roles: string[], roleState: IRole[]): boolean {
         });
     });
     return foundMatch;
-    // for (let i = 0; i < role.length; i++) {
-    //     if (roleState.some((oneRole: IRole) => oneRole.name === role[i])) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
 }
 
 const CheckRoleAuth: React.FC<ICheckRoleAuth> = ({ children, role }) => {
     const location = useLocation();
-    const { isLoading } = useAppSelector((state) => state.user);
+
     const { roles: roleState } = useAppSelector((state) => state.user.user);
+    const { isLoading } = useAppSelector((state) => state.user);
 
     if (isLoading) {
         return <LoadingSpin variant={LoadingVariant.INFO} />;

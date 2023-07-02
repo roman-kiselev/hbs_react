@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { IUser, IUserSlice } from "../../interfaces";
 import { authApi } from "../../api/auth";
 import { IDataError } from "../../interfaces/store";
+import { userApi } from "../../api";
 
 // Задаём начальное значение
 const initialState: IUserSlice = {
@@ -19,9 +20,10 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         logout(state) {
-            state.user = null;
-            state.isAuth = false;
             localStorage.removeItem("token");
+            state.isAuth = false;
+            state.token = null;
+            state.user = null;
         },
     },
 
@@ -72,7 +74,6 @@ export const userSlice = createSlice({
             (state, action) => {
                 const { token } = action.payload;
                 const user: IUser = jwt_decode(token);
-                //localStorage.setItem("token", token);
                 const { id, login, roles } = user;
                 state.user = { id, login, roles };
                 state.isAuth = true;
@@ -94,6 +95,27 @@ export const userSlice = createSlice({
                     status: Number(status),
                     data,
                 };
+            }
+        );
+        // Удаляем роль
+        builder.addMatcher(
+            userApi.endpoints.delRoleToUser.matchPending,
+            (state, action) => {
+                state.isLoading = true;
+            }
+        );
+        builder.addMatcher(
+            userApi.endpoints.delRoleToUser.matchFulfilled,
+            (state, action) => {
+                state.isLoading = false;
+                state.user.roles = action.payload.roles;
+            }
+        );
+        builder.addMatcher(
+            userApi.endpoints.delRoleToUser.matchRejected,
+            (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
             }
         );
     },

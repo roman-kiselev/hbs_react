@@ -22,6 +22,15 @@ const baseQueryWithRetry = retry(baseQuery, {
 
 export const api = createApi({
     reducerPath: "api",
+    tagTypes: ["Api"],
+    baseQuery: baseQueryWithRetry,
+    refetchOnMountOrArgChange: true,
+    endpoints: () => ({}),
+});
+
+export const objectsMainApi = createApi({
+    reducerPath: "objects",
+    tagTypes: ["Objects"],
     baseQuery: baseQueryWithRetry,
     refetchOnMountOrArgChange: true,
     endpoints: () => ({}),

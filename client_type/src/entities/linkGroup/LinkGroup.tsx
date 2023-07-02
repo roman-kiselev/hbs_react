@@ -10,7 +10,7 @@ interface ILinkListGroupProps {
 const LinkGroup: React.FC<ILinkListGroupProps> = ({ configList }) => {
     return (
         <>
-            <ListGroup>
+            <ListGroup className="text-center">
                 {configList.map((item, index) => (
                     <LinkItemGroup
                         title={item.title}

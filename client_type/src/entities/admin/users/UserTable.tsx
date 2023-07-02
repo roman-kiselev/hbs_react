@@ -19,7 +19,6 @@ const UserTable: React.FC<IUserTableProps> = ({
                 <tr>
                     <th>#</th>
                     <th>Логин</th>
-                    <th>Пароль</th>
                     <th>Профиль</th>
                 </tr>
             </thead>
@@ -29,11 +28,7 @@ const UserTable: React.FC<IUserTableProps> = ({
                         <tr key={item.id}>
                             <td>{index + 1}</td>
                             <td>{item.login}</td>
-                            <td>
-                                <Button variant="warning">
-                                    Сменить пароль
-                                </Button>
-                            </td>
+
                             <td>
                                 <Button
                                     onClick={() => goToProfile(item.id)}

@@ -11,8 +11,7 @@ import { LoadingVariant } from "../shared/config";
 const SimplePage = lazy(() => import("./simple"));
 const Auth = lazy(() => import("./auth"));
 const AdminPanelRoute = lazy(() => import("./admin"));
-//const AdminPanel = lazy(() => import("./admin/AdminPanel"));
-
+const ManagmentRoute = lazy(() => import("./managment"));
 export const Routing = () => {
     return (
         <Routes>
@@ -51,6 +50,23 @@ export const Routing = () => {
                             }
                         >
                             <AdminPanelRoute />
+                        </Suspense>
+                        {/* <AdminPanelRoute /> */}
+                    </CheckAuthAndRole>
+                }
+            />
+            <Route
+                path="managment/*"
+                element={
+                    <CheckAuthAndRole role={[EnRole.MANAGER]}>
+                        <Suspense
+                            fallback={
+                                <LoadingSpin
+                                    variant={LoadingVariant.SECONDARY}
+                                />
+                            }
+                        >
+                            <ManagmentRoute />
                         </Suspense>
                         {/* <AdminPanelRoute /> */}
                     </CheckAuthAndRole>

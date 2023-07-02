@@ -1,5 +1,5 @@
 import { oneUserReducer } from "./oneUserSlice";
 import { listUserReducer } from "./listUsersSlice";
-import { userReducer } from "./userSlice";
+import { userReducer, logout } from "./userSlice";
 
-export { oneUserReducer, listUserReducer, userReducer };
+export { oneUserReducer, listUserReducer, userReducer, logout };

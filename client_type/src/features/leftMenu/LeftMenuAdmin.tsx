@@ -6,7 +6,7 @@ const LeftMenuAdmin: React.FC = () => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    // const handleShow = () => setShow(true);
 
     return (
         <LeftMenu show={show} handleClose={handleClose}>
