@@ -5,6 +5,7 @@ import LeftMenuAdmin from "./leftMenu/LeftMenuAdmin";
 import LeftMenuManager from "./leftMenu/LeftMenuManager";
 import { UsersAdminFeatures, OneUserForm } from "./admin";
 import { Objects } from "./managment";
+import { AddObject } from "./objects";
 
 export {
     RequireAuth,
@@ -15,4 +16,5 @@ export {
     OneUserForm,
     LeftMenuManager,
     Objects,
+    AddObject,
 };

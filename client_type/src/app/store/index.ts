@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { api, objectsMainApi } from "../../shared/api/main";
 import { authApi } from "../../shared/api/auth";
 import { listUserReducer } from "../../shared/models/users/listUsersSlice";
+import { objectsApi } from "../../shared/api";
 const listenerMiddleware = createListenerMiddleware();
 
 listenerMiddleware.startListening({
@@ -39,7 +40,7 @@ const store = configureStore({
     reducer: rootReducer,
     middleware(getDefaultMiddleware) {
         return getDefaultMiddleware()
-            .concat(api.middleware)
+            .concat(api.middleware, objectsMainApi.middleware)
             .prepend(listenerMiddleware.middleware);
     },
 });

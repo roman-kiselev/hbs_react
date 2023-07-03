@@ -8,6 +8,7 @@ class ObjectsBuildsController {
     async createObject(req: Request, res: Response) {
         try {
             const dto = req.body as CreateObjectBuildsDto;
+            console.log(dto);
             const { img } = req.files as {
                 [img: string]: Express.Multer.File[];
             };

@@ -1,4 +1,5 @@
 import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import MainAddMeter from "../mainTable";
 import { Sections } from "./sections";
 
 interface ObjectsBuildsAttr {
@@ -38,4 +39,7 @@ export class ObjectsBuilds extends Model<ObjectsBuilds, ObjectsBuildsAttr> {
 
     @HasMany(() => Sections)
     sections: Sections[];
+
+    @HasMany(() => MainAddMeter)
+    mainAddMeters: MainAddMeter[];
 }

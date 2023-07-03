@@ -1,5 +1,5 @@
 import React from "react";
-import { useShowAndClose, useString } from "../../../../shared/hooks";
+import { useShowAndClose } from "../../../../shared/hooks";
 import { ButtonForModals, ModalUi } from "../../../../shared/ui";
 import BodyCreateObject from "./BodyCreateObject";
 

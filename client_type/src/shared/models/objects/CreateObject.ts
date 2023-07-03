@@ -3,7 +3,8 @@ import { ICreateObjectSlice } from "../../interfaces";
 
 const initialState: ICreateObjectSlice = {
     name: "",
-    address: "",
+    description: "",
+    img: null,
     listObjects: null,
     isLoading: false,
     isError: false,
@@ -17,11 +18,14 @@ const createObjectSlice = createSlice({
         setName: (state, action) => {
             state.name = action.payload;
         },
-        setAddress: (state, action) => {
-            state.address = action.payload;
+        setDescription: (state, action) => {
+            state.description = action.payload;
+        },
+        setImg: (state, action) => {
+            state.img = action.payload;
         },
     },
 });
 
-export const { setName, setAddress } = createObjectSlice.actions;
+export const { setName, setDescription, setImg } = createObjectSlice.actions;
 export const createObjectReducer = createObjectSlice.reducer;

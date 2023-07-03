@@ -14,6 +14,7 @@ import {
 } from "./admin";
 
 import { CreateObject } from "./managment";
+import { ButtonAndModalAddObject } from "./objects";
 
 export {
     NavbarAskue,
@@ -27,5 +28,6 @@ export {
     ListGroupRoles,
     RowUser,
     RowUserDescription,
+    ButtonAndModalAddObject,
 };
 export { CreateObject };

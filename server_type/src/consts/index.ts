@@ -1,3 +1,3 @@
 import { EnRole } from "./enumRoles";
-
-export { EnRole };
+import { TypeMeters } from "./typeMeters";
+export { EnRole, TypeMeters };

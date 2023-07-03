@@ -1,3 +1,8 @@
-import { createObjectReducer, setAddress, setName } from "./CreateObject";
+import {
+    createObjectReducer,
+    setDescription,
+    setName,
+    setImg,
+} from "./CreateObject";
 
-export { createObjectReducer, setAddress, setName };
+export { createObjectReducer, setDescription, setName, setImg };

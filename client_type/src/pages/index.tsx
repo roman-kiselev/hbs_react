@@ -8,7 +8,7 @@ import Layout from "./layout";
 import { LoadingSpin } from "../entities";
 import { LoadingVariant } from "../shared/config";
 
-const SimplePage = lazy(() => import("./simple"));
+const HomePageRoute = lazy(() => import("./homePage"));
 const Auth = lazy(() => import("./auth"));
 const AdminPanelRoute = lazy(() => import("./admin"));
 const ManagmentRoute = lazy(() => import("./managment"));
@@ -33,7 +33,7 @@ export const Routing = () => {
                                 />
                             }
                         >
-                            <SimplePage />
+                            <HomePageRoute />
                         </Suspense>
                     }
                 />

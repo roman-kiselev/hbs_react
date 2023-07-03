@@ -104,7 +104,7 @@ export class MainAddMeter extends Model<MainAddMeter, MainAddMeterAttributes> {
         type: DataType.INTEGER,
         allowNull: false,
     })
-    sectionId: number;
+    objectBuildId: number;
 
     @ForeignKey(() => User)
     @Column({

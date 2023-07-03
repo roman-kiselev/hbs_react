@@ -1,5 +1,9 @@
 import { IUserCreate, IRoleCreate, IUserLogin } from "./models";
-import { IRoleService, IObjectBuildsService } from "./service";
+import {
+    IRoleService,
+    IObjectBuildsService,
+    IGetAllByIdUserAndObjectQuery,
+} from "./service";
 import AuthenticatedRequest from "./middlewares/AuthenticatedRequest";
 
 export {
@@ -9,4 +13,5 @@ export {
     IRoleService,
     IUserLogin,
     IObjectBuildsService,
+    IGetAllByIdUserAndObjectQuery,
 };
