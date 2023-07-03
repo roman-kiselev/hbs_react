@@ -1,14 +1,10 @@
 import React from "react";
 import { ButtonAndModalAddObject } from "../../entities";
 import { objectsApi } from "../../shared/api";
-import { useAppSelector } from "../../shared/hooks";
-class CreateObjectDto {
-    name: string;
-    description: string;
-    img: File;
-}
-
+import { useAppDispatch, useAppSelector } from "../../shared/hooks";
+import { setDescription, setName } from "../../shared/models";
 const AddObject = () => {
+    const dispatch = useAppDispatch();
     const [fileState, setStateFile] = React.useState<File>(null);
     const { name, description } = useAppSelector((store) => store.createObject);
     const [addNewObjectHook, { isError, error }] =
@@ -19,7 +15,11 @@ const AddObject = () => {
             description,
             img: fileState,
         };
-        await addNewObjectHook(dto);
+        const result = await addNewObjectHook(dto);
+        if (result) {
+            dispatch(setName(""));
+            dispatch(setDescription(""));
+        }
     };
 
     return (
