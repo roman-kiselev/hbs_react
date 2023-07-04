@@ -1,11 +1,8 @@
-import { IWarehouse } from "../warehouse";
-
 export interface IObject {
     id: number;
     name: string;
-    address: string;
+    description: string;
+    img: string;
     updatedAt: string;
     createdAt: string;
-    deletedAt: boolean | null;
-    warehouse: IWarehouse[] | null;
 }

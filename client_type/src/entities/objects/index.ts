@@ -1,3 +1,4 @@
 import ButtonAndModalAddObject from "./ui/ButtonAndModalAddObject";
+import ListObjects from "./ui/ListObjects";
 
-export { ButtonAndModalAddObject };
+export { ButtonAndModalAddObject, ListObjects };

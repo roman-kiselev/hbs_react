@@ -1,11 +1,10 @@
 import React from "react";
-
-import { AddObject } from "../../../features";
+import { MainObjects } from "../../../features";
 
 const ListObjects = () => {
     return (
         <>
-            <AddObject />
+            <MainObjects />
         </>
     );
 };

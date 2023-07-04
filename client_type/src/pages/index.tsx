@@ -16,7 +16,7 @@ export const Routing = () => {
     return (
         <Routes>
             <Route
-                path="/"
+                path="/*"
                 element={
                     <CheckAuthAndRole role={[EnRole.ADMIN, EnRole.USER]}>
                         <Layout />
