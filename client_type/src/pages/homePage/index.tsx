@@ -3,9 +3,10 @@ import { Row } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 import { Route, Routes } from "react-router";
 import { LoadingSpin } from "../../entities";
+import { LoadingVariant } from "../../shared/config";
 
 const ListObjects = lazy(() => import("./objects/ListObjects"));
-
+const OneObjectRouting = lazy(() => import("../oneObject"));
 const HomePageRoute = () => {
     return (
         <>
@@ -25,18 +26,8 @@ const HomePageRoute = () => {
                                     </Suspense>
                                 }
                             />
-                            {/* <Route
-                                    path="objects"
-                                    element={
-                                        <Suspense
-                                            fallback={
-                                                <LoadingSpin variant="secondary" />
-                                            }
-                                        >
-                                            <ObjectsMain />
-                                        </Suspense>
-                                    }
-                                /> */}
+
+                            <Route path="/*" element={<h3>404</h3>} />
                         </Routes>
                     </Row>
                 </Row>

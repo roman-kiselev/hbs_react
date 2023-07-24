@@ -7,6 +7,9 @@ import {
     setImg,
 } from "./objects";
 
+import { leftMenuReducer, setShow } from "./leftMenu";
+
 export { userReducer, oneUserReducer, listUserReducer, logout };
 export { rolesReducer, setIsError };
 export { createObjectReducer, setDescription, setName, setImg };
+export { leftMenuReducer, setShow };

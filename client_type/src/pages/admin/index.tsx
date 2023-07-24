@@ -4,6 +4,8 @@ import { Route, Routes } from "react-router";
 import { LoadingSpin } from "../../entities";
 import { LeftMenuAdmin, NavbarAskueFeaters } from "../../features";
 import { configNavAdmin, LoadingVariant } from "../../shared/config";
+import { useAppDispatch, useAppSelector } from "../../shared/hooks";
+import { setShow } from "../../shared/models";
 
 const AdminPanel = lazy(() => import("./AdminPanel"));
 const SubPage = lazy(() => import("./SubPage"));
@@ -11,13 +13,18 @@ const Users = lazy(() => import("./users"));
 const OneUser = lazy(() => import("./users/OneUser"));
 
 const AdminPanelRoute = () => {
+    const { show } = useAppSelector((state) => state.leftMenu);
+    const dispatch = useAppDispatch();
+    const handleClose = () => dispatch(setShow(false));
+    const handleShow = () => dispatch(setShow(true));
+
     return (
         <>
             <NavbarAskueFeaters configData={configNavAdmin} />
             <Container fluid>
                 <Row className="m-1">
                     <Col>
-                        <LeftMenuAdmin />
+                        <LeftMenuAdmin show handleClose={handleClose} />
                     </Col>
                     <Col className="col-12 col-xl-9 justify-content-center mt-3">
                         <Row>

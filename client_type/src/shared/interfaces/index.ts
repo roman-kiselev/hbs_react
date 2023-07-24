@@ -22,6 +22,7 @@ import {
 import { ILinkItemGroupProps } from "./ui/link";
 import { IConfigAdmin } from "./config";
 import { IModalUiProps } from "./ui/modals/IModalUiProps";
+import { ICardLink } from "./ui/cards";
 
 export type {
     INavLinkAskueProps,
@@ -44,4 +45,5 @@ export type {
     IModalUiProps,
     ICreateObjectSlice,
     IRolesSlice,
+    ICardLink,
 };

@@ -20,7 +20,7 @@ const OneObject: React.FC<IObject> = ({ name, description, img, id }) => {
                 <Card.Title>{name}</Card.Title>
                 <Card.Text>{description}</Card.Text>
 
-                <Link to={`/object/${id}`}>
+                <Link to={`object/${id}`}>
                     <Button variant="primary">Перейти</Button>
                 </Link>
             </Card.Body>

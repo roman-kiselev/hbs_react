@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import { LeftMenu, LinkGroup } from "../../entities";
 import { configAdminPanel } from "../../shared/config";
 
-const LeftMenuAdmin: React.FC = () => {
-    const [show, setShow] = useState(false);
+interface LeftMenuAdminProps {
+    show: boolean;
+    handleClose: () => void;
+}
 
-    const handleClose = () => setShow(false);
+const LeftMenuAdmin: React.FC<LeftMenuAdminProps> = ({ show, handleClose }) => {
+    // const [show, setShow] = useState(false);
+
+    // const handleClose = () => setShow(false);
     // const handleShow = () => setShow(true);
 
     return (

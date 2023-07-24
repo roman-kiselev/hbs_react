@@ -24,7 +24,7 @@ function findRole(roles: string[], roleState: IRole[]): boolean {
 const CheckRoleAuth: React.FC<ICheckRoleAuth> = ({ children, role }) => {
     const location = useLocation();
 
-    const { roles: roleState } = useAppSelector((state) => state.user.user);
+    const { roles: roleState } = useAppSelector((state) => state.oneUser);
     const { isLoading } = useAppSelector((state) => state.user);
 
     if (isLoading) {

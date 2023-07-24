@@ -7,6 +7,8 @@ import { EnRole } from "../shared/config/enumRole";
 import Layout from "./layout";
 import { LoadingSpin } from "../entities";
 import { LoadingVariant } from "../shared/config";
+import OneObjectRouter from "./oneObject";
+import { SuspenseAndLoading } from "../features";
 
 const HomePageRoute = lazy(() => import("./homePage"));
 const Auth = lazy(() => import("./auth"));
@@ -25,16 +27,19 @@ export const Routing = () => {
             >
                 <Route
                     index
+                    path="/*"
                     element={
-                        <Suspense
-                            fallback={
-                                <LoadingSpin
-                                    variant={LoadingVariant.SECONDARY}
-                                />
-                            }
-                        >
+                        <SuspenseAndLoading>
                             <HomePageRoute />
-                        </Suspense>
+                        </SuspenseAndLoading>
+                    }
+                />
+                <Route
+                    path="object/:id/*"
+                    element={
+                        <SuspenseAndLoading>
+                            <OneObjectRouter />
+                        </SuspenseAndLoading>
                     }
                 />
             </Route>
@@ -42,16 +47,9 @@ export const Routing = () => {
                 path="admin/*"
                 element={
                     <CheckAuthAndRole role={[EnRole.ADMIN]}>
-                        <Suspense
-                            fallback={
-                                <LoadingSpin
-                                    variant={LoadingVariant.SECONDARY}
-                                />
-                            }
-                        >
+                        <SuspenseAndLoading>
                             <AdminPanelRoute />
-                        </Suspense>
-                        {/* <AdminPanelRoute /> */}
+                        </SuspenseAndLoading>
                     </CheckAuthAndRole>
                 }
             />
@@ -59,16 +57,9 @@ export const Routing = () => {
                 path="managment/*"
                 element={
                     <CheckAuthAndRole role={[EnRole.MANAGER]}>
-                        <Suspense
-                            fallback={
-                                <LoadingSpin
-                                    variant={LoadingVariant.SECONDARY}
-                                />
-                            }
-                        >
+                        <SuspenseAndLoading>
                             <ManagmentRoute />
-                        </Suspense>
-                        {/* <AdminPanelRoute /> */}
+                        </SuspenseAndLoading>
                     </CheckAuthAndRole>
                 }
             />
@@ -76,13 +67,9 @@ export const Routing = () => {
             <Route
                 path="/login"
                 element={
-                    <Suspense
-                        fallback={
-                            <LoadingSpin variant={LoadingVariant.SECONDARY} />
-                        }
-                    >
+                    <SuspenseAndLoading>
                         <Auth />
-                    </Suspense>
+                    </SuspenseAndLoading>
                 }
             />
             <Route path="/no_access" element={<NoAccess />} />

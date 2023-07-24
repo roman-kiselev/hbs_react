@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userApi } from "../../api";
+import { authApi, userApi } from "../../api";
 import { IRole, IUser, IUserDescription } from "../../interfaces";
-
+import jwt_decode from "jwt-decode";
 interface IOneUserSlice {
     user: IUser | null;
     roles: IRole[];
@@ -96,6 +96,30 @@ const oneUserSlice = createSlice({
             (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
+            }
+        );
+        // Добавляем при LOGIN
+        builder.addMatcher(
+            authApi.endpoints.login.matchFulfilled,
+            (state, action) => {
+                const { token } = action.payload;
+                const user: IUser = jwt_decode(token);
+                const { id, login, roles } = user;
+                state.user = { id, login, roles };
+                state.isLoading = false;
+                state.roles = roles;
+            }
+        );
+        // Добавляем при CHECK
+        builder.addMatcher(
+            authApi.endpoints.check.matchFulfilled,
+            (state, action) => {
+                const { token } = action.payload;
+                const user: IUser = jwt_decode(token);
+                const { id, login, roles } = user;
+                state.user = { id, login, roles };
+                state.isLoading = false;
+                state.roles = roles;
             }
         );
     },

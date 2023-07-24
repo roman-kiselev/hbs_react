@@ -5,6 +5,7 @@ import {
 } from "@reduxjs/toolkit";
 import {
     createObjectReducer,
+    leftMenuReducer,
     oneUserReducer,
     rolesReducer,
     userReducer,
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
     listUser: listUserReducer,
     oneUser: oneUserReducer,
     roles: rolesReducer,
+    leftMenu: leftMenuReducer,
     createObject: createObjectReducer,
     [api.reducerPath]: api.reducer,
     [objectsMainApi.reducerPath]: objectsMainApi.reducer,

@@ -3,9 +3,11 @@ import { RequireAuth, CheckRoleAuth } from "./auth";
 import NavbarAskueFeaters from "./navbar/NavbarAskueFeaters";
 import LeftMenuAdmin from "./leftMenu/LeftMenuAdmin";
 import LeftMenuManager from "./leftMenu/LeftMenuManager";
+import LeftMenuMain from "./leftMenu/LeftMenuMain";
 import { UsersAdminFeatures, OneUserForm } from "./admin";
 import { Objects } from "./managment";
 import { AddObject, ListObjectsFeatures, MainObjects } from "./objects";
+import { SuspenseAndLoading } from "./utils";
 
 export {
     RequireAuth,
@@ -18,4 +20,6 @@ export {
     Objects,
     AddObject,
     MainObjects,
+    LeftMenuMain,
+    SuspenseAndLoading,
 };
