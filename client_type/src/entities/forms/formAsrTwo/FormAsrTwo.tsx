@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import { InputNumber } from "../../../shared/ui";
+import OneAsrForList from "./OneAsrForList";
 
 const FormAsrTwo = () => {
     return (
@@ -127,6 +128,10 @@ const FormAsrTwo = () => {
                     </Col>
                 </Row>
             </Form>
+            <Row>
+                <OneAsrForList />
+                
+            </Row>
         </Row>
     );
 };
