@@ -1,128 +1,69 @@
-import React from "react";
-import { Form, Row, Col, Button } from "react-bootstrap";
-import { InputNumber } from "../../../shared/ui";
+import React, { useState } from "react";
+import { Form, Row, Col, Button, Badge } from "react-bootstrap";
+import {
+    ColdWaterGroup,
+    Comment,
+    HotWaterGroup,
+    InputNumber,
+    KdlInput,
+    LocationGroup,
+} from "../../../shared/ui";
+
+import OffCanvas from "./OffCanvas";
 
 const FormAsrTwo = () => {
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     return (
         <Row>
             <Form>
                 <Row>
-                    <Col>
-                        <InputNumber
-                            title="Секции"
-                            value={1}
-                            disabled={false}
-                            onChange={() => {}}
-                        />
-                    </Col>
-                    <Col>
-                        <InputNumber
-                            title="Этаж"
-                            value={1}
-                            disabled={false}
-                            onChange={() => {}}
-                        />
-                    </Col>
-                    <Col>
-                        <InputNumber
-                            title="Выбор помещения"
-                            value={1}
-                            disabled={false}
-                            onChange={() => {}}
-                        />
-                    </Col>
+                    <Row>
+                        <Col>
+                            <Badge bg="primary">
+                                Счётчики ХВС -<span>10 шт</span>
+                            </Badge>
+                        </Col>
+                        <Col>
+                            <Badge bg="danger">
+                                Счётчики ГВС -<span>10 шт</span>
+                            </Badge>
+                        </Col>
+                        <Col>
+                            <Badge bg="warning" text="dark">
+                                АСР -<span>10 шт</span>
+                            </Badge>
+                        </Col>
+                    </Row>
+                    <OffCanvas
+                        handleClose={handleClose}
+                        handleShow={handleShow}
+                        show={show}
+                    />
+                    <LocationGroup />
                 </Row>
 
                 <Row>
-                    <Col>
-                        <InputNumber
-                            title="КДЛ"
-                            value={1}
-                            disabled={false}
-                            onChange={() => {}}
-                        />
-                    </Col>
+                    <KdlInput />
 
                     <Row className="m-2">
-                        <Col
-                            className="col-12 col-sm-6 col text-center"
-                            style={{
-                                border: "1px solid grey",
-                                borderRadius: 10,
-                            }}
-                        >
-                            <h5>ХВС</h5>
-
-                            <InputNumber
-                                title="Номер Канала"
-                                value={1}
-                                disabled={false}
-                                onChange={() => {}}
-                            />
-
-                            <InputNumber
-                                title="Номер счётчика"
-                                value={1}
-                                disabled={false}
-                                onChange={() => {}}
-                            />
-                            <InputNumber
-                                title="Показания"
-                                value={1}
-                                disabled={false}
-                                onChange={() => {}}
-                            />
-                        </Col>
-
-                        <Col
-                            className="col-12 col-sm-6 text-center"
-                            style={{
-                                border: "1px solid grey",
-                                borderRadius: 10,
-                            }}
-                        >
-                            <h5>ГВС</h5>
-
-                            <InputNumber
-                                title="Номер Канала"
-                                value={1}
-                                disabled={false}
-                                onChange={() => {}}
-                            />
-
-                            <InputNumber
-                                title="Номер счётчика"
-                                value={1}
-                                disabled={false}
-                                onChange={() => {}}
-                            />
-                            <InputNumber
-                                title="Показания"
-                                value={1}
-                                disabled={false}
-                                onChange={() => {}}
-                            />
-                        </Col>
-                        <Row>
-                            <Form.Group
-                                className="mb-3"
-                                controlId="exampleForm.ControlTextarea1"
-                            >
-                                <Form.Label>Комментарий</Form.Label>
-                                <Form.Control
-                                    as="textarea"
-                                    rows={3}
-                                    value={""}
-                                    onChange={() => {}}
-                                />
-                            </Form.Group>
-                        </Row>
+                        <ColdWaterGroup />
+                        <HotWaterGroup />
+                        <Comment />
                     </Row>
                 </Row>
                 <Row>
                     <Col>
                         <Button variant="primary" type="submit">
                             Добавить
+                        </Button>
+                    </Col>
+                    <Col>
+                        <Button variant="primary" onClick={handleShow}>
+                            Launch
                         </Button>
                     </Col>
                 </Row>
