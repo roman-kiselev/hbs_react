@@ -1,0 +1,71 @@
+[
+  {
+    "_id": "c45bc37a-7e50-4fe9-9c99-5e8423295e52",
+    "colId": "1d464de2-ab60-4cdd-814a-fae0bc72c013",
+    "containerId": "",
+    "name": "login",
+    "url": "192.168.1.14:7777/auth/login",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2023-07-29T10:39:44.054Z",
+    "modified": "2023-07-29T10:43:14.843Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"login\": \"admin\",\n  \"password\": 28162342\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "91f49112-0e51-4e12-a506-c4167a7deae5",
+    "colId": "1d464de2-ab60-4cdd-814a-fae0bc72c013",
+    "containerId": "",
+    "name": "registration",
+    "url": "192.168.1.14:7777/auth/registration",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2023-07-29T10:44:56.321Z",
+    "modified": "2023-07-30T07:51:39.238Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"login\": \"admin\",\n  \"password\": \"admin\",\n  \"role\": \"admin\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "d774a50e-9f44-4d8f-8fd8-4f773824756c",
+    "colId": "5be340b3-a2a9-453a-9646-193eb5d62bc2",
+    "containerId": "",
+    "name": "create",
+    "url": "192.168.1.14:7777/role",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2023-07-30T07:46:43.731Z",
+    "modified": "2023-07-30T07:50:29.346Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\" :\"admin\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "a6581d28-b444-4d56-b78e-5a184491b1eb",
+    "colId": "5be340b3-a2a9-453a-9646-193eb5d62bc2",
+    "containerId": "",
+    "name": "getAll",
+    "url": "",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2023-07-30T07:46:51.697Z",
+    "modified": "2023-07-30T07:46:51.697Z",
+    "headers": []
+  }
+]

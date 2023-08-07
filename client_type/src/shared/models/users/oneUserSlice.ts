@@ -110,6 +110,13 @@ const oneUserSlice = createSlice({
                 state.roles = roles;
             }
         );
+        builder.addMatcher(
+            authApi.endpoints.login.matchRejected,
+            (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+            }
+        );
         // Добавляем при CHECK
         builder.addMatcher(
             authApi.endpoints.check.matchFulfilled,
@@ -120,6 +127,13 @@ const oneUserSlice = createSlice({
                 state.user = { id, login, roles };
                 state.isLoading = false;
                 state.roles = roles;
+            }
+        );
+        builder.addMatcher(
+            authApi.endpoints.check.matchRejected,
+            (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
             }
         );
     },

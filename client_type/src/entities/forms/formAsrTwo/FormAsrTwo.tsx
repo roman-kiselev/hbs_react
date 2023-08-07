@@ -1,15 +1,6 @@
-import React, { useState } from "react";
-import { Form, Row, Col, Button, Badge } from "react-bootstrap";
-import {
-    ColdWaterGroup,
-    Comment,
-    HotWaterGroup,
-    InputNumber,
-    KdlInput,
-    LocationGroup,
-} from "../../../shared/ui";
-
-import OffCanvas from "./OffCanvas";
+import React from "react";
+import { Form, Row, Col, Button } from "react-bootstrap";
+import { InputNumber } from "../../../shared/ui";
 
 const FormAsrTwo = () => {
     const [show, setShow] = useState(false);
@@ -68,6 +59,9 @@ const FormAsrTwo = () => {
                     </Col>
                 </Row>
             </Form>
+            <Row>
+                <OneAsrForList />
+            </Row>
         </Row>
     );
 };

@@ -37,13 +37,13 @@ export const userSlice = createSlice({
         builder.addMatcher(
             authApi.endpoints.login.matchFulfilled,
             (state, action) => {
+                state.isLoading = false;
                 const { token } = action.payload;
                 const user: IUser = jwt_decode(token);
                 //localStorage.setItem("token", token);
                 const { id, login, roles } = user;
                 state.user = { id, login, roles };
                 state.isAuth = true;
-                state.isLoading = false;
                 state.token = token;
             }
         );
@@ -77,8 +77,8 @@ export const userSlice = createSlice({
                 const { id, login, roles } = user;
                 state.user = { id, login, roles };
                 state.isAuth = true;
-                state.isLoading = false;
                 state.token = token;
+                state.isLoading = false;
             }
         );
         builder.addMatcher(
