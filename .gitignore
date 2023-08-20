@@ -1,5 +1,6 @@
 .idea
 client/node_modules
+client_type/node_modules
 server/node_modules
 server_type/node_modules
 server_type/dist
