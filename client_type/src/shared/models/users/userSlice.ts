@@ -1,9 +1,9 @@
-import jwt_decode from "jwt-decode";
 import { createSlice } from "@reduxjs/toolkit";
-import { IUser, IUserSlice } from "../../interfaces";
-import { authApi } from "../../api/auth";
-import { IDataError } from "../../interfaces/store";
+import jwt_decode from "jwt-decode";
 import { userApi } from "../../api";
+import { authApi } from "../../api/auth";
+import { IUser, IUserSlice } from "../../interfaces";
+import { IDataError } from "../../interfaces/store";
 
 // Задаём начальное значение
 const initialState: IUserSlice = {
