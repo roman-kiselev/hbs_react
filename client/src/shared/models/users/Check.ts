@@ -41,3 +41,5 @@ class Check implements CreateHandler<IUserSlice, IToken, IDataError> {
         };
     };
 }
+
+export default new Check();

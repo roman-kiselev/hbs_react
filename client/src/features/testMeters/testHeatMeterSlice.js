@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { $authHost } from "../../http/index.js";
 
 const initialState = {
@@ -101,4 +101,6 @@ export const {
     addMeters,
     setCurrentPage,
 } = testHeatMeterSlice.actions;
+
+export const testHeatMeterReducer = testHeatMeterSlice.reducer;
 export default testHeatMeterSlice.reducer;

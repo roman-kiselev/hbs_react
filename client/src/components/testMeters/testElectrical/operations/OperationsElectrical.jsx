@@ -1,16 +1,16 @@
-import React, { URL, useState } from "react";
-import { Button, Col, Form, Nav, Row, Tab, Table } from "react-bootstrap";
-import { RiFileExcel2Line } from "react-icons/ri";
+import { useState } from "react";
+import { Col, Nav, Row, Tab } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import * as XLSX from "xlsx";
+import { getAllElectricalMeters } from "../../../../features/testMeters/testElectricalMeterSlice";
 import {
     addDataExcel,
     getAllMetersElectrical,
 } from "../../../../http/electricalMeterApi";
-import * as XLSX from "xlsx";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllElectricalMeters } from "../../../../features/testMeters/testElectricalMeterSlice";
-import MainTabReadFileElectrical from "./readFile/MainTabReadFileElectrical";
+import { useAppSelector } from "../../../../shared/hooks";
 import MainTabDownloadListElectrical from "./downloadList/MainTabDownloadListElectrical";
 import MainTabGenerateTemplateElectrical from "./generateTemplate/MainTabGenerateTemplateElectrical";
+import MainTabReadFileElectrical from "./readFile/MainTabReadFileElectrical";
 
 const OperationsElectrical = ({ id: objectBuildId }) => {
     //LДиспатч для вызова функции
@@ -24,7 +24,7 @@ const OperationsElectrical = ({ id: objectBuildId }) => {
         }
     };
     // Формируем query для запроса
-    const { id: userId } = useSelector((state) => state.users.user);
+    const { id: userId } = useAppSelector((state) => state.user.user);
     const [data, setData] = useState([]);
     const formQuery = {
         userId,

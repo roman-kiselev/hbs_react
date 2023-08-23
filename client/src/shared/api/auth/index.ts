@@ -8,7 +8,7 @@ export const authApi = api.injectEndpoints({
     endpoints: (builder) => ({
         login: builder.mutation<IToken, UserData>({
             query: (userData) => ({
-                url: "/auth/login",
+                url: "/user/login",
                 method: "POST",
                 body: userData,
             }),
@@ -22,7 +22,7 @@ export const authApi = api.injectEndpoints({
         }),
         check: builder.query<IToken, void>({
             query: () => ({
-                url: "/auth/check",
+                url: "/user/auth",
                 method: "GET",
             }),
         }),

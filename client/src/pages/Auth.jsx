@@ -1,37 +1,25 @@
-import React, {useState} from 'react';
-import {Card, Container, Form, Row, Button} from "react-bootstrap";
-import {useDispatch, useSelector} from "react-redux";
-import {setUser, setIsAuth, loginIn} from "../features/user/userSlice";
-import {useNavigate} from "react-router-dom";
-
+import { useState } from "react";
+import { Button, Card, Container, Form, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { authApi } from "../shared/api";
 
 const Auth = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate()
-    const [login, setLogin] = useState('')
-    const [password, setPassword] = useState('')
-
-    const users = useSelector((state) => state.users)
-
+    const navigate = useNavigate();
+    const [handleLogin, { isSuccess }] = authApi.useLoginMutation();
+    const [login, setLogin] = useState("");
+    const [password, setPassword] = useState("");
 
     const checkAndRedirect = async () => {
         try {
-            let data = await dispatch(loginIn({login, password}))
-
-            if (data.payload != undefined) {
-                const {login, role, id } = data.payload
-                dispatch(setUser({ login, role, id }))
-                dispatch(setIsAuth(true))
-                return navigate("/")
-            } else {
-                console.log("Error_111")
+            const res = await handleLogin({ login, password });
+            console.log(res);
+            if (isSuccess) {
+                return navigate("/");
             }
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
-    }
-
-
+    };
 
     return (
         <Container
@@ -56,10 +44,10 @@ const Auth = () => {
                     />
                     <Row className="d-flex justify-content-between">
                         <Button
-                            onClick={
-                                () => checkAndRedirect()
-                            }
-                            className="mt-3 pointer-event" variant={"outline-success"}>
+                            onClick={() => checkAndRedirect()}
+                            className="mt-3 pointer-event"
+                            variant={"outline-success"}
+                        >
                             Войти
                         </Button>
                     </Row>

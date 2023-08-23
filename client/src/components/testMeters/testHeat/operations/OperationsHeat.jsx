@@ -1,17 +1,17 @@
-import React, { URL, useState } from "react";
-import { Button, Col, Form, Nav, Row, Tab, Table } from "react-bootstrap";
-import { RiFileExcel2Line } from "react-icons/ri";
+import { useState } from "react";
+import { Col, Nav, Row, Tab } from "react-bootstrap";
 
+import { useDispatch } from "react-redux";
 import * as XLSX from "xlsx";
-import { useDispatch, useSelector } from "react-redux";
+import { getAllHeatMeter } from "../../../../features/testMeters/testHeatMeterSlice";
 import {
     addDataExcelHeat,
     getAllMetersHeat,
 } from "../../../../http/heatMeterApi";
-import { getAllHeatMeter } from "../../../../features/testMeters/testHeatMeterSlice";
-import MainTabReadFile from "./readFile/MainTabReadFile";
+import { useAppSelector } from "../../../../shared/hooks";
 import MainTabDownloadList from "./downloadList/MainTabDownloadList";
 import MainTabGenerateTemplate from "./generateTemplate/MainTabGenerateTemplate";
+import MainTabReadFile from "./readFile/MainTabReadFile";
 
 const OperationsHeat = ({ id: objectBuildId }) => {
     //LДиспатч для вызова функции
@@ -25,7 +25,7 @@ const OperationsHeat = ({ id: objectBuildId }) => {
         }
     };
     // Формируем query для запроса
-    const { id: userId } = useSelector((state) => state.users.user);
+    const { id: userId } = useAppSelector((state) => state.user.user);
     const [data, setData] = useState([]);
     const formQuery = {
         userId,

@@ -22,6 +22,7 @@ import AdminHomePage from "./admin/AdminHomePage";
 
 const Routing = () => {
     const { isSuccess } = authApi.useCheckQuery();
+
     const { isAuth } = useAppSelector((state) => state.user);
 
     return (

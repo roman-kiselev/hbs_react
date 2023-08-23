@@ -1,22 +1,20 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useLiveQuery } from "dexie-react-hooks";
+import { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { BsPlusCircleFill } from "react-icons/bs";
-import { useSelector } from "react-redux";
-import CardCreateMeter from "../../../repeat/modals/CardCreateMeter";
-import MainTable from "../../testWater/formEditOffline/table/MainTable";
-import SectionPagination from "./helpers/SectionPagination";
-import TableOffline from "./table/TableOffline";
-import { v4 as uuidv4 } from "uuid";
-import addMeter from "../db/service/addMeters";
-import { useLiveQuery } from "dexie-react-hooks";
-import dbHeat from "../db/dbHeat";
-import editRecordById from "../db/service/editRecordById";
 import {
     getAllMetersForOffline,
     sendAllMetersForOffline,
 } from "../../../../http/heatMeterApi";
-import { delDbAndClose } from "../db/service/delDb";
+import { useAppSelector } from "../../../../shared/hooks";
+import CardCreateMeter from "../../../repeat/modals/CardCreateMeter";
+import dbHeat from "../db/dbHeat";
 import { addAllDataInDb } from "../db/service/addAllDataInDb";
+import addMeter from "../db/service/addMeters";
+import { delDbAndClose } from "../db/service/delDb";
+import editRecordById from "../db/service/editRecordById";
+import SectionPagination from "./helpers/SectionPagination";
+import TableOffline from "./table/TableOffline";
 
 //Добавляем все счётчики из БД
 const getWaterMeters = async (idObject, dataOld) => {
@@ -106,7 +104,7 @@ const FormOfflineHeat = ({ id }) => {
     };
 
     // Модальное окно для добавления счётчика
-    const { id: userId } = useSelector((state) => state.users.user);
+    const { id: userId } = useAppSelector((state) => state.user.user);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);

@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { Row, Col, Form, Button } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
     getAllMetersByUserAndObject,
     getMetersByNumberFlat,
     getOneMeter,
+    setCurrentPage,
 } from "../../../../features/testMeters/testWaterMeterSlice";
+import { deleteWaterMeter } from "../../../../http/waterMeterApi";
+import { useAppSelector } from "../../../../shared/hooks";
 import ListMeters from "../../../repeat/listMetersCard/ListMeters";
 import Pages from "../../../repeat/pagination/Pages";
-import { useQuery } from "react-query";
-import { setCurrentPage } from "../../../../features/testMeters/testWaterMeterSlice";
-import { deleteWaterMeter } from "../../../../http/waterMeterApi";
 
 const ListMeterWater = ({ id: objectBuildId }) => {
     const dispatch = useDispatch();
-    const { id: userId } = useSelector((state) => state.users.user);
+    const { id: userId } = useAppSelector((state) => state.user.user);
     // Получаем все счётчики
     const cardMeter = useSelector((state) => state.mainTable.mainTable);
 

@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { $authHost } from "../../http/index.js";
 
 const initialState = {
@@ -111,4 +111,6 @@ export const {
     setCurrentPage,
     getLimitAndCurrentPage,
 } = testWaterMeterSlice.actions;
+
+export const testWaterMeterReducer = testWaterMeterSlice.reducer;
 export default testWaterMeterSlice.reducer;

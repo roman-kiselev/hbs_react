@@ -125,4 +125,7 @@ export const {
     setCurrentPage,
     setMeters,
 } = testElectricalMeterSlice.actions;
+
+export const testElectricalMeterReducer = testElectricalMeterSlice.reducer;
+
 export default testElectricalMeterSlice.reducer;

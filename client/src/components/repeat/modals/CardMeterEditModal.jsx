@@ -1,10 +1,7 @@
-import React, { useState } from "react";
-import { Col, Row, Button, Modal, Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import {
-    getAllMetersByUserAndObject,
-    getOneMeter,
-} from "../../../features/testMeters/testWaterMeterSlice";
+import { useState } from "react";
+import { Button, Col, Form, Modal, Row } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "../../../shared/hooks";
 import useNumber from "../../hooks/useNumber";
 import InputNumber from "../inputs/inputsNumber/InputNumber";
 import InputNumberFloating from "../inputs/inputsNumber/InputNumberFloating";
@@ -18,7 +15,7 @@ const CardMeterEditModal = ({
 }) => {
     const dispatch = useDispatch();
 
-    const { id: userId } = useSelector((state) => state.users.user);
+    const { id: userId } = useAppSelector((state) => state.user.user);
 
     const [section, setSection, handleInputChangeSection] = useNumber(
         data.section

@@ -1,27 +1,17 @@
-import React, { URL, useState } from "react";
-import {
-    Badge,
-    Button,
-    Col,
-    Form,
-    Nav,
-    Row,
-    Tab,
-    Table,
-} from "react-bootstrap";
-import { RiFileExcel2Line } from "react-icons/ri";
-
+import { useState } from "react";
+import { Col, Nav, Row, Tab } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import * as XLSX from "xlsx";
-import { useDispatch, useSelector } from "react-redux";
+import { getAllMetersByUserAndObject } from "../../../../features/testMeters/testWaterMeterSlice";
 import {
     addDataExcelWater,
     getAllWaterMeter,
     getAllWaterMeterPulsar,
 } from "../../../../http/waterMeterApi";
-import { getAllMetersByUserAndObject } from "../../../../features/testMeters/testWaterMeterSlice";
+import { useAppSelector } from "../../../../shared/hooks";
 import MainTabDownloadListWater from "./downloadList/MainTabDownloadListWater";
-import MainTabReadFileWater from "./readFile/MainTabReadFileWater";
 import MainTabGenerateTemplateWater from "./generateTemplate/MainTabGenerateTemplateWater";
+import MainTabReadFileWater from "./readFile/MainTabReadFileWater";
 
 const OperationsWater = ({ id: objectBuildId }) => {
     //Диспатч для вызова функции
@@ -43,7 +33,7 @@ const OperationsWater = ({ id: objectBuildId }) => {
         }
     };
     // Формируем query для запроса
-    const { id: userId } = useSelector((state) => state.users.user);
+    const { id: userId } = useAppSelector((state) => state.user.user);
     const [data, setData] = useState([]);
     const formQuery = {
         userId,

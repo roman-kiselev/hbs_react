@@ -48,4 +48,5 @@ export const objectSlice = createSlice({
 });
 
 export const { addObject, removeObject, setObject } = objectSlice.actions;
+export const objectsBuildReducer = objectSlice.reducer;
 export default objectSlice.reducer;

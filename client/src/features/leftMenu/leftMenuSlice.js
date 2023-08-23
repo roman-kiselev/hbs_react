@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    show: false
+    show: false,
 };
-
 
 export const leftMenuSlice = createSlice({
     name: "leftMenu",
@@ -11,9 +10,10 @@ export const leftMenuSlice = createSlice({
     reducers: {
         setShow: (state, action) => {
             state.show = action.payload;
-        }
-    }
-})
+        },
+    },
+});
 
 export const { setShow } = leftMenuSlice.actions;
+export const leftMenuReducer = leftMenuSlice.reducer;
 export default leftMenuSlice.reducer;

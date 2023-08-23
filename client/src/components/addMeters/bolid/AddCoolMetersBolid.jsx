@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Button, Card, Col, Form, Modal, Row, Tab, Tabs} from "react-bootstrap";
+import { useState } from "react";
+import { Button, Col, Modal, Row, Tab, Tabs } from "react-bootstrap";
 import FormCoolMeterBolid from "./formMeter/FormCoolMeterBolid";
 import TestListMeters from "./listMeter/TestListMeters";
 
@@ -9,10 +9,11 @@ const AddCoolMetersBolid = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-
     return (
         <Row>
-            <p style={{fontSize: 15}}>Добавление счётчиков холодной воды (Болид)</p>
+            <p style={{ fontSize: 15 }}>
+                Добавление счётчиков холодной воды (Болид)
+            </p>
             <Row>
                 <Row className="justify-content-end">
                     <Col className="text-end">
@@ -26,7 +27,9 @@ const AddCoolMetersBolid = () => {
                     <Modal.Header closeButton>
                         <Modal.Title>Начальные параметры</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                    <Modal.Body>
+                        Woohoo, you're reading this text in a modal!
+                    </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
                             Закрыть
@@ -50,17 +53,16 @@ const AddCoolMetersBolid = () => {
                         </Row>
                     </Tab>
                     <Tab eventKey="list" title="Список">
-                        Сортировка // Квартиры // Этажи // Секции // КДЛ // АСР // Поиск номера
+                        Сортировка // Квартиры // Этажи // Секции // КДЛ // АСР
+                        // Поиск номера
                         <TestListMeters />
                     </Tab>
                     <Tab eventKey="op" title="Операции">
                         Тут разные
                     </Tab>
-
                 </Tabs>
             </Row>
         </Row>
-
     );
 };
 
