@@ -1,8 +1,8 @@
-import { Sequelize } from "sequelize-typescript";
 import * as dotenv from "dotenv";
-import { User, Role, UsersRole } from "./user";
-import { ObjectsBuilds, Sections, Floors } from "./objects";
+import { Sequelize } from "sequelize-typescript";
 import MainAddMeter from "./mainTable";
+import { Floors, ObjectsBuilds, Sections } from "./objects";
+import { Role, User, UsersRole } from "./user";
 dotenv.config();
 
 const db = new Sequelize(
