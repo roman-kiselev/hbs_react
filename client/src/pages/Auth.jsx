@@ -1,27 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Card, Container, Form, Row, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { authApi } from "../shared/api";
+import { useAppSelector } from "../shared/hooks";
 
 const Auth = () => {
     const navigate = useNavigate();
+    const { isAuth, isLoading: isLoadingUser } = useAppSelector(
+        (state) => state.user
+    );
     const { isSuccess: isSuccessCheck, isLoading: isLoadingCheck } =
         authApi.useCheckQuery();
-    const [handleLogin, { isSuccess }] = authApi.useLoginMutation();
+    const [handleLogin, { isSuccess, isLoading }] = authApi.useLoginMutation();
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
 
-    if (isLoadingCheck) {
+    if (isLoadingCheck || isLoading || isLoadingUser) {
         <Spinner />;
     }
-    if (isSuccessCheck) {
-        navigate("/");
-    }
+    useEffect(() => {
+        if (isAuth) {
+            navigate("/");
+        }
+    }, [isAuth]);
+
     const checkAndRedirect = async () => {
         try {
             const res = await handleLogin({ login, password });
-            console.log(res);
-            if (isSuccess) {
+            if (isAuth) {
                 return navigate("/");
             }
         } catch (e) {
@@ -52,7 +58,7 @@ const Auth = () => {
                     />
                     <Row className="d-flex justify-content-between">
                         <Button
-                            onClick={() => checkAndRedirect()}
+                            onClick={checkAndRedirect}
                             className="mt-3 pointer-event"
                             variant={"outline-success"}
                         >
