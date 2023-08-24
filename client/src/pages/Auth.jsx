@@ -1,14 +1,22 @@
 import { useState } from "react";
-import { Button, Card, Container, Form, Row } from "react-bootstrap";
+import { Button, Card, Container, Form, Row, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { authApi } from "../shared/api";
 
 const Auth = () => {
     const navigate = useNavigate();
+    const { isSuccess: isSuccessCheck, isLoading: isLoadingCheck } =
+        authApi.useCheckQuery();
     const [handleLogin, { isSuccess }] = authApi.useLoginMutation();
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
 
+    if (isLoadingCheck) {
+        <Spinner />;
+    }
+    if (isSuccessCheck) {
+        navigate("/");
+    }
     const checkAndRedirect = async () => {
         try {
             const res = await handleLogin({ login, password });

@@ -34,11 +34,13 @@ class Check implements CreateHandler<IUserSlice, IToken, IDataError> {
         state.isAuth = false;
         localStorage.removeItem("token");
         state.token = null;
-        const { status, data } = action.payload as IDataError;
-        state.dataError = {
-            status: Number(status),
-            data,
-        };
+        if (action.payload) {
+            const { status, data } = action.payload as IDataError;
+            state.dataError = {
+                status: Number(status),
+                data,
+            };
+        }
     };
 }
 
