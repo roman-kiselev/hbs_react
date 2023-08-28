@@ -19,17 +19,16 @@ const Auth = () => {
         <Spinner />;
     }
     useEffect(() => {
-        if (isAuth) {
+        if (isSuccess) {
             navigate("/");
         }
-    }, [isAuth]);
-
+    }, [isSuccess]);
+    console.log(isSuccess);
     const checkAndRedirect = async () => {
         try {
-            const res = await handleLogin({ login, password });
-            if (isAuth) {
-                return navigate("/");
-            }
+            await handleLogin({ login, password });
+
+            return navigate("/");
         } catch (e) {
             console.log(e);
         }

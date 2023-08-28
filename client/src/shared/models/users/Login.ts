@@ -20,6 +20,7 @@ class Login implements CreateHandler<IUserSlice, IToken, IDataError> {
         action
     ) => {
         state.isAuth = true;
+        state.isLoading = false;
         const { token } = action.payload;
         const user: IUser = jwt_decode(token);
         const { id, login, roles } = user;

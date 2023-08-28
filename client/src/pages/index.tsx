@@ -12,7 +12,6 @@ import SettingsUp from "../components/testMeters/settingsUp/view/SettingsUp";
 import TestMainElectricalPage from "../components/testMeters/testElectrical/view/TestMainElectricalPage";
 import TestMainHeatPage from "../components/testMeters/testHeat/view/TestMainHeatPage";
 import TestMainWaterPage from "../components/testMeters/testWater/view/TestMainWaterPage";
-import { authApi } from "../shared/api";
 import { useAppSelector } from "../shared/hooks";
 import Auth from "./Auth";
 import DescriptionObject from "./DescriptionObject";
@@ -21,13 +20,11 @@ import Layout from "./Layout";
 import AdminHomePage from "./admin/AdminHomePage";
 
 const Routing = () => {
-    const { isSuccess } = authApi.useCheckQuery();
-
-    const { isAuth } = useAppSelector((state) => state.user);
+    const { isAuth, isLoading } = useAppSelector((state) => state.user);
 
     return (
         <Routes>
-            {isAuth && isSuccess ? (
+            {isAuth ? (
                 <Route path="/" element={<Layout />}>
                     <Route path="/" element={<HomePage />} />
                     <Route path="object/:id" element={<DescriptionObject />}>
