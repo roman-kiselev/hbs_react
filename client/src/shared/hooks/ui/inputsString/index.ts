@@ -1,3 +1,4 @@
+import useInput from "./useInput";
 import useStringForFormInput from "./useStringForFormInput";
 
-export { useStringForFormInput };
+export { useInput, useStringForFormInput };

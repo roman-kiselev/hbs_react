@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import { Button, Col, Modal, Row, Tab, Tabs } from "react-bootstrap";
-import TestFormCoolHotMeterBolid from "../form/TestFormCoolHotMeterBolid";
+import { useState } from "react";
+import { Button, Modal, Row, Tab, Tabs } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import TestFormCoolHotMeterBolid from "../form/TestFormCoolHotMeterBolid";
+import FormEditOffline from "../formEditOffline/FormEditOffline";
 import ListMeterWater from "../listMeters/ListMeterWater";
 import OperationsWater from "../operation/OperationsWater";
-import FormEditOffline from "../formEditOffline/FormEditOffline";
 
 const TestMainWaterPage = () => {
     // id объекта
     const { id } = useParams();
-
     // Переменные и функции для модального окна
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
