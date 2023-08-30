@@ -1,3 +1,4 @@
-import { IGetAllByIdUserAndObjectQuery } from "./IGetAllByIdUserAndObjectQuery";
+import { IGetAllByObjectQuery } from "./IGetAllByObjectQuery";
+import { IOneWaterMeter } from "./IOneWaterMeter";
 
-export { IGetAllByIdUserAndObjectQuery };
+export type { IGetAllByObjectQuery, IOneWaterMeter };

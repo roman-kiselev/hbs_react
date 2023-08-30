@@ -1,5 +1,10 @@
 import { IRoleService } from "./IRoleService";
+import { IGetAllByObjectQuery, IOneWaterMeter } from "./mainTable";
 import { IObjectBuildsService } from "./objects";
-import { IGetAllByIdUserAndObjectQuery } from "./mainTable";
 
-export { IRoleService, IObjectBuildsService, IGetAllByIdUserAndObjectQuery };
+export {
+    IGetAllByObjectQuery,
+    IObjectBuildsService,
+    IOneWaterMeter,
+    IRoleService,
+};

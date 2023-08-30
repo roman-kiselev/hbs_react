@@ -9,21 +9,22 @@ import { ObjectsBuilds } from "../objects";
 import { User } from "../user";
 
 interface MainAddMeterAttributes {
-    id: number;
-    section: number;
-    floor: number;
-    flat: number;
-    office: number;
-    line: number;
-    typeMeter: string;
-    numberMeter: number;
-    sumMeter: number;
-    numberKdl: number;
-    numberAsr: number;
-    comment: string;
+    section?: number;
+    floor?: number;
+    flat?: number;
+    office?: number;
+    line?: number;
+    typeMeter?: string;
+    numberMeter?: number;
+    sumMeter?: number;
+    numberKdl?: number;
+    numberAsr?: number;
+    comment?: string;
+    objectBuildId?: number;
+    userId?: number;
 }
 
-@Table({ tableName: "main_meter" })
+@Table({ tableName: "main_meters" })
 export class MainAddMeter extends Model<MainAddMeter, MainAddMeterAttributes> {
     @Column({
         type: DataType.INTEGER,
@@ -102,14 +103,14 @@ export class MainAddMeter extends Model<MainAddMeter, MainAddMeterAttributes> {
     @ForeignKey(() => ObjectsBuilds)
     @Column({
         type: DataType.INTEGER,
-        allowNull: false,
+        allowNull: true,
     })
     objectBuildId: number;
 
     @ForeignKey(() => User)
     @Column({
         type: DataType.INTEGER,
-        allowNull: false,
+        allowNull: true,
     })
     userId: number;
 }

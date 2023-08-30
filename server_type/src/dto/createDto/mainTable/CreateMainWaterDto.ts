@@ -1,6 +1,6 @@
 class CreateMainWaterDto {
     section: number;
-    floors: number;
+    floor: number;
     flat: number;
     office: number;
     numberKdl: number;
@@ -12,6 +12,7 @@ class CreateMainWaterDto {
     sumMeterHot: number;
     userId: number;
     objectBuildId: number;
+    comment?: string;
 }
 
 export default CreateMainWaterDto;

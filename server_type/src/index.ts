@@ -1,13 +1,12 @@
-import { ErrorHandlerMiddleware } from "./middlewares/ErrorHandlerMiddleware";
-import express from "express";
-import { Sequelize } from "sequelize-typescript";
-import fileUpload from "express-fileupload";
 import * as dotenv from "dotenv";
+import express from "express";
+import fileUpload from "express-fileupload";
+import { ErrorHandlerMiddleware } from "./middlewares/ErrorHandlerMiddleware";
 dotenv.config();
 
 import cors from "cors";
-const PORT = process.env.PORT || 3001;
 import * as path from "path";
+const PORT = process.env.PORT || 3001;
 
 // Импорты из моиих папок
 import db from "./models/db";
@@ -21,7 +20,7 @@ app.use(express.static(path.join(__dirname, "static")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use("/", mainRouter);
+app.use("/api", mainRouter);
 const start = async () => {
     await db.sync().then(() => {
         app.listen(PORT, () => {

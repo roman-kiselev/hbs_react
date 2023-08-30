@@ -1,14 +1,12 @@
 import { Request, Response } from "express";
 import { CreateObjectBuildsDto } from "../../dto";
-import { ApiError } from "../../lib";
-import { FilesService, ObjectsBuildsService } from "../../services";
-import { ObjectsBuilds } from "../../models";
+import { ObjectsBuildsService } from "../../services";
 
 class ObjectsBuildsController {
     async createObject(req: Request, res: Response) {
         try {
             const dto = req.body as CreateObjectBuildsDto;
-            console.log(dto);
+            
             const { img } = req.files as {
                 [img: string]: Express.Multer.File[];
             };
@@ -23,7 +21,7 @@ class ObjectsBuildsController {
     async getAllObjects(req: Request, res: Response) {
         try {
             const objects = await ObjectsBuildsService.getAllObjectBuilds();
-            return res.status(200).json(objects);
+            return res.status(200).json({ objects });
         } catch (e) {
             console.log(e);
         }

@@ -1,5 +1,10 @@
-import { RoleController, UsersController } from "./users";
+import { MainTableWaterController } from "./mainTable";
 import { ObjectsBuildController } from "./objects";
+import { RoleController, UsersController } from "./users";
 
-export { ObjectsBuildController };
-export { RoleController, UsersController };
+export {
+    MainTableWaterController,
+    ObjectsBuildController,
+    RoleController,
+    UsersController,
+};

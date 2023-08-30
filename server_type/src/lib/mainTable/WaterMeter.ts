@@ -13,7 +13,7 @@ const waterMeter = (dto: CreateMainWaterDto) => {
         channelCool,
         channelHot,
         flat,
-        floors,
+        floor,
         numberKdl,
         numberMeterCool,
         numberMeterHot,
@@ -28,7 +28,7 @@ const waterMeter = (dto: CreateMainWaterDto) => {
         getCoolMeter() {
             return {
                 section,
-                floors,
+                floor,
                 flat: flat ? flat : 0,
                 office: office ? office : 0,
                 typeMeter: "Счётчик холодной воды",
@@ -44,7 +44,7 @@ const waterMeter = (dto: CreateMainWaterDto) => {
         getHotMeter() {
             return {
                 section,
-                floors,
+                floor,
                 flat: flat ? flat : 0,
                 office: office ? office : 0,
                 typeMeter: "Счётчик горячей воды",

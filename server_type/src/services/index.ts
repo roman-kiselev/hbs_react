@@ -1,6 +1,14 @@
-import { RoleService, UsersService } from "./users";
+import { ExcelService } from "./excel";
 import { FilesService } from "./files";
+import { MainWater } from "./mainTable";
 import { ObjectsBuildsService } from "./objects";
+import { RoleService, UsersService } from "./users";
 
-export { ObjectsBuildsService };
-export { RoleService, UsersService, FilesService };
+export {
+    ExcelService,
+    FilesService,
+    MainWater,
+    ObjectsBuildsService,
+    RoleService,
+    UsersService,
+};

@@ -1,17 +1,19 @@
-import { IUserCreate, IRoleCreate, IUserLogin } from "./models";
-import {
-    IRoleService,
-    IObjectBuildsService,
-    IGetAllByIdUserAndObjectQuery,
-} from "./service";
 import AuthenticatedRequest from "./middlewares/AuthenticatedRequest";
-
-export {
-    IUserCreate,
-    IRoleCreate,
-    AuthenticatedRequest,
-    IRoleService,
-    IUserLogin,
+import { IRoleCreate, IUserCreate, IUserLogin } from "./models";
+import {
+    IGetAllByObjectQuery,
     IObjectBuildsService,
-    IGetAllByIdUserAndObjectQuery,
+    IOneWaterMeter,
+    IRoleService,
+} from "./service";
+
+export type {
+    AuthenticatedRequest,
+    IGetAllByObjectQuery,
+    IObjectBuildsService,
+    IOneWaterMeter,
+    IRoleCreate,
+    IRoleService,
+    IUserCreate,
+    IUserLogin,
 };

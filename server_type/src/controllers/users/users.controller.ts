@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { IUserCreate, IUserLogin } from "../../interfaces";
 import { User } from "../../models/user";
 import { UsersService } from "../../services";
-import { IUserService } from "../../services/users/users.service";
 
 interface RequestUser extends Request {
     user: User;
