@@ -1,8 +1,14 @@
-import { Op, Sequelize } from "sequelize";
+import pkg, { Sequelize } from "sequelize";
 import { MainAddMeter } from "../../models";
-// const { Op } = pkg;
+const { Op } = pkg;
+
 // Поиск по номеру
-export const getMetersByNumberFlat = async (number, objectId, limit, page) => {
+export const getElectricalMetersByNumberFlat = async (
+    number,
+    objectId,
+    limit,
+    page
+) => {
     try {
         // Получаем данные для постраничной навигации
 
@@ -10,22 +16,12 @@ export const getMetersByNumberFlat = async (number, objectId, limit, page) => {
         limit = Number(limit) || 6;
         let offset = page * limit - limit;
 
-        const coolWater = "Счётчик холодной воды";
-        const hotWater = "Счётчик горячей воды";
+        const typeMeter = "Счётчик электроэнергии";
 
-        const listFlats = await MainAddMeter.findAndCountAll<MainAddMeter>({
+        const listFlats = await MainAddMeter.findAndCountAll({
             where: {
                 objectBuildId: objectId,
-                typeMeter: {
-                    [Op.or]: [coolWater, hotWater],
-                },
-
-                // flat: {
-                //     [Op.or]: {
-                //         [Op.eq]: number,
-                //         [Op.like]: { val: `%${number}` },
-                //     },
-                // },
+                typeMeter: typeMeter,
                 [Op.or]: [
                     {
                         flat: {
@@ -60,7 +56,6 @@ export const getMetersByNumberFlat = async (number, objectId, limit, page) => {
                        `
                 ),
             ],
-
             limit: limit,
             offset: offset,
         });

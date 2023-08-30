@@ -6,12 +6,7 @@ import { CreateMainWaterDto } from "../../dto";
 import { IGetAllByObjectQuery } from "../../interfaces";
 import { changeArrMeter, getFlatString } from "../../lib";
 import { MainAddMeter } from "../../models";
-import {
-    ExcelService,
-    MainWater,
-    getDatFile,
-    getMetersByNumberFlat,
-} from "../../services";
+import { MainWater, getDatFile, getMetersByNumberFlat } from "../../services";
 import db from "./../../models/db";
 class MainTableWater {
     // Добавление новых счётчиков воды
@@ -81,23 +76,23 @@ class MainTableWater {
         }
     }
 
-    async getExcelTest(req: Request, res: Response) {
-        const { objectId } = req.query;
-        // Устанавливаем id объекта
-        const listMeters = new ExcelService(1);
-        // Задаём имя excel файлу
-        listMeters.setFileName("Счётчики_1111.xlsx");
-        // Добавляем путь файла
-        listMeters.setPathWithFileName();
-        // Создаём excel файл
-        await listMeters.getExcelWaterMeter();
+    // async getExcelTest(req: Request, res: Response) {
+    //     const { objectId } = req.query;
+    //     // Устанавливаем id объекта
+    //     const listMeters = new ExcelService(1);
+    //     // Задаём имя excel файлу
+    //     listMeters.setFileName("Счётчики_1111.xlsx");
+    //     // Добавляем путь файла
+    //     listMeters.setPathWithFileName();
+    //     // Создаём excel файл
+    //     await listMeters.getExcelWaterMeter();
 
-        return res.download(listMeters.getPathWithFileName, (err) => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
+    //     return res.download(listMeters.getPathWithFileName, (err) => {
+    //         if (err) {
+    //             console.log(err);
+    //         }
+    //     });
+    // }
 
     async getExcelAllWaterMeterInObject(req, res) {
         try {
