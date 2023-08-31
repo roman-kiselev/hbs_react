@@ -1,5 +1,5 @@
 import { IRoleService } from "./IRoleService";
-import { IGetAllByObjectQuery, IOneWaterMeter } from "./mainTable";
+import { IGetAllByObjectQuery, IOneWaterMeter, IWaterMeter } from "./mainTable";
 import { IObjectBuildsService } from "./objects";
 
 export {
@@ -7,4 +7,5 @@ export {
     IObjectBuildsService,
     IOneWaterMeter,
     IRoleService,
+    IWaterMeter,
 };

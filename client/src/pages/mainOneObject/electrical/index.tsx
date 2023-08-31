@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 
-const HeatIndex = () => {
+const ElectricalIndex = () => {
     useEffect(() => {
-        document.title = "Тепло";
+        document.title = "Электроэнергия";
     }, []);
     return (
         <>
@@ -12,4 +12,4 @@ const HeatIndex = () => {
     );
 };
 
-export default HeatIndex;
+export default ElectricalIndex;

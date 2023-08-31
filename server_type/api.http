@@ -82,3 +82,16 @@ Content-Type: application/json; charset=utf-8
     "objectBuildId": 9
 }
 ###
+
+
+
+### ----------------------- Пульсар вода ----------------------------
+### Получим все номера счётчиков импульсов
+GET {{host}}/pulsarWater/?objectBuildId=8 HTTP/1.1
+
+###
+
+### Получим все счётчики
+GET {{host}}/pulsarWater/getByNumber/?numberKdl=9603534 HTTP/1.1
+
+###

@@ -52,7 +52,7 @@ class MainTableElectricalController {
             const meters = await MainAddMeter.findAndCountAll({
                 where: {
                     objectBuildId,
-                    userId,
+                    // userId,
                     typeMeter,
                 },
                 limit,

@@ -5,6 +5,7 @@ import {
     IObjectBuildsService,
     IOneWaterMeter,
     IRoleService,
+    IWaterMeter,
 } from "./service";
 
 export type {
@@ -16,4 +17,5 @@ export type {
     IRoleService,
     IUserCreate,
     IUserLogin,
+    IWaterMeter,
 };

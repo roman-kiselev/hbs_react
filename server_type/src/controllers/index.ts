@@ -1,13 +1,16 @@
 import {
+    MainKdlController,
     MainSectionsController,
     MainTableElectricalController,
     MainTableHeatController,
     MainTableWaterController,
+    WaterPulsarController,
 } from "./mainTable";
 import { ObjectsBuildController } from "./objects";
 import { RoleController, UsersController } from "./users";
 
 export {
+    MainKdlController,
     MainSectionsController,
     MainTableElectricalController,
     MainTableHeatController,
@@ -15,4 +18,5 @@ export {
     ObjectsBuildController,
     RoleController,
     UsersController,
+    WaterPulsarController,
 };

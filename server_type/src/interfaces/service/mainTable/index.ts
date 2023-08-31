@@ -1,3 +1,7 @@
-import { IGetAllByObjectQuery, IOneWaterMeter } from "./tableWater";
+import {
+    IGetAllByObjectQuery,
+    IOneWaterMeter,
+    IWaterMeter,
+} from "./tableWater";
 
-export type { IGetAllByObjectQuery, IOneWaterMeter };
+export type { IGetAllByObjectQuery, IOneWaterMeter, IWaterMeter };

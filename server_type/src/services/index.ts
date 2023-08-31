@@ -1,6 +1,6 @@
 import { ExcelService } from "./excel";
 import { FilesService } from "./files";
-import { MainWater } from "./mainTable";
+import { MainWater, PulsarWaterService } from "./mainTable";
 import { ObjectsBuildsService } from "./objects";
 import { getElectricalMetersByNumberFlat } from "./serviceElectrical";
 import { getHeatMetersByNumberFlat } from "./serviceHeat";
@@ -12,6 +12,7 @@ export {
     FilesService,
     MainWater,
     ObjectsBuildsService,
+    PulsarWaterService,
     RoleService,
     UsersService,
     getDatFile,
