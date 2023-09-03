@@ -4,7 +4,6 @@ import { useAppDispatch } from "../../app/store";
 import MenuOneObject from "../../components/addMeters/leftMenu/MenuOneObject";
 import TestMainElectricalPage from "../../components/testMeters/testElectrical/view/TestMainElectricalPage";
 import TestMainHeatPage from "../../components/testMeters/testHeat/view/TestMainHeatPage";
-import TestMainWaterPage from "../../components/testMeters/testWater/view/TestMainWaterPage";
 import { useAppSelector } from "../../shared/hooks";
 import { setShow } from "../../shared/models";
 import ElectricalIndex from "./electrical";
@@ -14,6 +13,7 @@ import HeatIndex from "./heat";
 import HeatMainPage from "./heat/HeatMainPage";
 import WaterIndex from "./water";
 import WaterMainPage from "./water/WaterMainPage";
+import NewOldWaterRouter from "./water/newOldWater";
 
 const MainOneObject = () => {
     const { id } = useParams();
@@ -49,7 +49,11 @@ const MainOneObject = () => {
                                     <Route index element={<WaterMainPage />} />
                                     <Route
                                         path="temporaryPage"
-                                        element={<TestMainWaterPage />}
+                                        element={<NewOldWaterRouter />}
+                                    />
+                                    <Route
+                                        path="newOld/*"
+                                        element={<NewOldWaterRouter />}
                                     />
                                 </Route>
                                 <Route path="heat/*" element={<HeatIndex />}>

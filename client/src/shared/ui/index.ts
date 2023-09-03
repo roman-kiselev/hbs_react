@@ -1,3 +1,4 @@
+import { ButtonGroupCol } from "./buttonsGroup";
 import { CardObject } from "./cards";
 
-export { CardObject };
+export { ButtonGroupCol, CardObject };

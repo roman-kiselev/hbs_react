@@ -1,3 +1,4 @@
+import { IButtonGroupConfig } from "./buttonsGroup";
 import { ICardLink } from "./cards";
 
-export type { ICardLink };
+export type { IButtonGroupConfig, ICardLink };
