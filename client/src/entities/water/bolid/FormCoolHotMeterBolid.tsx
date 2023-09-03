@@ -1,32 +1,31 @@
-import { useNumber } from "../../../shared/hooks";
+import { useType } from "../../../shared/hooks";
 
 const FormCoolHotMeterBolid = () => {
     // Состояние форм
-    const [section, setSection, handleInputChangeSection] = useNumber(0);
-    const [floors, setFloors, handleInputChangeFloors] = useNumber(0);
-    const [flat, setFlat, handleInputChangeFlat] = useNumber(0);
-    const [kdl, setKdl, handleInputChangeKdl] = useNumber();
+    const [section, setSection, handleInputChangeSection] = useType<number>(0);
+    const [floors, setFloors, handleInputChangeFloors] = useType<number>(0);
+    const [flat, setFlat, handleInputChangeFlat] = useType<number>(0);
+    const [kdl, setKdl, handleInputChangeKdl] = useType<number>(0);
     const [channelCool, setChannelCool, handleInputChangeChannelCool] =
-        useNumber(0);
+        useType<number>(0);
     const [channelHot, setChannelHot, handleInputChangeChannelHot] =
-        useNumber(0);
+        useType<number>(0);
     const [
         numberMeterCool,
         setNumberMeterCool,
         handleInputChangeNumberMeterCool,
-    ] = useNumber(0);
+    ] = useType<number>(0);
     const [numberMeterHot, setNumberMeterHot, handleInputChangeNumberMeterHot] =
-        useNumber(0);
+        useType<number>(0);
     const [sumMeterCool, setSumMeterCool, handleInputChangeSumMeterCool] =
-        useNumber(0);
+        useType<number>(0);
     const [sumMeterHot, setSumMeterHot, handleInputChangeSumMeterHot] =
-        useNumber(0);
-
+        useType<number>(0);
     const [selectObject, setSelectObject, handleInputChangeSelectObject] =
-        useNumber("flat");
+        useType<string>("flat");
 
     // Прибавляем канал
-    const addChannelHot = (e) => {
+    const addChannelHot = (e: React.ChangeEvent<HTMLInputElement>) => {
         setChannelCool(e.target.value);
         setChannelHot(Number(e.target.value) + 1);
     };
