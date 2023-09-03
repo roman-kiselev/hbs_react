@@ -6,6 +6,7 @@ import { useAppDispatch } from "./useAppDispatch";
 import { useAppSelector } from "./useAppSelector";
 import useNumber from "./useNumber";
 import useString from "./useString";
+import useType from "./useType";
 
 export {
     useAppDispatch,
@@ -15,4 +16,5 @@ export {
     useShowAndClose,
     useString,
     useStringForFormInput,
+    useType,
 };

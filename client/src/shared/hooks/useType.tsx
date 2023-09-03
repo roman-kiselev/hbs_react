@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
-const useType = <T,>(initialValue: T) => {
+const useType = <T,>(
+    initialValue: T
+): [T, (value: T) => void, (e: ChangeEvent<HTMLInputElement>) => void] => {
     const [value, setValue] = useState<T>(initialValue);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
