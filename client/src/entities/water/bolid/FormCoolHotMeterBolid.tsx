@@ -1,4 +1,5 @@
-import { useType } from "../../../shared/hooks";
+import React, { useState } from "react";
+import { useAppSelector, useType } from "../../../shared/hooks";
 
 const FormCoolHotMeterBolid = () => {
     // Состояние форм
@@ -26,7 +27,7 @@ const FormCoolHotMeterBolid = () => {
 
     // Прибавляем канал
     const addChannelHot = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setChannelCool(e.target.value);
+        setChannelCool(Number(e.target.value));
         setChannelHot(Number(e.target.value) + 1);
     };
 
@@ -60,7 +61,7 @@ const FormCoolHotMeterBolid = () => {
     // Достаём id пользователя
     const { id: userId } = useAppSelector((state) => state.user.user);
     // Достаём добавленные счётчики
-    const { lastMeters } = useSelector((state) => state.mainTable);
+    const { lastMeters } = useAppSelector((state) => state.mainTable);
 
     // Данные для добавления
     const addMeter = (e) => {
