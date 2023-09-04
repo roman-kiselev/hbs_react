@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { useAppSelector, useType } from "../../../shared/hooks";
+import { InputNumber } from "../../../shared/interfaces";
 
 const FormCoolHotMeterBolid = () => {
     // Состояние форм
@@ -51,57 +53,57 @@ const FormCoolHotMeterBolid = () => {
     ];
     // Фукнция для отправки данных на сервер
     // Если значения в массиве не пустые, то отправляем данные на сервер
-    const checkData = () => {
-        if (arrForCheck.every((item) => item !== "")) {
-            return false;
-        } else {
-            return true;
-        }
-    };
+    // const checkData = () => {
+    //     if (arrForCheck.every((item) => item !== "")) {
+    //         return false;
+    //     } else {
+    //         return true;
+    //     }
+    // };
     // Достаём id пользователя
     const { id: userId } = useAppSelector((state) => state.user.user);
     // Достаём добавленные счётчики
     const { lastMeters } = useAppSelector((state) => state.mainTable);
 
     // Данные для добавления
-    const addMeter = (e) => {
-        e.preventDefault();
-        const dataWith = {
-            section: section,
-            floors: floors,
-            flat: selectObject === "flat" ? flat : 0,
-            office: selectObject === "office" ? flat : 0,
-            kdl: kdl,
-            channelCool: channelCool,
-            channelHot: channelHot,
-            numberMeterCool: numberMeterCool,
-            numberMeterHot: numberMeterHot,
-            sumMeterCool: sumMeterCool,
-            sumMeterHot: sumMeterHot,
-            userId: userId,
-            objectId: id,
-        };
-        // В форму передаём
-        const formQuery = { userId, objectBuildId: id };
+    // const addMeter = (e) => {
+    //     e.preventDefault();
+    //     const dataWith = {
+    //         section: section,
+    //         floors: floors,
+    //         flat: selectObject === "flat" ? flat : 0,
+    //         office: selectObject === "office" ? flat : 0,
+    //         kdl: kdl,
+    //         channelCool: channelCool,
+    //         channelHot: channelHot,
+    //         numberMeterCool: numberMeterCool,
+    //         numberMeterHot: numberMeterHot,
+    //         sumMeterCool: sumMeterCool,
+    //         sumMeterHot: sumMeterHot,
+    //         userId: userId,
+    //         objectId: id,
+    //     };
+    //     // В форму передаём
+    //     const formQuery = { userId, objectBuildId: id };
 
-        const setNewAlert = () => {
-            setAlertAdd(false);
-        };
-        inputRef.current.focus();
-        dispatch(createTestMeter({ dataWith })).then((d) => {
-            dispatch(getAllMetersByUserAndObject({ formQuery }));
-            setNumberMeterCool("");
-            setNumberMeterHot("");
-            setSumMeterCool("");
-            setSumMeterHot("");
-            setChannelCool("");
-            setChannelHot("");
-            setFlat("");
-            setAlertAdd(true);
-            // Уведомление о добавлении
-            setTimeout(setNewAlert, 2000);
-        });
-    };
+    //     const setNewAlert = () => {
+    //         setAlertAdd(false);
+    //     };
+    //     inputRef.current.focus();
+    //     dispatch(createTestMeter({ dataWith })).then((d) => {
+    //         dispatch(getAllMetersByUserAndObject({ formQuery }));
+    //         setNumberMeterCool("");
+    //         setNumberMeterHot("");
+    //         setSumMeterCool("");
+    //         setSumMeterHot("");
+    //         setChannelCool("");
+    //         setChannelHot("");
+    //         setFlat("");
+    //         setAlertAdd(true);
+    //         // Уведомление о добавлении
+    //         setTimeout(setNewAlert, 2000);
+    //     });
+    // };
 
     return (
         <Row>
