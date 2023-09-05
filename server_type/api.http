@@ -1,9 +1,9 @@
 @hostHome = http://192.168.1.14:3333/api
 @hostJob = http://192.168.3.16:7777/api
 ###
-@host = {{hostHome}}
+@host = {{hostJob}}
 ###
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJsb2dpbiI6ImFkbWluIiwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDA1OjA3OjQ4LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDA1OjA3OjQ4LjAwMFoiLCJVc2Vyc1JvbGUiOnsiaWQiOjEsInVzZXJJZCI6MSwicm9sZUlkIjoxLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDA1OjA3OjU4LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDA1OjA3OjU4LjAwMFoifX1dLCJpYXQiOjE2OTMzODM3NjUsImV4cCI6MTY5MzQxMjU2NX0.0IfgH2FshZpg5WOx1a0cPmNhBAtG8nUwH0rsvNHblEg
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJsb2dpbiI6ImFkbWluIiwicm9sZXMiOlt7ImlkIjoxLCJuYW1lIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDA4OjQyOjE3LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDA4OjQyOjE3LjAwMFoiLCJVc2Vyc1JvbGUiOnsiaWQiOjEsInVzZXJJZCI6Miwicm9sZUlkIjoxLCJjcmVhdGVkQXQiOiIyMDIzLTAzLTAxVDA5OjA1OjUyLjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTAzLTAxVDA5OjA1OjUyLjAwMFoifX1dLCJpYXQiOjE2OTM4OTkyMDAsImV4cCI6MTY5MzkyODAwMH0.X6Pn4aduWCbjVqXklewd5OOaalXlWJ9yw18opujWZds
 
 
 ### Roles
@@ -47,7 +47,7 @@ Content-Type: application/json; charset=utf-8
 
 {
     "login": "admin",
-    "password": "28162342"
+    "password": "852046"
 }
 ### ------------------ Объекты-----------------------------------------
 ### Получить все объекты
@@ -82,6 +82,13 @@ Content-Type: application/json; charset=utf-8
     "objectBuildId": 9
 }
 ###
+
+### Получим линии
+GET {{host}}/testAddHeat/line/?objectBuildId=8 HTTP/1.1
+
+###
+
+
 
 
 

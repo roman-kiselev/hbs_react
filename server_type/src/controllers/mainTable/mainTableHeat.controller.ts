@@ -220,6 +220,7 @@ class MainTableHeatController {
     async getAllLines(req, res) {
         try {
             const { objectBuildId, line } = req.query;
+            console.log(objectBuildId);
             const lines = await MainAddMeter.findAll({
                 where: {
                     objectBuildId,
@@ -233,6 +234,7 @@ class MainTableHeatController {
                 ],
                 order: [["line", "ASC"]],
             });
+            console.log(lines);
 
             return res.json({ lines });
         } catch (e) {

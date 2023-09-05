@@ -1,3 +1,6 @@
-import { buttonGroupConfigWater } from "./buttonGroupConfig";
+import {
+    buttonGroupConfigWater,
+    buttonGroupConfigWaterPulsar,
+} from "./buttonGroupConfig";
 
-export { buttonGroupConfigWater };
+export { buttonGroupConfigWater, buttonGroupConfigWaterPulsar };

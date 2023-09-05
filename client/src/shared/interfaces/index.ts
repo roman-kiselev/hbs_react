@@ -11,7 +11,7 @@ import {
     IUserLoginAttr,
     IUserSlice,
 } from "./models";
-import { IButtonGroupConfig, ICardLink, InputNumber } from "./ui";
+import { IButtonGroupConfig, ICardLink } from "./ui";
 
 export type {
     CreateHandler,
@@ -27,5 +27,4 @@ export type {
     IUser,
     IUserLoginAttr,
     IUserSlice,
-    InputNumber,
 };

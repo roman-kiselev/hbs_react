@@ -14,6 +14,7 @@ import HeatMainPage from "./heat/HeatMainPage";
 import WaterIndex from "./water";
 import WaterMainPage from "./water/WaterMainPage";
 import NewOldWaterRouter from "./water/newOldWater";
+import PulsarRouter from "./water/pulsar";
 
 const MainOneObject = () => {
     const { id } = useParams();
@@ -48,12 +49,16 @@ const MainOneObject = () => {
                                 <Route path="water/*" element={<WaterIndex />}>
                                     <Route index element={<WaterMainPage />} />
                                     <Route
-                                        path="temporaryPage"
+                                        path="temporaryPage/*"
                                         element={<NewOldWaterRouter />}
                                     />
                                     <Route
                                         path="newOld/*"
                                         element={<NewOldWaterRouter />}
+                                    />
+                                    <Route
+                                        path="pulsar/*"
+                                        element={<PulsarRouter />}
                                     />
                                 </Route>
                                 <Route path="heat/*" element={<HeatIndex />}>
