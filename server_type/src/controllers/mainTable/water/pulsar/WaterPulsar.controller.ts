@@ -9,11 +9,11 @@ class WaterPulsarController {
     async getListDevicesWithChannels(req: Request, res: Response) {
         try {
             const { objectBuildId } = req.query as unknown as ITEst;
-            const test = await PulsarWaterService.getAllDeviceInObject(
+            const devices = await PulsarWaterService.getAllDeviceInObject(
                 objectBuildId
             );
 
-            return res.status(200).json({ test });
+            return res.status(200).json({ devices });
         } catch (e) {
             console.error(e);
         }
