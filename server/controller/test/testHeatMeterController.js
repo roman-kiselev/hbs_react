@@ -202,10 +202,8 @@ class TestHeatMeterController {
                         } else {
                             repeatMeters.push(meter);
                             loadedData++;
-                            console.log(progressBar);
                         }
                     }
-                    console.log(loadedData);
 
                     return res.json({
                         repeatMeters,
@@ -622,7 +620,7 @@ class TestHeatMeterController {
                         objectBuildId,
                         userId,
                     } = meter;
-                    console.log(`Обновляем данные счётчика ${meter.idDb}`);
+
                     await Models.MainAddMeter.update(
                         {
                             section,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
     Button,
     Col,
@@ -11,11 +11,7 @@ import {
 } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import {
-    getChangeTable,
-    getMeters,
-    sincMeters,
-} from "../../../../http/waterMeterApi";
+import { getChangeTable, sincMeters } from "../../../../http/waterMeterApi";
 
 const getAndSetMeters = async (id, setData) => {
     const { metersChange } = await getChangeTable(id);
@@ -45,10 +41,8 @@ const SettingsUp = () => {
         getAndSetMeters(id, setMetersList);
     }, []);
 
-    //console.log(metersList);
     const handleClick = async () => {
         try {
-            console.log("Click");
             sincMeters(id);
         } catch (e) {
             console.error(e);

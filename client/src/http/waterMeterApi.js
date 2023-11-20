@@ -1,4 +1,4 @@
-import { $authHost, $host } from "./index";
+import { $authHost } from "./index";
 
 export const getAllWaterMeter = async (objectBuildId) => {
     const date = new Date();
@@ -17,7 +17,6 @@ export const getAllWaterMeter = async (objectBuildId) => {
             responseType: "blob",
         })
         .then((res) => {
-            console.log(res);
             try {
                 if (res && res.data) {
                     const blob = new Blob([res.data], {
@@ -59,7 +58,6 @@ export const getAllWaterMeterPulsar = async (objectBuildId) => {
             }
         )
         .then((res) => {
-            console.log(res);
             try {
                 if (res && res.data) {
                     const blob = new Blob([res.data], {
@@ -207,6 +205,6 @@ export const getTable = async (objectBuildId) => {
     const { data } = await $authHost.get(
         `api/testAddWater/getTableForOffline/${objectBuildId}`
     );
-    console.log(data);
+
     return data;
 };

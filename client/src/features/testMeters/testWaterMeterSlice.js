@@ -23,6 +23,7 @@ export const getAllMetersByUserAndObject = createAsyncThunk(
     "api/testAddWater",
     async ({ formQuery }, { getState, dispatch }) => {
         const { userId, objectBuildId } = formQuery;
+
         // Получаем лимит и текущую страницу из геттера
         // Что бы получить state добавляем getState.mainTable
         const state = getState();
@@ -111,6 +112,4 @@ export const {
     setCurrentPage,
     getLimitAndCurrentPage,
 } = testWaterMeterSlice.actions;
-
-export const testWaterMeterReducer = testWaterMeterSlice.reducer;
 export default testWaterMeterSlice.reducer;

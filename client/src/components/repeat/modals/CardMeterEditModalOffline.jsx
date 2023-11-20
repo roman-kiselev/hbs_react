@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Col, Row, Button, Modal, Form } from "react-bootstrap";
+import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import useNumber from "../../hooks/useNumber";
 import InputNumber from "../inputs/inputsNumber/InputNumber";
 import InputNumberFloating from "../inputs/inputsNumber/InputNumberFloating";
@@ -110,7 +110,7 @@ const CardMeterEditModalOffline = ({
 
     // Создаём ref для того что бы после нажатия проставилась фокусировка
     const inputRef = React.useRef(null);
-    //console.log(dataHeat);
+
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>

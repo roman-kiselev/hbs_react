@@ -1,4 +1,4 @@
-import { $authHost, $host } from "./index";
+import { $authHost } from "./index";
 
 export const getAllMetersHeat = async (objectBuildId) => {
     const date = new Date();
@@ -53,7 +53,6 @@ export const addDataExcelHeat = async (objectBuildId, userId, jsonData) => {
                 },
             }
         );
-        console.log(data);
     } catch (e) {
         console.log(e);
         return e.message;

@@ -1,20 +1,19 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import ListMeters from "../../../repeat/listMetersCard/ListMeters";
+import Pages from "../../../repeat/pagination/Pages";
 import {
     getAllHeatMeter,
     getMetersByNumberFlat,
     getOneHeatMeter,
-    setCurrentPage,
 } from "../../../../features/testMeters/testHeatMeterSlice";
+import { setCurrentPage } from "../../../../features/testMeters/testHeatMeterSlice";
 import { deleteHeatMeter } from "../../../../http/heatMeterApi";
-import { useAppSelector } from "../../../../shared/hooks";
-import ListMeters from "../../../repeat/listMetersCard/ListMeters";
-import Pages from "../../../repeat/pagination/Pages";
 
 const ListMeterHeat = ({ id: objectBuildId }) => {
     const dispatch = useDispatch();
-    const { id: userId } = useAppSelector((state) => state.user.user);
+    const { id: userId } = useSelector((state) => state.users.user);
     const cardMeter = useSelector((state) => state.heatMeter.mainTable);
     const [searchValue, setSearchValue] = useState("");
     const { currentPage, limit } = useSelector((state) => state.heatMeter);

@@ -1,27 +1,31 @@
-import { Route, Routes } from "react-router-dom";
-import Auth from "../pages/Auth";
-import DescriptionObject from "../pages/DescriptionObject";
-import HomePage from "../pages/HomePage";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 import Layout from "../pages/Layout";
-import AdminHomePage from "../pages/admin/AdminHomePage";
+import HomePage from "../pages/HomePage";
+import DescriptionObject from "../pages/DescriptionObject";
 import Description from "./addMeters/Description";
 import AddCoolMetersBolid from "./addMeters/bolid/AddCoolMetersBolid";
 import AddHotMeterBolid from "./addMeters/bolid/AddHotMeterBolid";
 import AddMeterCoolHotBolid from "./addMeters/bolid/AddMeterCoolHotBolid";
 import AddCoolMeterPulsar from "./addMeters/pulsar/AddCoolMeterPulsar";
 import SettingsBolid from "./settings/SettingsBolid";
+import Auth from "../pages/Auth";
+import { useSelector } from "react-redux";
+import AdminLayout from "../pages/admin/AdminLayout";
+import AdminHomePage from "../pages/admin/AdminHomePage";
 import TestMainWaterPage from "./testMeters/testWater/view/TestMainWaterPage";
 
-import { useAppSelector } from "../shared/hooks";
+import TestAddMeterHeat from "./addMeters/testHeatAndEl/TestAddMeterHeat";
+import TestAddMeterElectrical from "./addMeters/testHeatAndEl/TestAddMeterElectrical";
+import TestMainHeatPage from "./testMeters/testHeat/view/TestMainHeatPage";
+import TestMainElectricalPage from "./testMeters/testElectrical/view/TestMainElectricalPage";
+import MainKdlInObject from "./kdlInObject/view/MainKdlInObject";
 import MainPageUsers from "./admin/users/views/MainPageUsers";
 import FormHousePage from "./formHouse/view/FormHousePage";
-import MainKdlInObject from "./kdlInObject/view/MainKdlInObject";
 import SettingsUp from "./testMeters/settingsUp/view/SettingsUp";
-import TestMainElectricalPage from "./testMeters/testElectrical/view/TestMainElectricalPage";
-import TestMainHeatPage from "./testMeters/testHeat/view/TestMainHeatPage";
 
 const AppRouter = () => {
-    const { isAuth } = useAppSelector((state) => state.user);
+    const isAuth = useSelector((state) => state.users.isAuth);
 
     return (
         <Routes>

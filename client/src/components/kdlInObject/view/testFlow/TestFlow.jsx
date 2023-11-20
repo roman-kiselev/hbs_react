@@ -1,10 +1,10 @@
 import { useCallback, useState } from "react";
 import ReactFlow, {
-    Controls,
     Background,
-    applyNodeChanges,
-    applyEdgeChanges,
+    Controls,
     addEdge,
+    applyEdgeChanges,
+    applyNodeChanges,
 } from "reactflow";
 import "reactflow/dist/style.css";
 
@@ -48,7 +48,6 @@ const CustomControls = () => {
     };
 
     const handleClick = () => {
-        console.log("Component 1 clicked");
         initialNodes.push(newElement);
     };
     return (

@@ -5,7 +5,6 @@ import {
     createTestHeatMeter,
     getAllHeatMeter,
 } from "../../../../features/testMeters/testHeatMeterSlice";
-import { useAppSelector } from "../../../../shared/hooks";
 import TestAlertAddHeatMeters from "../../../addMeters/bolid/alerts/TestAlertAddHeatMeters";
 import useNumber from "../../../hooks/useNumber";
 import InputNumber from "../../../repeat/inputs/inputsNumber/InputNumber";
@@ -38,7 +37,7 @@ const TestFormHeatMeter = ({ id: objectBuildId }) => {
     };
 
     // Достаём userId
-    const { id: userId } = useAppSelector((state) => state.user.user);
+    const { id: userId } = useSelector((state) => state.users.user);
     // Достаём добавленные счётчики для уведомления
     const { lastMeters } = useSelector((state) => state.heatMeter);
 

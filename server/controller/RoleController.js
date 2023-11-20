@@ -4,7 +4,7 @@ class RoleController {
     async createRole(req, res) {
         try {
             const { name } = req.body;
-            console.log(name);
+
             const role = await Models.Role.create({ name });
             return res.json({ role });
         } catch (e) {

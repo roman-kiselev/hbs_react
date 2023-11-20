@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Form, Row, Col, Button } from "react-bootstrap";
+import InputNumber from "../../../repeat/inputs/inputsNumber/InputNumber";
+import InputNumberFloating from "../../../repeat/inputs/inputsNumber/InputNumberFloating";
+import useNumber from "../../../hooks/useNumber";
 import { useDispatch, useSelector } from "react-redux";
+import AlertMeters from "../../../repeat/alert/AlertMeters";
 import {
     createTestElectricalMeter,
     getAllElectricalMeters,
 } from "../../../../features/testMeters/testElectricalMeterSlice";
-import { useAppSelector } from "../../../../shared/hooks";
-import useNumber from "../../../hooks/useNumber";
-import AlertMeters from "../../../repeat/alert/AlertMeters";
-import InputNumber from "../../../repeat/inputs/inputsNumber/InputNumber";
-import InputNumberFloating from "../../../repeat/inputs/inputsNumber/InputNumberFloating";
 import InputNumberSelected from "../../../repeat/inputs/inputsNumber/InputNumberSelected";
 
 const TestFormElectricalMeter = ({ id: objectBuildId }) => {
@@ -30,7 +29,7 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
     const arrForCheck = [section, floor, flat, line, numberMeter, sumMeter];
 
     // Достаём userId
-    const { id: userId } = useAppSelector((state) => state.user.user);
+    const { id: userId } = useSelector((state) => state.users.user);
 
     const checkData = () => {
         if (arrForCheck.every((item) => item !== "")) {

@@ -1,14 +1,16 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button, Modal, Row, Tab, Tabs } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import TestFormCoolHotMeterBolid from "../form/TestFormCoolHotMeterBolid";
 import FormEditOffline from "../formEditOffline/FormEditOffline";
 import ListMeterWater from "../listMeters/ListMeterWater";
 import OperationsWater from "../operation/OperationsWater";
+import TableMeters from "../tableMeters/TableMeters";
 
 const TestMainWaterPage = () => {
     // id объекта
     const { id } = useParams();
+
     // Переменные и функции для модального окна
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -64,6 +66,11 @@ const TestMainWaterPage = () => {
                         {/* Лист счётчиков */}
 
                         <ListMeterWater id={id} />
+                    </Tab>
+                    <Tab eventKey="table" title="Таблица">
+                        {/* Лист счётчиков */}
+
+                        <TableMeters id={id} />
                     </Tab>
                     <Tab eventKey="op" title="Операции">
                         {/* Здесь операции __ Скачать excel и т.д. */}

@@ -1,16 +1,14 @@
-import chalk from "chalk";
-import pkg, { Sequelize } from "sequelize";
-import Models from "../../models/models.js";
-import TestExcelService from "../../service/testExcel/TestExcelService.js";
+import pkg from "sequelize";
 import * as XLSX from "xlsx";
-const { Op } = pkg;
 import sequelize from "../../db.js";
-import { getMetersByNumberFlat } from "../../service/serviceWater/serviceWater.js";
-import HeadersWaterConfig from "../../service/headersConfig/headersWater/HeadersWaterConfig.js";
-import createHeatTemplate from "../../service/headersConfig/createHeatTemplate.js";
+import { changeArrMeter, getFlatString } from "../../helpers/index.js";
+import Models from "../../models/models.js";
 import createWaterTemplate from "../../service/headersConfig/createWaterTemplate.js";
+import HeadersWaterConfig from "../../service/headersConfig/headersWater/HeadersWaterConfig.js";
 import { getDatFile } from "../../service/serviceWater/getDatFileWater.js";
-import { getFlatString, changeArrMeter } from "../../helpers/index.js";
+import { getMetersByNumberFlat } from "../../service/serviceWater/serviceWater.js";
+import TestExcelService from "../../service/testExcel/TestExcelService.js";
+const { Op } = pkg;
 
 class TestWaterMeterController {
     async addNewMeter(req, res) {
@@ -320,10 +318,10 @@ class TestWaterMeterController {
     async addAllMetersInObject(req, res) {
         try {
             const { objectBuildId, userId, checkSelected } = req.query;
-            console.log(checkSelected);
+
             const { jsonData } = req.body;
             const data = JSON.parse(jsonData);
-            console.log(data);
+
             // Создадим массив с повторяющимися счётчиками
             const repeatMeters = [];
             // Создаём транзакцию с помощью Sequelize
@@ -553,7 +551,6 @@ class TestWaterMeterController {
     // Получение dat текста
     async getDatText(req, res) {
         try {
-            console.log("first");
             const { id: objectBuildId } = req.params;
             const { section, numberKdl } = req.query;
 
@@ -666,11 +663,9 @@ class TestWaterMeterController {
     // Обновление данных в базе данных
     async updateDataBase(req, res) {
         try {
-            console.log("====>  update");
             const { jsonData } = req.body;
-            console.log(jsonData);
+
             const data = JSON.parse(jsonData);
-            console.log(data);
 
             for (const meter of data) {
                 await Models.MainAddMeter.update(meter, {
@@ -690,7 +685,7 @@ class TestWaterMeterController {
     async getTableForOffline(req, res) {
         try {
             const { id: objectBuildId } = req.params;
-            console.log(objectBuildId);
+
             const table = await Models.MainAddMeter.findAll({
                 where: {
                     objectBuildId,

@@ -1,38 +1,37 @@
-import { useEffect, useState } from "react";
-import { Button, Card, Container, Form, Row, Spinner } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import { authApi } from "../shared/api";
-import { useAppSelector } from "../shared/hooks";
+import React, {useState} from 'react';
+import {Card, Container, Form, Row, Button} from "react-bootstrap";
+import {useDispatch, useSelector} from "react-redux";
+import {setUser, setIsAuth, loginIn} from "../features/user/userSlice";
+import {useNavigate} from "react-router-dom";
+
 
 const Auth = () => {
-    const navigate = useNavigate();
-    const { isAuth, isLoading: isLoadingUser } = useAppSelector(
-        (state) => state.user
-    );
-    const { isSuccess: isSuccessCheck, isLoading: isLoadingCheck } =
-        authApi.useCheckQuery();
-    const [handleLogin, { isSuccess, isLoading }] = authApi.useLoginMutation();
-    const [login, setLogin] = useState("");
-    const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const [login, setLogin] = useState('')
+    const [password, setPassword] = useState('')
 
-    if (isLoadingCheck || isLoading || isLoadingUser) {
-        <Spinner />;
-    }
-    useEffect(() => {
-        if (isSuccess) {
-            navigate("/");
-        }
-    }, [isSuccess]);
-    console.log(isSuccess);
+    const users = useSelector((state) => state.users)
+
+
     const checkAndRedirect = async () => {
         try {
-            await handleLogin({ login, password });
+            let data = await dispatch(loginIn({login, password}))
 
-            return navigate("/");
+            if (data.payload != undefined) {
+                const {login, role, id } = data.payload
+                dispatch(setUser({ login, role, id }))
+                dispatch(setIsAuth(true))
+                return navigate("/")
+            } else {
+                console.log("Error_111")
+            }
         } catch (e) {
-            console.log(e);
+            console.log(e)
         }
-    };
+    }
+
+
 
     return (
         <Container
@@ -57,10 +56,10 @@ const Auth = () => {
                     />
                     <Row className="d-flex justify-content-between">
                         <Button
-                            onClick={checkAndRedirect}
-                            className="mt-3 pointer-event"
-                            variant={"outline-success"}
-                        >
+                            onClick={
+                                () => checkAndRedirect()
+                            }
+                            className="mt-3 pointer-event" variant={"outline-success"}>
                             Войти
                         </Button>
                     </Row>

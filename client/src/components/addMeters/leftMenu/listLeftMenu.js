@@ -11,101 +11,78 @@ export const leftMenuItem = [
     //     variant: "light",
     //     title: "Настройки",
     // },
-
     {
-        toItem: `water`,
+        toItem: `temporaryPage`,
         action: true,
         variant: "light",
-        title: "Водоснабжение",
+        title: "Добавить воду (Test)",
     },
 
     {
-        toItem: "heat",
+        toItem: "addHeatTest",
         action: true,
         variant: "light",
-        title: "Теплоснабжение",
+        title: "Добавить счётчики тепла (Test)",
     },
     {
-        toItem: "electrics",
+        toItem: "addElectricalTest",
         action: true,
         variant: "light",
-        title: "Электроэнергия",
+        title: "Добавить счётчики электроэнергии (Test)",
     },
     {
-        toItem: "formTagsWater",
+        toItem: "allKdlInObject",
         action: true,
         variant: "light",
-        title: "Сформ. бирки",
+        title: "Все КДЛ объекта",
     },
+    {
+        toItem: "formHouse",
+        action: true,
+        variant: "light",
+        title: "Сформировать дом",
+    },
+    {
+        toItem: `settingsUp`,
+        action: true,
+        variant: "light",
+        title: "Наладка",
+    },
+
     // {
-    //     toItem: "allKdlInObject",
+    //     toItem: "addCoolMeterBolid",
     //     action: true,
     //     variant: "light",
-    //     title: "Все КДЛ объекта",
+    //     title: "Добавить ХВС - Болид",
     // },
     // {
-    //     toItem: "formHouse",
+    //     toItem: "addHotMeterBolid",
     //     action: true,
     //     variant: "light",
-    //     title: "Сформировать дом",
+    //     title: "Добавить ГВС - Болид",
     // },
     // {
-    //     toItem: `settingsUp`,
+    //     toItem: "addMeterCoolHotBolid",
     //     action: true,
     //     variant: "light",
-    //     title: "Наладка",
+    //     title: "Добавить ХГВС - Болид",
+    // },
+    // {
+    //     toItem: "addCoolMeterPulsar",
+    //     action: true,
+    //     variant: "light",
+    //     title: "Добавить ХВС - Пульсар",
+    // },
+    // {
+    //     toItem: "addHotMeterPulsar",
+    //     action: true,
+    //     variant: "light",
+    //     title: "Добавить ГВС - Пульсар",
+    // },
+    // {
+    //     toItem: "addMeterPulsar",
+    //     action: true,
+    //     variant: "light",
+    //     title: "Добавить ХГВС - Пульсар",
     // },
 ];
-
-// export const leftMenuItem = [
-//     // {
-//     //     toItem: "description",
-//     //     action: true,
-//     //     variant: "light",
-//     //     title: "Описание",
-//     // },
-//     // {
-//     //     toItem: "settings",
-//     //     action: true,
-//     //     variant: "light",
-//     //     title: "Настройки",
-//     // },
-//     {
-//         toItem: `water`,
-//         action: true,
-//         variant: "light",
-//         title: "Водоснабжение",
-//     },
-
-//     {
-//         toItem: "addHeatTest",
-//         action: true,
-//         variant: "light",
-//         title: "Добавить счётчики тепла (Test)",
-//     },
-//     {
-//         toItem: "addElectricalTest",
-//         action: true,
-//         variant: "light",
-//         title: "Добавить счётчики электроэнергии (Test)",
-//     },
-//     {
-//         toItem: "allKdlInObject",
-//         action: true,
-//         variant: "light",
-//         title: "Все КДЛ объекта",
-//     },
-//     {
-//         toItem: "formHouse",
-//         action: true,
-//         variant: "light",
-//         title: "Сформировать дом",
-//     },
-//     {
-//         toItem: `settingsUp`,
-//         action: true,
-//         variant: "light",
-//         title: "Наладка",
-//     },
-
-// ];

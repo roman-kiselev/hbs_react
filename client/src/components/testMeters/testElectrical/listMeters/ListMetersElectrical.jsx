@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -8,13 +9,13 @@ import {
     setCurrentPage,
 } from "../../../../features/testMeters/testElectricalMeterSlice";
 import { deleteElectricalMeter } from "../../../../http/electricalMeterApi";
-import { useAppSelector } from "../../../../shared/hooks";
+import { deleteHeatMeter } from "../../../../http/heatMeterApi";
 import ListMeters from "../../../repeat/listMetersCard/ListMeters";
 import Pages from "../../../repeat/pagination/Pages";
 
 const ListMetersElectrical = ({ id: objectBuildId }) => {
     const dispatch = useDispatch();
-    const { id: userId } = useAppSelector((state) => state.user.user);
+    const { id: userId } = useSelector((state) => state.users.user);
     const cardMeter = useSelector((state) => state.electricalMeter.mainTable);
     const [searchValue, setSearchValue] = useState("");
     const { currentPage, limit, perPage, totalCount } = useSelector(

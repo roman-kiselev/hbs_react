@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { Col, Nav, Row, Tab } from "react-bootstrap";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as XLSX from "xlsx";
 import { getAllHeatMeter } from "../../../../features/testMeters/testHeatMeterSlice";
 import {
     addDataExcelHeat,
     getAllMetersHeat,
 } from "../../../../http/heatMeterApi";
-import { useAppSelector } from "../../../../shared/hooks";
 import MainTabDownloadList from "./downloadList/MainTabDownloadList";
 import MainTabGenerateTemplate from "./generateTemplate/MainTabGenerateTemplate";
 import MainTabReadFile from "./readFile/MainTabReadFile";
@@ -25,7 +24,7 @@ const OperationsHeat = ({ id: objectBuildId }) => {
         }
     };
     // Формируем query для запроса
-    const { id: userId } = useAppSelector((state) => state.user.user);
+    const { id: userId } = useSelector((state) => state.users.user);
     const [data, setData] = useState([]);
     const formQuery = {
         userId,
@@ -50,7 +49,6 @@ const OperationsHeat = ({ id: objectBuildId }) => {
             const body = JSON.stringify(worksheetData);
             const lengthWorksheet = worksheetData.length + 1;
 
-            console.log(lengthWorksheet, body);
             const mainData = [];
             for (let i = 2; i < lengthWorksheet; i++) {
                 const section = worksheet["A" + i].v;
@@ -74,12 +72,6 @@ const OperationsHeat = ({ id: objectBuildId }) => {
             addDataExcelHeat(objectBuildId, userId, dataJson).then((res) => {
                 dispatch(getAllHeatMeter({ formQuery }));
             });
-
-            // addDataExcel(objectBuildId, userId, dataJson).then((res) => {
-            //     dispatch(getAllElectricalMeters({ formQuery }));
-            //     // В res лежат счётчики с повторным номером и ответ
-            //     console.log(res);
-            // });
         };
         reader.readAsBinaryString(file);
     };

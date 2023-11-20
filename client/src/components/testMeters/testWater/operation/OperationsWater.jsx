@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Col, Nav, Row, Tab } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+
+import { useDispatch, useSelector } from "react-redux";
 import * as XLSX from "xlsx";
 import { getAllMetersByUserAndObject } from "../../../../features/testMeters/testWaterMeterSlice";
 import {
@@ -8,7 +9,6 @@ import {
     getAllWaterMeter,
     getAllWaterMeterPulsar,
 } from "../../../../http/waterMeterApi";
-import { useAppSelector } from "../../../../shared/hooks";
 import MainTabDownloadListWater from "./downloadList/MainTabDownloadListWater";
 import MainTabGenerateTemplateWater from "./generateTemplate/MainTabGenerateTemplateWater";
 import MainTabReadFileWater from "./readFile/MainTabReadFileWater";
@@ -33,7 +33,7 @@ const OperationsWater = ({ id: objectBuildId }) => {
         }
     };
     // Формируем query для запроса
-    const { id: userId } = useAppSelector((state) => state.user.user);
+    const { id: userId } = useSelector((state) => state.users.user);
     const [data, setData] = useState([]);
     const formQuery = {
         userId,
@@ -88,11 +88,6 @@ const OperationsWater = ({ id: objectBuildId }) => {
                     dispatch(getAllMetersByUserAndObject({ formQuery }));
                 }
             );
-            // addDataExcel(objectBuildId, userId, dataJson).then((res) => {
-            //     dispatch(getAllElectricalMeters({ formQuery }));
-            //     // В res лежат счётчики с повторным номером и ответ
-            //     console.log(res);
-            // });
         };
         reader.readAsBinaryString(file);
     };

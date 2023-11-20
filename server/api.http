@@ -1,4 +1,4 @@
-@hostJob = http://192.168.3.16:7000
+@hostJob = http://192.168.3.19:7777
 @hostHome = http://192.168.1.14:3333/api
 
 @host = {{hostHome}}

@@ -2,11 +2,11 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { BsPlusCircleFill } from "react-icons/bs";
+import { useSelector } from "react-redux";
 import {
     getAllMetersForOffline,
     sendAllMetersForOffline,
 } from "../../../../http/heatMeterApi";
-import { useAppSelector } from "../../../../shared/hooks";
 import CardCreateMeter from "../../../repeat/modals/CardCreateMeter";
 import dbHeat from "../db/dbHeat";
 import { addAllDataInDb } from "../db/service/addAllDataInDb";
@@ -104,7 +104,7 @@ const FormOfflineHeat = ({ id }) => {
     };
 
     // Модальное окно для добавления счётчика
-    const { id: userId } = useAppSelector((state) => state.user.user);
+    const { id: userId } = useSelector((state) => state.users.user);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -137,7 +137,6 @@ const FormOfflineHeat = ({ id }) => {
     };
 
     const handleUpdateMeter = (data, handleClose) => {
-        console.log(data.id, data);
         editRecordById(data.id, data);
         handleClose();
     };

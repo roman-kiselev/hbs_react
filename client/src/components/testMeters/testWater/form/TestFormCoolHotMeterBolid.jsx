@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { getAllChannel } from "../../../../features/devices/DeviceSlice";
 import {
     createTestMeter,
     getAllMetersByUserAndObject,
 } from "../../../../features/testMeters/testWaterMeterSlice";
-import { useAppSelector } from "../../../../shared/hooks";
 import TestAlertAddMeters from "../../../addMeters/bolid/alerts/TestAlertAddMeters";
 import useNumber from "../../../hooks/useNumber";
 import InputNumber from "../../../repeat/inputs/inputsNumber/InputNumber";
@@ -72,7 +72,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
         }
     };
     // Достаём id пользователя
-    const { id: userId } = useAppSelector((state) => state.user.user);
+    const { id: userId } = useSelector((state) => state.users.user);
     // Достаём добавленные счётчики
     const { lastMeters } = useSelector((state) => state.mainTable);
 
@@ -113,6 +113,12 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
             setAlertAdd(true);
             // Уведомление о добавлении
             setTimeout(setNewAlert, 2000);
+            dispatch(
+                getAllChannel({
+                    objectId: id,
+                    numberKdl: kdl,
+                })
+            );
         });
     };
 

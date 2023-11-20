@@ -1,10 +1,9 @@
-import Models from "../../models/models.js";
+import pkg, { Sequelize } from "sequelize";
 import XLSX from "xlsx";
 import sequelize from "../../db.js";
-import { Sequelize } from "sequelize";
-import pkg from "sequelize";
-import HeadersElectricalConfig from "../../service/headersConfig/headersElectrical/HeadersElectricalConfig.js";
+import Models from "../../models/models.js";
 import createHeatTemplate from "../../service/headersConfig/createHeatTemplate.js";
+import HeadersElectricalConfig from "../../service/headersConfig/headersElectrical/HeadersElectricalConfig.js";
 import { getElectricalMetersByNumberFlat } from "../../service/serviceElectrical/serviceElectrical.js";
 const { Op } = pkg;
 
@@ -49,7 +48,7 @@ class TestElectricalMeterController {
             page = Number(page) || 1;
             limit = Number(limit) || 6;
             let offset = page * limit - limit;
-            console.log(limit, page, offset);
+            
             let typeMeter = "Счётчик электроэнергии";
 
             const meters = await Models.MainAddMeter.findAndCountAll({
@@ -166,7 +165,7 @@ class TestElectricalMeterController {
     async addAllMetersInObject(req, res) {
         try {
             const { objectBuildId, userId } = req.query;
-            console.log(objectBuildId, userId);
+            
             const { jsonData } = req.body;
             const data = JSON.parse(jsonData);
 
