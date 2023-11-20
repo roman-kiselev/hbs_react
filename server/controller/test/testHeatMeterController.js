@@ -1,9 +1,8 @@
 // Контроллер для списка счётчиков тепла
-import Models from "../../models/models.js";
+import pkg, { Sequelize } from "sequelize";
 import XLSX from "xlsx";
 import sequelize from "../../db.js";
-import { Sequelize } from "sequelize";
-import pkg from "sequelize";
+import Models from "../../models/models.js";
 import createHeatTemplate from "../../service/headersConfig/createHeatTemplate.js";
 import HeadersHeatConfig from "../../service/headersConfig/headersHeat/HeadersHeatConfig.js";
 import { getHeatMetersByNumberFlat } from "../../service/serviceHeat/serviceHeat.js";
@@ -193,7 +192,7 @@ class TestHeatMeterController {
                                     numberMeter: d.numberMeter,
                                     sumMeter: d.sumMeter,
                                     objectBuildId,
-                                    userId,
+                                    // userId,
                                     typeMeter: "Счётчик тепла",
                                 },
                                 { transaction: t }
