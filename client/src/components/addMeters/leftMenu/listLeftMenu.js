@@ -15,39 +15,39 @@ export const leftMenuItem = [
         toItem: `temporaryPage`,
         action: true,
         variant: "light",
-        title: "Добавить воду (Test)",
+        title: "Добавить воду",
     },
 
     {
         toItem: "addHeatTest",
         action: true,
         variant: "light",
-        title: "Добавить счётчики тепла (Test)",
+        title: "Добавить счётчики тепла",
     },
     {
         toItem: "addElectricalTest",
         action: true,
         variant: "light",
-        title: "Добавить счётчики электроэнергии (Test)",
+        title: "Добавить счётчики электроэнергии",
     },
-    {
-        toItem: "allKdlInObject",
-        action: true,
-        variant: "light",
-        title: "Все КДЛ объекта",
-    },
-    {
-        toItem: "formHouse",
-        action: true,
-        variant: "light",
-        title: "Сформировать дом",
-    },
-    {
-        toItem: `settingsUp`,
-        action: true,
-        variant: "light",
-        title: "Наладка",
-    },
+    // {
+    //     toItem: "allKdlInObject",
+    //     action: true,
+    //     variant: "light",
+    //     title: "Все КДЛ объекта",
+    // },
+    // {
+    //     toItem: "formHouse",
+    //     action: true,
+    //     variant: "light",
+    //     title: "Сформировать дом",
+    // },
+    // {
+    //     toItem: `settingsUp`,
+    //     action: true,
+    //     variant: "light",
+    //     title: "Наладка",
+    // },
 
     // {
     //     toItem: "addCoolMeterBolid",
