@@ -48,13 +48,13 @@ class TestElectricalMeterController {
             page = Number(page) || 1;
             limit = Number(limit) || 6;
             let offset = page * limit - limit;
-            
+
             let typeMeter = "Счётчик электроэнергии";
 
             const meters = await Models.MainAddMeter.findAndCountAll({
                 where: {
                     objectBuildId,
-                    userId,
+                    // userId,
                     typeMeter,
                 },
                 limit,
@@ -165,7 +165,7 @@ class TestElectricalMeterController {
     async addAllMetersInObject(req, res) {
         try {
             const { objectBuildId, userId } = req.query;
-            
+
             const { jsonData } = req.body;
             const data = JSON.parse(jsonData);
 

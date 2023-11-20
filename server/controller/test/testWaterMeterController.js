@@ -82,7 +82,7 @@ class TestWaterMeterController {
             const listMeters = await Models.MainAddMeter.findAndCountAll({
                 where: {
                     objectBuildId: objectId,
-                    userId: userId === 0 ? {} : userId,
+                    // userId: userId === 0 ? {} : userId,
                     [Op.or]: [
                         { typeMeter: typeMeterCool },
                         { typeMeter: typeMeterHot },
