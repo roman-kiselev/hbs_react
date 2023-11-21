@@ -10,5 +10,4 @@ client_type/.env
 client/.env
 server/.env
 server/static
-server/db.js
 .vscode
