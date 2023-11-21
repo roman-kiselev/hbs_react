@@ -1,5 +1,13 @@
+import { Route, Routes } from "react-router-dom";
+import MainHeatPage from "./MainHeatPage";
+
 const HeatRouter = () => {
-    return <div>HeatRouter</div>;
+    return (
+        <Routes>
+            <Route index element={<MainHeatPage />} />
+            <Route path="addHeat/*" element={<p>Вода</p>} />
+        </Routes>
+    );
 };
 
 export default HeatRouter;

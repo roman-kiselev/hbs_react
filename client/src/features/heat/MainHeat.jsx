@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button, Col, Modal, Row, Tab, Tabs } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import TestFormHeatMeter from "../form/TestFormHeatMeter";
-import FormOfflineHeat from "../formEditOffline/FormOfflineHeat";
-import ListMeterHeat from "../listMeter/ListMeterHeat";
-import OperationsHeat from "../operations/OperationsHeat";
+import TestFormHeatMeter from "../../components/testMeters/testHeat/form/TestFormHeatMeter";
+import FormOfflineHeat from "../../components/testMeters/testHeat/formEditOffline/FormOfflineHeat";
+import ListMeterHeat from "../../components/testMeters/testHeat/listMeter/ListMeterHeat";
+import OperationsHeat from "../../components/testMeters/testHeat/operations/OperationsHeat";
 
-const TestMainHeatPage = () => {
+const MainHeat = () => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -74,4 +74,4 @@ const TestMainHeatPage = () => {
     );
 };
 
-export default TestMainHeatPage;
+export default MainHeat;

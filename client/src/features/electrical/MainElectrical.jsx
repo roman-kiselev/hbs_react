@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button, Col, Modal, Row, Tab, Tabs } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import TestFormElectricalMeter from "../form/TestFormElectricalMeter";
-import ListMetersElectrical from "../listMeters/ListMetersElectrical";
-import OperationsElectrical from "../operations/OperationsElectrical";
+import TestFormElectricalMeter from "../../components/testMeters/testElectrical/form/TestFormElectricalMeter";
+import ListMetersElectrical from "../../components/testMeters/testElectrical/listMeters/ListMetersElectrical";
+import OperationsElectrical from "../../components/testMeters/testElectrical/operations/OperationsElectrical";
 
-const TestMainElectricalPage = () => {
+const MainElectrical = () => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -71,4 +71,4 @@ const TestMainElectricalPage = () => {
     );
 };
 
-export default TestMainElectricalPage;
+export default MainElectrical;
