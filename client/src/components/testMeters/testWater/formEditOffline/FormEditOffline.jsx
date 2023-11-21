@@ -1,21 +1,14 @@
-import React, { useEffect } from "react";
-import { Button, Col, Container, Row, Table } from "react-bootstrap";
-import {
-    getMeters,
-    getTable,
-    updateBulk,
-} from "../../../../http/waterMeterApi";
-import { addAllDataInDb } from "../db/service/addAllDataInDb";
-import ModalSettings from "./modal/ModalSettings";
-import db from "../db/db";
-import MainTable from "./table/MainTable";
-import getUniqueKdl from "../db/service/getUniqueKdl";
-import { useState } from "react";
-import getRowsByNumberKdl from "../db/service/getRowsByNumberKdl";
-import useLiveQuery from "dexie-react-hooks";
-import getAllTable from "../db/service/getAllTable";
-import { delDbAndClose } from "../db/service/delDb";
+import { useEffect, useState } from "react";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { AiOutlineCheckCircle } from "react-icons/ai";
+import { getTable, updateBulk } from "../../../../http/waterMeterApi";
+import { addAllDataInDb } from "../db/service/addAllDataInDb";
+import { delDbAndClose } from "../db/service/delDb";
+import getAllTable from "../db/service/getAllTable";
+import getRowsByNumberKdl from "../db/service/getRowsByNumberKdl";
+import getUniqueKdl from "../db/service/getUniqueKdl";
+import ModalSettings from "./modal/ModalSettings";
+import MainTable from "./table/MainTable";
 
 // Добавляем все счётчики из БД
 const getWaterMeters = async (idObject, dataOld, setState) => {

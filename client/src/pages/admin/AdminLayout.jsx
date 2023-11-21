@@ -1,7 +1,6 @@
-import React from 'react';
-import MyNavBar from "../../components/MyNavBar";
-import {Container} from "react-bootstrap";
-import {Outlet} from "react-router-dom";
+import { Container } from "react-bootstrap";
+import { Outlet } from "react-router-dom";
+import MyNavBar from "../../shared/ui/layout/MyNavBar";
 
 const AdminLayout = () => {
     return (

@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllChannel } from "../../../../features/devices/DeviceSlice";
+import useNumber from "../../../../shared/hooks/useNumber";
+import { getAllChannel } from "../../../../shared/models/devices/DeviceSlice";
 import {
     createTestMeter,
     getAllMetersByUserAndObject,
-} from "../../../../features/testMeters/testWaterMeterSlice";
+} from "../../../../shared/models/testMeterWater/testWaterMeterSlice";
+import InputNumber from "../../../../shared/ui/inputs/inputsNumber/InputNumber";
+import InputNumberFloating from "../../../../shared/ui/inputs/inputsNumber/InputNumberFloating";
+import InputNumberSelected from "../../../../shared/ui/inputs/inputsNumber/InputNumberSelected";
 import TestAlertAddMeters from "../../../addMeters/bolid/alerts/TestAlertAddMeters";
-import useNumber from "../../../hooks/useNumber";
-import InputNumber from "../../../repeat/inputs/inputsNumber/InputNumber";
-import InputNumberFloating from "../../../repeat/inputs/inputsNumber/InputNumberFloating";
-import InputNumberSelected from "../../../repeat/inputs/inputsNumber/InputNumberSelected";
 
 const TestFormCoolHotMeterBolid = ({ id }) => {
     const dispatch = useDispatch();

@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import ListMeters from "../../../repeat/listMetersCard/ListMeters";
-import Pages from "../../../repeat/pagination/Pages";
+import { deleteHeatMeter } from "../../../../http/heatMeterApi";
 import {
     getAllHeatMeter,
     getMetersByNumberFlat,
     getOneHeatMeter,
-} from "../../../../features/testMeters/testHeatMeterSlice";
-import { setCurrentPage } from "../../../../features/testMeters/testHeatMeterSlice";
-import { deleteHeatMeter } from "../../../../http/heatMeterApi";
+    setCurrentPage,
+} from "../../../../shared/models/testMeterHeat/testHeatMeterSlice";
+import ListMeters from "../../../../shared/ui/cards/ListMeters";
+import Pages from "../../../../shared/ui/pagination/Pages";
 
 const ListMeterHeat = ({ id: objectBuildId }) => {
     const dispatch = useDispatch();

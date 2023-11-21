@@ -7,7 +7,7 @@ import {
     getAllMetersForOffline,
     sendAllMetersForOffline,
 } from "../../../../http/heatMeterApi";
-import CardCreateMeter from "../../../repeat/modals/CardCreateMeter";
+import CardCreateMeter from "../../../../shared/ui/modals/CardCreateMeter";
 import dbHeat from "../db/dbHeat";
 import { addAllDataInDb } from "../db/service/addAllDataInDb";
 import addMeter from "../db/service/addMeters";

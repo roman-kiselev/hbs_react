@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import { store } from "./store/store";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
-import { QueryClient, QueryClientProvider, useQueryClient } from "react-query";
+import App from "./app/App";
+import { store } from "./app/store/store";
 
 const queryClient = new QueryClient();
 

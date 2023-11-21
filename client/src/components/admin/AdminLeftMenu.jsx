@@ -1,8 +1,7 @@
-import React from "react";
 import { ListGroup, Offcanvas, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { setShow } from "../../features/admin/leftMenuSlice.js";
+import { setShow } from "../../shared/models/admin/leftMenuSlice.js";
 import { leftMenuConfig } from "./leftMenuConfig";
 
 const AdminLeftMenu = ({ show, handleClose }) => {

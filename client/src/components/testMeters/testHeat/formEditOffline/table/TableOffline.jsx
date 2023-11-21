@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button, Table } from "react-bootstrap";
-import CardMeterEditModalOffline from "../../../../repeat/modals/CardMeterEditModalOffline";
+import CardMeterEditModalOffline from "../../../../../shared/ui/modals/CardMeterEditModalOffline";
 import editRecordById from "../../db/service/editRecordById";
 
 const TableOffline = ({ data, handleUpdateMeter }) => {

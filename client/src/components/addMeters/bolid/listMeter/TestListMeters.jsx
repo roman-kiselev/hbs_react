@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
-import TestCardMeter from "./TestCardMeter";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllMetersByUserAndObject } from "../../../../features/testMeters/testWaterMeterSlice";
-import Pages from "../../../repeat/pagination/Pages";
+import { getAllMetersByUserAndObject } from "../../../../shared/models/testMeterWater/testWaterMeterSlice";
+import Pages from "../../../../shared/ui/pagination/Pages";
+import TestCardMeter from "./TestCardMeter";
 
 const TestListMeters = ({ id: objectId }) => {
     const dispatch = useDispatch();

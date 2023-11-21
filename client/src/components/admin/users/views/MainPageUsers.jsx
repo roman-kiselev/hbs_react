@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Button, Col, Modal, Row, Table } from "react-bootstrap";
-import { getAllRoles, getAllUsers } from "../../../../http/userApi";
+import { useState } from "react";
+import { Button, Col, Row, Table } from "react-bootstrap";
 import { useQuery } from "react-query";
-import ModalUser from "../modals/ModalUser";
+import { getAllRoles, getAllUsers } from "../../../../http/userApi";
 import ModalRole from "../modals/ModalRole";
+import ModalUser from "../modals/ModalUser";
 
 const MainPageUsers = () => {
     const [users, setUsers] = useState([]);

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { Form, Row, Col, Button } from "react-bootstrap";
-import InputNumber from "../../../repeat/inputs/inputsNumber/InputNumber";
-import InputNumberFloating from "../../../repeat/inputs/inputsNumber/InputNumberFloating";
-import useNumber from "../../../hooks/useNumber";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import AlertMeters from "../../../repeat/alert/AlertMeters";
+import useNumber from "../../../../shared/hooks/useNumber";
 import {
     createTestElectricalMeter,
     getAllElectricalMeters,
-} from "../../../../features/testMeters/testElectricalMeterSlice";
-import InputNumberSelected from "../../../repeat/inputs/inputsNumber/InputNumberSelected";
+} from "../../../../shared/models/testMeterElectrical/testElectricalMeterSlice";
+import AlertMeters from "../../../../shared/ui/alert/AlertMeters";
+import InputNumber from "../../../../shared/ui/inputs/inputsNumber/InputNumber";
+import InputNumberFloating from "../../../../shared/ui/inputs/inputsNumber/InputNumberFloating";
+import InputNumberSelected from "../../../../shared/ui/inputs/inputsNumber/InputNumberSelected";
 
 const TestFormElectricalMeter = ({ id: objectBuildId }) => {
     const dispatch = useDispatch();

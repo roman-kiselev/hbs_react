@@ -1,12 +1,7 @@
-import React, {useState} from 'react'
-import {  Row, Button, Col, Card } from "react-bootstrap"
-import AddObject from "../modals/AddObject";
-import {useSelector} from "react-redux";
-import OneObject from "../components/objects/OneObject";
-import ListObjects from "../components/objects/ListObjects";
-
-
-
+import { useState } from "react";
+import { Button, Col, Row } from "react-bootstrap";
+import ListObjects from "../entities/objects/ListObjects";
+import AddObject from "../shared/ui/modals/AddObject";
 
 const HomePage = () => {
     const [show, setShow] = useState(false);
@@ -14,23 +9,27 @@ const HomePage = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-  return (
-    <Row className="m-5">
-        <Row className="mt-3 justify-content-center">
-            <Col className="col-4 text-center">
-                <Button className="btn" onClick={() => handleShow()} variant="primary">Добавить объект</Button>
-            </Col>
+    return (
+        <Row className="m-5">
+            <Row className="mt-3 justify-content-center">
+                <Col className="col-4 text-center">
+                    <Button
+                        className="btn"
+                        onClick={() => handleShow()}
+                        variant="primary"
+                    >
+                        Добавить объект
+                    </Button>
+                </Col>
+            </Row>
+
+            <Row>
+                <AddObject show={show} onHide={() => handleClose()} />
+            </Row>
+
+            <ListObjects />
         </Row>
-
-        <Row>
-            <AddObject  show={show} onHide={() => handleClose()}/>
-        </Row>
-
-        <ListObjects />
-
-    </Row>
-
-  )
-}
+    );
+};
 
 export default HomePage;

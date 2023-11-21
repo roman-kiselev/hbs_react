@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Button, Modal, Row, Table } from "react-bootstrap";
-import CardMeterEditModalOffline from "../../../../repeat/modals/CardMeterEditModalOffline";
+import { useEffect, useState } from "react";
+import { Button, Table } from "react-bootstrap";
+import CardMeterEditModalOffline from "../../../../../shared/ui/modals/CardMeterEditModalOffline";
 import editRecordById from "../../db/service/editRecordById";
 
 const editRecord = async (id, data) => {

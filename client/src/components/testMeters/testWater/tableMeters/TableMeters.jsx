@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Col, Form, Row, Table } from "react-bootstrap";
 import { AiFillDelete } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
+import { deleteWaterMeter } from "../../../../http/waterMeterApi";
 import {
     getAllChannel,
     getAllKdl,
-} from "../../../../features/devices/DeviceSlice";
+} from "../../../../shared/models/devices/DeviceSlice";
 import {
     getAllMetersByUserAndObject,
     getOneMeter,
-} from "../../../../features/testMeters/testWaterMeterSlice";
-import { deleteWaterMeter } from "../../../../http/waterMeterApi";
-import CardMeterEditModal from "../../../repeat/modals/CardMeterEditModal";
+} from "../../../../shared/models/testMeterWater/testWaterMeterSlice";
+import CardMeterEditModal from "../../../../shared/ui/modals/CardMeterEditModal";
 
 const TableMeters = ({ id: objectBuildId }) => {
     const dispatch = useDispatch();

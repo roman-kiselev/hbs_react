@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, Col, Container, ListGroup, Row, Table } from "react-bootstrap";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { useDispatch, useSelector } from "react-redux";
-import { setActive } from "../../../features/formHouse/formHouseSlice";
+import { setActive } from "../../../shared/models/formHouse/formHouseSlice";
 import ConfigHouse from "../config/ConfigHouse";
 import Kdl from "../config/Kdl.js";
 import Sections from "../config/Sections";

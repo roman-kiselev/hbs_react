@@ -3,12 +3,12 @@ import { Col, Nav, Row, Tab } from "react-bootstrap";
 
 import { useDispatch, useSelector } from "react-redux";
 import * as XLSX from "xlsx";
-import { getAllMetersByUserAndObject } from "../../../../features/testMeters/testWaterMeterSlice";
 import {
     addDataExcelWater,
     getAllWaterMeter,
     getAllWaterMeterPulsar,
 } from "../../../../http/waterMeterApi";
+import { getAllMetersByUserAndObject } from "../../../../shared/models/testMeterWater/testWaterMeterSlice";
 import MainTabDownloadListWater from "./downloadList/MainTabDownloadListWater";
 import MainTabGenerateTemplateWater from "./generateTemplate/MainTabGenerateTemplateWater";
 import MainTabReadFileWater from "./readFile/MainTabReadFileWater";

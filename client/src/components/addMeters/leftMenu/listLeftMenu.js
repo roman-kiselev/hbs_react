@@ -12,20 +12,23 @@ export const leftMenuItem = [
     //     title: "Настройки",
     // },
     {
-        toItem: `temporaryPage`,
+        // toItem: `temporaryPage`,
+        toItem: `water`,
         action: true,
         variant: "light",
         title: "Добавить воду",
     },
 
     {
-        toItem: "addHeatTest",
+        // toItem: "addHeatTest",
+        toItem: "heat",
         action: true,
         variant: "light",
         title: "Добавить счётчики тепла",
     },
     {
-        toItem: "addElectricalTest",
+        // toItem: "addElectricalTest",
+        toItem: "electrical",
         action: true,
         variant: "light",
         title: "Добавить счётчики электроэнергии",

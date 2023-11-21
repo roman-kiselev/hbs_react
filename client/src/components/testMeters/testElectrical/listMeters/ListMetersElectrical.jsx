@@ -1,17 +1,15 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { deleteElectricalMeter } from "../../../../http/electricalMeterApi";
 import {
     getAllElectricalMeters,
     getMetersByNumberFlat,
     getOneElectricalMeter,
     setCurrentPage,
-} from "../../../../features/testMeters/testElectricalMeterSlice";
-import { deleteElectricalMeter } from "../../../../http/electricalMeterApi";
-import { deleteHeatMeter } from "../../../../http/heatMeterApi";
-import ListMeters from "../../../repeat/listMetersCard/ListMeters";
-import Pages from "../../../repeat/pagination/Pages";
+} from "../../../../shared/models/testMeterElectrical/testElectricalMeterSlice";
+import ListMeters from "../../../../shared/ui/cards/ListMeters";
+import Pages from "../../../../shared/ui/pagination/Pages";
 
 const ListMetersElectrical = ({ id: objectBuildId }) => {
     const dispatch = useDispatch();

@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { Row, Col, Form, Button } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { deleteWaterMeter } from "../../../../http/waterMeterApi";
 import {
     getAllMetersByUserAndObject,
     getMetersByNumberFlat,
     getOneMeter,
-} from "../../../../features/testMeters/testWaterMeterSlice";
-import ListMeters from "../../../repeat/listMetersCard/ListMeters";
-import Pages from "../../../repeat/pagination/Pages";
-import { useQuery } from "react-query";
-import { setCurrentPage } from "../../../../features/testMeters/testWaterMeterSlice";
-import { deleteWaterMeter } from "../../../../http/waterMeterApi";
+    setCurrentPage,
+} from "../../../../shared/models/testMeterWater/testWaterMeterSlice";
+import ListMeters from "../../../../shared/ui/cards/ListMeters";
+import Pages from "../../../../shared/ui/pagination/Pages";
 
 const ListMeterWater = ({ id: objectBuildId }) => {
     const dispatch = useDispatch();

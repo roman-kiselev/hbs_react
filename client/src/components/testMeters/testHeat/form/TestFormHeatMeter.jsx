@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import useNumber from "../../../../shared/hooks/useNumber";
 import {
     createTestHeatMeter,
     getAllHeatMeter,
-} from "../../../../features/testMeters/testHeatMeterSlice";
+} from "../../../../shared/models/testMeterHeat/testHeatMeterSlice";
+import InputNumber from "../../../../shared/ui/inputs/inputsNumber/InputNumber";
+import InputNumberFloating from "../../../../shared/ui/inputs/inputsNumber/InputNumberFloating";
+import InputNumberSelected from "../../../../shared/ui/inputs/inputsNumber/InputNumberSelected";
 import TestAlertAddHeatMeters from "../../../addMeters/bolid/alerts/TestAlertAddHeatMeters";
-import useNumber from "../../../hooks/useNumber";
-import InputNumber from "../../../repeat/inputs/inputsNumber/InputNumber";
-import InputNumberFloating from "../../../repeat/inputs/inputsNumber/InputNumberFloating";
-import InputNumberSelected from "../../../repeat/inputs/inputsNumber/InputNumberSelected";
 
 const TestFormHeatMeter = ({ id: objectBuildId }) => {
     const dispatch = useDispatch();

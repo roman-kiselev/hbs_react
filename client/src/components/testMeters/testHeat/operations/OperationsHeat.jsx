@@ -3,11 +3,11 @@ import { Col, Nav, Row, Tab } from "react-bootstrap";
 
 import { useDispatch, useSelector } from "react-redux";
 import * as XLSX from "xlsx";
-import { getAllHeatMeter } from "../../../../features/testMeters/testHeatMeterSlice";
 import {
     addDataExcelHeat,
     getAllMetersHeat,
 } from "../../../../http/heatMeterApi";
+import { getAllHeatMeter } from "../../../../shared/models/testMeterHeat/testHeatMeterSlice";
 import MainTabDownloadList from "./downloadList/MainTabDownloadList";
 import MainTabGenerateTemplate from "./generateTemplate/MainTabGenerateTemplate";
 import MainTabReadFile from "./readFile/MainTabReadFile";
