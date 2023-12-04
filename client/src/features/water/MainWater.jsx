@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Button, Modal, Row, Tab, Tabs } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import TestFormCoolHotMeterBolid from "../../components/testMeters/testWater/form/TestFormCoolHotMeterBolid";
 import FormEditOffline from "../../components/testMeters/testWater/formEditOffline/FormEditOffline";
 import ListMeterWater from "../../components/testMeters/testWater/listMeters/ListMeterWater";
 import OperationsWater from "../../components/testMeters/testWater/operation/OperationsWater";
 import TableMeters from "../../components/testMeters/testWater/tableMeters/TableMeters";
+import CreateWaterMeters from "../../entities/water/createMeters/CreateWaterMeters";
 
 const MainWater = () => {
     // id объекта
@@ -59,7 +59,8 @@ const MainWater = () => {
                     <Tab eventKey="addMeter" title="Добавление">
                         <Row>
                             {/* Форма для добавления счётчиков воды */}
-                            <TestFormCoolHotMeterBolid id={id} />
+                            {/* <TestFormCoolHotMeterBolid id={id} /> */}
+                            <CreateWaterMeters />
                         </Row>
                     </Tab>
                     <Tab eventKey="list" title="Список">

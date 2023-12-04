@@ -2,7 +2,7 @@ import { Button, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useParams } from "react-router-dom";
 import MenuOneObject from "../components/addMeters/leftMenu/MenuOneObject";
-import { setShow } from "../shared/models/leftMenu/leftMenuSlice";
+import { setShow } from "../shared/models";
 
 const DescriptionObject = () => {
     let { id } = useParams();

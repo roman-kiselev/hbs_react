@@ -2,6 +2,11 @@ import express from "express";
 import TestWaterMeterController from "../../controller/test/testWaterMeterController.js";
 const router = express.Router();
 
+/**
+ * @description Получаем все аср по id пользователя и id объекта
+ * @param {тип} название - Описание параметра
+ * @returns {тип} - Описание возвращаемого значения
+ */
 router.get("/", TestWaterMeterController.getAllByIdUserAndObject);
 router.get(
     "/getAllMeters",

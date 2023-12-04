@@ -1,16 +1,15 @@
+import pkg, { Sequelize } from "sequelize";
 import sequelize from "../db.js";
-import { Sequelize } from "sequelize";
-import pkg from "sequelize";
-const { DataTypes } = pkg;
 import Brands from "./Brands.js";
-import Meters from "./Meters.js";
 import Devices from "./Devices.js";
-import Section from "./Section.js";
-import Parameters from "./Parameters.js";
-import Property from "./Property.js";
 import Flats from "./Flats.js";
 import Floors from "./Floors.js";
+import Meters from "./Meters.js";
 import Office from "./Office.js";
+import Parameters from "./Parameters.js";
+import Property from "./Property.js";
+import Section from "./Section.js";
+const { DataTypes } = pkg;
 
 class User extends Sequelize.Model {}
 User.init(

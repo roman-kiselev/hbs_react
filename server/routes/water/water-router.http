@@ -1,0 +1,37 @@
+@hostJob = http://192.168.3.2:7777/api
+@hostHome = http://192.168.1.14:3333/api
+
+@host = {{hostJob}}
+
+@login = "admin"
+@password = "admin"
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibG9naW4iOiJhZG1pbiIsInJvbGUiOlt7ImlkIjoxLCJuYW1lIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDIzLTA4LTIwVDE1OjA3OjU0LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTA4LTIwVDE1OjA3OjU0LjAwMFoiLCJ1c2Vyc19yb2xlIjp7ImlkIjoxLCJjcmVhdGVkQXQiOiIyMDIzLTA4LTIwVDE1OjIzOjUyLjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIzLTA4LTIwVDE1OjIzOjUyLjAwMFoiLCJ1c2VySWQiOjIsInJvbGVJZCI6MX19XSwiaWF0IjoxNjkyODExMDExLCJleHAiOjE2OTI4Mzk4MTF9._p37aHGXou24wSMfwxhWRMk0u8LJ_XU6Kg6dn8fKqzU
+
+
+
+
+### Получение всех счётчиков
+GET {{host}}/water/12 HTTP/1.1
+
+### Создание счётчиков
+POST {{host}}/water HTTP/1.1
+Content-type: application/json; charset=utf-8
+
+{
+    "section": "1",
+    "floors": "2",
+    "flat": "33" ,
+    "office": "0",
+    "kdl": "1",
+    "channelCool": "1",
+    "channelHot": "2",
+    "numberMeterCool": "1111",
+    "numberMeterHot": "2222",
+    "sumMeterCool": "1",
+    "sumMeterHot": "2",
+    "userId": 2,
+    "comment": "asdasdsa",
+    "objectBuildId": 12
+}
+
+###

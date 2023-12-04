@@ -1,21 +1,22 @@
 import express from "express";
 const router = express.Router();
 
-import userRouter from "./userRouter.js";
-import roleRouter from "./roleRouter.js";
-import objectsRouter from "./objects/objectsRouter.js";
+import brandRouter from "../routes/admin/brandsRouter.js";
+import kdlMainTableRouter from "../routes/devices/kdlMainTableRouter.js";
+import deviceKdlRouter from "../routes/mainTable/devices/deviceKdlRouter.js";
+import mainTableSectionRouter from "../routes/mainTable/objects/mainTableSectionRouter.js";
 import flatsRouter from "./objects/flatsRouter.js";
 import floorsRouter from "./objects/floorsRouter.js";
 import lineRoutes from "./objects/lineRoutes.js";
+import objectsRouter from "./objects/objectsRouter.js";
 import officeRouter from "./objects/officeRouter.js";
 import sectionsRouter from "./objects/sectionsRouter.js";
-import testWaterMeterRouter from "./test/testWaterMeterRouter.js";
-import testHeatMeterRouter from "./test/testHeatMeterRouter.js";
+import roleRouter from "./roleRouter.js";
 import testElectricalMeterRouter from "./test/testElectricalMeterRouter.js";
-import kdlMainTableRouter from "../routes/devices/kdlMainTableRouter.js";
-import mainTableSectionRouter from "../routes/mainTable/objects/mainTableSectionRouter.js";
-import deviceKdlRouter from "../routes/mainTable/devices/deviceKdlRouter.js";
-import brandRouter from "../routes/admin/brandsRouter.js";
+import testHeatMeterRouter from "./test/testHeatMeterRouter.js";
+import testWaterMeterRouter from "./test/testWaterMeterRouter.js";
+import userRouter from "./userRouter.js";
+import waterRouter from "./water/waterRouter.js";
 
 // User
 router.use("/user", userRouter);
@@ -44,5 +45,8 @@ router.use("/deviceKdl", kdlMainTableRouter);
 router.use("/mainTable", mainTableSectionRouter, deviceKdlRouter);
 // Роутер создания брендов
 router.use("/brands", brandRouter);
+
+//
+router.use("/water", waterRouter);
 
 export default router;

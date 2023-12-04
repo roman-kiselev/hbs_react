@@ -33,9 +33,7 @@ export const deviceSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: {
-        [getAllKdl.pending]: (state, action) => {
-            console.log(action);
-        },
+        [getAllKdl.pending]: (state, action) => {},
         [getAllKdl.fulfilled]: (state, action) => {
             state.listKdlInobject = action.payload;
         },

@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import TestAlertAddMeters from "../../../../components/addMeters/bolid/alerts/TestAlertAddMeters";
+import { mainTableDb } from "../../../../shared/db";
+import { createWaterBulkMeter } from "../../../../shared/db/mainTable/serviceMainTableDbWater";
 import useNumber from "../../../../shared/hooks/useNumber";
 import { getAllChannel } from "../../../../shared/models/devices/DeviceSlice";
 import {
@@ -10,9 +14,9 @@ import {
 import InputNumber from "../../../../shared/ui/inputs/inputsNumber/InputNumber";
 import InputNumberFloating from "../../../../shared/ui/inputs/inputsNumber/InputNumberFloating";
 import InputNumberSelected from "../../../../shared/ui/inputs/inputsNumber/InputNumberSelected";
-import TestAlertAddMeters from "../../../addMeters/bolid/alerts/TestAlertAddMeters";
 
 const TestFormCoolHotMeterBolid = ({ id }) => {
+    const { id: objectBuildId } = useParams();
     const dispatch = useDispatch();
     // Состояние форм
     const [section, setSection, handleInputChangeSection] = useNumber("");
@@ -37,6 +41,8 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
 
     const [selectObject, setSelectObject, handleInputChangeSelectObject] =
         useNumber("flat");
+
+    mainTableDb.open();
 
     // Прибавляем канал
     const addChannelHot = (e) => {
@@ -95,12 +101,13 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
             objectId: id,
         };
         // В форму передаём
-        const formQuery = { userId, objectBuildId: id };
+        const formQuery = { userId, objectBuildId: objectBuildId };
 
         const setNewAlert = () => {
             setAlertAdd(false);
         };
         inputRef.current.focus();
+
         dispatch(createTestMeter({ dataWith })).then((d) => {
             dispatch(getAllMetersByUserAndObject({ formQuery }));
             setNumberMeterCool("");
@@ -120,6 +127,27 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                 })
             );
         });
+    };
+
+    const addMetersInDb = async (e) => {
+        e.preventDefault();
+        const data = {
+            section: section,
+            floors: floors,
+            flat: selectObject === "flat" ? flat : 0,
+            office: selectObject === "office" ? flat : 0,
+            kdl: kdl,
+            channelCool: channelCool,
+            channelHot: channelHot,
+            numberMeterCool: numberMeterCool,
+            numberMeterHot: numberMeterHot,
+            sumMeterCool: sumMeterCool,
+            sumMeterHot: sumMeterHot,
+            userId: userId,
+            objectBuildId: objectBuildId,
+        };
+        const water = await createWaterBulkMeter(data);
+        console.log(water);
     };
 
     return (
@@ -240,7 +268,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                         <Button
                             variant="primary"
                             type="submit"
-                            onClick={(e) => addMeter(e)}
+                            onClick={(e) => addMetersInDb(e)}
                             disabled={checkData()}
                         >
                             Добавить

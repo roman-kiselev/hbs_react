@@ -1,4 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/query";
+import { mainApi } from "../../shared/api/main";
 import {
     coolWaterBildReducer,
     deviceReducer,
@@ -10,6 +12,7 @@ import {
     testHeatMeterReducer,
     testWaterMeterReducer,
     userReducer,
+    waterReducer,
 } from "../../shared/models";
 
 export const store = configureStore({
@@ -24,5 +27,11 @@ export const store = configureStore({
         electricalMeter: testElectricalMeterReducer,
         formHouse: formHouseReducer,
         device: deviceReducer,
+        water: waterReducer,
+        [mainApi.reducerPath]: mainApi.reducer,
     },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(mainApi.middleware),
 });
+
+setupListeners(store.dispatch);

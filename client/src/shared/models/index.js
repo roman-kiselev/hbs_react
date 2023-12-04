@@ -90,6 +90,8 @@ import {
     removeCoolBolid,
 } from "./bolid";
 
+import { waterReducer, waterSlice } from "./water";
+
 export {
     addCoolBolid,
     addElectricalMeters,
@@ -162,4 +164,6 @@ export {
     testWaterMeterSlice,
     userReducer,
     userSlice,
+    waterReducer,
+    waterSlice,
 };
