@@ -7,6 +7,7 @@ import HomePage from "./HomePage";
 import AdminHomePage from "./admin/AdminHomePage";
 import DescriptionRouter from "./description/DescriptionRouter";
 import Auth from "./login/Auth";
+import TreePageRouter from "./treePage/TreePageRouter";
 
 const AppRouter = () => {
     const isAuth = useSelector((state) => state.users.isAuth);
@@ -20,6 +21,7 @@ const AppRouter = () => {
                         path="object/:id/*"
                         element={<DescriptionRouter />}
                     />
+                    <Route path="tree/*" element={<TreePageRouter />} />
                     {/* <Route index element={<DescriptionRouter />} /> */}
                     {/* <Route path="settings" element={<SettingsBolid />} />
                         <Route path="water" element={<DescriptionRouter />} /> */}
@@ -62,6 +64,7 @@ const AppRouter = () => {
                     <Route path="/admin" element={<AdminHomePage />}>
                         <Route path="users" element={<MainPageUsers />} />
                     </Route>
+
                     <Route path="/*" element={<Auth />}></Route>
                 </Route>
             ) : (
