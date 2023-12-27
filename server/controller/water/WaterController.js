@@ -20,13 +20,11 @@ class WaterController {
     async findAllMetersForOneObject(req, res) {
         try {
             const { id: objectBuildId } = req.params;
-            console.log(
-                objectBuildId + "_________________________________________"
-            );
+
             const meters = await WaterService.findAllMetersForOneObject(
                 objectBuildId
             );
-            console.log(meters);
+            // console.log(meters);
             return res.json(meters);
         } catch (e) {
             console.log(e);
