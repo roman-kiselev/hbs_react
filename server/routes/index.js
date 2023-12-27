@@ -3,8 +3,8 @@ const router = express.Router();
 
 import brandRouter from "../routes/admin/brandsRouter.js";
 import kdlMainTableRouter from "../routes/devices/kdlMainTableRouter.js";
-import deviceKdlRouter from "../routes/mainTable/devices/deviceKdlRouter.js";
 import mainTableSectionRouter from "../routes/mainTable/objects/mainTableSectionRouter.js";
+import DeviceKdlRouter from "./mainTable/devices/DeviceKdlRouter.js";
 import flatsRouter from "./objects/flatsRouter.js";
 import floorsRouter from "./objects/floorsRouter.js";
 import lineRoutes from "./objects/lineRoutes.js";
@@ -42,7 +42,7 @@ router.use("/testElectrical", testElectricalMeterRouter);
 router.use("/deviceKdl", kdlMainTableRouter);
 
 // Роутер от общей таблицы
-router.use("/mainTable", mainTableSectionRouter, deviceKdlRouter);
+router.use("/mainTable", mainTableSectionRouter, DeviceKdlRouter);
 // Роутер создания брендов
 router.use("/brands", brandRouter);
 
