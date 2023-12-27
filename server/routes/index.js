@@ -4,6 +4,7 @@ const router = express.Router();
 import brandRouter from "../routes/admin/brandsRouter.js";
 import kdlMainTableRouter from "../routes/devices/kdlMainTableRouter.js";
 import mainTableSectionRouter from "../routes/mainTable/objects/mainTableSectionRouter.js";
+import deskRouter from "./desk/DeskRouter.js";
 import DeviceKdlRouter from "./mainTable/devices/DeviceKdlRouter.js";
 import flatsRouter from "./objects/flatsRouter.js";
 import floorsRouter from "./objects/floorsRouter.js";
@@ -48,5 +49,8 @@ router.use("/brands", brandRouter);
 
 //
 router.use("/water", waterRouter);
+//
+
+router.use("/desk", deskRouter);
 
 export default router;
