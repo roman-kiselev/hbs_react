@@ -33,6 +33,13 @@ export const leftMenuItem = [
         variant: "light",
         title: "Добавить счётчики электроэнергии",
     },
+    {
+        // toItem: "addElectricalTest",
+        toItem: "desk",
+        action: true,
+        variant: "light",
+        title: "Доска",
+    },
 
     // {
     //     toItem: "allKdlInObject",

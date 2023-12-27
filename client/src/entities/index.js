@@ -1,1 +1,3 @@
-export {};
+import { Desk } from "./desk";
+
+export { Desk };

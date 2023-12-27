@@ -162,6 +162,30 @@ MainAddMeter.init(
         modelName: "main_meter",
     }
 );
+
+class Desk extends Sequelize.Model {}
+Desk.init(
+    {
+        id: {
+            type: Sequelize.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+            allowNull: false,
+        },
+        status: {
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
+    },
+    {
+        sequelize,
+        modelName: "desk",
+    }
+);
+
+MainAddMeter.hasOne(Desk);
+Desk.belongsTo(MainAddMeter);
+
 // Добавляем хук
 
 // MainAddMeter.afterCreate(async (mainAddMeter, option) => {
@@ -379,4 +403,5 @@ export default {
     Flats,
     Floors,
     Office,
+    Desk,
 };
