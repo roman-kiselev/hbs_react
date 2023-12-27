@@ -98,7 +98,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
             sumMeterCool: sumMeterCool,
             sumMeterHot: sumMeterHot,
             userId: userId,
-            objectId: id,
+            objectId: objectBuildId,
         };
         // В форму передаём
         const formQuery = { userId, objectBuildId: objectBuildId };
@@ -122,7 +122,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
             setTimeout(setNewAlert, 2000);
             dispatch(
                 getAllChannel({
-                    objectId: id,
+                    objectId: objectBuildId,
                     numberKdl: kdl,
                 })
             );
@@ -268,7 +268,8 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                         <Button
                             variant="primary"
                             type="submit"
-                            onClick={(e) => addMetersInDb(e)}
+                            onClick={(e) => addMeter(e)}
+                            // onClick={(e) => addMetersInDb(e)}
                             disabled={checkData()}
                         >
                             Добавить

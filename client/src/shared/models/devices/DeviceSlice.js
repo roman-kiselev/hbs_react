@@ -13,6 +13,8 @@ export const getAllKdl = createAsyncThunk(
         const { data } = await $authHost.get(
             `/api/deviceKdl/?objectBuildId=${objectId}`
         );
+
+        console.log(data);
         return data;
     }
 );
@@ -24,6 +26,7 @@ export const getAllChannel = createAsyncThunk(
         const { data } = await $authHost.get(
             `/api/deviceKdl/getChannel/?objectBuildId=${objectId}&numberKdl=${numberKdl}`
         );
+        console.log(data);
         return data;
     }
 );

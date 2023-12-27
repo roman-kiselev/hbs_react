@@ -1,6 +1,5 @@
+import pkg, { Sequelize } from "sequelize";
 import Models from "../../models/models.js";
-import { Sequelize } from "sequelize";
-import pkg from "sequelize";
 const { Op } = pkg;
 
 class KdlMainTableController {
@@ -32,6 +31,24 @@ class KdlMainTableController {
 
     async getAllBusyChannels(req, res) {
         try {
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async getChannel(req, res) {
+        try {
+            const { objectBuildId, numberKdl } = req.query;
+
+            const allChannel = await Models.MainAddMeter.findAll({
+                where: {
+                    objectBuildId,
+                    numberKdl,
+                },
+                order: [["numberAsr", "ASC"]],
+            });
+
+            return res.json({ allChannel });
         } catch (e) {
             console.log(e);
         }
