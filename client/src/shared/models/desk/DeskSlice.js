@@ -54,9 +54,11 @@ export const deskSlice = createSlice({
         builder.addMatcher(
             deskApi.endpoints.getAll.matchFulfilled,
             (state, action) => {
-                state.listDesk = action.payload;
-                state.isLoading = false;
-                state.isSuccess = true;
+                if (action.payload !== null) {
+                    state.listDesk = action.payload;
+                    state.isLoading = false;
+                    state.isSuccess = true;
+                }
             }
         );
         builder.addMatcher(
