@@ -64,6 +64,7 @@ const DeskTable = () => {
                             <th>#</th>
                             <th>Секция</th>
                             <th>Этаж</th>
+                            <th>КВ</th>
                             <th>№</th>
                             <th>Статус</th>
                             <th>Ред</th>
@@ -76,6 +77,8 @@ const DeskTable = () => {
                                 <td>{index + 1}</td>
                                 <td>{item.main_meter.section}</td>
                                 <td>{item.main_meter.floor}</td>
+                                <td>{item.main_meter.num}</td>
+                                <td>{item.main_meter.flat}</td>
                                 <td>{item.main_meter.numberMeter}</td>
                                 <td>
                                     <Form.Select
