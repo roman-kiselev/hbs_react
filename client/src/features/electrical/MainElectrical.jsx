@@ -1,12 +1,21 @@
 import { useState } from "react";
-import { Button, Col, Modal, Row, Tab, Tabs } from "react-bootstrap";
+import { Button, Col, Form, Modal, Row, Tab, Tabs } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import TestFormElectricalMeter from "../../components/testMeters/testElectrical/form/TestFormElectricalMeter";
 import ListMetersElectrical from "../../components/testMeters/testElectrical/listMeters/ListMetersElectrical";
 import OperationsElectrical from "../../components/testMeters/testElectrical/operations/OperationsElectrical";
+import { setNumber } from "../../shared/models/testMeterElectrical/testElectricalMeterSlice";
 
 const MainElectrical = () => {
     const [show, setShow] = useState(false);
+    const dispatch = useDispatch();
+    const { number } = useSelector((store) => store.electricalMeter);
+
+    const changeNumber = (e) => {
+        const n = e.target.value;
+        dispatch(setNumber(n));
+    };
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -17,9 +26,7 @@ const MainElectrical = () => {
 
     return (
         <Row>
-            <p style={{ fontSize: 15 }}>
-                Добавление счётчиков электроэнергии (Test)
-            </p>
+            <p style={{ fontSize: 15 }}>Добавление счётчиков электроэнергии</p>
             <Row>
                 <Row className="justify-content-end">
                     <Col className="text-end">
@@ -34,7 +41,15 @@ const MainElectrical = () => {
                         <Modal.Title>Начальные параметры</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        Woohoo, you're reading this text in a modal!
+                        <Form.Group className="mb-3">
+                            <Form.Label>Начальные значения</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Начальные значения"
+                                value={number}
+                                onChange={(e) => changeNumber(e)}
+                            />
+                        </Form.Group>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>

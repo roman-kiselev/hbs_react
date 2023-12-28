@@ -3,6 +3,7 @@ import { $authHost } from "../../../http/index.js";
 
 const initialState = {
     mainTable: [],
+    number: "",
     currentPage: 1,
     perPage: 10,
     totalCount: 0,
@@ -114,6 +115,9 @@ export const testElectricalMeterSlice = createSlice({
         setCurrentPage: (state, action) => {
             state.currentPage = action.payload;
         },
+        setNumber: (state, action) => {
+            state.number = action.payload;
+        },
     },
 });
 
@@ -124,5 +128,6 @@ export const {
     getTotalCount,
     setCurrentPage,
     setMeters,
+    setNumber,
 } = testElectricalMeterSlice.actions;
 export const testElectricalMeterReducer = testElectricalMeterSlice.reducer;

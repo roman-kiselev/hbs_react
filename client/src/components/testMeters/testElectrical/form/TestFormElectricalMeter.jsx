@@ -13,12 +13,15 @@ import InputNumberSelected from "../../../../shared/ui/inputs/inputsNumber/Input
 
 const TestFormElectricalMeter = ({ id: objectBuildId }) => {
     const dispatch = useDispatch();
+    const { number: preNumber } = useSelector((store) => store.electricalMeter);
     const [section, setSection, handleInputChangeSection] = useNumber("");
     const [floor, setFloor, handleInputChangeFloor] = useNumber("");
     const [flat, setFlat, handleInputChangeFlat] = useNumber("");
     const [line, setLine, handleInputChangeLine] = useNumber("");
+
     const [numberMeter, setNumberMeter, handleInputChangeNumberMeter] =
-        useNumber("01283517740");
+        useNumber("");
+
     const [sumMeter, setSumMeter, handleInputChangeSumMeter] = useNumber("");
     const [selectObject, setSelectObject, handleInputChangeSelectObject] =
         useNumber("flat");
@@ -57,7 +60,7 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
             flat: selectObject === "flat" ? flat : 0,
             office: selectObject === "office" ? flat : 0,
             line,
-            numberMeter,
+            numberMeter: `${preNumber}${numberMeter}`,
             sumMeter,
         };
         inputRef.current.focus();
@@ -115,13 +118,30 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
 
                     <Row className="m-2">
                         <Col className="col-sm-6 text-center">
-                            <InputNumber
-                                prop={{
-                                    title: "Номер счётчика",
-                                    value: numberMeter,
-                                }}
-                                onChange={handleInputChangeNumberMeter}
-                            />
+                            <Row>
+                                {preNumber !== "" ? (
+                                    <Col md="auto">
+                                        <InputNumber
+                                            prop={{
+                                                title: "Начальные",
+                                                value: preNumber,
+                                                disabled: true,
+                                            }}
+                                            onChange={() => {}}
+                                        />
+                                    </Col>
+                                ) : null}
+                                <Col md="auto">
+                                    <InputNumber
+                                        prop={{
+                                            title: "Номер счётчика",
+                                            value: numberMeter,
+                                            defaultValue: preNumber,
+                                        }}
+                                        onChange={handleInputChangeNumberMeter}
+                                    />
+                                </Col>
+                            </Row>
                         </Col>
 
                         <Col className="col-12 col-sm-6 text-center">
