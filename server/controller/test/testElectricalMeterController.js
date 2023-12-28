@@ -18,6 +18,7 @@ class TestElectricalMeterController {
                 line,
                 numberMeter,
                 sumMeter,
+                comment,
                 objectBuildId,
                 userId,
             } = req.body;
@@ -32,6 +33,7 @@ class TestElectricalMeterController {
                 numberMeter,
                 sumMeter,
                 objectBuildId,
+                comment,
                 userId,
             });
 

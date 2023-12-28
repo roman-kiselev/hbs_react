@@ -41,7 +41,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
 
     const [selectObject, setSelectObject, handleInputChangeSelectObject] =
         useNumber("flat");
-
+    const [comment, setComment] = useState("");
     mainTableDb.open();
 
     // Прибавляем канал
@@ -97,6 +97,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
             numberMeterHot: numberMeterHot,
             sumMeterCool: sumMeterCool,
             sumMeterHot: sumMeterHot,
+            comment,
             userId: userId,
             objectId: objectBuildId,
         };
@@ -117,6 +118,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
             setChannelCool("");
             setChannelHot("");
             setFlat("");
+            setComment("");
             setAlertAdd(true);
             // Уведомление о добавлении
             setTimeout(setNewAlert, 2000);
@@ -262,7 +264,20 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                         </Col>
                     </Row>
                 </Row>
-
+                <Row>
+                    <Form.Group
+                        className="mb-3"
+                        controlId="exampleForm.ControlTextarea1"
+                    >
+                        <Form.Label>Комментарий</Form.Label>
+                        <Form.Control
+                            as="textarea"
+                            rows={3}
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                        />
+                    </Form.Group>
+                </Row>
                 <Row>
                     <Col>
                         <Button

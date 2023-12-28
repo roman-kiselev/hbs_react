@@ -25,6 +25,7 @@ class TestWaterMeterController {
                 numberMeterHot,
                 sumMeterCool,
                 sumMeterHot,
+                comment,
                 userId,
                 objectId,
             } = req.body;
@@ -40,6 +41,7 @@ class TestWaterMeterController {
                 numberMeter: numberMeterCool,
                 sumMeter: sumMeterCool,
                 objectBuildId: objectId,
+                comment,
                 userId: userId,
             };
 
@@ -53,6 +55,7 @@ class TestWaterMeterController {
                 numberAsr: channelHot,
                 numberMeter: numberMeterHot,
                 sumMeter: sumMeterHot,
+                comment,
                 objectBuildId: objectId,
                 userId: userId,
             };

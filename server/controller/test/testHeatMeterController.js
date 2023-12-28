@@ -20,6 +20,7 @@ class TestHeatMeterController {
                 line,
                 numberMeter,
                 sumMeter,
+                comment,
                 objectBuildId,
                 userId,
             } = req.body;
@@ -34,6 +35,7 @@ class TestHeatMeterController {
                 numberMeter: numberMeter,
                 sumMeter: sumMeter,
                 objectBuildId,
+                comment,
                 userId,
             });
 

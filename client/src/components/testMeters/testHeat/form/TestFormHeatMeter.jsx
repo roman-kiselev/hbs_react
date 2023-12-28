@@ -19,11 +19,12 @@ const TestFormHeatMeter = ({ id: objectBuildId }) => {
     const [flat, setFlat, handleInputChangeFlat] = useNumber("");
     const [line, setLine, handleInputChangeLine] = useNumber("");
     const [numberMeter, setNumberMeter, handleInputChangeNumberMeter] =
-        useNumber("22011");
+        useNumber("");
     const [sumMeter, setSumMeter, handleInputChangeSumMeter] = useNumber("");
     const [selectObject, setSelectObject, handleInputChangeSelectObject] =
         useNumber("flat");
 
+    const [comment, setComment] = useState("");
     // Состояние уведомлений
     const [alertAdd, setAlertAdd] = useState(false);
     // Создаём массив для проверки перед отправкой данных на сервер
@@ -58,6 +59,7 @@ const TestFormHeatMeter = ({ id: objectBuildId }) => {
             line: line,
             numberMeter: numberMeter,
             sumMeter: sumMeter,
+            comment,
             objectBuildId,
             userId,
         };
@@ -69,6 +71,7 @@ const TestFormHeatMeter = ({ id: objectBuildId }) => {
             setAlertAdd(true);
             setFlat("");
             setNumberMeter("");
+            setComment("");
             setSumMeter("");
             setTimeout(() => {
                 setAlertAdd(false);
@@ -138,6 +141,20 @@ const TestFormHeatMeter = ({ id: objectBuildId }) => {
                             />
                         </Col>
                     </Row>
+                </Row>
+                <Row>
+                    <Form.Group
+                        className="mb-3"
+                        controlId="exampleForm.ControlTextarea1"
+                    >
+                        <Form.Label>Комментарий</Form.Label>
+                        <Form.Control
+                            as="textarea"
+                            rows={3}
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                        />
+                    </Form.Group>
                 </Row>
 
                 <Row>

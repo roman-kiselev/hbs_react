@@ -26,6 +26,7 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
     const [selectObject, setSelectObject, handleInputChangeSelectObject] =
         useNumber("flat");
 
+    const [comment, setComment] = useState("");
     // Состояние уведомлений
     const [alertAdd, setAlertAdd] = useState(false);
     // Создаём массив для проверки перед отправкой данных на сервер
@@ -62,6 +63,7 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
             line,
             numberMeter: `${preNumber}${numberMeter}`,
             sumMeter,
+            comment,
         };
         inputRef.current.focus();
         dispatch(createTestElectricalMeter({ dataMeter })).then((d) => {
@@ -70,6 +72,7 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
             setFlat("");
             setNumberMeter("");
             setSumMeter("");
+            setComment("");
             setTimeout(() => {
                 setAlertAdd(false);
             }, 2000);
@@ -151,6 +154,20 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
                             />
                         </Col>
                     </Row>
+                </Row>
+                <Row>
+                    <Form.Group
+                        className="mb-3"
+                        controlId="exampleForm.ControlTextarea1"
+                    >
+                        <Form.Label>Комментарий</Form.Label>
+                        <Form.Control
+                            as="textarea"
+                            rows={3}
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                        />
+                    </Form.Group>
                 </Row>
 
                 <Row>
