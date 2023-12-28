@@ -56,7 +56,6 @@ const TableMeters = ({ id: objectBuildId }) => {
                 );
                 handleClose();
             });
-            console.log(selectedKdl);
         } catch (e) {
             console.log(e);
         }

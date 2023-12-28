@@ -185,6 +185,8 @@ Desk.init(
 
 MainAddMeter.hasOne(Desk);
 Desk.belongsTo(MainAddMeter);
+ObjectBuilds.hasOne(Desk);
+Desk.belongsTo(ObjectBuilds);
 
 // Добавляем хук
 

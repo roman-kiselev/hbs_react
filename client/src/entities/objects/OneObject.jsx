@@ -1,8 +1,13 @@
-import React from "react";
 import { Button, Card, Figure } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { resetList } from "../../shared/models/desk/DeskSlice";
 
 const OneObject = ({ description }) => {
+    const dispatch = useDispatch();
+    const handleClick = () => {
+        dispatch(resetList());
+    };
     return (
         <Card style={{ width: "18rem", margin: 10 }}>
             <Figure className="text-center">
@@ -25,7 +30,9 @@ const OneObject = ({ description }) => {
                 <Card.Text>{description.description}</Card.Text>
 
                 <Link to={`/object/${description.id}`}>
-                    <Button variant="primary">Перейти</Button>
+                    <Button onClick={handleClick} variant="primary">
+                        Перейти
+                    </Button>
                 </Link>
             </Card.Body>
         </Card>

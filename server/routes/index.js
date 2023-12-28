@@ -6,6 +6,7 @@ import kdlMainTableRouter from "../routes/devices/kdlMainTableRouter.js";
 import mainTableSectionRouter from "../routes/mainTable/objects/mainTableSectionRouter.js";
 import deskRouter from "./desk/DeskRouter.js";
 import DeviceKdlRouter from "./mainTable/devices/DeviceKdlRouter.js";
+import metersRouter from "./meters/metersRouter.js";
 import flatsRouter from "./objects/flatsRouter.js";
 import floorsRouter from "./objects/floorsRouter.js";
 import lineRoutes from "./objects/lineRoutes.js";
@@ -52,5 +53,6 @@ router.use("/water", waterRouter);
 //
 
 router.use("/desk", deskRouter);
+router.use("/meters", metersRouter);
 
 export default router;

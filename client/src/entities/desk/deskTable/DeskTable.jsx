@@ -1,186 +1,121 @@
-import { Button, Form, Table } from "react-bootstrap";
+import { useState } from "react";
+import { Button, Form, Row, Spinner, Table } from "react-bootstrap";
 import { AiFillDelete } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { deskApi } from "../../../shared/api/desk";
+import { getOneMeter } from "../../../shared/models/testMeterWater/testWaterMeterSlice";
+import CardMeterEditModal from "../../../shared/ui/modals/CardMeterEditModal";
 
 const DeskTable = () => {
+    const dispatch = useDispatch();
+    const { id } = useParams();
+    const [selectState, setSelectState] = useState("check");
+    const { data } = deskApi.useGetAllQuery(id);
+
+    const [deltem, { data: dataDel }] = deskApi.useDeleteMutation();
+
+    const [selectedMeter, setSelectedMeter] = useState(null);
+    const [show, setShow] = useState(false);
+    const { listDesk, isLoading } = useSelector((store) => store.desk);
+    const handleClose = () => {
+        setShow(false);
+        setSelectedMeter(null);
+    };
+    const [changeStatusOneItem, { data: dataChangeStatus }] =
+        deskApi.useChangeStatusMutation();
+    const handleShow = (data) => {
+        setSelectedMeter(data);
+        setShow(true);
+    };
+
+    const handleClickForEdit = (formData, formQuery, handleClose) => {
+        try {
+            dispatch(getOneMeter({ formData })).then((d) => {
+                dispatch(deskApi.endpoints.getAll.initiate());
+                handleClose();
+            });
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    const changeStatus = (id, e) => {
+        const currentValue = e.target.value;
+        setSelectState(currentValue);
+        changeStatusOneItem({ id, status: currentValue });
+    };
     return (
-        <Table striped bordered hover responsive style={{ fontSize: 12 }}>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Дом</th>
-                    <th>Секция</th>
-                    <th>Этаж</th>
-                    <th>№</th>
-                    <th>Статус</th>
-                    <th>Ред</th>
-                    <th>Удаление</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Лугометрия 12</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>123456789</td>
-                    <td>
-                        <Form.Select size="sm">
-                            <option>Small select</option>
-                        </Form.Select>
-                    </td>
-                    <td>
-                        <Button variant="primary" onClick={() => {}} size="sm">
-                            Edit
-                        </Button>
-                    </td>
-                    <td>
-                        <AiFillDelete
-                            size={30}
-                            color="red"
-                            style={{
-                                cursor: "pointer",
-                            }}
-                            onClick={() => {}}
-                        />
-                    </td>
-                </tr>
-                <tr style={{ backgroundColor: "green" }}>
-                    <td>1</td>
-                    <td>Лугометрия 12</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>123456789</td>
-                    <td>
-                        <Form.Select size="sm" disabled={true}>
-                            <option>Small select</option>
-                        </Form.Select>
-                    </td>
-                    <td>
-                        <Button variant="primary" onClick={() => {}} size="sm">
-                            Edit
-                        </Button>
-                    </td>
-                    <td>
-                        <AiFillDelete
-                            size={30}
-                            color="red"
-                            style={{
-                                cursor: "pointer",
-                            }}
-                            onClick={() => {}}
-                        />
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Лугометрия 12</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>123456789</td>
-                    <td>
-                        <Form.Select size="sm">
-                            <option>Small select</option>
-                        </Form.Select>
-                    </td>
-                    <td>
-                        <Button variant="primary" onClick={() => {}} size="sm">
-                            Edit
-                        </Button>
-                    </td>
-                    <td>
-                        <AiFillDelete
-                            size={30}
-                            color="red"
-                            style={{
-                                cursor: "pointer",
-                            }}
-                            onClick={() => {}}
-                        />
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Лугометрия 12</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>123456789</td>
-                    <td>
-                        <Form.Select size="sm">
-                            <option>Small select</option>
-                        </Form.Select>
-                    </td>
-                    <td>
-                        <Button variant="primary" onClick={() => {}} size="sm">
-                            Edit
-                        </Button>
-                    </td>
-                    <td>
-                        <AiFillDelete
-                            size={30}
-                            color="red"
-                            style={{
-                                cursor: "pointer",
-                            }}
-                            onClick={() => {}}
-                        />
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Лугометрия 12</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>123456789</td>
-                    <td>
-                        <Form.Select size="sm">
-                            <option>Small select</option>
-                        </Form.Select>
-                    </td>
-                    <td>
-                        <Button variant="primary" onClick={() => {}} size="sm">
-                            Edit
-                        </Button>
-                    </td>
-                    <td>
-                        <AiFillDelete
-                            size={30}
-                            color="red"
-                            style={{
-                                cursor: "pointer",
-                            }}
-                            onClick={() => {}}
-                        />
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Лугометрия 12</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>123456789</td>
-                    <td>
-                        <Form.Select size="sm">
-                            <option>Small select</option>
-                        </Form.Select>
-                    </td>
-                    <td>
-                        <Button variant="primary" onClick={() => {}} size="sm">
-                            Edit
-                        </Button>
-                    </td>
-                    <td>
-                        <AiFillDelete
-                            size={30}
-                            color="red"
-                            style={{
-                                cursor: "pointer",
-                            }}
-                            onClick={() => {}}
-                        />
-                    </td>
-                </tr>
-            </tbody>
-        </Table>
+        <Row>
+            {selectedMeter && (
+                <CardMeterEditModal
+                    show={show}
+                    handleClose={handleClose}
+                    data={selectedMeter}
+                    handleClickForEdit={handleClickForEdit}
+                />
+            )}
+            {isLoading && listDesk.length === 0 ? (
+                <Spinner />
+            ) : (
+                <Table bordered hover responsive style={{ fontSize: 12 }}>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Секция</th>
+                            <th>Этаж</th>
+                            <th>№</th>
+                            <th>Статус</th>
+                            <th>Ред</th>
+                            <th>Удаление</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {listDesk?.map((item, index) => (
+                            <tr key={item.id}>
+                                <td>{index + 1}</td>
+                                <td>{item.main_meter.section}</td>
+                                <td>{item.main_meter.floor}</td>
+                                <td>{item.main_meter.numberMeter}</td>
+                                <td>
+                                    <Form.Select
+                                        size="sm"
+                                        defaultValue={item.status}
+                                        onChange={(e) =>
+                                            changeStatus(item.id, e)
+                                        }
+                                    >
+                                        <option value="ready">Выполнен</option>
+                                        <option value="check">Проверка</option>
+                                    </Form.Select>
+                                </td>
+                                <td>
+                                    <Button
+                                        variant="primary"
+                                        onClick={() =>
+                                            handleShow(item.main_meter)
+                                        }
+                                        size="sm"
+                                    >
+                                        Edit
+                                    </Button>
+                                </td>
+                                <td>
+                                    <AiFillDelete
+                                        size={30}
+                                        color="red"
+                                        style={{
+                                            cursor: "pointer",
+                                        }}
+                                        onClick={() => deltem(item.id)}
+                                    />
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
+            )}
+        </Row>
     );
 };
 

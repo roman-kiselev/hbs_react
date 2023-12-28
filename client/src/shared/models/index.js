@@ -90,6 +90,7 @@ import {
     removeCoolBolid,
 } from "./bolid";
 
+import { deskReducer, deskSlice } from "./desk/DeskSlice.js";
 import { waterReducer, waterSlice } from "./water";
 
 export {
@@ -107,6 +108,8 @@ export {
     createTestElectricalMeter,
     createTestHeatMeter,
     createTestWaterMeter,
+    deskReducer,
+    deskSlice,
     deviceReducer,
     deviceSlice,
     formHouseReducer,
