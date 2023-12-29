@@ -52,6 +52,7 @@ class DeskService {
                     objectBuildId,
                 },
                 include: { all: true },
+                order: [["createdAt", "ASC"]],
             });
 
             return desk;

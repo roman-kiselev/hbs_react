@@ -75,47 +75,66 @@ const DeskTable = () => {
                     </thead>
                     <tbody>
                         {listDesk?.map((item, index) => (
-                            <tr key={item.id}>
-                                <td>{index + 1}</td>
-                                <td>{item.main_meter.section}</td>
-                                <td>{item.main_meter.floor}</td>
-                                <td>{item.main_meter.flat}</td>
+                            <>
+                                <tr key={item.id}>
+                                    <td>{index + 1}</td>
+                                    <td>{item.main_meter.section}</td>
+                                    <td>{item.main_meter.floor}</td>
+                                    <td>{item.main_meter.flat}</td>
 
-                                <td>{item.main_meter.numberMeter}</td>
-                                <td>
-                                    <Form.Select
-                                        size="sm"
-                                        defaultValue={item.status}
-                                        onChange={(e) =>
-                                            changeStatus(item.id, e)
-                                        }
-                                    >
-                                        <option value="ready">Выполнен</option>
-                                        <option value="check">Проверка</option>
-                                    </Form.Select>
-                                </td>
-                                <td>
-                                    <Button
-                                        variant="primary"
-                                        onClick={() =>
-                                            handleShow(item.main_meter)
-                                        }
-                                        size="sm"
-                                    >
-                                        Edit
-                                    </Button>
-                                </td>
-                                <td>
-                                    <AiFillDelete
-                                        size={30}
-                                        color="red"
+                                    <td>{item.main_meter.numberMeter}</td>
+                                    <td>
+                                        <Form.Select
+                                            size="sm"
+                                            defaultValue={item.status}
+                                            onChange={(e) =>
+                                                changeStatus(item.id, e)
+                                            }
+                                        >
+                                            <option value="ready">
+                                                Выполнен
+                                            </option>
+                                            <option value="check">
+                                                Проверка
+                                            </option>
+                                        </Form.Select>
+                                    </td>
+                                    <td>
+                                        <Button
+                                            variant="primary"
+                                            onClick={() =>
+                                                handleShow(item.main_meter)
+                                            }
+                                            size="sm"
+                                        >
+                                            Edit
+                                        </Button>
+                                    </td>
+                                    <td>
+                                        <AiFillDelete
+                                            size={30}
+                                            color="red"
+                                            style={{
+                                                cursor: "pointer",
+                                            }}
+                                            onClick={() => deltem(item.id)}
+                                        />
+                                    </td>
+                                </tr>
+                                {item.main_meter.comment && (
+                                    <tr
                                         style={{
-                                            cursor: "pointer",
+                                            backgroundColor: "lightgreen",
                                         }}
-                                        onClick={() => deltem(item.id)}
-                                    />
-                                </td>
-                            </tr>
+                                    >
+                                        <td colSpan={8}>
+                                            {item.main_meter.comment && (
+                                                <p>{item.main_meter.comment}</p>
+                                            )}
+                                        </td>
+                                    </tr>
+                                )}
+                            </>
                         ))}
                     </tbody>
                 </Table>
