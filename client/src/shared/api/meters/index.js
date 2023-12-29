@@ -10,6 +10,14 @@ export const metersApi = mainApi.injectEndpoints({
                 };
             },
         }),
+        checkMeter: builder.query({
+            query: ({ number, objectBuildId, typeMeter }) => {
+                return {
+                    url: `/api/meters/check/?number=${number}&objectBuildId=${objectBuildId}&typeMeter=${typeMeter}`,
+                    method: "GET",
+                };
+            },
+        }),
     }),
 });
 

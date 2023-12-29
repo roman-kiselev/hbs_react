@@ -52,6 +52,85 @@ class MeterService {
             console.log(e);
         }
     }
+
+    async __getWaterMeterByNumber(number, objectBuildId) {
+        try {
+            const meter = await Models.MainAddMeter.findOne({
+                where: {
+                    objectBuildId,
+                    numberMeter: number,
+                    [Op.or]: [
+                        { typeMeter: "Счётчик холодной воды" },
+                        { typeMeter: "Счётчик горячей воды" },
+                    ],
+                },
+            });
+
+            return meter;
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async __getHeatMeterByNumber(number, objectBuildId) {
+        try {
+            const meter = await Models.MainAddMeter.findOne({
+                where: {
+                    objectBuildId,
+                    numberMeter: number,
+                    typeMeter: "Счётчик тепла",
+                },
+            });
+
+            return meter;
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async __getElectricalMeterByNumber(number, objectBuildId) {
+        try {
+            const meter = await Models.MainAddMeter.findOne({
+                where: {
+                    objectBuildId,
+                    numberMeter: number,
+                    typeMeter: "Счётчик электроэнергии",
+                },
+            });
+
+            return meter;
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    // Проверка счётчиков
+    async checkMeter(number, objectBuildId, typeMeter) {
+        try {
+            console.log(number, objectBuildId, typeMeter);
+            if (typeMeter === "water") {
+                const meter = this.__getWaterMeterByNumber(
+                    number,
+                    objectBuildId
+                );
+                return meter;
+            } else if (typeMeter === "heat") {
+                const meter = this.__getHeatMeterByNumber(
+                    number,
+                    objectBuildId
+                );
+                return meter;
+            } else if (typeMeter === "electrical") {
+                const meter = this.__getElectricalMeterByNumber(
+                    number,
+                    objectBuildId
+                );
+                return meter;
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
 }
 
 export default new MeterService();

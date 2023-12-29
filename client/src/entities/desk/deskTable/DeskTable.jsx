@@ -46,6 +46,7 @@ const DeskTable = () => {
         const currentValue = e.target.value;
         setSelectState(currentValue);
         changeStatusOneItem({ id, status: currentValue });
+        refetch();
     };
     return (
         <Row>

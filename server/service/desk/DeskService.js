@@ -50,6 +50,7 @@ class DeskService {
             const desk = await Models.Desk.findAll({
                 where: {
                     objectBuildId,
+                    status: "check",
                 },
                 include: { all: true },
                 order: [["createdAt", "ASC"]],

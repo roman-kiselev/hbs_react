@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import TestAlertAddMeters from "../../../../components/addMeters/bolid/alerts/TestAlertAddMeters";
 import { mainTableDb } from "../../../../shared/db";
 import { createWaterBulkMeter } from "../../../../shared/db/mainTable/serviceMainTableDbWater";
+import { useNumberMeter } from "../../../../shared/hooks";
 import useNumber from "../../../../shared/hooks/useNumber";
 import { getAllChannel } from "../../../../shared/models/devices/DeviceSlice";
 import {
@@ -32,8 +33,14 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
         setNumberMeterCool,
         handleInputChangeNumberMeterCool,
     ] = useNumber("");
-    const [numberMeterHot, setNumberMeterHot, handleInputChangeNumberMeterHot] =
-        useNumber("");
+    // const [numberMeterHot, setNumberMeterHot, handleInputChangeNumberMeterHot] =
+    //     useNumber("");
+    const [
+        numberMeterHot,
+        setNumberMeterHot,
+        handleInputChangeNumberMeterHot,
+        status,
+    ] = useNumberMeter("", objectBuildId, "water");
     const [sumMeterCool, setSumMeterCool, handleInputChangeSumMeterCool] =
         useNumber("");
     const [sumMeterHot, setSumMeterHot, handleInputChangeSumMeterHot] =
@@ -149,7 +156,6 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
             objectBuildId: objectBuildId,
         };
         const water = await createWaterBulkMeter(data);
-        console.log(water);
     };
 
     return (
