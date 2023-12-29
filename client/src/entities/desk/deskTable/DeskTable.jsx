@@ -11,8 +11,10 @@ const DeskTable = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
     const [selectState, setSelectState] = useState("check");
-    const { data } = deskApi.useGetAllQuery(id);
-
+    // const { data } = deskApi.useGetAllQuery(id);
+    const { data, status, refetch } = dispatch(
+        deskApi.endpoints.getAll.initiate(id)
+    );
     const [deltem, { data: dataDel }] = deskApi.useDeleteMutation();
 
     const [selectedMeter, setSelectedMeter] = useState(null);
@@ -32,7 +34,7 @@ const DeskTable = () => {
     const handleClickForEdit = (formData, formQuery, handleClose) => {
         try {
             dispatch(getOneMeter({ formData })).then((d) => {
-                dispatch(deskApi.endpoints.getAll.initiate());
+                refetch();
                 handleClose();
             });
         } catch (e) {
