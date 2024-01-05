@@ -39,8 +39,9 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
         numberMeterHot,
         setNumberMeterHot,
         handleInputChangeNumberMeterHot,
-        status,
+        statusHotWater,
     ] = useNumberMeter("", objectBuildId, "water");
+    // console.log(status);
     const [sumMeterCool, setSumMeterCool, handleInputChangeSumMeterCool] =
         useNumber("");
     const [sumMeterHot, setSumMeterHot, handleInputChangeSumMeterHot] =
@@ -259,6 +260,9 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                                 }}
                                 onChange={handleInputChangeNumberMeterHot}
                             />
+                            {statusHotWater ? null : (
+                                <p>Номер счётчика уже существует</p>
+                            )}
 
                             <InputNumberFloating
                                 prop={{

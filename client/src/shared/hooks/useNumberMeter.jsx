@@ -15,15 +15,20 @@ const useNumberMeter = (
             objectBuildId,
             typeMeter,
         });
-
-    if (data === null) {
-        setStatus(false);
-    }
+    console.log(data);
+    // if (data === null) {
+    //     setStatus(false);
+    // }
 
     const handleInputChange = (e) => {
         const value = e.target.value;
         setValue(value);
         // refetch();
+        if (data !== null) {
+            setStatus(false);
+        } else {
+            setStatus(true);
+        }
     };
 
     return [value, setValue, handleInputChange, status];
