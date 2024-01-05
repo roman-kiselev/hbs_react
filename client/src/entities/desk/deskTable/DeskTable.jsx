@@ -77,7 +77,7 @@ const DeskTable = () => {
                     <tbody>
                         {listDesk?.map((item, index) => (
                             <>
-                                <tr key={index}>
+                                <tr key={item.id}>
                                     <td>{index + 1}</td>
                                     <td>{item.main_meter.section}</td>
                                     <td>{item.main_meter.floor}</td>
