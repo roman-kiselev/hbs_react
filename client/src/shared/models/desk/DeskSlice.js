@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import { deskApi } from "../../api/desk";
 import { metersApi } from "../../api/meters";
 
@@ -127,6 +127,8 @@ export const deskSlice = createSlice({
         builder.addMatcher(
             deskApi.endpoints.changeStatus.matchFulfilled,
             (state, action) => {
+                console.log(action.payload);
+                console.log(current(state.listDesk));
                 const findedIndex = state.listDesk.findIndex(
                     (item) => item.id === action.payload.id
                 );
