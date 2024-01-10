@@ -129,7 +129,7 @@ export const changeArrMeter = (arr) => {
             floor,
             flat,
             numberKdl,
-            numberAsr: `Канал${numberAsr}`,
+            numberAsr: `Канал ${numberAsr}`,
             numberMeter,
             sumMeter,
             typeMeter,
