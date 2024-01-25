@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { deskApi } from "../../../shared/api/desk";
 import { getOneMeter } from "../../../shared/models/testMeterWater/testWaterMeterSlice";
 import CardMeterEditModal from "../../../shared/ui/modals/CardMeterEditModal";
+import SelectBlock from "../select/SelectBlock";
 
 const DeskTable = () => {
     const dispatch = useDispatch();
@@ -48,6 +49,8 @@ const DeskTable = () => {
         changeStatusOneItem({ id, status: currentValue });
         refetch();
     };
+
+    console.log(listDesk);
     return (
         <Row>
             {selectedMeter && (
@@ -61,84 +64,136 @@ const DeskTable = () => {
             {isLoading && listDesk.length === 0 ? (
                 <Spinner />
             ) : (
-                <Table bordered hover responsive style={{ fontSize: 12 }}>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Секция</th>
-                            <th>Этаж</th>
-                            <th>КВ</th>
-                            <th>№</th>
-                            <th>Статус</th>
-                            <th>Ред</th>
-                            <th>Удаление</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {listDesk?.map((item, index) => (
-                            <>
-                                <tr key={item.id}>
-                                    <td>{index + 1}</td>
-                                    <td>{item.main_meter.section}</td>
-                                    <td>{item.main_meter.floor}</td>
-                                    <td>{item.main_meter.flat}</td>
+                <>
+                    <SelectBlock data={listDesk} />
+                    <Table
+                        bordered
+                        hover
+                        responsive
+                        style={{ fontSize: 12, marginTop: "10px" }}
+                    >
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Секция</th>
+                                <th>Этаж</th>
+                                <th>КВ</th>
+                                <th>№</th>
+                                <th>Статус</th>
+                                <th>Ред</th>
+                                <th>Удаление</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {listDesk?.map((item, index) => (
+                                <>
+                                    {item.main_meter === null ? (
+                                        <>
+                                            <tr key={item.id}>
+                                                <td>{index + 1}</td>
+                                                <td>
+                                                    {item.main_meter.section
+                                                        ? item.main_meter
+                                                              .section
+                                                        : 0}
+                                                </td>
+                                                <td>{item.main_meter.floor}</td>
+                                                <td>{item.main_meter.flat}</td>
 
-                                    <td>{item.main_meter.numberMeter}</td>
-                                    <td>
-                                        <Form.Select
-                                            size="sm"
-                                            defaultValue={item.status}
-                                            onChange={(e) =>
-                                                changeStatus(item.id, e)
-                                            }
-                                        >
-                                            <option value="ready">
-                                                Выполнен
-                                            </option>
-                                            <option value="check">
-                                                Проверка
-                                            </option>
-                                        </Form.Select>
-                                    </td>
-                                    <td>
-                                        <Button
-                                            variant="primary"
-                                            onClick={() =>
-                                                handleShow(item.main_meter)
-                                            }
-                                            size="sm"
-                                        >
-                                            Edit
-                                        </Button>
-                                    </td>
-                                    <td>
-                                        <AiFillDelete
-                                            size={30}
-                                            color="red"
-                                            style={{
-                                                cursor: "pointer",
-                                            }}
-                                            onClick={() => deltem(item.id)}
-                                        />
-                                    </td>
-                                </tr>
-                                {item.main_meter.comment && (
-                                    <tr
-                                        style={{
-                                            backgroundColor: "lightgreen",
-                                        }}
-                                    >
-                                        <td colSpan={8}>
+                                                <td>
+                                                    {
+                                                        item.main_meter
+                                                            .numberMeter
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <Form.Select
+                                                        size="sm"
+                                                        defaultValue={
+                                                            item.status
+                                                        }
+                                                        onChange={(e) =>
+                                                            changeStatus(
+                                                                item.id,
+                                                                e
+                                                            )
+                                                        }
+                                                    >
+                                                        <option value="ready">
+                                                            Выполнен
+                                                        </option>
+                                                        <option value="check">
+                                                            Проверка
+                                                        </option>
+                                                    </Form.Select>
+                                                </td>
+                                                <td>
+                                                    <Button
+                                                        variant="primary"
+                                                        onClick={() =>
+                                                            handleShow(
+                                                                item.main_meter
+                                                            )
+                                                        }
+                                                        size="sm"
+                                                    >
+                                                        Edit
+                                                    </Button>
+                                                </td>
+                                                <td>
+                                                    <AiFillDelete
+                                                        size={30}
+                                                        color="red"
+                                                        style={{
+                                                            cursor: "pointer",
+                                                        }}
+                                                        onClick={() =>
+                                                            deltem(item.id)
+                                                        }
+                                                    />
+                                                </td>
+                                            </tr>
                                             {item.main_meter.comment && (
-                                                <p>{item.main_meter.comment}</p>
+                                                <tr
+                                                    style={{
+                                                        backgroundColor:
+                                                            "lightgreen",
+                                                    }}
+                                                >
+                                                    <td colSpan={8}>
+                                                        {item.main_meter
+                                                            .comment && (
+                                                            <p>
+                                                                {
+                                                                    item
+                                                                        .main_meter
+                                                                        .comment
+                                                                }
+                                                            </p>
+                                                        )}
+                                                    </td>
+                                                </tr>
                                             )}
-                                        </td>
-                                    </tr>
-                                )}
-                            </>
-                        ))}
-                    </tbody>
-                </Table>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <tr>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                            </tr>
+                                        </>
+                                    )}
+                                </>
+                            ))}
+                        </tbody>
+                    </Table>
+                </>
             )}
         </Row>
     );
