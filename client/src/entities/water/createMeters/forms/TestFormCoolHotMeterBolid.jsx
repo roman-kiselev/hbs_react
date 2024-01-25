@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Badge, Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import TestAlertAddMeters from "../../../../components/addMeters/bolid/alerts/TestAlertAddMeters";
@@ -19,6 +19,7 @@ import InputNumberSelected from "../../../../shared/ui/inputs/inputsNumber/Input
 const TestFormCoolHotMeterBolid = ({ id }) => {
     const { id: objectBuildId } = useParams();
     const dispatch = useDispatch();
+
     // Состояние форм
     const [section, setSection, handleInputChangeSection] = useNumber("");
     const [floors, setFloors, handleInputChangeFloors] = useNumber("");
@@ -32,7 +33,9 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
         numberMeterCool,
         setNumberMeterCool,
         handleInputChangeNumberMeterCool,
-    ] = useNumber("");
+        statusCoolWater,
+        dataCool,
+    ] = useNumberMeter("", objectBuildId, "water");
     // const [numberMeterHot, setNumberMeterHot, handleInputChangeNumberMeterHot] =
     //     useNumber("");
     const [
@@ -40,8 +43,9 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
         setNumberMeterHot,
         handleInputChangeNumberMeterHot,
         statusHotWater,
+        dataHot,
     ] = useNumberMeter("", objectBuildId, "water");
-    // console.log(status);
+
     const [sumMeterCool, setSumMeterCool, handleInputChangeSumMeterCool] =
         useNumber("");
     const [sumMeterHot, setSumMeterHot, handleInputChangeSumMeterHot] =
@@ -225,6 +229,12 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                                 }}
                                 onChange={handleInputChangeNumberMeterCool}
                             />
+                            {dataCool ? (
+                                <Badge bg="danger">
+                                    Номер счётчика уже существует
+                                </Badge>
+                            ) : null}
+
                             <InputNumber
                                 prop={{
                                     title: "Показания",
@@ -260,9 +270,11 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                                 }}
                                 onChange={handleInputChangeNumberMeterHot}
                             />
-                            {statusHotWater ? null : (
-                                <p>Номер счётчика уже существует</p>
-                            )}
+                            {dataHot ? (
+                                <Badge bg="danger">
+                                    Номер счётчика уже существует
+                                </Badge>
+                            ) : null}
 
                             <InputNumberFloating
                                 prop={{

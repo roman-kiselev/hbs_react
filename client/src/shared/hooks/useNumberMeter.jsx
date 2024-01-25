@@ -1,37 +1,27 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { metersApi } from "../api/meters";
-
 const useNumberMeter = (
     initialValue,
     objectBuildId,
     typeMeter = "water" | "heat" | "electrical"
 ) => {
     const [value, setValue] = useState(initialValue);
-    const [status, setStatus] = useState(true);
-
+    const [status, setStatus] = useState(false);
+    const { number: preNumber } = useSelector((store) => store.electricalMeter);
     const { data, isLoading, refetch, isSuccess, isError } =
         metersApi.useCheckMeterQuery({
-            number: value,
+            number: typeMeter === "electrical" ? `${preNumber}${value}` : value,
             objectBuildId,
             typeMeter,
         });
-    console.log(data);
-    // if (data === null) {
-    //     setStatus(false);
-    // }
 
     const handleInputChange = (e) => {
         const value = e.target.value;
         setValue(value);
-        // refetch();
-        if (data !== null) {
-            setStatus(false);
-        } else {
-            setStatus(true);
-        }
     };
 
-    return [value, setValue, handleInputChange, status];
+    return [value, setValue, handleInputChange, status, data];
 };
 
 export default useNumberMeter;

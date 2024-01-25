@@ -94,6 +94,17 @@ class MeterService {
                 where: {
                     objectBuildId,
                     numberMeter: number,
+                    // [Op.or]: [
+                    //     {
+                    //         numberMeter: {
+                    //             [Op.like]: `%${number}`,
+                    //         },
+                    //     },
+                    //     {
+                    //         numberMeter: number,
+                    //     },
+                    // ],
+
                     typeMeter: "Счётчик электроэнергии",
                 },
             });

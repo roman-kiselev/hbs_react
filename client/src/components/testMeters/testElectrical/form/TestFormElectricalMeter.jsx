@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Badge, Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useNumberMeter } from "../../../../shared/hooks";
 import useNumber from "../../../../shared/hooks/useNumber";
 import {
     createTestElectricalMeter,
@@ -19,8 +20,13 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
     const [flat, setFlat, handleInputChangeFlat] = useNumber("");
     const [line, setLine, handleInputChangeLine] = useNumber("");
 
-    const [numberMeter, setNumberMeter, handleInputChangeNumberMeter] =
-        useNumber("");
+    const [
+        numberMeter,
+        setNumberMeter,
+        handleInputChangeNumberMeter,
+        statusMeter,
+        dataMeter,
+    ] = useNumberMeter("", objectBuildId, "electrical");
 
     const [sumMeter, setSumMeter, handleInputChangeSumMeter] = useNumber("");
     const [selectObject, setSelectObject, handleInputChangeSelectObject] =
@@ -143,6 +149,11 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
                                         }}
                                         onChange={handleInputChangeNumberMeter}
                                     />
+                                    {dataMeter ? (
+                                        <Badge bg="danger">
+                                            Номер счётчика уже существует
+                                        </Badge>
+                                    ) : null}
                                 </Col>
                             </Row>
                         </Col>

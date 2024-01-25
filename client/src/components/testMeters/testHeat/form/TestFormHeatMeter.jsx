@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Badge, Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useNumberMeter } from "../../../../shared/hooks";
 import useNumber from "../../../../shared/hooks/useNumber";
 import {
     createTestHeatMeter,
@@ -18,8 +19,13 @@ const TestFormHeatMeter = ({ id: objectBuildId }) => {
     const [floor, setFloor, handleInputChangeFloor] = useNumber("");
     const [flat, setFlat, handleInputChangeFlat] = useNumber("");
     const [line, setLine, handleInputChangeLine] = useNumber("");
-    const [numberMeter, setNumberMeter, handleInputChangeNumberMeter] =
-        useNumber("");
+    const [
+        numberMeter,
+        setNumberMeter,
+        handleInputChangeNumberMeter,
+        statusMeter,
+        dataMeter,
+    ] = useNumberMeter("", objectBuildId, "heat");
     const [sumMeter, setSumMeter, handleInputChangeSumMeter] = useNumber("");
     const [selectObject, setSelectObject, handleInputChangeSelectObject] =
         useNumber("flat");
@@ -132,6 +138,11 @@ const TestFormHeatMeter = ({ id: objectBuildId }) => {
                                 }}
                                 onChange={handleInputChangeNumberMeter}
                             />
+                            {dataMeter ? (
+                                <Badge bg="danger">
+                                    Номер счётчика уже существует
+                                </Badge>
+                            ) : null}
                         </Col>
 
                         <Col className="col-12 col-sm-6 text-center">
