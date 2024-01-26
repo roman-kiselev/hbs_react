@@ -18,6 +18,38 @@ export const metersApi = mainApi.injectEndpoints({
                 };
             },
         }),
+        getInvalidWaterMeters: builder.query({
+            query: ({ number, objectBuildId }) => {
+                return {
+                    url: `/api/meters/invalidWater/${objectBuildId}/?number=${number}`,
+                    method: "GET",
+                };
+            },
+        }),
+        getInvalidHeatMeters: builder.query({
+            query: ({ number, objectBuildId }) => {
+                return {
+                    url: `/api/meters/invalidHeat/${objectBuildId}/?number=${number}`,
+                    method: "GET",
+                };
+            },
+        }),
+        getInvalidElectricalMeters: builder.query({
+            query: ({ number, objectBuildId }) => {
+                return {
+                    url: `/api/meters/invalidElectrical/${objectBuildId}/?number=${number}`,
+                    method: "GET",
+                };
+            },
+        }),
+        getRepeatingMeters: builder.query({
+            query: ({ objectBuildId }) => {
+                return {
+                    url: `/api/meters/repeatingMeter/${objectBuildId}`,
+                    method: "GET",
+                };
+            },
+        }),
     }),
 });
 

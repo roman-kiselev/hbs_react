@@ -1,21 +1,13 @@
 import { useState } from "react";
-import { Button, Form, Row, Spinner, Table } from "react-bootstrap";
-import { AiFillDelete } from "react-icons/ai";
+import { Button, Row, Spinner, Table } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { deskApi } from "../../../shared/api/desk";
 import { getOneMeter } from "../../../shared/models/testMeterWater/testWaterMeterSlice";
 import CardMeterEditModal from "../../../shared/ui/modals/CardMeterEditModal";
 
-const DeskTable = ({ listDesk, isLoading }) => {
+const DeskTableShort = ({ listDesk, isLoading, refetch }) => {
     const dispatch = useDispatch();
     const { id } = useParams();
-    const [selectState, setSelectState] = useState("check");
-    console.log(listDesk);
-    const { data, status, refetch } = dispatch(
-        deskApi.endpoints.getAll.initiate(id)
-    );
-    const [deltem, { data: dataDel }] = deskApi.useDeleteMutation();
 
     const [selectedMeter, setSelectedMeter] = useState(null);
     const [show, setShow] = useState(false);
@@ -24,8 +16,7 @@ const DeskTable = ({ listDesk, isLoading }) => {
         setShow(false);
         setSelectedMeter(null);
     };
-    const [changeStatusOneItem, { data: dataChangeStatus }] =
-        deskApi.useChangeStatusMutation();
+
     const handleShow = (data) => {
         setSelectedMeter(data);
         setShow(true);
@@ -34,19 +25,12 @@ const DeskTable = ({ listDesk, isLoading }) => {
     const handleClickForEdit = (formData, formQuery, handleClose) => {
         try {
             dispatch(getOneMeter({ formData })).then((d) => {
-                refetch();
                 handleClose();
+                refetch();
             });
         } catch (e) {
             console.log(e);
         }
-    };
-
-    const changeStatus = (id, e) => {
-        const currentValue = e.target.value;
-        setSelectState(currentValue);
-        changeStatusOneItem({ id, status: currentValue });
-        refetch();
     };
 
     return (
@@ -77,7 +61,6 @@ const DeskTable = ({ listDesk, isLoading }) => {
                                 <th>Этаж</th>
                                 <th>КВ</th>
                                 <th>№</th>
-                                <th>Статус</th>
                                 <th>Ред</th>
                                 <th>Удаление</th>
                             </tr>
@@ -88,42 +71,23 @@ const DeskTable = ({ listDesk, isLoading }) => {
                                     <tr key={item.id}>
                                         <td>{index + 1}</td>
                                         <td>
-                                            {item.main_meter.section
-                                                ? item.main_meter.section
-                                                : 0}
+                                            {item.section ? item.section : 0}
                                         </td>
-                                        <td>{item.main_meter.floor}</td>
-                                        <td>{item.main_meter.flat}</td>
+                                        <td>{item.floor}</td>
+                                        <td>{item.flat}</td>
 
-                                        <td>{item.main_meter.numberMeter}</td>
-                                        <td>
-                                            <Form.Select
-                                                size="sm"
-                                                defaultValue={item.status}
-                                                onChange={(e) =>
-                                                    changeStatus(item.id, e)
-                                                }
-                                            >
-                                                <option value="ready">
-                                                    Выполнен
-                                                </option>
-                                                <option value="check">
-                                                    Проверка
-                                                </option>
-                                            </Form.Select>
-                                        </td>
+                                        <td>{item.numberMeter}</td>
+
                                         <td>
                                             <Button
                                                 variant="primary"
-                                                onClick={() =>
-                                                    handleShow(item.main_meter)
-                                                }
+                                                onClick={() => handleShow(item)}
                                                 size="sm"
                                             >
                                                 Edit
                                             </Button>
                                         </td>
-                                        <td>
+                                        {/* <td>
                                             <AiFillDelete
                                                 size={30}
                                                 color="red"
@@ -132,22 +96,17 @@ const DeskTable = ({ listDesk, isLoading }) => {
                                                 }}
                                                 onClick={() => deltem(item.id)}
                                             />
-                                        </td>
+                                        </td> */}
                                     </tr>
-                                    {item.main_meter.comment && (
+                                    {item.comment && (
                                         <tr
                                             style={{
                                                 backgroundColor: "lightgreen",
                                             }}
                                         >
                                             <td colSpan={8}>
-                                                {item.main_meter.comment && (
-                                                    <p>
-                                                        {
-                                                            item.main_meter
-                                                                .comment
-                                                        }
-                                                    </p>
+                                                {item.comment && (
+                                                    <p>{item.comment}</p>
                                                 )}
                                             </td>
                                         </tr>
@@ -162,4 +121,4 @@ const DeskTable = ({ listDesk, isLoading }) => {
     );
 };
 
-export default DeskTable;
+export default DeskTableShort;

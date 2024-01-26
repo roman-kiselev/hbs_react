@@ -40,6 +40,13 @@ export const leftMenuItem = [
         variant: "light",
         title: "Доска",
     },
+    {
+        // toItem: "addElectricalTest",
+        toItem: "deskAuto",
+        action: true,
+        variant: "light",
+        title: "Доска(Auto)",
+    },
 
     // {
     //     toItem: "allKdlInObject",

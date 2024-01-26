@@ -3,6 +3,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import { mainApi } from "../../shared/api/main";
 import {
     coolWaterBildReducer,
+    deskAutoReducer,
     deskReducer,
     deviceReducer,
     formHouseReducer,
@@ -30,6 +31,7 @@ export const store = configureStore({
         device: deviceReducer,
         water: waterReducer,
         desk: deskReducer,
+        deskAuto: deskAutoReducer,
         [mainApi.reducerPath]: mainApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>

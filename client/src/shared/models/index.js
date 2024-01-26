@@ -93,6 +93,8 @@ import {
 import { deskReducer, deskSlice } from "./desk/DeskSlice.js";
 import { waterReducer, waterSlice } from "./water";
 
+import { deskAutoReducer, deskAutoSlice } from "./deskAuto";
+
 export {
     addCoolBolid,
     addElectricalMeters,
@@ -108,6 +110,8 @@ export {
     createTestElectricalMeter,
     createTestHeatMeter,
     createTestWaterMeter,
+    deskAutoReducer,
+    deskAutoSlice,
     deskReducer,
     deskSlice,
     deviceReducer,

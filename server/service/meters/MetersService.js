@@ -1,4 +1,5 @@
 import pkg, { Sequelize } from "sequelize";
+import sequelize from "../../db.js";
 import Models from "../../models/models.js";
 const { Op } = pkg;
 
@@ -138,6 +139,66 @@ class MeterService {
                 );
                 return meter;
             }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    // Получить номера счётчиков которые не подходят по номеру(не валидные)
+    async getInvalidWaterMeters(number, objectBuildId) {
+        try {
+            const listInvalidMeters =
+                await sequelize.query(`SELECT * FROM hbs_react.main_meters
+            WHERE objectBuildId=${objectBuildId} and typeMeter!="Счётчик тепла" and typeMeter != "Счётчик электроэнергии" and length(numberMeter) <> ${number};`);
+            return listInvalidMeters[0];
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async getInvalidHeatMeters(number, objectBuildId) {
+        try {
+            const listInvalidMeters = await sequelize.query(`
+                SELECT * FROM hbs_react.main_meters
+                WHERE objectBuildId=${objectBuildId} and typeMeter="Счётчик тепла" and length(numberMeter) <> ${number};`);
+            return listInvalidMeters[0];
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async getInvalidElectricalMeters(number, objectBuildId) {
+        try {
+            const listInvalidMeters = await sequelize.query(`
+            SELECT * FROM hbs_react.main_meters
+            WHERE objectBuildId=${objectBuildId} and typeMeter="Счётчик электроэнергии" and length(numberMeter) <> ${number};`);
+
+            return listInvalidMeters[0];
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async getRepeatingNumberMeters(objectBuildId) {
+        try {
+            const listMeters = await sequelize.query(`
+            SELECT 
+            *
+        FROM
+            hbs_react.main_meters
+        WHERE
+            numberMeter IN (SELECT 
+                    numberMeter
+                FROM
+                    hbs_react.main_meters
+                WHERE
+                    objectBuildId = ${objectBuildId}
+                GROUP BY numberMeter
+                HAVING COUNT(numberMeter) > 1)
+        ORDER BY numberMeter DESC;
+            `);
+
+            return listMeters[0];
         } catch (e) {
             console.log(e);
         }
