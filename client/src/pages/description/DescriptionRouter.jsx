@@ -4,6 +4,7 @@ import { DeskPage } from "./desk";
 import { DeskAutoPage } from "./deskAuto";
 import { ElectricalRouter } from "./electrical";
 import { HeatRouter } from "./heat";
+import { RadioPage } from "./radio";
 import { WaterRouter } from "./water";
 
 const DescriptionRouter = () => {
@@ -15,6 +16,7 @@ const DescriptionRouter = () => {
                 <Route path="electrical/*" element={<ElectricalRouter />} />
                 <Route path="desk/*" element={<DeskPage />} />
                 <Route path="deskAuto/*" element={<DeskAutoPage />} />
+                <Route path="radio/*" element={<RadioPage />} />
             </Route>
         </Routes>
     );

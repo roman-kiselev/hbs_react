@@ -14,6 +14,7 @@ import objectsRouter from "./objects/objectsRouter.js";
 import officeRouter from "./objects/officeRouter.js";
 import sectionsRouter from "./objects/sectionsRouter.js";
 import roleRouter from "./roleRouter.js";
+import statusRadioRouter from "./statusRadio/StatusRadioRouter.js";
 import testElectricalMeterRouter from "./test/testElectricalMeterRouter.js";
 import testHeatMeterRouter from "./test/testHeatMeterRouter.js";
 import testWaterMeterRouter from "./test/testWaterMeterRouter.js";
@@ -54,5 +55,7 @@ router.use("/water", waterRouter);
 
 router.use("/desk", deskRouter);
 router.use("/meters", metersRouter);
+
+router.use("/statusRadio", statusRadioRouter);
 
 export default router;

@@ -47,6 +47,13 @@ export const leftMenuItem = [
         variant: "light",
         title: "Доска(Auto)",
     },
+    {
+        // toItem: "addElectricalTest",
+        toItem: "radio",
+        action: true,
+        variant: "light",
+        title: "Радио",
+    },
 
     // {
     //     toItem: "allKdlInObject",

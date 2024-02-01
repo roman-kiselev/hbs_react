@@ -97,3 +97,29 @@ GET {{host}}/name-work/4 HTTP/1.1
 ### Получение Данных
 
 GET {{host}}/meters/invalidWater/11/?number=6 HTTP/1.1
+###
+GET {{host}}/water/getLineMeters/14 HTTP/1.1
+###
+GET {{host}}/water/getFloors/14 HTTP/1.1
+
+###
+GET {{host}}/water/getLineMeterOneFloor/14/?floor=2 HTTP/1.1
+
+
+###
+POST {{host}}/statusRadio HTTP/1.1
+Content-type: application/json; charset=utf-8
+
+{
+    "mainMeterId": 8206,
+    "status": true,
+    "signal": 80,
+    "comment": null,
+    "objectBuildId": 14
+}
+
+###
+GET {{host}}/statusRadio/currentStatus/?mainMeterId=11 HTTP/1.1
+
+### 
+GET {{host}}/statusRadio/lastArr/?mainMeterId=11 HTTP/1.1

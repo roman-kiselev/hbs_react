@@ -90,6 +90,9 @@ ObjectBuilds.init(
             type: Sequelize.STRING,
             allowNull: false,
         },
+        radio: {
+            type: Sequelize.BOOLEAN,
+        },
         img: {
             type: Sequelize.STRING,
             allowNull: false,
@@ -188,6 +191,36 @@ Desk.belongsTo(MainAddMeter);
 ObjectBuilds.hasOne(Desk);
 Desk.belongsTo(ObjectBuilds);
 
+class StatusRadio extends Sequelize.Model {}
+StatusRadio.init(
+    {
+        id: {
+            type: Sequelize.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+            allowNull: false,
+        },
+        status: {
+            type: Sequelize.BOOLEAN,
+        },
+        signalStatus: {
+            type: Sequelize.INTEGER,
+        },
+        comment: {
+            type: Sequelize.STRING,
+        },
+    },
+    {
+        sequelize,
+        modelName: "status_radio",
+    }
+);
+
+MainAddMeter.hasMany(StatusRadio);
+StatusRadio.belongsTo(MainAddMeter);
+
+ObjectBuilds.hasMany(StatusRadio);
+StatusRadio.belongsTo(ObjectBuilds);
 // Добавляем хук
 
 // MainAddMeter.afterCreate(async (mainAddMeter, option) => {

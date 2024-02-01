@@ -22,3 +22,29 @@ WHERE
         GROUP BY numberMeter
         HAVING COUNT(numberMeter) > 1)
 ORDER BY numberMeter DESC;
+
+
+SELECT 
+    *
+FROM
+    hbs_react.main_meters
+WHERE
+    objectBuildId = 14
+ORDER BY floor, line ASC;
+
+-- Добавим колонку радио(true, false)
+ALTER TABLE hbs_react.object_builds
+ADD COLUMN radio boolean default null;
+SELECT 
+    *
+FROM
+    hbs_react.object_builds;
+    
+-- Добавим значения в новую колонку
+UPDATE hbs_react.object_builds
+SET radio = false
+WHERE id =! 14;
+
+UPDATE hbs_react.object_builds
+SET radio = true
+WHERE id = 14;

@@ -1,10 +1,8 @@
 import express from "express";
 import ObjectsController from "../../controller/objects/ObjectsController.js";
-const router = express.Router()
+const router = express.Router();
 
-
-router.post('/', ObjectsController.createObject)
-router.get('/', ObjectsController.getAll)
+router.get("/", ObjectsController.getAll);
+router.post("/", ObjectsController.createObject);
 
 export default router;
-

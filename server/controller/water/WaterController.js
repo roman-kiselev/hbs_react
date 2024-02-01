@@ -30,6 +30,48 @@ class WaterController {
             console.log(e);
         }
     }
+
+    async getFloorsForOneObject(req, res) {
+        try {
+            const { id: objectBuildId } = req.params;
+
+            const floors = await WaterService._getUniqFloors(objectBuildId);
+
+            res.json(floors);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async getArrWithLineMeters(req, res) {
+        try {
+            const { id } = req.params;
+            const objectBuildId = Number(id);
+            if (typeof objectBuildId === "number") {
+                const data = await WaterService.getMetersByLineAndFloor(
+                    objectBuildId
+                );
+                res.json(data);
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async getLinesForOneFloor(req, res) {
+        try {
+            const { id: objectBuildId } = req.params;
+            const { floor } = req.query;
+
+            const data = await WaterService.getLinesForOneFloor(
+                objectBuildId,
+                floor
+            );
+            return res.json(data);
+        } catch (e) {
+            console.log(e);
+        }
+    }
 }
 
 export default new WaterController();

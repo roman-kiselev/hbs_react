@@ -360,6 +360,10 @@ class TestWaterMeterController {
                                             d.comment !== undefined
                                                 ? d.comment
                                                 : null,
+                                        line:
+                                            d.line !== undefined
+                                                ? d.line
+                                                : null,
                                         typeMeter:
                                             d.numberAsr % 2 === 0
                                                 ? "Счётчик горячей воды"

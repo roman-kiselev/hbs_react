@@ -74,6 +74,10 @@ const OperationsWater = ({ id: objectBuildId }) => {
                     worksheet["H" + i].v !== undefined
                         ? worksheet["H" + i].v
                         : null;
+                const line =
+                    worksheet["I" + i].v !== undefined
+                        ? worksheet["I" + i].v
+                        : null;
 
                 mainData.push({
                     section,
@@ -84,6 +88,7 @@ const OperationsWater = ({ id: objectBuildId }) => {
                     numberMeter,
                     sumMeter,
                     comment,
+                    line,
                 });
             }
             const dataJson = JSON.stringify(mainData);

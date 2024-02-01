@@ -1,0 +1,10 @@
+.hotWater {
+    display: flex;
+    border-left: "1px black solid";
+    justify-content: center;
+    align-items: center;
+    height: "100%";
+    width: "100%";
+    background-color: rgb(255, 0, 0);
+    cursor: pointer;
+}
