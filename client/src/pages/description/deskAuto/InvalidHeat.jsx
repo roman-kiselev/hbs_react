@@ -1,4 +1,4 @@
-import { Form, Row, Spinner } from "react-bootstrap";
+import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import DeskTableShort from "../../../entities/desk/deskTable/DeskTableShort";
@@ -21,19 +21,27 @@ const InvalidHeat = () => {
 
     const handleChangeNumber = (e) => {
         dispatch(setInvalidHeat(e.target.value));
+    };
+
+    const handleClick = () => {
         refetch();
     };
 
     return (
         <div>
             <Row>
-                <Form.Control
-                    size="sm"
-                    type="number"
-                    placeholder="Количество цифр"
-                    value={number}
-                    onChange={(e) => handleChangeNumber(e)}
-                />
+                <Col>
+                    <Form.Control
+                        size="sm"
+                        type="number"
+                        placeholder="Количество цифр"
+                        value={number}
+                        onChange={(e) => handleChangeNumber(e)}
+                    />
+                </Col>
+                <Col>
+                    <Button onClick={() => handleClick()}>Получить</Button>
+                </Col>
             </Row>
             <>
                 {isLoading ? (
