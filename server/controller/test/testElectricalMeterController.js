@@ -347,6 +347,44 @@ class TestElectricalMeterController {
 
                     return res.send(buffer);
                     break;
+                case "Меркурий 200":
+                    const listMetersMercurii = meters.map(
+                        ({ flat, numberMeter, section, floor }) => {
+                            let preparedDevice =
+                                HeadersElectricalConfig.getTMagicDevice_RS485_InterfaceMercurii(
+                                    flat,
+                                    numberMeter,
+                                    section,
+                                    floor,
+                                    maxFlat.flat
+                                );
+                            return preparedDevice;
+                        }
+                    );
+                    const arrInterfaceMercurii = [
+                        "",
+                        "[RS-485] Меркурий 20x",
+                        "ID=",
+                        "ParentID=",
+                        "ClassName=TMagicDevice_RS485_Interface",
+                        "MagicXML=mercurii206_200.device",
+                        "Активность=Да",
+                        "Описание=[RS-485] Меркурий 20x",
+                        "Тайм-аут чтения, мсек=300",
+                        "Пауза между командами, мсек=50",
+                        "Задержка между счётчиками, мсек=100",
+                        "Число неответов до потери=3",
+                        "Скорость порта=9600",
+                        "Совместимость с Карат-911=Нет",
+                    ];
+                    const bufferMercurii = createHeatTemplate(
+                        listMetersMercurii,
+                        arrInterfaceMercurii,
+                        arrLink,
+                        nameSheet
+                    );
+                    return res.send(bufferMercurii);
+
                 case "Pulsar":
                     break;
                 default:

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Col, Form, Row, Button } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import {
     getAllLinesElectrical,
     getTemplateFromServerElectrical,
@@ -65,6 +65,7 @@ const MainTabGenerateTemplateElectrical = ({ objectBuildId }) => {
                         <option value="Энергомера СЕ102-S6/R5 AK">
                             Энергомера СЕ102-S6/R5 AK
                         </option>
+                        <option value="Меркурий 200">Меркурий 200</option>
                         <option value="Pulsar">Нет</option>
                     </Form.Select>
                 </Col>
