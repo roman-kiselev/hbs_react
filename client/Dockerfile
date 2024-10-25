@@ -2,7 +2,9 @@ FROM node:alpine as build
 
 COPY package.json package.json
 
-RUN npm install --verbose --no-cache
+#RUN npm install --verbose --no-cache --no-optional 
+#RUN npm install --verbose --silent --loglevel=info
+RUN npm install --force --verbose
 
 COPY . .
 
