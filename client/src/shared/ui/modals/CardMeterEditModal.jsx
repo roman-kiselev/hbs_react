@@ -21,6 +21,7 @@ const CardMeterEditModal = ({
     );
     const [floor, setFloors, handleInputChangeFloor] = useNumber(data.floor);
     const [flat, setFlat, handleInputChangeFlat] = useNumber(data.flat);
+
     const [numberMeter, setNumberMeter, handleInputChangeNumberMeter] =
         useNumber(data.numberMeter);
     const [sumMeter, setSumMeter, handleInputChangeSumMeter] = useNumber(
@@ -35,6 +36,7 @@ const CardMeterEditModal = ({
     const [line, setLine, handleInputChangeLine] = useNumber(data.line);
 
     const [office, setOffice, handleInputChangeOffice] = useNumber(data.office);
+
     const [comment, setComment] = useState(
         data.comment === null ? "" : data.comment
     );
@@ -81,7 +83,7 @@ const CardMeterEditModal = ({
                                 />
                             </Col>
                             <Col>
-                                {flat ? (
+                                {data.flat ? (
                                     <InputNumber
                                         prop={{
                                             title: "Квартира",
