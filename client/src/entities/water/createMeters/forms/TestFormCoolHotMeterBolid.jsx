@@ -54,8 +54,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
 
     const [selectObject, setSelectObject, handleInputChangeSelectObject] =
         useState("flat");
-    console.log(flat);
-    console.log(selectObject);
+
     const [comment, setComment] = useState("");
     mainTableDb.open();
 
@@ -123,7 +122,6 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
             setAlertAdd(false);
         };
         inputRef.current.focus();
-        console.log(dataWith);
 
         dispatch(createTestMeter({ dataWith })).then((d) => {
             dispatch(getAllMetersByUserAndObject({ formQuery }));
