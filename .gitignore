@@ -11,3 +11,4 @@ client/.env
 server/.env
 server/static
 .vscode
+

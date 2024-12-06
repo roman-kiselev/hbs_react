@@ -7,7 +7,7 @@ import { mainTableDb } from "../../../../shared/db";
 import { createWaterBulkMeter } from "../../../../shared/db/mainTable/serviceMainTableDbWater";
 import { useNumberMeter } from "../../../../shared/hooks";
 import useNumber from "../../../../shared/hooks/useNumber";
-import { getAllChannel } from "../../../../shared/models/devices/DeviceSlice";
+import { getAllChannel } from "../../../../shared/models";
 import {
     createTestMeter,
     getAllMetersByUserAndObject,
@@ -24,6 +24,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
     const [section, setSection, handleInputChangeSection] = useNumber("");
     const [floors, setFloors, handleInputChangeFloors] = useNumber("");
     const [flat, setFlat, handleInputChangeFlat] = useNumber("");
+
     const [kdl, setKdl, handleInputChangeKdl] = useNumber("");
     const [channelCool, setChannelCool, handleInputChangeChannelCool] =
         useNumber("");
@@ -52,7 +53,9 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
         useNumber("");
 
     const [selectObject, setSelectObject, handleInputChangeSelectObject] =
-        useNumber("flat");
+        useState("flat");
+    console.log(flat);
+    console.log(selectObject);
     const [comment, setComment] = useState("");
     mainTableDb.open();
 
@@ -120,6 +123,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
             setAlertAdd(false);
         };
         inputRef.current.focus();
+        console.log(dataWith);
 
         dispatch(createTestMeter({ dataWith })).then((d) => {
             dispatch(getAllMetersByUserAndObject({ formQuery }));
