@@ -1,7 +1,7 @@
-import React from "react";
 import { Form } from "react-bootstrap";
 
 const InputNumberFloating = ({ prop, onChange }) => {
+    const formattedValue = typeof prop.value === "number" ? prop.value : "";
     return (
         <>
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -10,7 +10,7 @@ const InputNumberFloating = ({ prop, onChange }) => {
                     type="number"
                     pattern="^[ 0-9]+$"
                     step="0.01"
-                    value={prop.value || "Ошибка"}
+                    value={formattedValue}
                     onChange={onChange}
                 />
             </Form.Group>

@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Badge, Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNumberMeter } from "../../../../shared/hooks";
+import useFloatingNumber from "../../../../shared/hooks/useFloatingNumber";
 import useNumber from "../../../../shared/hooks/useNumber";
 import {
     createTestHeatMeter,
     getAllHeatMeter,
-} from "../../../../shared/models/testMeterHeat/testHeatMeterSlice";
+} from "../../../../shared/models";
 import InputNumber from "../../../../shared/ui/inputs/inputsNumber/InputNumber";
 import InputNumberFloating from "../../../../shared/ui/inputs/inputsNumber/InputNumberFloating";
 import InputNumberSelected from "../../../../shared/ui/inputs/inputsNumber/InputNumberSelected";
@@ -26,9 +27,10 @@ const TestFormHeatMeter = ({ id: objectBuildId }) => {
         statusMeter,
         dataMeter,
     ] = useNumberMeter("", objectBuildId, "heat");
-    const [sumMeter, setSumMeter, handleInputChangeSumMeter] = useNumber("");
-    const [selectObject, setSelectObject, handleInputChangeSelectObject] =
-        useNumber("flat");
+    const [sumMeter, setSumMeter, handleInputChangeSumMeter] =
+        useFloatingNumber("");
+
+    const [selectObject, setSelectObject] = useState("flat");
 
     const [comment, setComment] = useState("");
     // Состояние уведомлений
@@ -71,6 +73,7 @@ const TestFormHeatMeter = ({ id: objectBuildId }) => {
         };
 
         inputRef.current.focus();
+        console.log(dataMeter);
 
         dispatch(createTestHeatMeter({ dataMeter })).then((d) => {
             dispatch(getAllHeatMeter({ formQuery }));
@@ -111,7 +114,7 @@ const TestFormHeatMeter = ({ id: objectBuildId }) => {
                                 value: flat,
                             }}
                             value={selectObject}
-                            onChangeSelect={handleInputChangeSelectObject}
+                            onChangeSelect={setSelectObject}
                             onChangeFlat={handleInputChangeFlat}
                             inputRef={inputRef}
                         />

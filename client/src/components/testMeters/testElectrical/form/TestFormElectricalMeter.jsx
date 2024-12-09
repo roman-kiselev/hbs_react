@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Badge, Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNumberMeter } from "../../../../shared/hooks";
+import useFloatingNumber from "../../../../shared/hooks/useFloatingNumber";
 import useNumber from "../../../../shared/hooks/useNumber";
 import {
     createTestElectricalMeter,
@@ -28,9 +29,9 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
         dataMeter,
     ] = useNumberMeter("", objectBuildId, "electrical");
 
-    const [sumMeter, setSumMeter, handleInputChangeSumMeter] = useNumber("");
-    const [selectObject, setSelectObject, handleInputChangeSelectObject] =
-        useNumber("flat");
+    const [sumMeter, setSumMeter, handleInputChangeSumMeter] =
+        useFloatingNumber("");
+    const [selectObject, setSelectObject] = useState("flat");
 
     const [comment, setComment] = useState("");
     // Состояние уведомлений
@@ -111,7 +112,7 @@ const TestFormElectricalMeter = ({ id: objectBuildId }) => {
                                 value: flat,
                             }}
                             value={selectObject}
-                            onChangeSelect={handleInputChangeSelectObject}
+                            onChangeSelect={setSelectObject}
                             onChangeFlat={handleInputChangeFlat}
                             inputRef={inputRef}
                         />

@@ -53,8 +53,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
     const [sumMeterHot, setSumMeterHot, handleInputChangeSumMeterHot] =
         useFloatingNumber("");
 
-    const [selectObject, setSelectObject, handleInputChangeSelectObject] =
-        useState("flat");
+    const [selectObject, setSelectObject] = useState("flat");
 
     const [comment, setComment] = useState("");
     mainTableDb.open();
@@ -192,7 +191,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                                 value: flat,
                             }}
                             value={selectObject}
-                            onChangeSelect={handleInputChangeSelectObject}
+                            onChangeSelect={setSelectObject}
                             onChangeFlat={handleInputChangeFlat}
                             inputRef={inputRef}
                         />

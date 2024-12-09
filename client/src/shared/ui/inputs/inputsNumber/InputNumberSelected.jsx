@@ -1,4 +1,3 @@
-import React from "react";
 import { Form } from "react-bootstrap";
 
 const InputNumberSelected = ({
@@ -10,18 +9,22 @@ const InputNumberSelected = ({
 }) => {
     return (
         <>
-            <Form.Select size="sm" value={value} onChange={onChangeSelect}>
+            <Form.Select
+                size="sm"
+                onChange={(e) => onChangeSelect(e.target.value)}
+                value={value}
+            >
                 {prop.titles.map((t, i) => (
                     <option key={t.title} value={t.value}>
                         {t.title}
                     </option>
                 ))}
             </Form.Select>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-3">
                 <Form.Control
                     type="number"
-                    pattern="^[ 0-9]+$"
-                    value={prop.value || "Ошибка"}
+                    pattern="^[0-9]+$"
+                    value={prop.value || 0}
                     onChange={onChangeFlat}
                     ref={inputRef}
                 />
