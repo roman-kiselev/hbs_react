@@ -6,6 +6,7 @@ import TestAlertAddMeters from "../../../../components/addMeters/bolid/alerts/Te
 import { mainTableDb } from "../../../../shared/db";
 import { createWaterBulkMeter } from "../../../../shared/db/mainTable/serviceMainTableDbWater";
 import { useNumberMeter } from "../../../../shared/hooks";
+import useFloatingNumber from "../../../../shared/hooks/useFloatingNumber";
 import useNumber from "../../../../shared/hooks/useNumber";
 import { getAllChannel } from "../../../../shared/models";
 import {
@@ -48,9 +49,9 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
     ] = useNumberMeter("", objectBuildId, "water");
 
     const [sumMeterCool, setSumMeterCool, handleInputChangeSumMeterCool] =
-        useNumber("");
+        useFloatingNumber("");
     const [sumMeterHot, setSumMeterHot, handleInputChangeSumMeterHot] =
-        useNumber("");
+        useFloatingNumber("");
 
     const [selectObject, setSelectObject, handleInputChangeSelectObject] =
         useState("flat");
@@ -237,7 +238,7 @@ const TestFormCoolHotMeterBolid = ({ id }) => {
                                 </Badge>
                             ) : null}
 
-                            <InputNumber
+                            <InputNumberFloating
                                 prop={{
                                     title: "Показания",
                                     value: sumMeterCool,
