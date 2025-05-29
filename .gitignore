@@ -11,4 +11,5 @@ client/.env
 server/.env
 server/static
 .vscode
+server/config/config.json
 

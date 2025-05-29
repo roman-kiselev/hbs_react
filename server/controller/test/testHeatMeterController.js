@@ -196,6 +196,7 @@ class TestHeatMeterController {
                                     objectBuildId,
                                     // userId,
                                     typeMeter: "Счётчик тепла",
+                                    comment: d.comment ? d.comment : "",
                                 },
                                 { transaction: t }
                             );
