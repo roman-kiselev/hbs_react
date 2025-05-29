@@ -56,6 +56,10 @@ const OperationsElectrical = ({ id: objectBuildId }) => {
                 const line = worksheet["D" + i].v;
                 const numberMeter = worksheet["E" + i].v;
                 const sumMeter = worksheet["F" + i].v;
+                const comment =
+                    worksheet["G" + i].v !== undefined
+                        ? worksheet["G" + i].v
+                        : null;
 
                 mainData.push({
                     section,
@@ -64,6 +68,7 @@ const OperationsElectrical = ({ id: objectBuildId }) => {
                     line,
                     numberMeter,
                     sumMeter,
+                    comment,
                 });
             }
             const dataJson = JSON.stringify(mainData);

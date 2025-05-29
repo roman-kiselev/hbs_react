@@ -202,6 +202,7 @@ class TestElectricalMeterController {
                                     objectBuildId,
                                     userId,
                                     typeMeter: "Счётчик электроэнергии",
+                                    comment: d.comment ? d.comment : "",
                                 },
                                 { transaction: t }
                             );
