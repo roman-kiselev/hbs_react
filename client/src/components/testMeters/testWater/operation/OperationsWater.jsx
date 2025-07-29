@@ -13,6 +13,14 @@ import MainTabDownloadListWater from "./downloadList/MainTabDownloadListWater";
 import MainTabGenerateTemplateWater from "./generateTemplate/MainTabGenerateTemplateWater";
 import MainTabReadFileWater from "./readFile/MainTabReadFileWater";
 
+const checkCell = (cell) => {
+    if (cell && cell.v !== undefined) {
+        return cell.v;
+    } else {
+        return null;
+    }
+};
+
 const OperationsWater = ({ id: objectBuildId }) => {
     //Диспатч для вызова функции
     const dispatch = useDispatch();
@@ -63,21 +71,15 @@ const OperationsWater = ({ id: objectBuildId }) => {
 
             const mainData = [];
             for (let i = 2; i < lengthWorksheet; i++) {
-                const section = worksheet["A" + i].v;
-                const floor = worksheet["B" + i].v;
-                const flat = worksheet["C" + i].v;
-                const numberKdl = worksheet["D" + i].v;
-                const numberAsr = worksheet["E" + i].v;
-                const numberMeter = worksheet["F" + i].v;
-                const sumMeter = worksheet["G" + i].v;
-                const comment =
-                    worksheet["H" + i].v !== undefined
-                        ? worksheet["H" + i].v
-                        : null;
-                const line =
-                    worksheet["I" + i].v !== undefined
-                        ? worksheet["I" + i].v
-                        : null;
+                const section = checkCell(worksheet["A" + i]);
+                const floor = checkCell(worksheet["B" + i]);
+                const flat = checkCell(worksheet["C" + i]);
+                const numberKdl = checkCell(worksheet["D" + i]);
+                const numberAsr = checkCell(worksheet["E" + i]);
+                const numberMeter = checkCell(worksheet["F" + i]);
+                const sumMeter = checkCell(worksheet["G" + i]);
+                const comment = checkCell(worksheet["H" + i]);
+                const line = checkCell(worksheet["I" + i]);
 
                 mainData.push({
                     section,

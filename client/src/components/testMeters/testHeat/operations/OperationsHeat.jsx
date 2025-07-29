@@ -12,6 +12,14 @@ import MainTabDownloadList from "./downloadList/MainTabDownloadList";
 import MainTabGenerateTemplate from "./generateTemplate/MainTabGenerateTemplate";
 import MainTabReadFile from "./readFile/MainTabReadFile";
 
+const checkCell = (cell) => {
+    if (cell && cell.v !== undefined) {
+        return cell.v;
+    } else {
+        return null;
+    }
+};
+
 const OperationsHeat = ({ id: objectBuildId }) => {
     //LДиспатч для вызова функции
     const dispatch = useDispatch();
@@ -51,12 +59,13 @@ const OperationsHeat = ({ id: objectBuildId }) => {
 
             const mainData = [];
             for (let i = 2; i < lengthWorksheet; i++) {
-                const section = worksheet["A" + i].v;
-                const floor = worksheet["B" + i].v;
-                const flat = worksheet["C" + i].v;
-                const line = worksheet["D" + i].v;
-                const numberMeter = worksheet["E" + i].v;
-                const sumMeter = worksheet["F" + i].v;
+                const section = checkCell(worksheet["A" + i]);
+                const floor = checkCell(worksheet["B" + i]);
+                const flat = checkCell(worksheet["C" + i]);
+                const line = checkCell(worksheet["D" + i]);
+                const numberMeter = checkCell(worksheet["E" + i]);
+                const sumMeter = checkCell(worksheet["F" + i]);
+                const comment = checkCell(worksheet["G" + i]);
 
                 mainData.push({
                     section,
@@ -65,6 +74,7 @@ const OperationsHeat = ({ id: objectBuildId }) => {
                     line,
                     numberMeter,
                     sumMeter,
+                    comment,
                 });
             }
             const dataJson = JSON.stringify(mainData);

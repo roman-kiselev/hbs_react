@@ -356,14 +356,8 @@ class TestWaterMeterController {
                                         sumMeter: d.sumMeter,
                                         objectBuildId,
                                         userId,
-                                        comment:
-                                            d.comment !== undefined
-                                                ? d.comment
-                                                : null,
-                                        line:
-                                            d.line !== undefined
-                                                ? d.line
-                                                : null,
+                                        comment: d.comment ? d.comment : null,
+                                        line: d.line ? d.line : null,
                                         typeMeter:
                                             d.numberAsr % 2 === 0
                                                 ? "Счётчик горячей воды"

@@ -11,6 +11,14 @@ import MainTabDownloadListElectrical from "./downloadList/MainTabDownloadListEle
 import MainTabGenerateTemplateElectrical from "./generateTemplate/MainTabGenerateTemplateElectrical";
 import MainTabReadFileElectrical from "./readFile/MainTabReadFileElectrical";
 
+const checkCell = (cell) => {
+    if (cell && cell.v !== undefined) {
+        return cell.v;
+    } else {
+        return null;
+    }
+};
+
 const OperationsElectrical = ({ id: objectBuildId }) => {
     //LДиспатч для вызова функции
     const dispatch = useDispatch();
@@ -50,16 +58,13 @@ const OperationsElectrical = ({ id: objectBuildId }) => {
 
             const mainData = [];
             for (let i = 2; i < lengthWorksheet; i++) {
-                const section = worksheet["A" + i].v;
-                const floor = worksheet["B" + i].v;
-                const flat = worksheet["C" + i].v;
-                const line = worksheet["D" + i].v;
-                const numberMeter = worksheet["E" + i].v;
-                const sumMeter = worksheet["F" + i].v;
-                const comment =
-                    worksheet["G" + i].v !== undefined
-                        ? worksheet["G" + i].v
-                        : null;
+                const section = checkCell(worksheet["A" + i]);
+                const floor = checkCell(worksheet["B" + i]);
+                const flat = checkCell(worksheet["C" + i]);
+                const line = checkCell(worksheet["D" + i]);
+                const numberMeter = checkCell(worksheet["E" + i]);
+                const sumMeter = checkCell(worksheet["F" + i]);
+                const comment = checkCell(worksheet["G" + i]);
 
                 mainData.push({
                     section,

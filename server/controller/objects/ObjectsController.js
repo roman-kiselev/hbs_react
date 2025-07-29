@@ -7,17 +7,24 @@ class ObjectsController {
         try {
             const { name, description } = req.body;
 
-            const { img } = req.files;
+            if (req.files && req.files.img) {
+                let fileName = uuid() + ".jpg";
+                await img.mv(path.resolve("static/objects/img", fileName));
 
-            let fileName = uuid() + ".jpg";
-            await img.mv(path.resolve("static/objects/img", fileName));
-
-            const object = await Models.ObjectBuilds.create({
-                name,
-                description,
-                img: fileName,
-            });
-            return res.json(object);
+                const object = await Models.ObjectBuilds.create({
+                    name,
+                    description,
+                    img: req.files.img || "",
+                });
+                return res.json(object);
+            } else {
+                const object = await Models.ObjectBuilds.create({
+                    name,
+                    description,
+                    img: "",
+                });
+                return res.json(object);
+            }
         } catch (e) {
             console.log(e);
         }
